@@ -15,6 +15,7 @@
 		8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E02766FC7900A32320 /* Assets.xcassets */; };
 		8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */; };
 		8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49ED2766FD2500A32320 /* AppCenter.swift */; };
+		8EDD026D2767214600A6987F /* AppCenter.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD026C2767214600A6987F /* AppCenter.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		8EAB49E32766FC7900A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EAB49E52766FC7900A32320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EAB49ED2766FD2500A32320 /* AppCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenter.swift; sourceTree = "<group>"; };
+		8EDD026C2767214600A6987F /* AppCenter.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppCenter.json; sourceTree = "<group>"; };
 		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				8EAB49ED2766FD2500A32320 /* AppCenter.swift */,
+				8EDD026C2767214600A6987F /* AppCenter.json */,
 			);
 			path = AppCenter;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EDD026D2767214600A6987F /* AppCenter.json in Resources */,
 				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
 				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
 				8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */,
