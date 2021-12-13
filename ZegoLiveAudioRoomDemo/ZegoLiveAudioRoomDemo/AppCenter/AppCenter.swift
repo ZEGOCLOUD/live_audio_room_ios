@@ -11,9 +11,9 @@ struct AppCenter {
     
     private static var json : [String:Any]?
         
-    static func appID() -> UInt {
+    static func appID() -> UInt32 {
         if let dict = getJsonDictionary() {
-            let appID = dict["appID"] as! UInt
+            let appID = dict["appID"] as! UInt32
             return appID
         }
         return 0
@@ -42,6 +42,7 @@ struct AppCenter {
         }
         let jsonPath = Bundle.main.path(forResource: "AppCenter", ofType: "json")
         if jsonPath == nil {
+            assert(false)
             return nil
         }
         let jsonStr = try? String(contentsOfFile: jsonPath!)

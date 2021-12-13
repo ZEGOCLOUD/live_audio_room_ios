@@ -15,7 +15,20 @@
 		8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E02766FC7900A32320 /* Assets.xcassets */; };
 		8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */; };
 		8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49ED2766FD2500A32320 /* AppCenter.swift */; };
-		8EDD026D2767214600A6987F /* AppCenter.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD026C2767214600A6987F /* AppCenter.json */; };
+		8EDD026F2767340C00A6987F /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD026E2767340C00A6987F /* RoomManager.swift */; };
+		8EDD0271276735BE00A6987F /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0270276735BE00A6987F /* RoomService.swift */; };
+		8EDD0273276735CD00A6987F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0272276735CD00A6987F /* UserService.swift */; };
+		8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */; };
+		8EDD0277276735EC00A6987F /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0276276735EC00A6987F /* MessageService.swift */; };
+		8EDD0279276735F900A6987F /* GiftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0278276735F900A6987F /* GiftService.swift */; };
+		8EDD027B27673C8C00A6987F /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD027A27673C8C00A6987F /* Define.swift */; };
+		8EDD027D27673CED00A6987F /* ZIMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD027C27673CED00A6987F /* ZIMManager.swift */; };
+		8EDD028327674FF800A6987F /* AppCenter.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD028227674FF800A6987F /* AppCenter.json */; };
+		8EDD02892767727C00A6987F /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02882767727C00A6987F /* RoomInfo.swift */; };
+		8EDD028C2767771300A6987F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028B2767771300A6987F /* UserInfo.swift */; };
+		8EDD028E27683A7B00A6987F /* SpeakerSeatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */; };
+		8EDD02902768723700A6987F /* TextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028F2768723700A6987F /* TextMessage.swift */; };
+		8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02912768727D00A6987F /* CustomCommand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +41,20 @@
 		8EAB49E32766FC7900A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EAB49E52766FC7900A32320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EAB49ED2766FD2500A32320 /* AppCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenter.swift; sourceTree = "<group>"; };
-		8EDD026C2767214600A6987F /* AppCenter.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppCenter.json; sourceTree = "<group>"; };
+		8EDD026E2767340C00A6987F /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		8EDD0270276735BE00A6987F /* RoomService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
+		8EDD0272276735CD00A6987F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerSeatService.swift; sourceTree = "<group>"; };
+		8EDD0276276735EC00A6987F /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		8EDD0278276735F900A6987F /* GiftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftService.swift; sourceTree = "<group>"; };
+		8EDD027A27673C8C00A6987F /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		8EDD027C27673CED00A6987F /* ZIMManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIMManager.swift; sourceTree = "<group>"; };
+		8EDD028227674FF800A6987F /* AppCenter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppCenter.json; sourceTree = "<group>"; };
+		8EDD02882767727C00A6987F /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
+		8EDD028B2767771300A6987F /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerSeatModel.swift; sourceTree = "<group>"; };
+		8EDD028F2768723700A6987F /* TextMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessage.swift; sourceTree = "<group>"; };
+		8EDD02912768727D00A6987F /* CustomCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommand.swift; sourceTree = "<group>"; };
 		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +117,15 @@
 		8EAB49EB2766FC9100A32320 /* ZegoLiveAudioRoom */ = {
 			isa = PBXGroup;
 			children = (
+				8EDD02872767727100A6987F /* Model */,
+				8EDD027C27673CED00A6987F /* ZIMManager.swift */,
+				8EDD026E2767340C00A6987F /* RoomManager.swift */,
+				8EDD0270276735BE00A6987F /* RoomService.swift */,
+				8EDD0272276735CD00A6987F /* UserService.swift */,
+				8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */,
+				8EDD0276276735EC00A6987F /* MessageService.swift */,
+				8EDD0278276735F900A6987F /* GiftService.swift */,
+				8EDD027A27673C8C00A6987F /* Define.swift */,
 			);
 			path = ZegoLiveAudioRoom;
 			sourceTree = "<group>";
@@ -99,9 +134,21 @@
 			isa = PBXGroup;
 			children = (
 				8EAB49ED2766FD2500A32320 /* AppCenter.swift */,
-				8EDD026C2767214600A6987F /* AppCenter.json */,
+				8EDD028227674FF800A6987F /* AppCenter.json */,
 			);
 			path = AppCenter;
+			sourceTree = "<group>";
+		};
+		8EDD02872767727100A6987F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02882767727C00A6987F /* RoomInfo.swift */,
+				8EDD028B2767771300A6987F /* UserInfo.swift */,
+				8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */,
+				8EDD028F2768723700A6987F /* TextMessage.swift */,
+				8EDD02912768727D00A6987F /* CustomCommand.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AEBCC9E3D655A089D69D6D36 /* Pods */ = {
@@ -181,7 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EDD026D2767214600A6987F /* AppCenter.json in Resources */,
+				8EDD028327674FF800A6987F /* AppCenter.json in Resources */,
 				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
 				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
 				8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */,
@@ -237,10 +284,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EDD0279276735F900A6987F /* GiftService.swift in Sources */,
+				8EDD026F2767340C00A6987F /* RoomManager.swift in Sources */,
+				8EDD0273276735CD00A6987F /* UserService.swift in Sources */,
+				8EDD028E27683A7B00A6987F /* SpeakerSeatModel.swift in Sources */,
+				8EDD0271276735BE00A6987F /* RoomService.swift in Sources */,
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
 				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
+				8EDD02902768723700A6987F /* TextMessage.swift in Sources */,
+				8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
+				8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */,
+				8EDD0277276735EC00A6987F /* MessageService.swift in Sources */,
 				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,
+				8EDD027B27673C8C00A6987F /* Define.swift in Sources */,
+				8EDD02892767727C00A6987F /* RoomInfo.swift in Sources */,
+				8EDD028C2767771300A6987F /* UserInfo.swift in Sources */,
+				8EDD027D27673CED00A6987F /* ZIMManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
