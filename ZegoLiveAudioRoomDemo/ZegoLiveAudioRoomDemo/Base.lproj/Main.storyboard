@@ -1,24 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tTz-Zd-lO2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Login-->
+        <scene sceneID="bWy-74-wqL">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController storyboardIdentifier="LoginViewController" id="tTz-Zd-lO2" customClass="LoginViewController" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QIM-ax-6mq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYg-8I-nlz">
+                                <rect key="frame" x="37" y="50" width="526" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="BLT-r0-Dwt"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">ZEGOCLOUD
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="30" name="PingFangSC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Live Audio Room">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="30" name="PingFangSC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="42" lineHeightMultiple="2" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arY-Dw-nbb">
+                                <rect key="frame" x="30" y="328" width="540" height="49"/>
+                                <color key="backgroundColor" red="0.0" green="0.33333333329999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="ymI-Ut-OH6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" systemColor="systemGray6Color"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dh4-G3-g0G">
+                                <rect key="frame" x="30" y="169" width="540" height="49"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v11-6P-61J">
+                                        <rect key="frame" x="18" y="0.0" width="504" height="49"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="v11-6P-61J" secondAttribute="bottom" id="7ai-1i-6GA"/>
+                                    <constraint firstItem="v11-6P-61J" firstAttribute="top" secondItem="Dh4-G3-g0G" secondAttribute="top" id="OBD-RR-N5e"/>
+                                    <constraint firstAttribute="trailing" secondItem="v11-6P-61J" secondAttribute="trailing" constant="18" id="dL4-IW-CmL"/>
+                                    <constraint firstAttribute="height" constant="49" id="r9U-bT-gsl"/>
+                                    <constraint firstItem="v11-6P-61J" firstAttribute="leading" secondItem="Dh4-G3-g0G" secondAttribute="leading" constant="18" id="yLo-ag-NLu"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mwx-bm-cgc">
+                                <rect key="frame" x="30" y="244" width="540" height="49"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zf4-Iw-dOF">
+                                        <rect key="frame" x="18" y="0.0" width="504" height="49"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="zf4-Iw-dOF" firstAttribute="top" secondItem="Mwx-bm-cgc" secondAttribute="top" id="Dmy-ag-XdO"/>
+                                    <constraint firstItem="zf4-Iw-dOF" firstAttribute="leading" secondItem="Mwx-bm-cgc" secondAttribute="leading" constant="18" id="PBk-Pb-UC5"/>
+                                    <constraint firstAttribute="bottom" secondItem="zf4-Iw-dOF" secondAttribute="bottom" id="Tdl-qO-alo"/>
+                                    <constraint firstAttribute="trailing" secondItem="zf4-Iw-dOF" secondAttribute="trailing" constant="18" id="UMN-Kr-sW2"/>
+                                    <constraint firstAttribute="height" constant="49" id="sLU-Gm-wqj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4OV-nQ-Kf2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="arY-Dw-nbb" firstAttribute="top" secondItem="Mwx-bm-cgc" secondAttribute="bottom" constant="35" id="1et-WH-ogi"/>
+                            <constraint firstItem="lYg-8I-nlz" firstAttribute="leading" secondItem="4OV-nQ-Kf2" secondAttribute="leading" constant="37" id="4Ef-VI-dIP"/>
+                            <constraint firstItem="4OV-nQ-Kf2" firstAttribute="trailing" secondItem="Mwx-bm-cgc" secondAttribute="trailing" constant="30" id="Bqz-e8-W5W"/>
+                            <constraint firstItem="Dh4-G3-g0G" firstAttribute="leading" secondItem="4OV-nQ-Kf2" secondAttribute="leading" constant="30" id="Uvz-Wi-BKh"/>
+                            <constraint firstItem="lYg-8I-nlz" firstAttribute="top" secondItem="4OV-nQ-Kf2" secondAttribute="top" constant="50" id="VaW-Kl-kg3"/>
+                            <constraint firstItem="arY-Dw-nbb" firstAttribute="leading" secondItem="4OV-nQ-Kf2" secondAttribute="leading" constant="30" id="a1F-C8-1Ia"/>
+                            <constraint firstItem="Dh4-G3-g0G" firstAttribute="top" secondItem="lYg-8I-nlz" secondAttribute="bottom" constant="35" id="dpA-C7-7r1"/>
+                            <constraint firstItem="4OV-nQ-Kf2" firstAttribute="trailing" secondItem="lYg-8I-nlz" secondAttribute="trailing" constant="37" id="iEY-y2-VNp"/>
+                            <constraint firstItem="4OV-nQ-Kf2" firstAttribute="trailing" secondItem="arY-Dw-nbb" secondAttribute="trailing" constant="30" id="n5w-Vw-9kO"/>
+                            <constraint firstItem="Mwx-bm-cgc" firstAttribute="leading" secondItem="4OV-nQ-Kf2" secondAttribute="leading" constant="30" id="pt2-L3-ZtA"/>
+                            <constraint firstItem="Mwx-bm-cgc" firstAttribute="top" secondItem="Dh4-G3-g0G" secondAttribute="bottom" constant="26" id="rWk-Qa-cU3"/>
+                            <constraint firstItem="4OV-nQ-Kf2" firstAttribute="trailing" secondItem="Dh4-G3-g0G" secondAttribute="trailing" constant="30" id="uoT-uw-l4i"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="Kdn-Sc-2sg"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9wW-1x-hhW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-3101.449275362319" y="-930.13392857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
