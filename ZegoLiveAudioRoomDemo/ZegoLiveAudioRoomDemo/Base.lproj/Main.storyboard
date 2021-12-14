@@ -136,8 +136,157 @@
             </objects>
             <point key="canvasLocation" x="-3101.449275362319" y="-930.13392857142856"/>
         </scene>
+        <!--Create Room View Controller-->
+        <scene sceneID="FRt-8S-zEg">
+            <objects>
+                <viewController storyboardIdentifier="CreateChatRoomViewController" id="hsI-7P-bkc" customClass="CreateRoomViewController" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CHJ-bE-ypK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-hp-o4A">
+                                <rect key="frame" x="30" y="332.5" width="354" height="49"/>
+                                <color key="backgroundColor" red="0.0" green="0.33333333329999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="stB-66-RuM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Join room">
+                                    <color key="titleColor" systemColor="systemGray6Color"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKJ-Pg-EWj">
+                                <rect key="frame" x="30" y="248.5" width="354" height="49"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Room ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBh-D1-H1D">
+                                        <rect key="frame" x="18" y="0.0" width="318" height="49"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZBh-D1-H1D" secondAttribute="bottom" id="ary-Wv-lwA"/>
+                                    <constraint firstItem="ZBh-D1-H1D" firstAttribute="top" secondItem="HKJ-Pg-EWj" secondAttribute="top" id="c0I-lw-JXN"/>
+                                    <constraint firstAttribute="height" constant="49" id="fVL-M5-bPW"/>
+                                    <constraint firstItem="ZBh-D1-H1D" firstAttribute="leading" secondItem="HKJ-Pg-EWj" secondAttribute="leading" constant="18" id="gY3-1h-wlO"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZBh-D1-H1D" secondAttribute="trailing" constant="18" id="yo7-fg-wS1"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4C-ZS-uey">
+                                <rect key="frame" x="192" y="397.5" width="30" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="HzC-CQ-Jy0"/>
+                                    <constraint firstAttribute="height" constant="17" id="qQs-qT-sNg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.60561436410000002" green="0.61550331120000001" blue="0.66523259879999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyI-RE-1Rc">
+                                <rect key="frame" x="30" y="430.5" width="354" height="49"/>
+                                <color key="backgroundColor" red="0.96867185830000002" green="0.96861177679999999" blue="0.97275525330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="T6j-bl-pIy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="-4" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="Create room" image="add_icon">
+                                    <color key="titleColor" red="0.20392155649999999" green="0.20392155649999999" blue="0.20392155649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qeg-Lo-dsf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qeg-Lo-dsf" firstAttribute="trailing" secondItem="HKJ-Pg-EWj" secondAttribute="trailing" constant="30" id="2EY-dE-0g7"/>
+                            <constraint firstItem="rRY-hp-o4A" firstAttribute="leading" secondItem="Qeg-Lo-dsf" secondAttribute="leading" constant="30" id="4j9-5l-f8L"/>
+                            <constraint firstItem="v4C-ZS-uey" firstAttribute="top" secondItem="rRY-hp-o4A" secondAttribute="bottom" constant="16" id="Jii-Yt-hKq"/>
+                            <constraint firstItem="HKJ-Pg-EWj" firstAttribute="centerY" secondItem="CHJ-bE-ypK" secondAttribute="centerY" constant="-175" id="UU0-cu-iHD"/>
+                            <constraint firstItem="KyI-RE-1Rc" firstAttribute="top" secondItem="v4C-ZS-uey" secondAttribute="bottom" constant="16" id="VFa-tx-PWU"/>
+                            <constraint firstItem="rRY-hp-o4A" firstAttribute="top" secondItem="HKJ-Pg-EWj" secondAttribute="bottom" constant="35" id="WpU-Ap-UUX"/>
+                            <constraint firstItem="Qeg-Lo-dsf" firstAttribute="trailing" secondItem="rRY-hp-o4A" secondAttribute="trailing" constant="30" id="gr5-Lh-dUL"/>
+                            <constraint firstItem="v4C-ZS-uey" firstAttribute="centerX" secondItem="CHJ-bE-ypK" secondAttribute="centerX" id="lC9-IV-DqE"/>
+                            <constraint firstItem="HKJ-Pg-EWj" firstAttribute="leading" secondItem="Qeg-Lo-dsf" secondAttribute="leading" constant="30" id="p5b-7N-2oQ"/>
+                            <constraint firstItem="KyI-RE-1Rc" firstAttribute="leading" secondItem="Qeg-Lo-dsf" secondAttribute="leading" constant="30" id="sgy-RD-Yql"/>
+                            <constraint firstItem="Qeg-Lo-dsf" firstAttribute="trailing" secondItem="KyI-RE-1Rc" secondAttribute="trailing" constant="30" id="tW6-W3-ept"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="M3E-Qn-eYx">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="5CB-CL-o4G">
+                            <color key="tintColor" red="0.0" green="0.33333333329999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="oSF-75-O5S" kind="push" id="nh4-pR-jGt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Odc-C5-fSl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1170" y="-919"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="32I-hp-t7A">
+            <objects>
+                <navigationController storyboardIdentifier="LiveAudioRoomNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="6st-Ie-Kbx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AaL-nz-mCg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hsI-7P-bkc" kind="relationship" relationship="rootViewController" id="5p9-G7-7Lw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eW9-SN-vGM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2059" y="-919"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="7zT-xv-frJ">
+            <objects>
+                <viewController storyboardIdentifier="ZegoSettingVC" title="Settings" id="oSF-75-O5S" customClass="SettingViewController" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SQc-YJ-j7Q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-qs-h24">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.96078431369999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="oSF-75-O5S" id="2tP-UP-ziE"/>
+                                    <outlet property="delegate" destination="oSF-75-O5S" id="TeF-4X-mRH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SJe-fc-jBM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="X1z-qs-h24" firstAttribute="top" secondItem="SJe-fc-jBM" secondAttribute="top" id="5nr-ms-oJa"/>
+                            <constraint firstItem="X1z-qs-h24" firstAttribute="leading" secondItem="SJe-fc-jBM" secondAttribute="leading" id="HdN-6J-hBZ"/>
+                            <constraint firstItem="SJe-fc-jBM" firstAttribute="trailing" secondItem="X1z-qs-h24" secondAttribute="trailing" id="qs1-gh-e8R"/>
+                            <constraint firstItem="X1z-qs-h24" firstAttribute="bottom" secondItem="SQc-YJ-j7Q" secondAttribute="bottom" id="zvW-KL-TIW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MOc-Jw-JIj"/>
+                    <connections>
+                        <outlet property="settingTableView" destination="X1z-qs-h24" id="hZE-bm-fpW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwU-vc-uht" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-278" y="-919"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="add_icon" width="12" height="12"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
