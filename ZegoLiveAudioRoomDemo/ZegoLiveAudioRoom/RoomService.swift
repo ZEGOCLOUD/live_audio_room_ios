@@ -31,13 +31,13 @@ class RoomService {
         
     }
     
-    /// Leave the chat room , you need to enter your `roomID`
-    func leaveRoom(_ roomID: String, callback: RoomCallback) {
+    /// Leave the chat room
+    func leaveRoom(callback: RoomCallback) {
         
     }
     
     /// Query the number of chat rooms available online
-    func queryOnlineRoomUsers(_ roomID: String, callback: OnlineRoomUsersCallback) {
+    func queryOnlineRoomUsers(callback: OnlineRoomUsersCallback) {
         
     }
     

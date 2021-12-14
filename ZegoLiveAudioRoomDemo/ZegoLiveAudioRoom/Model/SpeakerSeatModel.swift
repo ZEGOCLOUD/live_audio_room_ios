@@ -13,6 +13,12 @@ enum SpeakerSeatStatus {
     case Closed
 }
 
+enum NetworkQuality {
+    case Good
+    case Medium
+    case Bad
+}
+
 struct SpeakerSeatModel {
     /// user ID
     var userID: String?
@@ -29,6 +35,6 @@ struct SpeakerSeatModel {
     /// the sound level of mic `[0, 100]`
     var soundLevel: UInt = 0
     
-    /// newwork status of current seat
-    var newwork: UInt = 0
+    /// newwork quality of current seat
+    var networkQuality: NetworkQuality = .Good
 }
