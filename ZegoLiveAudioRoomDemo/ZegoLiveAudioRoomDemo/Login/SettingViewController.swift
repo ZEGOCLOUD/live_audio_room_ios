@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import ZegoExpressEngine
+import ZIM
 
 class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -14,7 +16,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var dataList : [[SettingCellModel]] {
         get {
-            return [[configModel(type: .RTA),configModel(type: .ZIM)],[configModel(type: .Log)],[configModel(type: .Out)]];
+            return [[configModel(type: .express),configModel(type: .zim)],[configModel(type: .shareLog)],[configModel(type: .logOut)]];
         }
     }
 
@@ -22,13 +24,12 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         setupNavBar()
-        
         settingTableView .register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         settingTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell1")
     }
     
     func setupNavBar() -> Void {
-        self.title = ZGLocalizedString(key: "setting_page_settings")
+        self.title = ZGLocalizedString("setting_page_settings")
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "nav_back"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = backItem
     }
@@ -40,20 +41,25 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func configModel(type:SettingCellType) -> SettingCellModel {
         let model : SettingCellModel = SettingCellModel.init()
         switch type {
-        case .RTA:
-            model.title = ZGLocalizedString(key: "")
-            model.subTitle = ZGLocalizedString(key: "")
+        case .express:
+            let version : String = ZegoExpressEngine.getVersion().components(separatedBy: "_")[0]
+            model.title = ZGLocalizedString("setting_page_sdk_version")
+            model.subTitle = "v\(version)"
             model.type = type
-        case .ZIM:
-            model.title = ZGLocalizedString(key: "")
-            model.subTitle = ZGLocalizedString(key: "")
+            break
+        case .zim:
+            model.title = ZGLocalizedString("setting_page_zim_sdk_version")
+            model.subTitle = "v\(ZIM.getVersion())"
             model.type = type
-        case .Log:
-            model.title = ZGLocalizedString(key: "")
+            break
+        case .shareLog:
+            model.title = ZGLocalizedString("setting_page_upload_log")
             model.type = type
-        case .Out:
-            model.title = ZGLocalizedString(key: "")
+            break
+        case .logOut:
+            model.title = ZGLocalizedString("setting_page_logout")
             model.type = type
+            break
         }
         return model
     }
@@ -71,9 +77,9 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let array : Array = dataList[indexPath.section];
         let model = array[indexPath.row]
         var cell : UITableViewCell
-        if model.type == .Out {
+        if model.type == .logOut {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            let titleLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let titleLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 49.0))
             titleLabel.text = model.title
             titleLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
             titleLabel.textColor = UIColor.init(red: 238/255.0, green: 21/255.0, blue: 21/255.0, alpha: 1.0)
@@ -86,10 +92,9 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.detailTextLabel?.text = model.subTitle
             cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         }
-        
         let lineView = UIView.init(frame: CGRect.init(x: 0, y: 48.5, width: self.view.bounds.size.width, height: 0.5))
         lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
-        if model.type == .RTA {
+        if model.type == .express {
             lineView.isHidden = false
         } else {
             lineView.isHidden = true
@@ -121,6 +126,28 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
+        let model : SettingCellModel = dataList[indexPath.section][indexPath.row]
+        if (model.type == .logOut) {
+            // logout
+            RoomManager.shared.userService.logout()
+            RoomManager.shared.uninit()
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
+            getKeyWindow().rootViewController = vc
+
+        } else if (model.type == .shareLog) {
+            // share log.
+//            [ZGHUDHelper showNetworkLoading];
+            RoomManager.shared.uploadLog { UInt in
+                
+            };
+//            [[ZGZIMManager shared] uploadLog:^(ZIMError *_Nonnull errorInfo) {
+//                [ZGHUDHelper hideNetworkLoading];
+//                if (errorInfo.code == 0) {
+//                    [ZGHUDHelper showMessage:ZGLocalizedString(toast_upload_log_success)];
+//                } else {
+//                    [ZGHUDHelper showMessage:[NSString stringWithFormat:ZGLocalizedString(toast_upload_log_fail), errorInfo.code]];
+//                }
+//            }];
+        }
     }
 }

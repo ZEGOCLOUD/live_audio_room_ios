@@ -12,6 +12,7 @@
 		8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9127687A490048871D /* CreateRoomViewController.swift */; };
 		8624CC9427687A600048871D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9327687A600048871D /* SettingViewController.swift */; };
 		8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9627687D7B0048871D /* SettingCellModel.swift */; };
+		8624CC9C2768A4000048871D /* Room.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8624CC9E2768A4000048871D /* Room.strings */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
 		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
@@ -40,6 +41,8 @@
 		8624CC9127687A490048871D /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		8624CC9327687A600048871D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8624CC9627687D7B0048871D /* SettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellModel.swift; sourceTree = "<group>"; };
+		8624CC9D2768A4000048871D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Room.strings; sourceTree = "<group>"; };
+		8624CC9F2768A41A0048871D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Room.strings"; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +91,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8624CC992768A3A50048871D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8624CC9E2768A4000048871D /* Room.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		86F305FB27673FE7003BA278 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +132,7 @@
 		8EAB49D62766FC7800A32320 /* ZegoLiveAudioRoomDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8624CC992768A3A50048871D /* Resource */,
 				86F305FB27673FE7003BA278 /* Login */,
 				8EAB49EC2766FD1400A32320 /* AppCenter */,
 				8EAB49D72766FC7800A32320 /* AppDelegate.swift */,
@@ -232,6 +244,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 8EAB49CB2766FC7800A32320;
 			productRefGroup = 8EAB49D52766FC7800A32320 /* Products */;
@@ -250,6 +263,7 @@
 			files = (
 				8EDD028327674FF800A6987F /* AppCenter.json in Resources */,
 				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
+				8624CC9C2768A4000048871D /* Room.strings in Resources */,
 				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
 				8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */,
 			);
@@ -331,6 +345,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		8624CC9E2768A4000048871D /* Room.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8624CC9D2768A4000048871D /* en */,
+				8624CC9F2768A41A0048871D /* zh-Hans */,
+			);
+			name = Room.strings;
+			sourceTree = "<group>";
+		};
 		8EAB49DD2766FC7800A32320 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -354,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -415,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
