@@ -10,7 +10,7 @@
 		7E2F4BD29093631E4EEEF6F0 /* Pods_ZegoLiveAudioRoomDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
-		8EAB49DC2766FC7800A32320 /* ZegoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* ZegoLoginViewController.swift */; };
+		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
 		8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49DD2766FC7800A32320 /* Main.storyboard */; };
 		8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E02766FC7900A32320 /* Assets.xcassets */; };
 		8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */; };
@@ -22,7 +22,7 @@
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8EAB49DB2766FC7800A32320 /* ZegoLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoLoginViewController.swift; sourceTree = "<group>"; };
+		8EAB49DB2766FC7800A32320 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8EAB49DE2766FC7800A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8EAB49E02766FC7900A32320 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EAB49E32766FC7900A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 				8EAB49EC2766FD1400A32320 /* AppCenter */,
 				8EAB49D72766FC7800A32320 /* AppDelegate.swift */,
 				8EAB49D92766FC7800A32320 /* SceneDelegate.swift */,
-				8EAB49DB2766FC7800A32320 /* ZegoLoginViewController.swift */,
+				8EAB49DB2766FC7800A32320 /* LoginViewController.swift */,
 				8EAB49DD2766FC7800A32320 /* Main.storyboard */,
 				8EAB49E02766FC7900A32320 /* Assets.xcassets */,
 				8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */,
@@ -238,7 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
-				8EAB49DC2766FC7800A32320 /* ZegoLoginViewController.swift in Sources */,
+				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,
 			);

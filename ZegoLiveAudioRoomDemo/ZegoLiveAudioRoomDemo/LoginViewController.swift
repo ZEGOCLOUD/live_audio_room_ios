@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ZegoLoginViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
