@@ -16,7 +16,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var dataList : [[SettingCellModel]] {
         get {
-            return [[configModel(type: .RTA),configModel(type: .ZIM)],[configModel(type: .Log)],[configModel(type: .Out)]];
+            return [[configModel(type: .express),configModel(type: .zim)],[configModel(type: .shareLog)],[configModel(type: .logOut)]];
         }
     }
 
@@ -29,7 +29,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func setupNavBar() -> Void {
-        self.title = ZGLocalizedString(key: "setting_page_settings")
+        self.title = ZGLocalizedString("setting_page_settings")
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "nav_back"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = backItem
     }
@@ -41,23 +41,23 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func configModel(type:SettingCellType) -> SettingCellModel {
         let model : SettingCellModel = SettingCellModel.init()
         switch type {
-        case .RTA:
+        case .express:
             let version : String = ZegoExpressEngine.getVersion().components(separatedBy: "_")[0]
-            model.title = ZGLocalizedString(key: "setting_page_sdk_version")
+            model.title = ZGLocalizedString("setting_page_sdk_version")
             model.subTitle = "v\(version)"
             model.type = type
             break
-        case .ZIM:
-            model.title = ZGLocalizedString(key: "setting_page_zim_sdk_version")
+        case .zim:
+            model.title = ZGLocalizedString("setting_page_zim_sdk_version")
             model.subTitle = "v\(ZIM.getVersion())"
             model.type = type
             break
-        case .Log:
-            model.title = ZGLocalizedString(key: "setting_page_upload_log")
+        case .shareLog:
+            model.title = ZGLocalizedString("setting_page_upload_log")
             model.type = type
             break
-        case .Out:
-            model.title = ZGLocalizedString(key: "setting_page_logout")
+        case .logOut:
+            model.title = ZGLocalizedString("setting_page_logout")
             model.type = type
             break
         }
@@ -77,7 +77,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let array : Array = dataList[indexPath.section];
         let model = array[indexPath.row]
         var cell : UITableViewCell
-        if model.type == .Out {
+        if model.type == .logOut {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             let titleLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 49.0))
             titleLabel.text = model.title
@@ -94,7 +94,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
         let lineView = UIView.init(frame: CGRect.init(x: 0, y: 48.5, width: self.view.bounds.size.width, height: 0.5))
         lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
-        if model.type == .RTA {
+        if model.type == .express {
             lineView.isHidden = false
         } else {
             lineView.isHidden = true
@@ -127,14 +127,14 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model : SettingCellModel = dataList[indexPath.section][indexPath.row]
-        if (model.type == .Out) {
+        if (model.type == .logOut) {
             // logout
             RoomManager.shared.userService.logout()
             RoomManager.shared.uninit()
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
             getKeyWindow().rootViewController = vc
 
-        } else if (model.type == .Log) {
+        } else if (model.type == .shareLog) {
             // share log.
 //            [ZGHUDHelper showNetworkLoading];
             RoomManager.shared.uploadLog { UInt in

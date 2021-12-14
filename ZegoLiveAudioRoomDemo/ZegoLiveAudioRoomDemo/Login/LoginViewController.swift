@@ -46,13 +46,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 42.0
-        let attributedText = NSAttributedString.init(string: ZGLocalizedString(key: "login_page_title"), attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30.0),NSAttributedString.Key.paragraphStyle : paragraphStyle, NSAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSAttributedString.init(string: ZGLocalizedString("login_page_title"), attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30.0),NSAttributedString.Key.paragraphStyle : paragraphStyle, NSAttributedString.Key.foregroundColor : UIColor.black])
         titleLabel.attributedText = attributedText
         
-        let userIdPlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString(key: "login_page_user_id"), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
+        let userIdPlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString("login_page_user_id"), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
         userIDTextField.attributedPlaceholder = userIdPlaceHolder
         
-        let userNamePlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString(key: "login_page_user_name"), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
+        let userNamePlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString("login_page_user_name"), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
         userNameTextField.attributedPlaceholder = userNamePlaceHolder
         
     }
@@ -93,9 +93,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         var errMsg : String = ""
         if userInfo.userID == "" || userInfo.userID == nil {
-            errMsg = ZGLocalizedString(key: "toast_userid_login_fail")
+            errMsg = ZGLocalizedString("toast_userid_login_fail")
         } else {
-            errMsg = ZGLocalizedString(key: "toast_user_id_error")
+            errMsg = ZGLocalizedString("toast_user_id_error")
         }
         
         if errMsg.count > 0 {

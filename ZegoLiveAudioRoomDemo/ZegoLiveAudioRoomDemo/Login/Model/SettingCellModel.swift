@@ -8,15 +8,15 @@
 import UIKit
 
 enum SettingCellType {
-    case RTA
-    case ZIM
-    case Log
-    case Out
+    case express
+    case zim
+    case shareLog
+    case logOut
 }
 
 class SettingCellModel: NSObject {
     
     var title : String?
     var subTitle : String?
-    var type : SettingCellType = .RTA
+    var type : SettingCellType = .express
 }

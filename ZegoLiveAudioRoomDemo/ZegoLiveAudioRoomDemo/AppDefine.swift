@@ -7,7 +7,7 @@
 
 import UIKit
 
-func ZGLocalizedString(key : String) -> String {
+func ZGLocalizedString(_ key : String) -> String {
     return Bundle.main.localizedString(forKey: key, value: "", table: "Room")
 }
 
