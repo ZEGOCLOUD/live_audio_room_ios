@@ -46,23 +46,28 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 42.0
-        let attributedText = NSAttributedString.init(string: "", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30.0),NSAttributedString.Key.paragraphStyle : paragraphStyle, NSAttributedString.Key.foregroundColor : UIColor.black])
+        let attributedText = NSAttributedString.init(string: ZGLocalizedString(key: ""), attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30.0),NSAttributedString.Key.paragraphStyle : paragraphStyle, NSAttributedString.Key.foregroundColor : UIColor.black])
         titleLabel.attributedText = attributedText
         
-        let userIdPlaceHolder:NSAttributedString = NSAttributedString.init(string: "33423", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
+        let userIdPlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString(key: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
         userIDTextField.attributedPlaceholder = userIdPlaceHolder
         
-        let userNamePlaceHolder:NSAttributedString = NSAttributedString.init(string: "qewqw", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
+        let userNamePlaceHolder:NSAttributedString = NSAttributedString.init(string: ZGLocalizedString(key: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(red: 152/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0)])
         userNameTextField.attributedPlaceholder = userNamePlaceHolder
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+    func getKeyWindow() -> UIWindow {
         var window:UIWindow = UIApplication.shared.keyWindow!
             if #available(iOS 13.0, *) {
                 window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).last!
             }
+        return window
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let window : UIWindow = getKeyWindow()
         window.endEditing(true)
     }
     
@@ -92,6 +97,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         //TODO: 需要补充实现逻辑
+        let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
+        getKeyWindow().rootViewController = navVC
     }
     
     //MARK: - UITextFieldDelegate
