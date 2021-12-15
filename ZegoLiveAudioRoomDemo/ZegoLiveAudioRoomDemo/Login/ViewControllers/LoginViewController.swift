@@ -34,7 +34,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         loginButton.clipsToBounds = true
         
         userIDBackgroundView.layer.borderWidth = 1.5
-        userNameBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
+        userIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
         userIDBackgroundView.layer.cornerRadius = 12.0
         userIDBackgroundView.clipsToBounds = true
         
@@ -127,7 +127,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     //MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        var backView = userNameBackgroundView;
+        var backView = userIDBackgroundView
         if textField.isEqual(userNameTextField) {
             backView = userNameBackgroundView
         }

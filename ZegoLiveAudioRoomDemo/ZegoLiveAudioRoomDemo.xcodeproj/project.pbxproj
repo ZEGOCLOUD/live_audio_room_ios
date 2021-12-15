@@ -130,13 +130,21 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
-		86F305FB27673FE7003BA278 /* Login */ = {
+		8624CCAA2769E6CC0048871D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8624CC9527687D5C0048871D /* Model */,
 				8EAB49DB2766FC7800A32320 /* LoginViewController.swift */,
 				8624CC9127687A490048871D /* CreateRoomViewController.swift */,
 				8624CC9327687A600048871D /* SettingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86F305FB27673FE7003BA278 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8624CCAA2769E6CC0048871D /* ViewControllers */,
+				8624CC9527687D5C0048871D /* Model */,
 			);
 			path = Login;
 			sourceTree = "<group>";
