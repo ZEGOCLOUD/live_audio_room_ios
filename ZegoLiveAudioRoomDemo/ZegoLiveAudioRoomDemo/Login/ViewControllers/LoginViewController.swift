@@ -32,6 +32,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     func configUI() -> Void {
         loginButton.layer.cornerRadius = 12.0
         loginButton.clipsToBounds = true
+        loginButton.setTitle(ZGLocalizedString("login_page_login"), for: UIControl.State.normal)
         
         userIDBackgroundView.layer.borderWidth = 1.5
         userIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor

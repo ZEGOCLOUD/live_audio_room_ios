@@ -15,6 +15,8 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     @IBOutlet weak var roomIDTextField: UITextField!
     @IBOutlet weak var joinRoomButton: UIButton!
     @IBOutlet weak var createRoomButton: UIButton!
+    @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var settingButton: UIBarButtonItem!
     
     var rtcToken : String = ""
     var myRoomID : String = ""
@@ -32,15 +34,22 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     func configUI() -> Void {
         joinRoomButton.layer.cornerRadius = 12.0
         joinRoomButton.clipsToBounds = true
+        joinRoomButton.setTitle(ZGLocalizedString("create_page_join_room"), for: UIControl.State.normal)
         
         createRoomButton.layer.cornerRadius = 12.0
         createRoomButton.clipsToBounds = true
+        createRoomButton.setTitle(ZGLocalizedString("create_page_create_room"), for: UIControl.State.normal)
         
         roomIDBackgroundView.layer.borderWidth = 1.5
         roomIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
         roomIDBackgroundView.layer.cornerRadius = 12.0
         roomIDBackgroundView.clipsToBounds = true
         
+        orLabel.text = ZGLocalizedString("create_page_or")
+        
+        settingButton.title = ZGLocalizedString("setting_page_settings")
+        
+        roomIDTextField.placeholder = ZGLocalizedString("create_page_room_id")
         roomIDTextField.addTarget(self, action: #selector(joinRoomIdTextFieldDidChange), for: UIControl.Event.editingChanged)
         
     }

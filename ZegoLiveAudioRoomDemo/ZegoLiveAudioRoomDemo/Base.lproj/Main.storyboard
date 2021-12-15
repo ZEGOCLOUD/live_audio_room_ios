@@ -235,8 +235,10 @@
                     <connections>
                         <outlet property="createRoomButton" destination="KyI-RE-1Rc" id="pm8-qw-cd9"/>
                         <outlet property="joinRoomButton" destination="rRY-hp-o4A" id="glH-FE-YDx"/>
+                        <outlet property="orLabel" destination="v4C-ZS-uey" id="ivw-uH-Fwb"/>
                         <outlet property="roomIDBackgroundView" destination="HKJ-Pg-EWj" id="9MI-sf-9cX"/>
                         <outlet property="roomIDTextField" destination="ZBh-D1-H1D" id="Bvk-O6-UkH"/>
+                        <outlet property="settingButton" destination="5CB-CL-o4G" id="Y7O-vt-cBJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Odc-C5-fSl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
