@@ -39,6 +39,7 @@ class HUDHelper: NSObject {
         }
     }
     
+    /// Remove network loading HUD
     static func hideNetworkLoading() -> Void {
         DispatchQueue.main.async {
             for subview in getKeyWindow().subviews {

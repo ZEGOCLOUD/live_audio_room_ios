@@ -15,8 +15,8 @@ func ZGLocalizedString(_ key : String) -> String {
 
 func getKeyWindow() -> UIWindow {
     var window:UIWindow = UIApplication.shared.keyWindow!
-        if #available(iOS 13.0, *) {
-            window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).last!
-        }
+    if #available(iOS 13.0, *) {
+        window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).last!
+    }
     return window
 }
