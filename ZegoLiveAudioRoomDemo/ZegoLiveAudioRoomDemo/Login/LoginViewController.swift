@@ -13,7 +13,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var userNameBackgroundView: UIView!
     @IBOutlet weak var userIDTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var loginButton: UINavigationItem!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
     var myUserID : String = ""
@@ -30,8 +30,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     func configUI() -> Void {
-        loginButton.titleView?.layer.cornerRadius = 12.0
-        loginButton.titleView?.clipsToBounds = true
+        loginButton.layer.cornerRadius = 12.0
+        loginButton.clipsToBounds = true
         
         userIDBackgroundView.layer.borderWidth = 1.5
         userNameBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
@@ -66,8 +66,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBAction func userIDTextFieldChanged(_ sender: UITextField) {
         var userId : String = sender.text! as String
         if userId.count > 20 {
+            let startIndex = userId.index(userId.startIndex, offsetBy: 0)
             let index = userId.index(userId.startIndex, offsetBy: 20)
-            userId = userId.substring(to: index)
+            userId = String(userId[startIndex...index])
             sender.text = userId;
         }
         myUserID = userId;
@@ -77,8 +78,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBAction func userNameTextFieldChanged(_ sender: UITextField) {
         var userName = sender.text! as String
         if userName.count > 32 {
+            let startIndex = userName.index(userName.startIndex, offsetBy: 0)
             let index = userName.index(userName.startIndex, offsetBy: 32)
-            userName = userName.substring(to: index)
+            userName = String(userName[startIndex...index])
             sender.text = userName
         }
         myUserName = userName
@@ -94,28 +96,33 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         var errMsg : String = ""
         if userInfo.userID == "" || userInfo.userID == nil {
             errMsg = ZGLocalizedString("toast_userid_login_fail")
-        } else {
+        } else if (userInfo.userID?.isUserIdValidated() == false) {
             errMsg = ZGLocalizedString("toast_user_id_error")
         }
         
         if errMsg.count > 0 {
-            
+            HUDHelper.showMessage(message:errMsg)
             return
         }
         
+        let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
+        getKeyWindow().rootViewController = navVC
+        
         let token : String = ""
-        RoomManager.shared.initWithAppID(appID: AppCenter.appID(), appSign: AppCenter.appSign()) { UInt in
-            //TODO: 需要补充实现逻辑
+        RoomManager.shared.initWithAppID(appID: AppCenter.appID(), appSign: AppCenter.appSign()) { result in
+            
         };
         RoomManager.shared.userService.login(userInfo, token) { result in
-            if result.isSuccess {
+            switch result {
+            case .success:
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
                 getKeyWindow().rootViewController = navVC
-            } else {
-                //TODO: 需要补充实现逻辑
+                break
+            case .failure(let code):
+                HUDHelper.showMessage(message: (ZGLocalizedString("toast_login_fail") + "\(code)"))
+                break
             }
         }
-        
     }
     
     //MARK: - UITextFieldDelegate

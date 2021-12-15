@@ -124,7 +124,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Kdn-Sc-2sg"/>
                     <connections>
-                        <outlet property="loginButton" destination="Kdn-Sc-2sg" id="JGh-cj-a3A"/>
+                        <outlet property="loginButton" destination="arY-Dw-nbb" id="a3a-4b-fds"/>
                         <outlet property="titleLabel" destination="lYg-8I-nlz" id="ZY6-HX-hb8"/>
                         <outlet property="userIDBackgroundView" destination="Dh4-G3-g0G" id="yTI-c2-R3A"/>
                         <outlet property="userIDTextField" destination="v11-6P-61J" id="1Cf-kY-1tZ"/>
@@ -164,6 +164,10 @@
                                         <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                        <connections>
+                                            <action selector="chatRoomIDTextFieldChanged:" destination="hsI-7P-bkc" eventType="editingChanged" id="sja-ah-EGc"/>
+                                            <outlet property="delegate" destination="hsI-7P-bkc" id="MF8-ih-8in"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -197,6 +201,9 @@
                                 <state key="normal" title="Create room" image="add_icon">
                                     <color key="titleColor" red="0.20392155649999999" green="0.20392155649999999" blue="0.20392155649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="createButtonClicked:" destination="hsI-7P-bkc" eventType="touchUpInside" id="CL2-T6-AVF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qeg-Lo-dsf"/>
@@ -225,6 +232,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="createRoomButton" destination="KyI-RE-1Rc" id="pm8-qw-cd9"/>
+                        <outlet property="joinRoomButton" destination="rRY-hp-o4A" id="glH-FE-YDx"/>
+                        <outlet property="roomIDBackgroundView" destination="HKJ-Pg-EWj" id="9MI-sf-9cX"/>
+                        <outlet property="roomIDTextField" destination="ZBh-D1-H1D" id="Bvk-O6-UkH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Odc-C5-fSl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

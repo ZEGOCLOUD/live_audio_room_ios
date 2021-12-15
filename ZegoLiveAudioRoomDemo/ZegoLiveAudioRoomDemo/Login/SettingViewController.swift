@@ -86,7 +86,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
             titleLabel.textAlignment = NSTextAlignment.center
             cell.contentView.addSubview(titleLabel)
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell1")
             cell.textLabel?.text = model.title
             cell.textLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
             cell.detailTextLabel?.text = model.subTitle
@@ -136,18 +136,18 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
 
         } else if (model.type == .shareLog) {
             // share log.
-//            [ZGHUDHelper showNetworkLoading];
-            RoomManager.shared.uploadLog { UInt in
-                
+            HUDHelper.showNetworkLoading()
+            RoomManager.shared.uploadLog { result in
+                HUDHelper.hideNetworkLoading()
+                switch result {
+                case .success:
+                    HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_success"))
+                    break
+                case .failure(let code):
+                    HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_fail") + "\(code)")
+                    break
+                }
             };
-//            [[ZGZIMManager shared] uploadLog:^(ZIMError *_Nonnull errorInfo) {
-//                [ZGHUDHelper hideNetworkLoading];
-//                if (errorInfo.code == 0) {
-//                    [ZGHUDHelper showMessage:ZGLocalizedString(toast_upload_log_success)];
-//                } else {
-//                    [ZGHUDHelper showMessage:[NSString stringWithFormat:ZGLocalizedString(toast_upload_log_fail), errorInfo.code]];
-//                }
-//            }];
         }
     }
 }

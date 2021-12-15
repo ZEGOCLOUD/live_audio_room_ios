@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias RoomUICallback = () -> Void
+
 func ZGLocalizedString(_ key : String) -> String {
     return Bundle.main.localizedString(forKey: key, value: "", table: "Room")
 }

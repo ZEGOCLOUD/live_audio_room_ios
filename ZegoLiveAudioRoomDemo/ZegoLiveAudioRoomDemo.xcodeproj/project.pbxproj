@@ -13,6 +13,9 @@
 		8624CC9427687A600048871D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9327687A600048871D /* SettingViewController.swift */; };
 		8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9627687D7B0048871D /* SettingCellModel.swift */; };
 		8624CC9C2768A4000048871D /* Room.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8624CC9E2768A4000048871D /* Room.strings */; };
+		8624CCA42769C1710048871D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA22769C1710048871D /* MBProgressHUD.m */; };
+		8624CCA62769C2380048871D /* HUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA52769C2380048871D /* HUDHelper.swift */; };
+		8624CCA92769D6BF0048871D /* StringTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA82769D6BF0048871D /* StringTool.swift */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
 		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
@@ -45,6 +48,11 @@
 		8624CC9627687D7B0048871D /* SettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellModel.swift; sourceTree = "<group>"; };
 		8624CC9D2768A4000048871D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Room.strings; sourceTree = "<group>"; };
 		8624CC9F2768A41A0048871D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Room.strings"; sourceTree = "<group>"; };
+		8624CCA12769C1710048871D /* ZegoLiveAudioRoomDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZegoLiveAudioRoomDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		8624CCA22769C1710048871D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8624CCA32769C1710048871D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8624CCA52769C2380048871D /* HUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDHelper.swift; sourceTree = "<group>"; };
+		8624CCA82769D6BF0048871D /* StringTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTool.swift; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +111,25 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		8624CCA02769C1050048871D /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				8624CCA32769C1710048871D /* MBProgressHUD.h */,
+				8624CCA22769C1710048871D /* MBProgressHUD.m */,
+				8624CCA12769C1710048871D /* ZegoLiveAudioRoomDemo-Bridging-Header.h */,
+				8624CCA52769C2380048871D /* HUDHelper.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		8624CCA72769D6310048871D /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				8624CCA82769D6BF0048871D /* StringTool.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		86F305FB27673FE7003BA278 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +163,8 @@
 		8EAB49D62766FC7800A32320 /* ZegoLiveAudioRoomDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8624CCA72769D6310048871D /* Tool */,
+				8624CCA02769C1050048871D /* HUD */,
 				8624CC992768A3A50048871D /* Resource */,
 				86F305FB27673FE7003BA278 /* Login */,
 				8EAB49EC2766FD1400A32320 /* AppCenter */,
@@ -256,6 +285,7 @@
 				TargetAttributes = {
 					8EAB49D32766FC7800A32320 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -347,12 +377,14 @@
 				8EDD0271276735BE00A6987F /* RoomService.swift in Sources */,
 				8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */,
 				8624CC90276877100048871D /* AppDefine.swift in Sources */,
+				8624CCA42769C1710048871D /* MBProgressHUD.m in Sources */,
 				8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */,
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
 				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
 				8EDD02902768723700A6987F /* TextMessage.swift in Sources */,
 				8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */,
 				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
+				8624CCA92769D6BF0048871D /* StringTool.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */,
 				8EDD02982768CFB100A6987F /* ZegoModelTool.swift in Sources */,
@@ -361,6 +393,7 @@
 				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,
 				8EDD027B27673C8C00A6987F /* Define.swift in Sources */,
 				8EDD02892767727C00A6987F /* RoomInfo.swift in Sources */,
+				8624CCA62769C2380048871D /* HUDHelper.swift in Sources */,
 				8EDD028C2767771300A6987F /* UserInfo.swift in Sources */,
 				8EDD027D27673CED00A6987F /* ZIMManager.swift in Sources */,
 			);
@@ -521,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B82BHJ5H89;
@@ -540,6 +574,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/HUD/ZegoLiveAudioRoomDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -551,6 +587,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B82BHJ5H89;
@@ -570,6 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/HUD/ZegoLiveAudioRoomDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
