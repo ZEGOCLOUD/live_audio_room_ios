@@ -23,7 +23,7 @@ class SpeakerSeatService: NSObject {
     var seatList: [SpeakerSeatModel] = []
     
     /// remove other user to leave his seat
-    func removeUserFromSeat(_ userID: String, callback: RoomCallback) {
+    func removeUserFromSeat(_ index: UInt, callback: RoomCallback) {
         
     }
     
@@ -48,7 +48,7 @@ class SpeakerSeatService: NSObject {
     }
     
     /// local user leave speaker seat
-    func leaveSeat(_ index: UInt, callback: RoomCallback) {
+    func leaveSeat(callback: RoomCallback) {
         
     }
     
