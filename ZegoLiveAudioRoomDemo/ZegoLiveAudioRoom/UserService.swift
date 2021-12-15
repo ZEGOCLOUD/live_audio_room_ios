@@ -16,7 +16,7 @@ protocol UserServiceDelegate: AnyObject {
     func roomUserLeave(_ users: [UserInfo])
 }
 
-class UserService {
+class UserService: NSObject {
     // MARK: - Public
     weak var delegate: UserServiceDelegate?
     var localInfo: UserInfo?
@@ -24,7 +24,7 @@ class UserService {
     
     /// user login with user info and `ZIM token`
     func login(_ info: UserInfo, _ token: String, callback: RoomCallback) {
-        
+        callback(.failure(.paramInvalid))
     }
     
     /// user logout

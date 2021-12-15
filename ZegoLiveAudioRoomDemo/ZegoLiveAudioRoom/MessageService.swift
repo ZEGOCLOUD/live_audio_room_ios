@@ -15,7 +15,7 @@ protocol MessageServiceDelegate: AnyObject {
     func receiveCustomCommand(_ command: CustomCommand, roomID: String)
 }
 
-class MessageService {
+class MessageService: NSObject {
     
     // MARK: - Public
     weak var delegate: MessageServiceDelegate?

@@ -13,7 +13,7 @@ protocol RoomServiceDelegate: AnyObject {
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent)
 }
 
-class RoomService {
+class RoomService: NSObject {
     // MARK: - Public
     
     var info: RoomInfo?

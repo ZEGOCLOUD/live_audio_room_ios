@@ -13,7 +13,7 @@ protocol SpeakerSeatServiceDelegate: AnyObject {
     func speakerSeatUpdate(_ model: SpeakerSeatModel)
 }
 
-class SpeakerSeatService {
+class SpeakerSeatService: NSObject {
     
     // MARK: - Public
     /// seat service delegate
