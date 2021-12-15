@@ -19,7 +19,7 @@ class MessageService {
     
     // MARK: - Public
     weak var delegate: MessageServiceDelegate?
-    var messageList: [String] = []
+    var messageList: [TextMessage] = []
     
     /// send group chat message
     func sendTextMessage(_ message: String, callback: RoomCallback) {

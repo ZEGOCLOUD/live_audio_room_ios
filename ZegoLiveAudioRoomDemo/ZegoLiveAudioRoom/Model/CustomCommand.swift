@@ -9,8 +9,8 @@ import UIKit
 import ZIM
 
 enum CustomCommandType {
-    case Invitation
-    case Gift
+    case invitation
+    case gift
 }
 
 class CustomCommand: ZIMCustomMessage {

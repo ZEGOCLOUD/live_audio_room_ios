@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RoomInfo {
+struct RoomInfo: Codable {
     /// room ID
     var roomID: String?
     
@@ -25,4 +25,14 @@ struct RoomInfo {
     
     /// whether to close all seat
     var isSeatClosed: Bool = false
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case roomID = "id"
+        case roomName = "name"
+        case hostID = "hostID"
+        case seatNum = "num"
+        case isTextMessageDisabled = "disable"
+        case isSeatClosed = "close"
+    }
 }
