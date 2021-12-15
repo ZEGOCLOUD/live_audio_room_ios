@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ZIM
 
 protocol SpeakerSeatServiceDelegate: AnyObject {
     /// speaker seat upate
@@ -53,6 +54,14 @@ class SpeakerSeatService {
     
     /// local user switch the speaker seat
     func switchSeat(to index: UInt, callback: RoomCallback) {
+        
+    }
+}
+
+extension SpeakerSeatService {
+    // MARK: - Private
+    func updateSpeakerSeats(_ seatDict: [String:Any]?, _ action: ZIMRoomAttributesUpdateAction) {
+        
         
     }
 }

@@ -7,8 +7,26 @@
 
 import Foundation
 
-/// commonHandler, the parameter is ErrorCode
-typealias RoomCallback = (UInt) -> Void
+/// common room callback
+typealias RoomCallback = (Result<Void, ZegoError>) -> Void
 
-/// the first parameter is Count, the second parameter is errorCode
-typealias OnlineRoomUsersCallback = (UInt, UInt) -> Void
+/// online room users callback
+typealias OnlineRoomUsersCallback = (Result<UInt, ZegoError>) -> Void
+
+
+enum ZegoError: Error {
+    /// common failed
+    case failed
+    case roomExisted
+    case roomNotFound
+    case takeSeatFailed
+    case setSeatInfoFailed
+    case alreadyOnSeat
+    case noPermission
+    case notOnSeat
+    case paramInvalid
+    
+    /// other error code
+    case other(_ rawValue: Int)
+    
+}

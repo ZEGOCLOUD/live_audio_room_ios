@@ -7,13 +7,19 @@
 
 import Foundation
 
-enum SpeakerSeatStatus {
-    case Untaken
-    case Occupied
-    case Closed
+enum SpeakerSeatStatus: Codable {
+    case untaken
+    case occupied
+    case closed
 }
 
-struct SpeakerSeatModel {
+enum NetworkQuality: Codable {
+    case good
+    case medium
+    case bad
+}
+
+struct SpeakerSeatModel: Codable {
     /// user ID
     var userID: String?
     
@@ -21,14 +27,14 @@ struct SpeakerSeatModel {
     var index: Int?
     
     /// the mic status of speaker seat
-    var isMuteMic: Bool = false
+    var isMicMuted: Bool = false
     
     /// the status of speaker seat
-    var status: SpeakerSeatStatus = .Untaken
+    var status: SpeakerSeatStatus = .untaken
     
     /// the sound level of mic `[0, 100]`
     var soundLevel: UInt = 0
     
-    /// newwork status of current seat
-    var newwork: UInt = 0
+    /// newwork quality of current seat
+    var networkQuality: NetworkQuality = .good
 }

@@ -34,6 +34,8 @@
 		8EDD028E27683A7B00A6987F /* SpeakerSeatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */; };
 		8EDD02902768723700A6987F /* TextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028F2768723700A6987F /* TextMessage.swift */; };
 		8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02912768727D00A6987F /* CustomCommand.swift */; };
+		8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02942768AF6900A6987F /* Result+Zego.swift */; };
+		8EDD02982768CFB100A6987F /* ZegoModelTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02972768CFB100A6987F /* ZegoModelTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerSeatModel.swift; sourceTree = "<group>"; };
 		8EDD028F2768723700A6987F /* TextMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessage.swift; sourceTree = "<group>"; };
 		8EDD02912768727D00A6987F /* CustomCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommand.swift; sourceTree = "<group>"; };
+		8EDD02942768AF6900A6987F /* Result+Zego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Zego.swift"; sourceTree = "<group>"; };
+		8EDD02972768CFB100A6987F /* ZegoModelTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoModelTool.swift; sourceTree = "<group>"; };
 		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 		8EAB49EB2766FC9100A32320 /* ZegoLiveAudioRoom */ = {
 			isa = PBXGroup;
 			children = (
+				8EDD02962768CF9E00A6987F /* Tool */,
+				8EDD02932768AF5400A6987F /* Extensions */,
 				8EDD02872767727100A6987F /* Model */,
 				8EDD027C27673CED00A6987F /* ZIMManager.swift */,
 				8EDD026E2767340C00A6987F /* RoomManager.swift */,
@@ -181,6 +187,22 @@
 				8EDD02912768727D00A6987F /* CustomCommand.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8EDD02932768AF5400A6987F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02942768AF6900A6987F /* Result+Zego.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8EDD02962768CF9E00A6987F /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02972768CFB100A6987F /* ZegoModelTool.swift */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		AEBCC9E3D655A089D69D6D36 /* Pods */ = {
@@ -330,8 +352,10 @@
 				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
 				8EDD02902768723700A6987F /* TextMessage.swift in Sources */,
 				8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */,
+				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */,
+				8EDD02982768CFB100A6987F /* ZegoModelTool.swift in Sources */,
 				8EDD0277276735EC00A6987F /* MessageService.swift in Sources */,
 				8624CC9427687A600048871D /* SettingViewController.swift in Sources */,
 				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,

@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum UserRole {
-    case Listener
-    case Speaker
-    case Host
+enum UserRole: Codable {
+    case listener
+    case speaker
+    case host
 }
 
-struct UserInfo {
+struct UserInfo: Codable {
     /// user ID
     var userID: String?
     
@@ -21,5 +21,5 @@ struct UserInfo {
     var userName: String?
     
     /// user role
-    var role: UserRole = .Listener
+    var role: UserRole = .listener
 }
