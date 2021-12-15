@@ -86,7 +86,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        var userInfo = UserInfo.init(userID: myUserID, userName: myUserName, role: .Listener)
+        var userInfo = UserInfo.init(userID: myUserID, userName: myUserName, role: .listener)
         if userInfo.userName == nil || userInfo.userName?.count == 0 {
             userInfo.userName = userInfo.userID
         }
@@ -107,8 +107,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         RoomManager.shared.initWithAppID(appID: AppCenter.appID(), appSign: AppCenter.appSign()) { UInt in
             //TODO: 需要补充实现逻辑
         };
-        RoomManager.shared.userService.login(userInfo, token) {(errorCode:UInt) in
-            if errorCode == 0 {
+        RoomManager.shared.userService.login(userInfo, token) { result in
+            if result.isSuccess {
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
                 getKeyWindow().rootViewController = navVC
             } else {
