@@ -13,8 +13,6 @@ class RoomManager: NSObject {
     static let shared = RoomManager()
     
     // MARK: - Private
-    private var appSign: String?
-    private var appID: UInt32 = 0
     private let rtcEventDelegates: NSHashTable<ZegoEventHandler> = NSHashTable(options: .weakMemory)
     private let zimEventDelegates: NSHashTable<ZIMEventHandler> = NSHashTable(options: .weakMemory)
     
@@ -41,10 +39,10 @@ class RoomManager: NSObject {
             return
         }
         
-        self.appSign = appSign
-        self.appID = appID
-        
         ZIMManager.shared.createZIM(appID: appID)
+        
+        ZegoExpressEngine.createEngine(withAppID: appID, appSign: appSign, isTestEnv: false, scenario: .general, eventHandler: self)
+        
         if ZIMManager.shared.zim == nil {
             callback(.failure(.other(1)))
         } else {
@@ -54,8 +52,9 @@ class RoomManager: NSObject {
     }
     
     func uninit() {
+        logoutRtcRoom(true)
         ZIMManager.shared.destoryZIM()
-        resetRoomData(true)
+        ZegoExpressEngine.destroy(nil)
     }
     
     func uploadLog(callback: @escaping RoomCallback) {
@@ -70,10 +69,7 @@ class RoomManager: NSObject {
 }
 
 extension RoomManager {
-    // MARK: - Private
-    func setupRTCModule(with rtcToken: String) {
-        ZegoExpressEngine.createEngine(withAppID: self.appID, appSign: self.appSign!, isTestEnv: false, scenario: .general, eventHandler: self)
-        
+    func loginRtcRoom(with rtcToken: String) {
         guard let userID = RoomManager.shared.userService.localInfo?.userID else {
             assert(false, "user id can't be nil.")
             return
@@ -90,15 +86,14 @@ extension RoomManager {
         let config = ZegoRoomConfig()
         config.token = rtcToken
         config.maxMemberCount = 0
-        ZegoExpressEngine.shared() .loginRoom(roomID, user: user, config: config)
+        ZegoExpressEngine.shared().loginRoom(roomID, user: user, config: config)
         
         // monitor sound level
         ZegoExpressEngine.shared().startSoundLevelMonitor(1000)
     }
         
-    func resetRoomData(_ containsUserService: Bool = false) {
+    func logoutRtcRoom(_ containsUserService: Bool = false) {
         ZegoExpressEngine.shared().logoutRoom()
-        ZegoExpressEngine.destroy(nil)
         
         if containsUserService {
             userService = UserService()

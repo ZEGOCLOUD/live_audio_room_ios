@@ -110,9 +110,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         getKeyWindow().rootViewController = navVC
         
         let token : String = ""
-        RoomManager.shared.initWithAppID(appID: AppCenter.appID(), appSign: AppCenter.appSign()) { result in
-            
-        };
         RoomManager.shared.userService.login(userInfo, token) { result in
             switch result {
             case .success:
