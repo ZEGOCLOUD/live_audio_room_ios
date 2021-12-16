@@ -20,7 +20,7 @@ class MessageService: NSObject {
     var messageList: [TextMessage] = []
     
     /// send group chat message
-    func sendTextMessage(_ message: String, callback: RoomCallback) {
+    func sendTextMessage(_ message: String, callback: RoomCallback?) {
         
     }
 }

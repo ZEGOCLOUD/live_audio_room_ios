@@ -32,40 +32,43 @@ class RoomService: NSObject {
     
     /// Create a chat room
     /// You need to enter a generated `rtc token`
-    func createRoom(_ roomID: String, _ roomName: String, _ token: String, callback: @escaping RoomCallback) {
+    func createRoom(_ roomID: String, _ roomName: String, _ token: String, callback: RoomCallback?) {
         guard roomID.count != 0 else {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
         
         let parameters = getCreateRoomParameters(roomID, roomName)
         ZIMManager.shared.zim?.createRoom(parameters.0, config: parameters.1, callback: { fullRoomInfo, error in
+            
+            var result: ZegoResult = .success(())
             if error.code == .ZIMErrorCodeSuccess {
-                
                 RoomManager.shared.roomService.info = parameters.2
                 RoomManager.shared.userService.localInfo?.role = .host
                 RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes, .set)
                 RoomManager.shared.loginRtcRoom(with: token)
-                
-                callback(.success(()))
             }
-            
             else {
                 if error.code == .ZIMErrorCodeCreateExistRoom {
-                    callback(.failure(.roomExisted))
+                    result = .failure(.roomExisted)
                 } else {
-                    callback(.failure(.other(Int32(error.code.rawValue))))
+                    result = .failure(.other(Int32(error.code.rawValue)))
                 }
             }
+            
+            guard let callback = callback else { return }
+            callback(result)
         })
         
     }
     
     /// Join a chat room
     /// You need to enter a generated `rtc token`
-    func joinRoom(_ roomID: String, _ roomName: String, _ token: String, callback: @escaping RoomCallback) {
+    func joinRoom(_ roomID: String, _ roomName: String, _ token: String, callback: RoomCallback?) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
             if error.code != .ZIMErrorCodeSuccess {
+                guard let callback = callback else { return }
                 callback(.failure(.other(Int32(error.code.rawValue))))
                 return
             }
@@ -73,54 +76,66 @@ class RoomService: NSObject {
             RoomManager.shared.roomService.info?.roomID = roomID
             RoomManager.shared.roomService.info?.roomName = roomName
             RoomManager.shared.loginRtcRoom(with: token)
+            
+            guard let callback = callback else { return }
             callback(.success(()))
         })
     }
     
     /// Leave the chat room
-    func leaveRoom(callback: @escaping RoomCallback) {
+    func leaveRoom(callback: RoomCallback?) {
         guard let roomID = RoomManager.shared.roomService.info?.roomID else {
             assert(false, "room ID can't be nil")
+            guard let callback = callback else { return }
             callback(.failure(.failed))
             return
         }
         
         ZIMManager.shared.zim?.leaveRoom(roomID, callback: { error in
+            var result: ZegoResult = .success(())
             if error.code == .ZIMErrorCodeSuccess {
                 RoomManager.shared.logoutRtcRoom()
-                callback(.success(()))
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
     
     /// Query the number of chat rooms available online
-    func queryOnlineRoomUsers(callback: @escaping OnlineRoomUsersCallback) {
+    func queryOnlineRoomUsers(callback: OnlineRoomUsersCallback?) {
         guard let roomID = RoomManager.shared.roomService.info?.roomID else {
             assert(false, "room ID can't be nil")
+            guard let callback = callback else { return }
             callback(.failure(.failed))
             return
         }
         
         ZIMManager.shared.zim?.queryRoomOnlineMemberCount(roomID, callback: { count, error in
+            var result: Result<UInt32, ZegoError>
             if error.code == .ZIMErrorCodeSuccess {
-                callback(.success(count))
+                result = .success(count)
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
     
     /// Disable text chat for all users
-    func disableTextMessage(_ isDisabled: Bool, callback: @escaping RoomCallback) {
+    func disableTextMessage(_ isDisabled: Bool, callback: RoomCallback?) {
         let parameters = getDisableTextMessageParameters(isDisabled)
         ZIMManager.shared.zim?.setRoomAttributes(parameters.0, roomID: parameters.1, config: parameters.2, callback: { error in
+            var result: ZegoResult
             if error.code == .ZIMErrorCodeSuccess {
-                callback(.success(()))
+                result = .success(())
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
 }

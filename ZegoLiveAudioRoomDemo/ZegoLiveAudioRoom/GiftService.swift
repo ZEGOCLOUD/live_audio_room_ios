@@ -16,7 +16,7 @@ class GiftService: NSObject {
     weak var delegate: GiftServiceDelegate?
     
     /// send gift message to corresponding users
-    func sendGift(_ giftID: String, to userList: [String]) {
+    func sendGift(_ giftID: String, to userList: [String], callback: RoomCallback?) {
         
     }
 }
