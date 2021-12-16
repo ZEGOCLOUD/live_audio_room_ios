@@ -143,8 +143,8 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 case .success:
                     HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_success"))
                     break
-                case .failure(let code):
-                    HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_fail") + "\(code)")
+                case .failure(let error):
+                    HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_fail") + "\(error.code)")
                     break
                 }
             };

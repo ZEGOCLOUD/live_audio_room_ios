@@ -50,7 +50,7 @@ class RoomService: NSObject {
                 if error.code == .ZIMErrorCodeCreateExistRoom {
                     callback(.failure(.roomExisted))
                 } else {
-                    callback(.failure(.other(Int(error.code.rawValue))))
+                    callback(.failure(.other(Int32(error.code.rawValue))))
                 }
             }
         })
@@ -62,7 +62,7 @@ class RoomService: NSObject {
     func joinRoom(_ roomID: String, _ roomName: String, _ token: String, callback: @escaping RoomCallback) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
             if error.code != .ZIMErrorCodeSuccess {
-                callback(.failure(.other(Int(error.code.rawValue))))
+                callback(.failure(.other(Int32(error.code.rawValue))))
                 return
             }
             
@@ -86,7 +86,7 @@ class RoomService: NSObject {
                 RoomManager.shared.resetRoomData()
                 callback(.success(()))
             } else {
-                callback(.failure(.other(Int(error.code.rawValue))))
+                callback(.failure(.other(Int32(error.code.rawValue))))
             }
         })
     }
@@ -103,7 +103,7 @@ class RoomService: NSObject {
             if error.code == .ZIMErrorCodeSuccess {
                 callback(.success(count))
             } else {
-                callback(.failure(.other(Int(error.code.rawValue))))
+                callback(.failure(.other(Int32(error.code.rawValue))))
             }
         })
     }
@@ -115,7 +115,7 @@ class RoomService: NSObject {
             if error.code == .ZIMErrorCodeSuccess {
                 callback(.success(()))
             } else {
-                callback(.failure(.other(Int(error.code.rawValue))))
+                callback(.failure(.other(Int32(error.code.rawValue))))
             }
         })
     }

@@ -119,8 +119,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
                 getKeyWindow().rootViewController = navVC
                 break
-            case .failure(let code):
-                HUDHelper.showMessage(message: (ZGLocalizedString("toast_login_fail") + "\(code)"))
+            case .failure(let error):
+                HUDHelper.showMessage(message: (ZGLocalizedString("toast_login_fail") + "\(error.code)"))
                 break
             }
         }

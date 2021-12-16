@@ -63,7 +63,7 @@ class RoomManager: NSObject {
             if errorCode.code == .ZIMErrorCodeSuccess {
                 callback(.success(()))
             } else {
-                callback(.failure(.other(Int(errorCode.code.rawValue))))
+                callback(.failure(.other(Int32(errorCode.code.rawValue))))
             }
         })
     }
