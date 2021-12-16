@@ -23,8 +23,8 @@ class LiveAudioMessageModelBuilder: NSObject {
         }
     }
     
-    static func buildModelWithUserId(userId:String,message:String) -> LiveAudioMessageModel {
-        let user:UserInfo? = LiveAudioMessageModelBuilder.getUserWithUserId(userId: userId)
+    static func buildModelWithUserId(userID:String,message:String) -> LiveAudioMessageModel {
+        let user:UserInfo? = LiveAudioMessageModelBuilder.getUserWithUserId(userID:userID)
         let isHost:Bool = user?.role == .host;
         let attributedStr:NSMutableAttributedString = NSMutableAttributedString()
         
@@ -65,9 +65,9 @@ class LiveAudioMessageModelBuilder: NSObject {
         return LiveAudioMessageModelBuilder._buildLeftOrJoinMessageModelWithMessage(message: message)
     }
     
-    static func getUserWithUserId(userId:String) -> UserInfo? {
+    static func getUserWithUserId(userID:String) -> UserInfo? {
         for user:UserInfo in RoomManager.shared.userService.userList {
-            if user.userID == userId {
+            if user.userID == userID {
                 return user
             }
         }
