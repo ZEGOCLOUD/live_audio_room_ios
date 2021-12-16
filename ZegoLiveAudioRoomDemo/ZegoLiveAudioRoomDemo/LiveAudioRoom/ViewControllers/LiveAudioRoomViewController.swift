@@ -89,6 +89,10 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
     }
     
+    func receiveCustomCommand(_ command: CustomCommand, roomID: String) {
+        
+    }
+    
     //MARK: -RoomServiceDelegate
     func receiveRoomInfoUpdate(_ info: RoomInfo?) {
         

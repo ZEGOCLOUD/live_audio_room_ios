@@ -18,7 +18,11 @@ class RoomService: NSObject {
     // MARK: - Private
     override init() {
         super.init()
-        RoomManager.shared.addZIMEventHandler(self)
+        
+        // RoomManager didn't finish init at this time.
+        DispatchQueue.main.async {
+            RoomManager.shared.addZIMEventHandler(self)
+        }
     }
     
     // MARK: - Public
@@ -41,7 +45,7 @@ class RoomService: NSObject {
                 RoomManager.shared.roomService.info = parameters.2
                 RoomManager.shared.userService.localInfo?.role = .host
                 RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes, .set)
-                RoomManager.shared.setupRTCModule(with: token)
+                RoomManager.shared.loginRtcRoom(with: token)
                 
                 callback(.success(()))
             }
@@ -68,7 +72,7 @@ class RoomService: NSObject {
             
             RoomManager.shared.roomService.info?.roomID = roomID
             RoomManager.shared.roomService.info?.roomName = roomName
-            RoomManager.shared.setupRTCModule(with: token)
+            RoomManager.shared.loginRtcRoom(with: token)
             callback(.success(()))
         })
     }
@@ -83,7 +87,7 @@ class RoomService: NSObject {
         
         ZIMManager.shared.zim?.leaveRoom(roomID, callback: { error in
             if error.code == .ZIMErrorCodeSuccess {
-                RoomManager.shared.resetRoomData()
+                RoomManager.shared.logoutRtcRoom()
                 callback(.success(()))
             } else {
                 callback(.failure(.other(Int32(error.code.rawValue))))

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ZIM
 
 protocol UserServiceDelegate: AnyObject {
     /// user info update
@@ -14,6 +15,8 @@ protocol UserServiceDelegate: AnyObject {
     func roomUserJoin(_ users: [UserInfo])
     /// reveive user leave room
     func roomUserLeave(_ users: [UserInfo])
+    /// receive custom command: invitation
+    func receiveCustomCommand(_ command: CustomCommand, roomID: String)
 }
 
 class UserService: NSObject {
@@ -23,12 +26,39 @@ class UserService: NSObject {
     var userList: [UserInfo] = []
     
     /// user login with user info and `ZIM token`
-    func login(_ info: UserInfo, _ token: String, callback: RoomCallback) {
+    func login(_ user: UserInfo, _ token: String, callback: @escaping RoomCallback) {
         
+        guard let userID = user.userID else {
+            callback(.failure(.paramInvalid))
+            return
+        }
+        
+        guard let userName = user.userName else {
+            callback(.failure(.paramInvalid))
+            return
+        }
+        
+        let zimUser = ZIMUserInfo()
+        zimUser.userID = userID
+        zimUser.userName = userName
+        
+        ZIMManager.shared.zim?.login(zimUser, token: token, callback: { error in
+            if error.code == .ZIMErrorCodeSuccess {
+                self.localInfo = user
+            } else {
+                callback(.failure(.other(Int32(error.code.rawValue))))
+            }
+        })
     }
     
     /// user logout
     func logout() {
+        ZIMManager.shared.zim?.logout()
+        RoomManager.shared.logoutRtcRoom(true)
+    }
+    
+    /// send an invitation to user to take a speaker seat
+    func sendInvitation(_ userID: String, callback: RoomCallback) {
         
     }
 }

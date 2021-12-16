@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum SpeakerSeatStatus: Codable {
-    case untaken
-    case occupied
-    case closed
+enum SpeakerSeatStatus: UInt, Codable {
+    case untaken = 0
+    case occupied = 1
+    case closed = 2
 }
 
 enum NetworkQuality: Codable {
@@ -24,10 +24,10 @@ class SpeakerSeatModel: NSObject, Codable {
     var userID: String?
     
     /// the index of speaker seat
-    var index: Int?
+    fileprivate(set) var index: Int
     
     /// the mic status of speaker seat
-    var isMicMuted: Bool = false
+    var mic: Bool = false
     
     /// the status of speaker seat
     var status: SpeakerSeatStatus = .untaken
@@ -38,24 +38,40 @@ class SpeakerSeatModel: NSObject, Codable {
     /// newwork quality of current seat
     var networkQuality: NetworkQuality = .good
     
+    init(index: Int) {
+        self.index = index
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case userID = "id"
+        case index = "index"
+        case mic = "mic"
+        case status = "status"
+    }
+    
     func updateModel(with newModel: SpeakerSeatModel?) {
-        guard let newModel = newModel else {
-            return
-        }
-
+        guard let newModel = newModel else { return }
         userID = newModel.userID
         index = newModel.index
-        isMicMuted = newModel.isMicMuted
+        mic = newModel.mic
         status = newModel.status
-        soundLevel = newModel.soundLevel
-        networkQuality = newModel.networkQuality
     }
     
     func reset() {
         userID = ""
-        isMicMuted = false
+        mic = false
         status = .untaken
         soundLevel = 0
         networkQuality = .good
+    }
+}
+
+extension SpeakerSeatModel: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = SpeakerSeatModel(index: self.index)
+        copy.userID = userID
+        copy.mic = mic
+        copy.status = status
+        return copy
     }
 }
