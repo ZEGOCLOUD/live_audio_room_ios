@@ -16,7 +16,7 @@ protocol UserServiceDelegate: AnyObject {
     func roomUserLeave(_ users: [UserInfo])
 }
 
-class UserService {
+class UserService: NSObject {
     // MARK: - Public
     weak var delegate: UserServiceDelegate?
     var localInfo: UserInfo?

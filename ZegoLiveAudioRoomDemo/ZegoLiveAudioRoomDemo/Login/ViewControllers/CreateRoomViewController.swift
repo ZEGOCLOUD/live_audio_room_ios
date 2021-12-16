@@ -109,8 +109,8 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
             switch result {
             case .success:
                 self.joinToChatRoom()
-            case .failure(let code):
-                HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_fail") + "\(code)")
+            case .failure(let error):
+                HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_fail") + "\(error.code)")
 //                switch error {
 //                case .other
 //                }

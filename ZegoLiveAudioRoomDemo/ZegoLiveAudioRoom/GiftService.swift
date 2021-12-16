@@ -12,7 +12,7 @@ protocol GiftServiceDelegate: AnyObject {
     func receiveGift(_ giftID: String, to userList: [String])
 }
 
-class GiftService {
+class GiftService: NSObject {
     weak var delegate: GiftServiceDelegate?
     
     /// send gift message to corresponding users
