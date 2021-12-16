@@ -121,7 +121,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
         RegisterServiceCallback()
         
-        if localUserIsAuthor() {
+        if localUserIsHost() {
             RoomManager.shared.speakerService.takeSeat(0, callback:nil)
         }
         
@@ -175,7 +175,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         }
     }
     
-    func localUserIsAuthor() -> Bool {
+    func localUserIsHost() -> Bool {
         return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info?.hostID
     }
     
