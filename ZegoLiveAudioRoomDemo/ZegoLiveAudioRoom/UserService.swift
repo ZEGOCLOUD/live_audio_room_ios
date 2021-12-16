@@ -15,6 +15,8 @@ protocol UserServiceDelegate: AnyObject {
     func roomUserJoin(_ users: [UserInfo])
     /// reveive user leave room
     func roomUserLeave(_ users: [UserInfo])
+    /// receive custom command: invitation
+    func receiveCustomCommand(_ command: CustomCommand, roomID: String)
 }
 
 class UserService: NSObject {
@@ -53,5 +55,10 @@ class UserService: NSObject {
     func logout() {
         ZIMManager.shared.zim?.logout()
         RoomManager.shared.logoutRtcRoom(true)
+    }
+    
+    /// send an invitation to user to take a speaker seat
+    func sendInvitation(_ userID: String, callback: RoomCallback) {
+        
     }
 }

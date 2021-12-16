@@ -9,7 +9,7 @@ import Foundation
 
 protocol GiftServiceDelegate: AnyObject {
     /// receive gift message
-    func receiveGift(_ giftID: String, to userList: [String])
+    func receiveGift(_ giftID: String, from userID: String, to userList: [String])
 }
 
 class GiftService: NSObject {

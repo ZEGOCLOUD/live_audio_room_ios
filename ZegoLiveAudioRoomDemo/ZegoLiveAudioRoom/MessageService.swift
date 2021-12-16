@@ -11,8 +11,6 @@ import ZIM
 protocol MessageServiceDelegate: AnyObject {
     /// receive text message
     func receiveTextMessage(_ message: TextMessage, _ roomID: String)
-    /// receive custom command: invitation
-    func receiveCustomCommand(_ command: CustomCommand, roomID: String)
 }
 
 class MessageService: NSObject {
@@ -23,11 +21,6 @@ class MessageService: NSObject {
     
     /// send group chat message
     func sendTextMessage(_ message: String, callback: RoomCallback) {
-        
-    }
-    
-    /// send an invitation message to user to take a speaker seat
-    func sendInvitation(_ userID: String, callback: RoomCallback) {
         
     }
 }
