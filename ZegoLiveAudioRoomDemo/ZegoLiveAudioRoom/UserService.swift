@@ -65,6 +65,26 @@ class UserService: NSObject {
     
     /// send an invitation to user to take a speaker seat
     func sendInvitation(_ userID: String, callback: RoomCallback?) {
+        let command: CustomCommand = CustomCommand(type: .invitation)
+        command.targetUserIDs = [userID]
+        guard let message = command.josnString() else {
+            guard let callback = callback else { return }
+            callback(.failure(.failed))
+            return
+        }
+        
+        let textMessage: ZIMTextMessage = ZIMTextMessage(message: message)
+        
+        ZIMManager.shared.zim?.sendPeerMessage(textMessage, toUserID: userID, callback: { _, error in
+            var result: ZegoResult
+            if error.code == .ZIMErrorCodeSuccess {
+                result = .success(())
+            } else {
+                result = .failure(.other(Int32(error.code.rawValue)))
+            }
+            guard let callback = callback else { return }
+            callback(result)
+        })
         
     }
 }

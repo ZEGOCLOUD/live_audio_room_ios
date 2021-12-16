@@ -49,5 +49,22 @@ struct ZegoModelTool {
         }
         return dict
     }
+    
+    /// a dictionary to json str
+    static func dictionaryToJson(_ dict: [String : Any]?) -> String? {
+        guard let dict = dict else {
+            return nil
+        }
+
+        let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
+        guard let data = data else {
+            return nil
+        }
+        let jsonStr = String(data: data, encoding: .utf8)
+        guard let jsonStr = jsonStr else {
+            return nil
+        }
+        return jsonStr
+    }
 }
     
