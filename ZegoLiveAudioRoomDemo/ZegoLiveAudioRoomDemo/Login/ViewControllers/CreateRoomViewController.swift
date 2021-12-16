@@ -90,6 +90,8 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     }
     
     func createRoomWithRoomId(roomId:String,roomName:String) -> Void {
+        joinToChatRoom()
+        return
         var message:String = ""
         if roomId.count == 0 {
             message = ZGLocalizedString("toast_room_id_enter_error")
@@ -155,7 +157,7 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     
     //MARK: - Jump
     func joinToChatRoom() -> Void {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatRoomVC")
+        let vc = UIStoryboard(name: "LiveAudioRoom", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

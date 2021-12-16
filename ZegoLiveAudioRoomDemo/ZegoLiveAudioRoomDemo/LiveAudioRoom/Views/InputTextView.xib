@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gQs-2g-09d" customClass="InputTextView" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cBm-EB-fe0">
+                    <rect key="frame" x="18" y="7.5" width="399" height="40"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h1s-IJ-f1n">
+                            <rect key="frame" x="18" y="0.0" width="376" height="40"/>
+                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldDidChange:" destination="gQs-2g-09d" eventType="editingChanged" id="dyv-X7-LAa"/>
+                                <outlet property="delegate" destination="gQs-2g-09d" id="cMG-i5-XyL"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="h1s-IJ-f1n" firstAttribute="top" secondItem="cBm-EB-fe0" secondAttribute="top" id="3aM-Hn-XWs"/>
+                        <constraint firstItem="h1s-IJ-f1n" firstAttribute="leading" secondItem="cBm-EB-fe0" secondAttribute="leading" constant="18" id="AUx-8F-iZ8"/>
+                        <constraint firstAttribute="bottom" secondItem="h1s-IJ-f1n" secondAttribute="bottom" id="cO2-Z6-5Uc"/>
+                        <constraint firstAttribute="trailing" secondItem="h1s-IJ-f1n" secondAttribute="trailing" constant="5" id="iHy-sp-1ye"/>
+                        <constraint firstAttribute="height" constant="40" id="vKB-zE-bf8"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3k-ar-17S">
+                    <rect key="frame" x="428" y="7.5" width="94" height="40"/>
+                    <color key="backgroundColor" red="0.0" green="0.33333333329999998" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Xqb-8v-Ylc"/>
+                        <constraint firstAttribute="width" constant="94" id="m8i-Y7-59r"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <state key="normal" title="Send">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="sendButtonClick:" destination="gQs-2g-09d" eventType="touchUpInside" id="22a-cj-GaS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="6iB-XJ-g2l"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="e3k-ar-17S" firstAttribute="leading" secondItem="cBm-EB-fe0" secondAttribute="trailing" constant="11" id="ARh-OD-cPj"/>
+                <constraint firstItem="e3k-ar-17S" firstAttribute="centerY" secondItem="gQs-2g-09d" secondAttribute="centerY" id="BMe-mh-36c"/>
+                <constraint firstItem="6iB-XJ-g2l" firstAttribute="trailing" secondItem="e3k-ar-17S" secondAttribute="trailing" constant="18" id="kZJ-eC-SuO"/>
+                <constraint firstItem="cBm-EB-fe0" firstAttribute="centerY" secondItem="gQs-2g-09d" secondAttribute="centerY" id="ksf-nB-pPp"/>
+                <constraint firstItem="cBm-EB-fe0" firstAttribute="leading" secondItem="6iB-XJ-g2l" secondAttribute="leading" constant="18" id="pa4-M1-hde"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="inputTextView" destination="h1s-IJ-f1n" id="cd6-Sv-Mlv"/>
+                <outlet property="sendButton" destination="e3k-ar-17S" id="Lar-h6-xCm"/>
+            </connections>
+            <point key="canvasLocation" x="182.60869565217394" y="76.004464285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

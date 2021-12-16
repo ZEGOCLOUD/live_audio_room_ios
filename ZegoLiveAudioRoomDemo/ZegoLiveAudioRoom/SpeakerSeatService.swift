@@ -49,7 +49,7 @@ class SpeakerSeatService: NSObject {
     }
     
     /// local user take the speaker seat
-    func takeSeat(_ index: UInt, callback: RoomCallback) {
+    func takeSeat(_ index: UInt, callback: RoomCallback?) {
         
     }
     
