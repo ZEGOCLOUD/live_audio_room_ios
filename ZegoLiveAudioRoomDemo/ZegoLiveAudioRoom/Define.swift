@@ -11,7 +11,7 @@ import Foundation
 typealias RoomCallback = (Result<Void, ZegoError>) -> Void
 
 /// online room users callback
-typealias OnlineRoomUsersCallback = (Result<UInt, ZegoError>) -> Void
+typealias OnlineRoomUsersCallback = (Result<UInt32, ZegoError>) -> Void
 
 
 enum ZegoError: Error {

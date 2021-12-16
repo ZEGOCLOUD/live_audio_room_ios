@@ -13,7 +13,7 @@ enum UserRole: Codable {
     case host
 }
 
-struct UserInfo: Codable {
+class UserInfo: NSObject, Codable {
     /// user ID
     var userID: String?
     
@@ -22,4 +22,10 @@ struct UserInfo: Codable {
     
     /// user role
     var role: UserRole = .listener
+    
+    init(_ userID: String, _ userName: String, _ role: UserRole) {
+        self.userID = userID
+        self.userName = userName
+        self.role = role
+    }
 }

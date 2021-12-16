@@ -24,6 +24,8 @@ class RoomManager: NSObject {
         speakerService = SpeakerSeatService()
         messageService = MessageService()
         giftService = GiftService()
+        
+        super.init()
     }
     
     // MARK: - Public
@@ -53,7 +55,7 @@ class RoomManager: NSObject {
     
     func uninit() {
         ZIMManager.shared.destoryZIM()
-        ZegoExpressEngine .destroy(nil)
+        resetRoomData(true)
     }
     
     func uploadLog(callback: @escaping RoomCallback) {
@@ -78,7 +80,7 @@ extension RoomManager {
         }
         
         guard let roomID = RoomManager.shared.roomService.info?.roomID else {
-            assert(false, "room ID can't be nil.")
+            assert(false, "room id can't be nil.")
             return
         }
         
@@ -93,13 +95,26 @@ extension RoomManager {
         // monitor sound level
         ZegoExpressEngine.shared().startSoundLevelMonitor(1000)
     }
+        
+    func resetRoomData(_ containsUserService: Bool = false) {
+        ZegoExpressEngine.shared().logoutRoom()
+        ZegoExpressEngine.destroy(nil)
+        
+        if containsUserService {
+            userService = UserService()
+        }
+        roomService = RoomService()
+        speakerService = SpeakerSeatService()
+        messageService = MessageService()
+        giftService = GiftService()
+    }
     
     // MARK: - event handler
-    private func addZIMEventHandler(_ eventHandler: ZIMEventHandler?) {
+    func addZIMEventHandler(_ eventHandler: ZIMEventHandler?) {
         zimEventDelegates.add(eventHandler)
     }
     
-    private func addExpressEventHandler(_ eventHandler: ZegoEventHandler?) {
+    func addExpressEventHandler(_ eventHandler: ZegoEventHandler?) {
         rtcEventDelegates.add(eventHandler)
     }
 }

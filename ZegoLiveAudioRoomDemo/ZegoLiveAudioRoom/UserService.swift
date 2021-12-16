@@ -24,7 +24,7 @@ class UserService: NSObject {
     
     /// user login with user info and `ZIM token`
     func login(_ info: UserInfo, _ token: String, callback: RoomCallback) {
-        callback(.failure(.paramInvalid))
+        
     }
     
     /// user logout

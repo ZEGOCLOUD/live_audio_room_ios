@@ -7,6 +7,7 @@
 
 import Foundation
 import ZIM
+import ZegoExpressEngine
 
 protocol SpeakerSeatServiceDelegate: AnyObject {
     /// speaker seat upate
@@ -14,6 +15,11 @@ protocol SpeakerSeatServiceDelegate: AnyObject {
 }
 
 class SpeakerSeatService: NSObject {
+    // MARK: - Private
+    override init() {
+        super.init()
+        
+    }
     
     // MARK: - Public
     /// seat service delegate
@@ -61,7 +67,32 @@ class SpeakerSeatService: NSObject {
 extension SpeakerSeatService {
     // MARK: - Private
     func updateSpeakerSeats(_ seatDict: [String:Any]?, _ action: ZIMRoomAttributesUpdateAction) {
-        
-        
+        let localUser = RoomManager.shared.userService.localInfo
+        for seatModel in seatList {
+            let seatKey = "seat_\(String(describing: seatModel.index))"
+            if seatDict?.keys.contains(seatKey) == false { continue }
+            
+            var isUpdateLocalUser = seatModel.userID == localUser?.userID
+            if action == .set {
+                guard let seatValue = seatDict?[seatKey] as? String else { continue }
+                let newModel = ZegoModelTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
+                seatModel.updateModel(with: newModel)
+                isUpdateLocalUser = seatModel.userID == localUser?.userID
+            }
+            
+            else {
+                seatModel.reset()
+            }
+            
+            if isUpdateLocalUser {
+                if localUser?.role != .host {
+                    localUser?.role = seatModel.status == .occupied ? .speaker : .listener
+                }
+                // local user leave the seat, and stop publish
+                if action == .delete {
+                    ZegoExpressEngine.shared().stopPublishingStream()
+                }
+            }
+        }
     }
 }

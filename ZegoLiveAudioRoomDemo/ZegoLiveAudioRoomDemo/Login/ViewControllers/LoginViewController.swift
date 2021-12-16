@@ -89,7 +89,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        var userInfo = UserInfo.init(userID: myUserID, userName: myUserName, role: .listener)
+        let userInfo = UserInfo(myUserID, myUserID, .listener)
         if userInfo.userName == nil || userInfo.userName?.count == 0 {
             userInfo.userName = userInfo.userID
         }

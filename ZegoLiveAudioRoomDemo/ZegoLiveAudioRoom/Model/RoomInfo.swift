@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RoomInfo: Codable {
+class RoomInfo: NSObject, Codable {
     /// room ID
     var roomID: String?
     
@@ -34,5 +34,18 @@ struct RoomInfo: Codable {
         case seatNum = "num"
         case isTextMessageDisabled = "disable"
         case isSeatClosed = "close"
+    }
+}
+
+extension RoomInfo: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = RoomInfo()
+        copy.roomID = roomID
+        copy.roomName = roomName
+        copy.hostID = hostID
+        copy.seatNum = seatNum
+        copy.isTextMessageDisabled = isTextMessageDisabled
+        copy.isSeatClosed = isSeatClosed
+        return copy
     }
 }

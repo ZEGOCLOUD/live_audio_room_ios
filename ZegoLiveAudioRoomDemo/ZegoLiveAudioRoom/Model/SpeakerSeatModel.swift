@@ -19,7 +19,7 @@ enum NetworkQuality: Codable {
     case bad
 }
 
-struct SpeakerSeatModel: Codable {
+class SpeakerSeatModel: NSObject, Codable {
     /// user ID
     var userID: String?
     
@@ -37,4 +37,25 @@ struct SpeakerSeatModel: Codable {
     
     /// newwork quality of current seat
     var networkQuality: NetworkQuality = .good
+    
+    func updateModel(with newModel: SpeakerSeatModel?) {
+        guard let newModel = newModel else {
+            return
+        }
+
+        userID = newModel.userID
+        index = newModel.index
+        isMicMuted = newModel.isMicMuted
+        status = newModel.status
+        soundLevel = newModel.soundLevel
+        networkQuality = newModel.networkQuality
+    }
+    
+    func reset() {
+        userID = ""
+        isMicMuted = false
+        status = .untaken
+        soundLevel = 0
+        networkQuality = .good
+    }
 }
