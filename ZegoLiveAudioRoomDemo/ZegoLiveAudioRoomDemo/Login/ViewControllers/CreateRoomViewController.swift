@@ -71,7 +71,7 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
         let createAction:UIAlertAction = UIAlertAction.init(title: ZGLocalizedString("create_page_create"), style: UIAlertAction.Style.default) { action in
             let roomIdTextField = (alter.textFields?.first)!
             let roomNameTextField = (alter.textFields?.last)!
-            self.createRoomWithRoomId(roomId: roomIdTextField.text! as String, roomName: roomNameTextField.text! as String)
+            self.createRoomWithRoomID(roomID: roomIdTextField.text! as String, roomName: roomNameTextField.text! as String)
         }
         alter.addTextField { textField in
             textField.placeholder = ZGLocalizedString("create_page_room_id")
@@ -89,11 +89,11 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
         self.present(alter, animated: true, completion: nil)
     }
     
-    func createRoomWithRoomId(roomId:String,roomName:String) -> Void {
+    func createRoomWithRoomID(roomID:String,roomName:String) -> Void {
         joinToChatRoom()
         return
         var message:String = ""
-        if roomId.count == 0 {
+        if roomID.count == 0 {
             message = ZGLocalizedString("toast_room_id_enter_error")
         } else if roomName.count == 0 {
             message = ZGLocalizedString("toast_room_name_error")
@@ -107,7 +107,7 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
         rtcToken = ""
         
         HUDHelper.showNetworkLoading()
-        RoomManager.shared.roomService .createRoom(roomId, roomName, rtcToken) { result in
+        RoomManager.shared.roomService .createRoom(roomID, roomName, rtcToken) { result in
             switch result {
             case .success:
                 self.joinToChatRoom()
