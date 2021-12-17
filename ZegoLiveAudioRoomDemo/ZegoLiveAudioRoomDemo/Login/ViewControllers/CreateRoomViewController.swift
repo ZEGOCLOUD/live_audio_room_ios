@@ -9,7 +9,7 @@ import UIKit
 import ZIM
 
 
-class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomServiceDelegate {
+class CreateRoomViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var roomIDBackgroundView: UIView!
     @IBOutlet weak var roomIDTextField: UITextField!
@@ -176,12 +176,15 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     func textFieldDidEndEditing(_ textField: UITextField) {
         roomIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
     }
-    
-    //MARK: -RoomServiceDelegate
+}
+
+extension CreateRoomViewController : RoomServiceDelegate, UserServiceDelegate {
+    //MARK: - RoomServiceDelegate
     func receiveRoomInfoUpdate(_ info: RoomInfo?) {
         
     }
     
+    //MARK: - UserServiceDelegate
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         if (state == .disconnected) {
             let message:String = event == .kickedOut ? ZGLocalizedString("toast_kickout_error") : ZGLocalizedString("toast_disconnect_tips")
@@ -189,5 +192,4 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
             logout()
         }
     }
-    
 }

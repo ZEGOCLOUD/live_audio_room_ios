@@ -67,7 +67,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     
     func RegisterServiceCallback() -> Void {
         RoomManager.shared.roomService.delegate = self
-        RoomManager.shared.userService.delegate = self
+        RoomManager.shared.userService.addUserServiceDelegate(self)
         RoomManager.shared.speakerService.delegate = self
     }
     
@@ -77,6 +77,9 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     }
     
     //MARK: -UserServiceDelegate
+    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
+        
+    }
     func userInfoUpdate(_ info: UserInfo?) {
         
     }
@@ -95,10 +98,6 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     
     //MARK: -RoomServiceDelegate
     func receiveRoomInfoUpdate(_ info: RoomInfo?) {
-        
-    }
-    
-    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         
     }
     

@@ -8,7 +8,8 @@
 import Foundation
 import ZIM
 
-protocol UserServiceDelegate: AnyObject {
+protocol UserServiceDelegate : AnyObject  {
+    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent)
     /// user info update
     func userInfoUpdate(_ info: UserInfo?)
     /// receive user join room
@@ -19,11 +20,22 @@ protocol UserServiceDelegate: AnyObject {
     func receiveTakeSeatInvitation()
 }
 
+extension UserServiceDelegate {
+    func userInfoUpdate(_ info: UserInfo?) { }
+    func roomUserJoin(_ users: [UserInfo]) { }
+    func roomUserLeave(_ users: [UserInfo]) { }
+    func receiveTakeSeatInvitation() { }
+}
+
 class UserService: NSObject {
     // MARK: - Public
-    weak var delegate: UserServiceDelegate?
+    private let delegates = NSHashTable<AnyObject>.weakObjects()
     var localInfo: UserInfo?
     var userList: [UserInfo] = []
+    
+    func addUserServiceDelegate(_ delegate: UserServiceDelegate) {
+        self.delegates.add(delegate)
+    }
     
     /// user login with user info and `ZIM token`
     func login(_ user: UserInfo, _ token: String, callback: RoomCallback?) {
