@@ -130,7 +130,6 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         if (model.type == .logOut) {
             // logout
             RoomManager.shared.userService.logout()
-            RoomManager.shared.uninit()
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
             getKeyWindow().rootViewController = vc
 

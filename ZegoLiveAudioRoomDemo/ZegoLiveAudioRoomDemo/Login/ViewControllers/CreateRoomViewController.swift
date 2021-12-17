@@ -163,7 +163,6 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
     
     func logout() -> Void {
         RoomManager.shared.userService.logout()
-        RoomManager.shared.uninit()
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
         getKeyWindow().rootViewController = vc
     }

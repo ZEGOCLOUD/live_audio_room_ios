@@ -8,7 +8,8 @@
 import Foundation
 
 struct AppToken {
-    static func getRtcToken(with roomID: String) -> String? {
+    static func getRtcToken(withRoomID roomID: String?) -> String? {
+        guard let roomID = roomID else { return nil }
         guard let userID = RoomManager.shared.userService.localInfo?.userID else { return nil }
         let token = ZegoToken.getRTCToken(withRoomID: roomID,
                                           userID: userID,
@@ -17,8 +18,9 @@ struct AppToken {
         return token
     }
     
-    static func getZIMToken(with userID: String) -> String? {
-        
+    static func getZIMToken(withUserID userID: String?) -> String? {
+        guard let userID = userID else { return nil }
+
         let token = ZegoToken.getZIMToken(withUserID: userID,
                                           appID: AppCenter.appID(),
                                           appSecret: AppCenter.appSecret())
