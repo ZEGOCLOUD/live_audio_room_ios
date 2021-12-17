@@ -156,7 +156,7 @@ extension RoomService {
         roomInfo.seatNum = 8
         
         let config = ZIMRoomAdvancedConfig()
-        let roomInfoJson = ZegoModelTool.modelToJson(toString: roomInfo) ?? ""
+        let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
         config.roomAttributes = ["room_info" : roomInfoJson]
         
@@ -168,7 +168,7 @@ extension RoomService {
         let roomInfo = self.info?.copy() as? RoomInfo
         roomInfo?.isTextMessageDisabled = isDisabled
         
-        let roomInfoJson = ZegoModelTool.modelToJson(toString: roomInfo) ?? ""
+        let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
         let attributes = ["room_info" : roomInfoJson]
         

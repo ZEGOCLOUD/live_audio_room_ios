@@ -21,11 +21,6 @@ class MessageService: NSObject {
     
     /// send group chat message
     func sendTextMessage(_ message: String, callback: RoomCallback?) {
-        guard let userID = RoomManager.shared.userService.localInfo?.userID else {
-            guard let callback = callback else { return }
-            callback(.failure(.failed))
-            return
-        }
         
         guard let roomID = RoomManager.shared.roomService.info?.roomID else {
             guard let callback = callback else { return }
@@ -33,7 +28,7 @@ class MessageService: NSObject {
             return
         }
         
-        let textMessage = ZIMTextMessage(message: makeTextRoomMessageJson(message, userID: userID))
+        let textMessage = ZIMTextMessage(message: message)
         ZIMManager.shared.zim?.sendRoomMessage(textMessage, toRoomID: roomID, callback: { _, error in
             var result: ZegoResult
             if error.code == .ZIMErrorCodeSuccess {
@@ -44,12 +39,5 @@ class MessageService: NSObject {
             guard let callback = callback else { return }
             callback(result)
         })
-    }
-}
-
-extension MessageService {
-    private func makeTextRoomMessageJson(_ message: String, userID: String) -> String {
-        let json = "{\"action\":\"TEXT\",\"textMessage\":{\"content\":\"\(message)\",\"fromUserID\":\"\(userID)\"}}"
-        return json
     }
 }

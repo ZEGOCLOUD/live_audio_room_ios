@@ -16,7 +16,7 @@ protocol UserServiceDelegate: AnyObject {
     /// reveive user leave room
     func roomUserLeave(_ users: [UserInfo])
     /// receive custom command: invitation
-    func receiveCustomCommand(_ command: CustomCommand, roomID: String)
+    func receiveTakeSeatInvitation()
 }
 
 class UserService: NSObject {

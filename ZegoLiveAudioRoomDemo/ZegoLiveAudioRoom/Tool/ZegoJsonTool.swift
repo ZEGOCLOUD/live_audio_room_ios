@@ -1,5 +1,5 @@
 //
-//  ZegoModelTool.swift
+//  ZegoJsonTool.swift
 //  ZegoLiveAudioRoomDemo
 //
 //  Created by Kael Ding on 2021/12/14.
@@ -9,7 +9,7 @@ import Foundation
 
 
 /// a `json to model` and `model to json` tool
-struct ZegoModelTool {
+struct ZegoJsonTool {
     
     /// json to model
     static func jsonToModel<T>(type: T.Type, json: Any) -> T? where T: Codable {
@@ -65,6 +65,23 @@ struct ZegoModelTool {
             return nil
         }
         return jsonStr
+    }
+    
+    /// json string to dictionary
+    static func jsonToDictionary(_ jsonStr: String?) -> [String : Any]? {
+        
+        guard let jsonStr = jsonStr else {
+            return nil
+        }
+        
+        if let data = jsonStr.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+            } catch {
+                
+            }
+        }
+        return nil
     }
 }
     

@@ -89,7 +89,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
     }
     
-    func receiveCustomCommand(_ command: CustomCommand, roomID: String) {
+    func receiveTakeSeatInvitation() {
         
     }
     
