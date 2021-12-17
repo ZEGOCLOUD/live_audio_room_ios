@@ -101,28 +101,7 @@ class RoomService: NSObject {
             callback(result)
         })
     }
-    
-    /// Query the number of chat rooms available online
-    func queryOnlineRoomUsers(callback: OnlineRoomUsersCallback?) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
-            assert(false, "room ID can't be nil")
-            guard let callback = callback else { return }
-            callback(.failure(.failed))
-            return
-        }
         
-        ZIMManager.shared.zim?.queryRoomOnlineMemberCount(roomID, callback: { count, error in
-            var result: Result<UInt32, ZegoError>
-            if error.code == .ZIMErrorCodeSuccess {
-                result = .success(count)
-            } else {
-                result = .failure(.other(Int32(error.code.rawValue)))
-            }
-            guard let callback = callback else { return }
-            callback(result)
-        })
-    }
-    
     /// Disable text chat for all users
     func disableTextMessage(_ isDisabled: Bool, callback: RoomCallback?) {
         let parameters = getDisableTextMessageParameters(isDisabled)

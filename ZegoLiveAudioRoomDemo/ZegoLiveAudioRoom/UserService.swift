@@ -10,8 +10,6 @@ import ZIM
 
 protocol UserServiceDelegate : AnyObject  {
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent)
-    /// user info update
-    func userInfoUpdate(_ info: UserInfo?)
     /// receive user join room
     func roomUserJoin(_ users: [UserInfo])
     /// reveive user leave room
@@ -21,7 +19,6 @@ protocol UserServiceDelegate : AnyObject  {
 }
 
 extension UserServiceDelegate {
-    func userInfoUpdate(_ info: UserInfo?) { }
     func roomUserJoin(_ users: [UserInfo]) { }
     func roomUserLeave(_ users: [UserInfo]) { }
     func receiveTakeSeatInvitation() { }
@@ -31,7 +28,7 @@ class UserService: NSObject {
     // MARK: - Public
     private let delegates = NSHashTable<AnyObject>.weakObjects()
     var localInfo: UserInfo?
-    var userList: [UserInfo] = []
+    var userList = DictionaryArrary<String, UserInfo>()
     
     func addUserServiceDelegate(_ delegate: UserServiceDelegate) {
         self.delegates.add(delegate)
@@ -97,6 +94,56 @@ class UserService: NSObject {
             guard let callback = callback else { return }
             callback(result)
         })
+    }
+    
+    /// Query the number of chat rooms available online
+    func queryOnlineRoomUsersCount(callback: OnlineRoomUsersCountCallback?) {
+        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+            assert(false, "room ID can't be nil")
+            guard let callback = callback else { return }
+            callback(.failure(.failed))
+            return
+        }
         
+        ZIMManager.shared.zim?.queryRoomOnlineMemberCount(roomID, callback: { count, error in
+            var result: Result<UInt32, ZegoError>
+            if error.code == .ZIMErrorCodeSuccess {
+                result = .success(count)
+            } else {
+                result = .failure(.other(Int32(error.code.rawValue)))
+            }
+            guard let callback = callback else { return }
+            callback(result)
+        })
+    }
+    
+    /// Query users of target page.
+    func queryOnlineRoomUsersCount(_ page: UInt, callback: OnlineRoomUsersCallback?) {
+        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+            assert(false, "room ID can't be nil")
+            guard let callback = callback else { return }
+            callback(.failure(.failed))
+            return
+        }
+        let config = ZIMQueryMemberConfig()
+        config.count = 100
+        config.nextFlag = String(page)
+        ZIMManager.shared.zim?.queryRoomMember(roomID, config: config, callback: { zimUsers, nextFlag, error in
+            
+            if error.code != .ZIMErrorCodeSuccess {
+                guard let callback = callback else { return }
+                callback(.failure(.other(Int32(error.code.rawValue))))
+                return
+            }
+            var users: [UserInfo] = []
+            
+            for zimUser in zimUsers {
+                let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+                let user = UserInfo(zimUser.userID, zimUser.userName, role)
+                users.append(user)
+            }
+            guard let callback = callback else { return }
+            callback(.success(users))
+        })
     }
 }
