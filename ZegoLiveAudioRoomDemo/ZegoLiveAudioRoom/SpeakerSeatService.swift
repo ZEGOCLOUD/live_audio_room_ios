@@ -55,7 +55,7 @@ class SpeakerSeatService: NSObject {
         let seatModel = SpeakerSeatModel(index: index)
         seatModel.status = .untaken
         
-        let seatModelJson = ZegoModelTool.modelToJson(toString: seatModel) ?? ""
+        let seatModelJson = ZegoJsonTool.modelToJson(toString: seatModel) ?? ""
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
@@ -75,7 +75,7 @@ class SpeakerSeatService: NSObject {
             let key = String(model.index)
             let copyModel = SpeakerSeatModel(index: model.index)
             copyModel.status = isClosed ? .closed : .untaken
-            let jsonValue = ZegoModelTool.modelToJson(toString: copyModel) ?? ""
+            let jsonValue = ZegoJsonTool.modelToJson(toString: copyModel) ?? ""
             attributes[key] = jsonValue
         }
         
@@ -104,7 +104,7 @@ class SpeakerSeatService: NSObject {
         
         let newModel = SpeakerSeatModel(index: seatModel?.index ?? -1)
         newModel.status = isClosed ? .closed : .untaken
-        let seatModelJson = ZegoModelTool.modelToJson(toString: newModel) ?? ""
+        let seatModelJson = ZegoJsonTool.modelToJson(toString: newModel) ?? ""
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
@@ -129,7 +129,7 @@ class SpeakerSeatService: NSObject {
         }
         
         let key = String(seatModel.index)
-        let seatModelJson = ZegoModelTool.modelToJson(toString: seatModel) ?? ""
+        let seatModelJson = ZegoJsonTool.modelToJson(toString: seatModel) ?? ""
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
@@ -165,7 +165,7 @@ class SpeakerSeatService: NSObject {
         newModel.userID = RoomManager.shared.userService.localInfo?.userID
         newModel.status = .occupied
         
-        let seatModelJson = ZegoModelTool.modelToJson(toString: newModel) ?? ""
+        let seatModelJson = ZegoJsonTool.modelToJson(toString: newModel) ?? ""
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
@@ -190,7 +190,7 @@ class SpeakerSeatService: NSObject {
         }
         
         let key = String(seatModel.index)
-        let seatModelJson = ZegoModelTool.modelToJson(toString: seatModel) ?? ""
+        let seatModelJson = ZegoJsonTool.modelToJson(toString: seatModel) ?? ""
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
@@ -244,8 +244,8 @@ class SpeakerSeatService: NSObject {
         let key1 = String(fromSeatNew.index)
         let key2 = String(toSeatNew.index)
         
-        let json1 = ZegoModelTool.modelToJson(toString: fromSeatNew) ?? ""
-        let json2 = ZegoModelTool.modelToJson(toString: toSeatNew) ?? ""
+        let json1 = ZegoJsonTool.modelToJson(toString: fromSeatNew) ?? ""
+        let json2 = ZegoJsonTool.modelToJson(toString: toSeatNew) ?? ""
         
         var attributes: [String : String] = [ : ]
         attributes[key1] = json1
@@ -301,7 +301,7 @@ extension SpeakerSeatService {
             var isUpdateLocalUser = seatModel.userID == localUser?.userID
             if action == .set {
                 guard let seatValue = seatDict?[seatKey] as? String else { continue }
-                let newModel = ZegoModelTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
+                let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
                 seatModel.updateModel(with: newModel)
                 isUpdateLocalUser = seatModel.userID == localUser?.userID
             }

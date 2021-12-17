@@ -16,7 +16,7 @@ protocol UserServiceDelegate: AnyObject {
     /// reveive user leave room
     func roomUserLeave(_ users: [UserInfo])
     /// receive custom command: invitation
-    func receiveCustomCommand(_ command: CustomCommand, roomID: String)
+    func receiveTakeSeatInvitation()
 }
 
 class UserService: NSObject {
@@ -26,14 +26,16 @@ class UserService: NSObject {
     var userList: [UserInfo] = []
     
     /// user login with user info and `ZIM token`
-    func login(_ user: UserInfo, _ token: String, callback: @escaping RoomCallback) {
+    func login(_ user: UserInfo, _ token: String, callback: RoomCallback?) {
         
         guard let userID = user.userID else {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
         
         guard let userName = user.userName else {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
@@ -43,11 +45,15 @@ class UserService: NSObject {
         zimUser.userName = userName
         
         ZIMManager.shared.zim?.login(zimUser, token: token, callback: { error in
+            var result: ZegoResult
             if error.code == .ZIMErrorCodeSuccess {
                 self.localInfo = user
+                result = .success(())
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
     
@@ -58,7 +64,27 @@ class UserService: NSObject {
     }
     
     /// send an invitation to user to take a speaker seat
-    func sendInvitation(_ userID: String, callback: RoomCallback) {
+    func sendInvitation(_ userID: String, callback: RoomCallback?) {
+        let command: CustomCommand = CustomCommand(type: .invitation)
+        command.targetUserIDs = [userID]
+        guard let message = command.josnString() else {
+            guard let callback = callback else { return }
+            callback(.failure(.failed))
+            return
+        }
+        
+        let textMessage: ZIMTextMessage = ZIMTextMessage(message: message)
+        
+        ZIMManager.shared.zim?.sendPeerMessage(textMessage, toUserID: userID, callback: { _, error in
+            var result: ZegoResult
+            if error.code == .ZIMErrorCodeSuccess {
+                result = .success(())
+            } else {
+                result = .failure(.other(Int32(error.code.rawValue)))
+            }
+            guard let callback = callback else { return }
+            callback(result)
+        })
         
     }
 }

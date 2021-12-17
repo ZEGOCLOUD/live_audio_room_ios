@@ -33,22 +33,24 @@ class RoomManager: NSObject {
     var messageService: MessageService
     var giftService: GiftService
     
-    func initWithAppID(appID: UInt32, appSign: String, callback: RoomCallback) {
+    func initWithAppID(appID: UInt32, appSign: String, callback: RoomCallback?) {
         if appSign.count == 0 {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
         
         ZIMManager.shared.createZIM(appID: appID)
-        
         ZegoExpressEngine.createEngine(withAppID: appID, appSign: appSign, isTestEnv: false, scenario: .general, eventHandler: self)
         
+        var result: ZegoResult = .success(())
         if ZIMManager.shared.zim == nil {
-            callback(.failure(.other(1)))
+            result = .failure(.other(1))
         } else {
-            callback(.success(()))
             ZIMManager.shared.zim?.setEventHandler(self)
         }
+        guard let callback = callback else { return }
+        callback(result)
     }
     
     func uninit() {
@@ -57,8 +59,9 @@ class RoomManager: NSObject {
         ZegoExpressEngine.destroy(nil)
     }
     
-    func uploadLog(callback: @escaping RoomCallback) {
+    func uploadLog(callback: RoomCallback?) {
         ZIMManager.shared.zim?.uploadLog({ errorCode in
+            guard let callback = callback else { return }
             if errorCode.code == .ZIMErrorCodeSuccess {
                 callback(.success(()))
             } else {

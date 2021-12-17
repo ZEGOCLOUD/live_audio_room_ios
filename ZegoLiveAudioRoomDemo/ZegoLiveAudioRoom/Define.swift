@@ -7,8 +7,9 @@
 
 import Foundation
 
+typealias ZegoResult = Result<Void, ZegoError>
 /// common room callback
-typealias RoomCallback = (Result<Void, ZegoError>) -> Void
+typealias RoomCallback = (ZegoResult) -> Void
 
 /// online room users callback
 typealias OnlineRoomUsersCallback = (Result<UInt32, ZegoError>) -> Void
