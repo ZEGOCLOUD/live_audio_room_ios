@@ -26,6 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let userId:String = "Apple\(a)"
         userIDTextField.text = userId
         myUserID = userId;
+        myUserName = userId
         configUI()
     }
     
@@ -105,11 +106,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             HUDHelper.showMessage(message:errMsg)
             return
         }
-        
-        let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
-        getKeyWindow().rootViewController = navVC
-        
-        let token : String = ""
+                
+        let token: String = AppToken.getZIMToken(withUserID: userInfo.userID) ?? ""
         RoomManager.shared.userService.login(userInfo, token) { result in
             switch result {
             case .success:
