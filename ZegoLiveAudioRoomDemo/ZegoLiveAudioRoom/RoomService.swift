@@ -162,5 +162,17 @@ extension RoomService {
 
 extension RoomService: ZIMEventHandler {
     
-    
+    func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
+        if updateInfo.roomAttributes.keys.contains("room_info") {
+            let roomJson = updateInfo.roomAttributes["room_info"] ?? ""
+            let roomInfo = ZegoJsonTool.jsonToModel(type: RoomInfo.self, json: roomJson)
+            
+            // if the room info is nil, we should not set self.info = nil
+            // because it can't get room info outside.
+            if let roomInfo = roomInfo {
+                self.info = roomInfo
+            }
+            delegate?.receiveRoomInfoUpdate(roomInfo)
+        }
+    }
 }

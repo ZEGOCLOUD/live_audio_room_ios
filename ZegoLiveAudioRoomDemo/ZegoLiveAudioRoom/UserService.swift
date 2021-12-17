@@ -30,6 +30,15 @@ class UserService: NSObject {
     var localInfo: UserInfo?
     var userList = DictionaryArrary<String, UserInfo>()
     
+    override init() {
+        super.init()
+        
+        // RoomManager didn't finish init at this time.
+        DispatchQueue.main.async {
+            RoomManager.shared.addZIMEventHandler(self)
+        }
+    }
+    
     func addUserServiceDelegate(_ delegate: UserServiceDelegate) {
         self.delegates.add(delegate)
     }
@@ -82,9 +91,15 @@ class UserService: NSObject {
             return
         }
         
-        let textMessage: ZIMTextMessage = ZIMTextMessage(message: message)
+        guard let messageData = message.data(using: .utf8) else {
+            guard let callback = callback else { return }
+            callback(.failure(.failed))
+            return
+        }
         
-        ZIMManager.shared.zim?.sendPeerMessage(textMessage, toUserID: userID, callback: { _, error in
+        let customMessage: ZIMCustomMessage = ZIMCustomMessage(message: messageData)
+        
+        ZIMManager.shared.zim?.sendPeerMessage(customMessage, toUserID: userID, callback: { _, error in
             var result: ZegoResult
             if error.code == .ZIMErrorCodeSuccess {
                 result = .success(())
@@ -145,5 +160,65 @@ class UserService: NSObject {
             guard let callback = callback else { return }
             callback(.success(users))
         })
+    }
+}
+
+extension UserService : ZIMEventHandler {
+    func zim(_ zim: ZIM, connectionStateChanged state: ZIMConnectionState, event: ZIMConnectionEvent, extendedData: [AnyHashable : Any]) {
+        for obj  in delegates.allObjects {
+            let delegate = obj as? UserServiceDelegate
+            guard let delegate = delegate else { continue }
+            delegate.connectionStateChanged(state, event)
+        }
+    }
+    
+    func zim(_ zim: ZIM, roomMemberJoined memberList: [ZIMUserInfo], roomID: String) {
+        var addUsers: [UserInfo] = []
+        for zimUser in memberList {
+            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+            let user = UserInfo(zimUser.userID, zimUser.userName, role)
+            addUsers.append(user)
+            guard let userID = user.userID else { continue }
+            userList.addObj(userID, user)
+        }
+        
+        for obj in delegates.allObjects {
+            if let delegate = obj as? UserServiceDelegate {
+                delegate.roomUserJoin(addUsers)
+            }
+        }
+    }
+    
+    func zim(_ zim: ZIM, roomMemberLeft memberList: [ZIMUserInfo], roomID: String) {
+        var leftUsers: [UserInfo] = []
+        for zimUser in memberList {
+            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+            let user = UserInfo(zimUser.userID, zimUser.userName, role)
+            leftUsers.append(user)
+            guard let userID = user.userID else { continue }
+            userList.removeObj(userID)
+        }
+        
+        for obj in delegates.allObjects {
+            if let delegate = obj as? UserServiceDelegate {
+                delegate.roomUserLeave(leftUsers)
+            }
+        }
+    }
+    
+    // recevie a invitation via this method
+    func zim(_ zim: ZIM, receivePeerMessage messageList: [ZIMMessage], fromUserID: String) {
+        for message in messageList {
+            guard let message = message as? ZIMCustomMessage else { continue }
+            guard let jsonStr = String(data: message.message, encoding: .utf8) else { continue }
+            guard let dict = ZegoJsonTool.jsonToDictionary(jsonStr) else { continue }
+            guard let actionType = dict["actionType"] as? CustomCommandType else { continue }
+            if actionType != .invitation { continue }
+            
+            for delegate in delegates.allObjects {
+                guard let delegate = delegate as? UserServiceDelegate else { continue }
+                delegate.receiveTakeSeatInvitation()
+            }
+        }
     }
 }

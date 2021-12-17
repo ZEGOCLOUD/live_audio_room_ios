@@ -12,6 +12,12 @@ class DictionaryArrary<KEY, VALUE> where KEY : Hashable, VALUE : NSObject {
     private var list: [VALUE] = []
     private var dict: [KEY : VALUE] = [ : ]
     
+    var count: Int {
+        get {
+            return list.count
+        }
+    }
+    
     func allObjects() -> [VALUE] {
         return list
     }
