@@ -11,7 +11,7 @@ import ZegoExpressEngine
 
 protocol SpeakerSeatServiceDelegate: AnyObject {
     /// speaker seat upate
-    func speakerSeatUpdate(_ model: SpeakerSeatModel)
+    func speakerSeatUpdate(_ models: [SpeakerSeatModel])
 }
 
 class SpeakerSeatService: NSObject {
@@ -20,6 +20,11 @@ class SpeakerSeatService: NSObject {
         for index in 0..<8 {
             let model = SpeakerSeatModel(index: index)
             seatList.append(model)
+        }
+        super.init()
+        // RoomManager didn't finish init at this time.
+        DispatchQueue.main.async {
+            RoomManager.shared.addZIMEventHandler(self)
         }
     }
     
@@ -318,6 +323,22 @@ extension SpeakerSeatService {
                 if action == .delete {
                     ZegoExpressEngine.shared().stopPublishingStream()
                 }
+            }
+        }
+    }
+}
+
+extension SpeakerSeatService : ZIMEventHandler {
+    func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
+        updateSpeakerSeats(updateInfo.roomAttributes, updateInfo.action)
+        
+        // the seat key is the index
+        // if the roomAttributes's keys don't have seat key, then we don't need call back
+        let seatKeys = seatList.map() { String($0.index) }
+        for key in seatKeys {
+            if updateInfo.roomAttributes.keys.contains(key) {
+                delegate?.speakerSeatUpdate(seatList)
+                return
             }
         }
     }

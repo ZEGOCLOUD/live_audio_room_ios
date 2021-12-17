@@ -9,5 +9,8 @@ import Foundation
 import ZIM
 
 class TextMessage: ZIMTextMessage {
-    
+    init(_ message: String) {
+        super.init()
+        self.message = message
+    }
 }

@@ -72,8 +72,8 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     }
     
     //MARK: -SpeakerSeatServiceDelegate
-    func speakerSeatUpdate(_ model: SpeakerSeatModel) {
-
+    func speakerSeatUpdate(_ models: [SpeakerSeatModel]) {
+        
     }
     
     //MARK: -UserServiceDelegate

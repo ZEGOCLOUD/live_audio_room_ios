@@ -18,6 +18,15 @@ class CustomCommand : NSObject {
     var targetUserIDs: [String] = []
     var content: [String : Any] = [ : ]
     
+    var giftID: String? {
+        get {
+            return content["giftID"] as? String
+        }
+        set {
+            content["giftID"] = newValue
+        }
+    }
+    
     init(type: CustomCommandType) {
         self.actionType = type
     }
