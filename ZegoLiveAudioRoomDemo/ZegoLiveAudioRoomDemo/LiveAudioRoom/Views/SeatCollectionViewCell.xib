@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ZegoChatRoomCollectionViewCell" id="lxP-ws-dwQ" customClass="ZegoChatRoomCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="70" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="70" height="80"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-Tb-ajk">
+                        <rect key="frame" x="0.0" y="66" width="70" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="oUV-zh-XMh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sound_waves" translatesAutoresizingMaskIntoConstraints="NO" id="qJ8-K2-L6E">
+                        <rect key="frame" x="-3" y="-6" width="76" height="76"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="76" id="3gD-lv-ogc"/>
+                            <constraint firstAttribute="width" secondItem="qJ8-K2-L6E" secondAttribute="height" multiplier="1:1" id="d1K-R7-lBa"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_seat" translatesAutoresizingMaskIntoConstraints="NO" id="dxs-EU-tcd">
+                        <rect key="frame" x="8" y="5" width="54" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="54" id="J5g-Rd-DWg"/>
+                            <constraint firstAttribute="width" secondItem="dxs-EU-tcd" secondAttribute="height" multiplier="1:1" id="edG-oT-aJ3"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="host_logo" translatesAutoresizingMaskIntoConstraints="NO" id="v03-CW-Xkh">
+                        <rect key="frame" x="11.5" y="50" width="47" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="Vtq-aB-gd6"/>
+                            <constraint firstAttribute="width" constant="47" id="qzm-eV-lFC"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_mic_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Sz0-hi-FRK">
+                        <rect key="frame" x="8" y="5" width="54" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Sz0-hi-FRK" secondAttribute="height" multiplier="1:1" id="IiP-GU-U7A"/>
+                            <constraint firstAttribute="height" constant="54" id="dLR-S7-1ux"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="d4m-fH-Kep"/>
+            <constraints>
+                <constraint firstItem="pi7-Tb-ajk" firstAttribute="top" secondItem="v03-CW-Xkh" secondAttribute="bottom" constant="4" id="BWA-d1-Nfn"/>
+                <constraint firstItem="qJ8-K2-L6E" firstAttribute="centerX" secondItem="dxs-EU-tcd" secondAttribute="centerX" id="DKH-zV-H0q"/>
+                <constraint firstAttribute="bottom" secondItem="pi7-Tb-ajk" secondAttribute="bottom" id="Hrz-ms-XcC"/>
+                <constraint firstItem="dxs-EU-tcd" firstAttribute="centerX" secondItem="lxP-ws-dwQ" secondAttribute="centerX" id="LLD-p2-4Pm"/>
+                <constraint firstItem="Sz0-hi-FRK" firstAttribute="centerY" secondItem="dxs-EU-tcd" secondAttribute="centerY" id="Qbb-lk-pOg"/>
+                <constraint firstItem="Sz0-hi-FRK" firstAttribute="centerX" secondItem="dxs-EU-tcd" secondAttribute="centerX" id="TWn-hm-3ic"/>
+                <constraint firstItem="pi7-Tb-ajk" firstAttribute="leading" secondItem="lxP-ws-dwQ" secondAttribute="leading" id="Wo1-E4-8dx"/>
+                <constraint firstItem="pi7-Tb-ajk" firstAttribute="top" secondItem="dxs-EU-tcd" secondAttribute="bottom" constant="7" id="X6c-V1-Xur"/>
+                <constraint firstItem="v03-CW-Xkh" firstAttribute="centerX" secondItem="dxs-EU-tcd" secondAttribute="centerX" id="fgS-Ob-RKV"/>
+                <constraint firstAttribute="trailing" secondItem="pi7-Tb-ajk" secondAttribute="trailing" id="lDV-dD-vTh"/>
+                <constraint firstItem="qJ8-K2-L6E" firstAttribute="centerY" secondItem="dxs-EU-tcd" secondAttribute="centerY" id="wyA-fu-COK"/>
+            </constraints>
+            <size key="customSize" width="72" height="65"/>
+            <connections>
+                <outlet property="headImageHeightConstraint" destination="J5g-Rd-DWg" id="hDP-mX-nhA"/>
+                <outlet property="headImageView" destination="dxs-EU-tcd" id="Hwy-gr-bb3"/>
+                <outlet property="hostLogo" destination="v03-CW-Xkh" id="j3G-Ps-uSq"/>
+                <outlet property="micImageHeightConstraint" destination="dLR-S7-1ux" id="jn3-Vl-G7L"/>
+                <outlet property="micImageView" destination="Sz0-hi-FRK" id="gzC-nP-2Bx"/>
+                <outlet property="nameLabel" destination="pi7-Tb-ajk" id="MpG-lg-ADo"/>
+                <outlet property="soundImageHeightConstraint" destination="3gD-lv-ogc" id="DqD-7r-V66"/>
+                <outlet property="soundWaveImage" destination="qJ8-K2-L6E" id="SuO-SM-lag"/>
+            </connections>
+            <point key="canvasLocation" x="162" y="56"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="close_mic_icon" width="54" height="54"/>
+        <image name="host_logo" width="39" height="12"/>
+        <image name="icon_seat" width="54" height="54"/>
+        <image name="sound_waves" width="76" height="76"/>
+    </resources>
+</document>
