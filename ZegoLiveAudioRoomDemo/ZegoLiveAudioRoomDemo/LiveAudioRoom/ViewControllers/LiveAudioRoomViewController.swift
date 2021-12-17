@@ -80,9 +80,6 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         
     }
-    func userInfoUpdate(_ info: UserInfo?) {
-        
-    }
 
     func roomUserJoin(_ users: [UserInfo]) {
         

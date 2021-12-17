@@ -66,7 +66,7 @@ class LiveAudioMessageModelBuilder: NSObject {
     }
     
     static func getUserWithUserID(userID:String) -> UserInfo? {
-        for user:UserInfo in RoomManager.shared.userService.userList {
+        for user:UserInfo in RoomManager.shared.userService.userList.allObjects() {
             if user.userID == userID {
                 return user
             }

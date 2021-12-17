@@ -203,10 +203,4 @@ extension RoomManager: ZIMEventHandler {
             delegate.zim?(zim, roomAttributesUpdated: updateInfo, roomID: roomID)
         }
     }
-    
-//    func zim(_ zim: ZIM, roomAttributesBatchUpdated updateInfo: [ZIMRoomAttributesUpdateInfo], roomID: String) {
-//        for delegate in zimEventDelegates.allObjects {
-//            delegate.zim?(zim, roomAttributesBatchUpdated: updateInfo, roomID: roomID)
-//        }
-//    }
 }
