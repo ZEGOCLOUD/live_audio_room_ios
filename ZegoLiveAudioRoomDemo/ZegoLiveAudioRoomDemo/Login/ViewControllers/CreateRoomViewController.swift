@@ -18,17 +18,19 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var settingButton: UIBarButtonItem!
     
-    var rtcToken : String = ""
     var myRoomID : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // register userservice delegate
+        RoomManager.shared.userService.addUserServiceDelegate(self)
+        
         configUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        RoomManager.shared.roomService.delegate = self
+        
     }
     
     func configUI() -> Void {
@@ -89,9 +91,8 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
         self.present(alter, animated: true, completion: nil)
     }
     
-    func createRoomWithRoomID(roomID:String,roomName:String) -> Void {
-        joinToChatRoom()
-        return
+    func createRoomWithRoomID(roomID: String, roomName: String) -> Void {
+        
         var message:String = ""
         if roomID.count == 0 {
             message = ZGLocalizedString("toast_room_id_enter_error")
@@ -103,25 +104,20 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
             return
         }
         
-        //TODO: - need add logic
-        rtcToken = ""
+        let rtcToken: String = AppToken.getRtcToken(withRoomID: roomID) ?? ""
         
         HUDHelper.showNetworkLoading()
-        RoomManager.shared.roomService .createRoom(roomID, roomName, rtcToken) { result in
+        RoomManager.shared.roomService.createRoom(roomID, roomName, rtcToken) { result in
+            HUDHelper.hideNetworkLoading()
             switch result {
             case .success:
                 self.joinToChatRoom()
             case .failure(let error):
-                HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_fail") + "\(error.code)")
-//                switch error {
-//                case .other
-//                }
-//                if code == 1001 {
-//                    HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_success"))
-//                } else {
-//
-//                }
-//                break
+                var message = ZGLocalizedString("toast_create_room_fail") + "\(error.code)"
+                if case .roomExisted = error {
+                    message =  ZGLocalizedString("toast_room_existed")
+                }
+                HUDHelper.showMessage(message: message)
             }
         }
         
@@ -177,12 +173,7 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
     }
 }
 
-extension CreateRoomViewController : RoomServiceDelegate, UserServiceDelegate {
-    //MARK: - RoomServiceDelegate
-    func receiveRoomInfoUpdate(_ info: RoomInfo?) {
-        
-    }
-    
+extension CreateRoomViewController : UserServiceDelegate {
     //MARK: - UserServiceDelegate
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         if (state == .disconnected) {
