@@ -10,7 +10,6 @@ import ZIM
 
 protocol RoomServiceDelegate: AnyObject {
     func receiveRoomInfoUpdate(_ info: RoomInfo?)
-    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent)
 }
 
 class RoomService: NSObject {
