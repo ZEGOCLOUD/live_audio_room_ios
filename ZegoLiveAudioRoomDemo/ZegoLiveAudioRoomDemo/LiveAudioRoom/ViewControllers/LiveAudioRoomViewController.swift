@@ -122,7 +122,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         RegisterServiceCallback()
         
         if localUserIsHost() {
-            RoomManager.shared.speakerService.takeSeat(0, callback:nil)
+            //RoomManager.shared.speakerService.takeSeat(0, callback:nil)
         }
         
         configUI()
@@ -190,14 +190,16 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
     }
     
-    
     @IBAction func settingButtonClick(_ sender: UIButton) {
+        
     }
     
     @IBAction func memberButtonClick(_ sender: UIButton) {
+        
     }
     
     @IBAction func micButtonClick(_ sender: UIButton) {
+        
     }
     
     

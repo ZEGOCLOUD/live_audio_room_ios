@@ -10,29 +10,8 @@ import UIKit
 class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
     
     
-    var _tableView:UITableView?
-    var messageTableView:UITableView? {
-        get {
-            if _tableView == nil {
-                _tableView? = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height), style: UITableView.Style.plain)
-                _tableView!.delegate = self as UITableViewDelegate
-                _tableView!.dataSource = self as UITableViewDataSource
-                _tableView!.backgroundColor = UIColor.init(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
-                _tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
-                _tableView?.showsHorizontalScrollIndicator = false
-                _tableView?.showsVerticalScrollIndicator = false
-                _tableView?.estimatedRowHeight = 0
-                _tableView?.estimatedSectionFooterHeight = 0
-                _tableView?.estimatedSectionHeaderHeight = 0
-                if #available(iOS 11.0, *) {
-                    _tableView?.contentInsetAdjustmentBehavior = .never
-                    _tableView?.insetsContentViewsToSafeArea = false
-                }
-                _tableView?.translatesAutoresizingMaskIntoConstraints = false
-            }
-            return _tableView
-        }
-    }
+//    var _tableView:UITableView?
+    var messageTableView:UITableView?
     var dataSource:Array<LiveAudioMessageModel>?
     
     override func awakeFromNib() {
@@ -45,17 +24,36 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
         LiveAudioMessageModelBuilder.messageViewWidth = self.frame.size.width
     }
     
+    var constraintLeft:NSLayoutConstraint!
     //MARK: -Private
     private func configUI() -> Void {
         self.backgroundColor = UIColor.clear
-        self.addSubview(messageTableView!)
-        messageTableView!.register(UINib.init(nibName: "", bundle: nil), forCellReuseIdentifier:"LiveAudioMessageCell")
-        
-        let constraintLeft:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView!, attribute: .left)
-        let constraintRight:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView!, attribute: .right)
-        let constraintTop:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView!, attribute: .top)
-        let constraintBottom:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView!, attribute: .bottom)
-        addConstraints([constraintLeft,constraintRight,constraintTop,constraintBottom])
+        setupTableView()
+        let constraintLeft:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView ?? UITableView(), attribute: .left)
+        let constraintRight:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView ?? UITableView(), attribute: .right)
+        let constraintTop:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView ?? UITableView(), attribute: .top)
+        let constraintBottom:NSLayoutConstraint = equallyRelatedConstraint(view: messageTableView ?? UITableView(), attribute: .bottom)
+        self.addConstraints([constraintLeft,constraintRight,constraintTop,constraintBottom])
+    }
+    
+    func setupTableView() -> Void {
+        messageTableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height), style: UITableView.Style.plain)
+        messageTableView?.delegate = self as UITableViewDelegate
+        messageTableView?.dataSource = self as UITableViewDataSource
+        messageTableView?.backgroundColor = UIColor.init(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
+        messageTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+        messageTableView?.showsHorizontalScrollIndicator = false
+        messageTableView?.showsVerticalScrollIndicator = false
+        messageTableView?.estimatedRowHeight = 0
+        messageTableView?.estimatedSectionFooterHeight = 0
+        messageTableView?.estimatedSectionHeaderHeight = 0
+        if #available(iOS 11.0, *) {
+            messageTableView?.contentInsetAdjustmentBehavior = .never
+            messageTableView?.insetsContentViewsToSafeArea = false
+        }
+        messageTableView?.translatesAutoresizingMaskIntoConstraints = false
+        messageTableView?.register(UINib.init(nibName: "LiveAudioMessageCell", bundle: nil), forCellReuseIdentifier:"LiveAudioMessageCell")
+        self.addSubview(messageTableView ?? UITableView())
     }
     
     private func equallyRelatedConstraint(view:UIView,attribute:NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
@@ -96,6 +94,5 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
         let model:LiveAudioMessageModel = dataSource![indexPath.row]
         return model.messageHeight! + 10*2 + 10
     }
-    
 
 }

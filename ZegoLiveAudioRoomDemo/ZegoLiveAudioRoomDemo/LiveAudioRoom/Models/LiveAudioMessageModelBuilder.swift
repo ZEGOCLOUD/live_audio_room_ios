@@ -13,8 +13,8 @@ class LiveAudioMessageModelBuilder: NSObject {
     
     
 
-    static var _messageViewWidth:CGFloat?
-    static var messageViewWidth:CGFloat? {
+    static var _messageViewWidth: CGFloat?
+    static var messageViewWidth: CGFloat? {
         set {
             _messageViewWidth = newValue
         }
@@ -23,7 +23,7 @@ class LiveAudioMessageModelBuilder: NSObject {
         }
     }
     
-    static func buildModelWithUserID(userID:String,message:String) -> LiveAudioMessageModel {
+    static func buildModelWithUserID(userID: String,message: String) -> LiveAudioMessageModel {
         let user:UserInfo? = LiveAudioMessageModelBuilder.getUserWithUserID(userID:userID)
         let isHost:Bool = user?.role == .host;
         let attributedStr:NSMutableAttributedString = NSMutableAttributedString()
@@ -55,12 +55,12 @@ class LiveAudioMessageModelBuilder: NSObject {
         return model
     }
     
-    static func buildLeftMessageModelWithUser(user:UserInfo) -> LiveAudioMessageModel {
+    static func buildLeftMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
         let message = ZGLocalizedString("room_page_has_left_the_room") + (user.userName ?? "")
         return LiveAudioMessageModelBuilder._buildLeftOrJoinMessageModelWithMessage(message: message)
     }
     
-    static func buildJoinMessageModelWithUser(user:UserInfo) -> LiveAudioMessageModel {
+    static func buildJoinMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
         let message  = ZGLocalizedString("room_page_joined_the_room") + (user.userName ?? "")
         return LiveAudioMessageModelBuilder._buildLeftOrJoinMessageModelWithMessage(message: message)
     }
@@ -74,7 +74,7 @@ class LiveAudioMessageModelBuilder: NSObject {
         return nil
     }
     
-    static func getNameAttributes(isHost:Bool) -> NSDictionary {
+    static func getNameAttributes(isHost: Bool) -> NSDictionary {
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
@@ -82,7 +82,7 @@ class LiveAudioMessageModelBuilder: NSObject {
         return [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0),NSAttributedString.Key.paragraphStyle:paragraphStyle,NSAttributedString.Key.foregroundColor:BlueColor()]
     }
     
-    static func getContentAttributes(isHost:Bool) -> NSDictionary {
+    static func getContentAttributes(isHost: Bool) -> NSDictionary {
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
@@ -91,7 +91,7 @@ class LiveAudioMessageModelBuilder: NSObject {
         
     }
     
-    static func _buildLeftOrJoinMessageModelWithMessage(message:String) -> LiveAudioMessageModel {
+    static func _buildLeftOrJoinMessageModelWithMessage(message: String) -> LiveAudioMessageModel {
         let model:LiveAudioMessageModel = LiveAudioMessageModel()
         model.content = message
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
