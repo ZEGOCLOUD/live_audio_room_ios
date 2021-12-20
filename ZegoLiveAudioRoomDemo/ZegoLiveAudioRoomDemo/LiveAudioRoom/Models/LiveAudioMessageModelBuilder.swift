@@ -11,8 +11,6 @@ let hostWidth:CGFloat = 42.0
 
 class LiveAudioMessageModelBuilder: NSObject {
     
-    
-
     static var _messageViewWidth: CGFloat?
     static var messageViewWidth: CGFloat? {
         set {
@@ -24,22 +22,22 @@ class LiveAudioMessageModelBuilder: NSObject {
     }
     
     static func buildModelWithUserID(userID: String,message: String) -> LiveAudioMessageModel {
-        let user:UserInfo? = LiveAudioMessageModelBuilder.getUserWithUserID(userID:userID)
-        let isHost:Bool = user?.role == .host;
-        let attributedStr:NSMutableAttributedString = NSMutableAttributedString()
+        let user: UserInfo? = getUserWithUserID(userID:userID)
+        let isHost: Bool = user?.role == .host;
+        let attributedStr: NSMutableAttributedString = NSMutableAttributedString()
         
-        let nameAttributes:NSDictionary = LiveAudioMessageModelBuilder.getNameAttributes(isHost: isHost)
-        let nameStr:NSAttributedString = NSAttributedString.init(string: user?.userName ?? "", attributes: nameAttributes as! [NSAttributedString.Key : Any])
+        let nameAttributes = getNameAttributes(isHost: isHost)
+        let nameStr: NSAttributedString = NSAttributedString(string: user?.userName ?? "", attributes: nameAttributes)
         
-        let contentAttributes:NSDictionary = LiveAudioMessageModelBuilder.getContentAttributes(isHost: isHost)
-        let content:String = ": " + message
-        let contentStr:NSAttributedString = NSAttributedString.init(string: content, attributes: contentAttributes as! [NSAttributedString.Key : Any])
+        let contentAttributes = getContentAttributes(isHost: isHost)
+        let content: String = ": " + message
+        let contentStr: NSAttributedString = NSAttributedString(string: content, attributes: contentAttributes)
         
         attributedStr.append(nameStr)
         attributedStr.append(contentStr)
         
         let labelWidth = (messageViewWidth ?? 0) - 16 - 30 - 10*2
-        var size:CGSize = attributedStr.boundingRect(with: CGSize.init(width: labelWidth, height: CGFloat(MAXFLOAT)), options:[NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading], context: nil).size
+        var size = attributedStr.boundingRect(with: CGSize.init(width: labelWidth, height: CGFloat(MAXFLOAT)), options:[NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading], context: nil).size
         
         if size.height <= 15 {
             size.width += isHost ? hostWidth : 0
@@ -56,13 +54,13 @@ class LiveAudioMessageModelBuilder: NSObject {
     }
     
     static func buildLeftMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
-        let message = ZGLocalizedString("room_page_has_left_the_room") + (user.userName ?? "")
-        return LiveAudioMessageModelBuilder._buildLeftOrJoinMessageModelWithMessage(message: message)
+        let message = String(format: ZGLocalizedString("room_page_has_left_the_room"), user.userName ?? "")
+        return _buildLeftOrJoinMessageModelWithMessage(message: message)
     }
     
     static func buildJoinMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
-        let message  = ZGLocalizedString("room_page_joined_the_room") + (user.userName ?? "")
-        return LiveAudioMessageModelBuilder._buildLeftOrJoinMessageModelWithMessage(message: message)
+        let message = String(format: ZGLocalizedString("room_page_joined_the_room"), user.userName ?? "")
+        return _buildLeftOrJoinMessageModelWithMessage(message: message)
     }
     
     static func getUserWithUserID(userID:String) -> UserInfo? {
@@ -74,35 +72,40 @@ class LiveAudioMessageModelBuilder: NSObject {
         return nil
     }
     
-    static func getNameAttributes(isHost: Bool) -> NSDictionary {
-        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
+    static func getNameAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
+        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
         paragraphStyle.firstLineHeadIndent = isHost ? hostWidth : 0
-        return [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0),NSAttributedString.Key.paragraphStyle:paragraphStyle,NSAttributedString.Key.foregroundColor:BlueColor()]
+        return [.font : UIFont.systemFont(ofSize: 12.0),
+                .paragraphStyle : paragraphStyle,
+                .foregroundColor : BlueColor()]
     }
     
-    static func getContentAttributes(isHost: Bool) -> NSDictionary {
-        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
+    static func getContentAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
+        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
         paragraphStyle.firstLineHeadIndent = isHost ? hostWidth : 0
-        return [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0),NSAttributedString.Key.paragraphStyle:paragraphStyle,NSAttributedString.Key.foregroundColor:BlackColor()]
-        
+        return [.font : UIFont.systemFont(ofSize: 12.0),
+                .paragraphStyle : paragraphStyle,
+                .foregroundColor : BlackColor()]
     }
     
     static func _buildLeftOrJoinMessageModelWithMessage(message: String) -> LiveAudioMessageModel {
-        let model:LiveAudioMessageModel = LiveAudioMessageModel()
+        let model: LiveAudioMessageModel = LiveAudioMessageModel()
         model.content = message
-        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 16.5
         
-        let attributes:NSDictionary = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12.0),NSAttributedString.Key.paragraphStyle:paragraphStyle,NSAttributedString.Key.foregroundColor:BlueColor()]
-        let attributedStr:NSAttributedString = NSAttributedString.init(string: message, attributes: attributes as! [NSAttributedString.Key : Any])
+        let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 12.0),
+                                                          .paragraphStyle : paragraphStyle,
+                                                          .foregroundColor : BlueColor()]
+        let attributedStr: NSAttributedString = NSAttributedString(string: message, attributes: attributes)
         
         let labelWidth = (messageViewWidth ?? 0) - 16 - 30 - 10 * 2
-        let size:CGSize = attributedStr.boundingRect(with: CGSize.init(width: labelWidth, height: CGFloat(MAXFLOAT)), options: [NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).size
+        let size = attributedStr.boundingRect(with: CGSize.init(width: labelWidth, height: CGFloat(MAXFLOAT)), options: [NSStringDrawingOptions.usesLineFragmentOrigin], context: nil).size
         
         model.attributedContent = attributedStr
         model.messageWidth = size.width + 1.0
