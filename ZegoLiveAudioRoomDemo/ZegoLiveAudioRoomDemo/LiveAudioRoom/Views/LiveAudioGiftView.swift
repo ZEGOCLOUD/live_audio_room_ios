@@ -38,7 +38,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell:giftCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "giftCollectionViewCell", for: indexPath) as! giftCollectionViewCell
+        let cell:GiftCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "giftCollectionViewCell", for: indexPath) as! GiftCollectionViewCell
         cell.model = giftArray?[indexPath.item] ?? GiftModel()
         return cell
     }
