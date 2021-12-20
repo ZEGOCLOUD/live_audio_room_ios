@@ -275,6 +275,19 @@ extension SpeakerSeatService {
         return seatList[index]
     }
     
+    func getSeatModel(userID: String?) -> SpeakerSeatModel? {
+        guard let userID = userID else {
+            return nil
+        }
+        
+        for model in seatList {
+            if model.userID == userID {
+                return model
+            }
+        }
+        return nil
+    }
+    
     func setRoomAttributes(_ attributes: [String : String], _ roomID: String?, _ config: ZIMRoomAttributesSetConfig, _ callback: RoomCallback?) {
         
         guard let roomID = RoomManager.shared.roomService.info.roomID else {

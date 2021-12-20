@@ -9,7 +9,7 @@ import UIKit
 
 let hostWidth:CGFloat = 42.0
 
-class LiveAudioMessageModelBuilder: NSObject {
+class MessageModelBuilder: NSObject {
     
     static var _messageViewWidth: CGFloat?
     static var messageViewWidth: CGFloat? {
@@ -21,8 +21,8 @@ class LiveAudioMessageModelBuilder: NSObject {
         }
     }
     
-    static func buildModelWithUserID(userID: String,message: String) -> LiveAudioMessageModel {
-        let user: UserInfo? = getUserWithUserID(userID:userID)
+    static func buildModel(userID: String, message: String) -> MessageModel {
+        let user: UserInfo? = getUser(with: userID)
         let isHost: Bool = user?.role == .host;
         let attributedStr: NSMutableAttributedString = NSMutableAttributedString()
         
@@ -43,7 +43,7 @@ class LiveAudioMessageModelBuilder: NSObject {
             size.width += isHost ? hostWidth : 0
         }
         
-        let model:LiveAudioMessageModel = LiveAudioMessageModel()
+        let model:MessageModel = MessageModel()
         model.isOwner = isHost
         model.content = content
         model.attributedContent = attributedStr
@@ -53,17 +53,17 @@ class LiveAudioMessageModelBuilder: NSObject {
         return model
     }
     
-    static func buildLeftMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
+    static func buildLeftMessageModel(user: UserInfo) -> MessageModel {
         let message = String(format: ZGLocalizedString("room_page_has_left_the_room"), user.userName ?? "")
-        return _buildLeftOrJoinMessageModelWithMessage(message: message)
+        return _buildLeftOrJoinMessageModel(message: message)
     }
     
-    static func buildJoinMessageModelWithUser(user: UserInfo) -> LiveAudioMessageModel {
+    static func buildJoinMessageModel(user: UserInfo) -> MessageModel {
         let message = String(format: ZGLocalizedString("room_page_joined_the_room"), user.userName ?? "")
-        return _buildLeftOrJoinMessageModelWithMessage(message: message)
+        return _buildLeftOrJoinMessageModel(message: message)
     }
     
-    static func getUserWithUserID(userID:String) -> UserInfo? {
+    private static func getUser(with userID:String) -> UserInfo? {
         for user:UserInfo in RoomManager.shared.userService.userList.allObjects() {
             if user.userID == userID {
                 return user
@@ -72,7 +72,7 @@ class LiveAudioMessageModelBuilder: NSObject {
         return nil
     }
     
-    static func getNameAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
+    private static func getNameAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
@@ -82,7 +82,7 @@ class LiveAudioMessageModelBuilder: NSObject {
                 .foregroundColor : BlueColor()]
     }
     
-    static func getContentAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
+    private static func getContentAttributes(isHost: Bool) -> [NSAttributedString.Key : Any] {
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.paragraphSpacing = 0
         paragraphStyle.minimumLineHeight = 15.0
@@ -92,8 +92,8 @@ class LiveAudioMessageModelBuilder: NSObject {
                 .foregroundColor : BlackColor()]
     }
     
-    static func _buildLeftOrJoinMessageModelWithMessage(message: String) -> LiveAudioMessageModel {
-        let model: LiveAudioMessageModel = LiveAudioMessageModel()
+    private static func _buildLeftOrJoinMessageModel(message: String) -> MessageModel {
+        let model: MessageModel = MessageModel()
         model.content = message
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacing = 0

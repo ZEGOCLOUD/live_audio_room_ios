@@ -15,7 +15,7 @@ class LiveAudioMessageCell: UITableViewCell {
     @IBOutlet weak var labelWidthConstraint: NSLayoutConstraint!
     
     
-    var model:LiveAudioMessageModel?{
+    var model:MessageModel?{
         didSet {
             contentLabel.attributedText = model?.attributedContent
             labelWidthConstraint.constant = model?.messageWidth ?? 0
