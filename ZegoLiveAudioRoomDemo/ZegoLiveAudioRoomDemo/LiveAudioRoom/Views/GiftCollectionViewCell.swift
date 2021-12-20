@@ -7,7 +7,7 @@
 
 import UIKit
 
-class giftCollectionViewCell: UICollectionViewCell {
+class GiftCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var giftImage: UIImageView!
     
