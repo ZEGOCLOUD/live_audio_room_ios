@@ -72,7 +72,7 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         let cell:SettingTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
         cell.delegate = self as SettingTableViewCellDelegate
         
-        let statusArray:Array = [RoomManager.shared.roomService.info?.isSeatClosed,RoomManager.shared.roomService.info?.isTextMessageDisabled]
+        let statusArray:Array = [RoomManager.shared.roomService.info.isSeatClosed,RoomManager.shared.roomService.info.isTextMessageDisabled]
         if indexPath.row < dataSource?.count ?? 0 {
             let statusDic:NSDictionary = (dataSource?[indexPath.row] ?? [:]) as NSDictionary
             let title:String = statusDic["title"] as! String

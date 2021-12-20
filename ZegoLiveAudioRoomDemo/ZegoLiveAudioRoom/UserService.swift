@@ -113,7 +113,7 @@ class UserService: NSObject {
     
     /// Query the number of chat rooms available online
     func queryOnlineRoomUsersCount(callback: OnlineRoomUsersCountCallback?) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID can't be nil")
             guard let callback = callback else { return }
             callback(.failure(.failed))
@@ -134,7 +134,7 @@ class UserService: NSObject {
     
     /// Query users of target page.
     func queryOnlineRoomUsersCount(_ page: UInt, callback: OnlineRoomUsersCallback?) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID can't be nil")
             guard let callback = callback else { return }
             callback(.failure(.failed))
@@ -153,7 +153,7 @@ class UserService: NSObject {
             var users: [UserInfo] = []
             
             for zimUser in zimUsers {
-                let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+                let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info.hostID ? .host : .listener
                 let user = UserInfo(zimUser.userID, zimUser.userName, role)
                 users.append(user)
             }
@@ -175,7 +175,7 @@ extension UserService : ZIMEventHandler {
     func zim(_ zim: ZIM, roomMemberJoined memberList: [ZIMUserInfo], roomID: String) {
         var addUsers: [UserInfo] = []
         for zimUser in memberList {
-            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info.hostID ? .host : .listener
             let user = UserInfo(zimUser.userID, zimUser.userName, role)
             addUsers.append(user)
             guard let userID = user.userID else { continue }
@@ -192,7 +192,7 @@ extension UserService : ZIMEventHandler {
     func zim(_ zim: ZIM, roomMemberLeft memberList: [ZIMUserInfo], roomID: String) {
         var leftUsers: [UserInfo] = []
         for zimUser in memberList {
-            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info?.hostID ? .host : .listener
+            let role: UserRole = zimUser.userID == RoomManager.shared.roomService.info.hostID ? .host : .listener
             let user = UserInfo(zimUser.userID, zimUser.userName, role)
             leftUsers.append(user)
             guard let userID = user.userID else { continue }

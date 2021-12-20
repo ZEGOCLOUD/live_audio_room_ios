@@ -176,12 +176,12 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     }
     
     func localUserIsHost() -> Bool {
-        return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info?.hostID
+        return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
     }
     
     func configUI() -> Void {
-        roomTitleLabel.text = RoomManager.shared.roomService.info?.roomName
-        roomIdLabel.text = RoomManager.shared.roomService.info?.roomID
+        roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
+        roomIdLabel.text = RoomManager.shared.roomService.info.roomID
         
     }
     

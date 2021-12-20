@@ -78,7 +78,7 @@ extension RoomManager {
             return
         }
         
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room id can't be nil.")
             return
         }

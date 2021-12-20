@@ -9,7 +9,7 @@ import UIKit
 import ZIM
 
 
-class CreateRoomViewController: UIViewController,UITextFieldDelegate {
+class CreateRoomViewController: UIViewController {
     
     @IBOutlet weak var roomIDBackgroundView: UIView!
     @IBOutlet weak var roomIDTextField: UITextField!
@@ -61,8 +61,36 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
         getKeyWindow().endEditing(true)
     }
     
+    // MARK: - Action
     @IBAction func chatRoomIDTextFieldChanged(_ sender: UITextField) {
         myRoomID = sender.text!
+    }
+    
+    @objc func joinRoomIdTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 20 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 20)
+            textField.text = String(text[startIndex...index])
+        }
+    }
+    
+    @objc func createRoomIdTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 20 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 20)
+            textField.text = String(text[startIndex...index])
+        }
+    }
+    
+    @objc func createRoomNameTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 32 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 32)
+            textField.text = String(text[startIndex...index])
+        }
     }
     
     @IBAction func createButtonClicked(_ sender: UIButton) {
@@ -89,6 +117,31 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
         alter.addAction(cancelAction)
         alter.addAction(createAction)
         self.present(alter, animated: true, completion: nil)
+    }
+    
+    @IBAction func joinRoomButtonClick(_ sender: UIButton) {
+        
+        if myRoomID.count == 0 {
+            HUDHelper.showMessage(message: ZGLocalizedString("toast_room_id_enter_error"))
+            return
+        }
+        
+        let rtcToken = AppToken.getRtcToken(withRoomID: myRoomID) ?? ""
+        
+        HUDHelper.showNetworkLoading()
+        RoomManager.shared.roomService.joinRoom(myRoomID, rtcToken) { result in
+            HUDHelper.hideNetworkLoading()
+            switch result {
+            case .success:
+                self.joinToChatRoom()
+            case .failure(let error):
+                var message = String(format: ZGLocalizedString("toast_join_room_fail"), error.code)
+                if case .roomNotFound = error {
+                    message = ZGLocalizedString("toast_room_not_exist_fail")
+                }
+                HUDHelper.showMessage(message: message)
+            }
+        }
     }
     
     func createRoomWithRoomID(roomID: String, roomName: String) -> Void {
@@ -122,35 +175,7 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
         }
         
     }
-    
-    //MARK: - action
-    @objc func joinRoomIdTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 20 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
-    @objc func createRoomIdTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 20 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
-    @objc func createRoomNameTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 32 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 32)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
+        
     //MARK: - Jump
     func joinToChatRoom() -> Void {
         let vc = UIStoryboard(name: "LiveAudioRoom", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomViewController")
@@ -162,7 +187,9 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
         getKeyWindow().rootViewController = vc
     }
-    
+}
+
+extension CreateRoomViewController : UITextFieldDelegate {
     //MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         roomIDBackgroundView.layer.borderColor = UIColor.init(red: 0 / 255.0, green: 85 / 255.0, blue: 255 / 255.0, alpha: 1.0).cgColor

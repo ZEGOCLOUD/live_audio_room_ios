@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var userIDBackgroundView: UIView!
     @IBOutlet weak var userNameBackgroundView: UIView!
@@ -122,7 +122,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
-    
+}
+
+extension LoginViewController : UITextFieldDelegate {
     //MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         var backView = userIDBackgroundView

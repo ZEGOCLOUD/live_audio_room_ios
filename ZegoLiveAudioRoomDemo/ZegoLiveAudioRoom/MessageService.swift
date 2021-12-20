@@ -31,7 +31,7 @@ class MessageService: NSObject {
     /// send group chat message
     func sendTextMessage(_ message: String, callback: RoomCallback?) {
         
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             guard let callback = callback else { return }
             callback(.failure(.failed))
             return

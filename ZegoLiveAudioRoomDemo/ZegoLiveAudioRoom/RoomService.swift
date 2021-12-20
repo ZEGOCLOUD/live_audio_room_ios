@@ -26,7 +26,7 @@ class RoomService: NSObject {
     
     // MARK: - Public
     
-    var info: RoomInfo?
+    var info: RoomInfo = RoomInfo()
     weak var delegate: RoomServiceDelegate?
     
     /// Create a chat room
@@ -64,16 +64,20 @@ class RoomService: NSObject {
     
     /// Join a chat room
     /// You need to enter a generated `rtc token`
-    func joinRoom(_ roomID: String, _ roomName: String, _ token: String, callback: RoomCallback?) {
+    func joinRoom(_ roomID: String, _ token: String, callback: RoomCallback?) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
             if error.code != .ZIMErrorCodeSuccess {
                 guard let callback = callback else { return }
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                if error.code == .ZIMErrorCodeRoomNotExist {
+                    callback(.failure(.roomNotFound))
+                } else {
+                    callback(.failure(.other(Int32(error.code.rawValue))))
+                }
                 return
             }
             
-            RoomManager.shared.roomService.info?.roomID = roomID
-            RoomManager.shared.roomService.info?.roomName = roomName
+            RoomManager.shared.roomService.info.roomID = fullRoomInfo.baseInfo.roomID
+            RoomManager.shared.roomService.info.roomName = fullRoomInfo.baseInfo.roomName
             RoomManager.shared.loginRtcRoom(with: token)
             
             guard let callback = callback else { return }
@@ -83,7 +87,7 @@ class RoomService: NSObject {
     
     /// Leave the chat room
     func leaveRoom(callback: RoomCallback?) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID can't be nil")
             guard let callback = callback else { return }
             callback(.failure(.failed))
@@ -143,7 +147,7 @@ extension RoomService {
     
     private func getDisableTextMessageParameters(_ isDisabled: Bool) -> ([String:String], String, ZIMRoomAttributesSetConfig) {
         
-        let roomInfo = self.info?.copy() as? RoomInfo
+        let roomInfo = self.info.copy() as? RoomInfo
         roomInfo?.isTextMessageDisabled = isDisabled
         
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
