@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol LiveAudioGiftViewDelegate:AnyObject {
+protocol LiveAudioGiftViewDelegate: AnyObject {
     func sendGift(giftModel: GiftModel,targetUserList: Array<giftMemberModel>);
 }
 
@@ -54,23 +54,32 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     weak var delegate: LiveAudioGiftViewDelegate?
     
-    var titleLabel:UILabel?
-    var sendButton:UIButton?
-    var giftCollectionView:UICollectionView?
+    var titleLabel: UILabel?
+    var sendButton: UIButton?
+    var giftCollectionView: UICollectionView?
     
-    let nomalGiftModel:GiftModel = GiftModel()
-    var giftArray:Array<GiftModel>? {
+    let nomalGiftModel: GiftModel = GiftModel()
+    var giftArray: Array<GiftModel>? {
         get {
             nomalGiftModel.imageName = "gift_logo"
             return [nomalGiftModel]
         }
     }
-    var seatUserList:Array<giftMemberModel>?
-    var targetUserList:Array<Any>?
-    var sendGift:GiftModel?
-    var messageLabel:UILabel?
-    var arrowButton:UIButton?
-    var messageTableView:UITableView?
+    var seatUserList: Array<giftMemberModel>? {
+        get {
+            return configSeatUserListData()
+        }
+    }
+    
+    var targetUserList: Array<String>? {
+        get {
+            return configTargetUserListData()
+        }
+    }
+    var sendGift: GiftModel?
+    var messageLabel: UILabel?
+    var arrowButton: UIButton?
+    var messageTableView: UITableView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,18 +87,32 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         configUI()
     }
     
-    func configData() -> Void {
-//        seatUserList = seatUserList()<giftMemberModel>
-//        seatUserList?.append(giftMemberModel())
-//        for seat in RoomManager.shared.speakerService.seatList {
-//            if seat.status != .occupied {
-//                continue
-//            }
-//            if seat.userID == RoomManager.shared.userService.localInfo?.userID {
-//                continue
-//            }
-//                
-//        }
+    func configSeatUserListData() -> Array<giftMemberModel> {
+        var array: Array<giftMemberModel> = []
+        array.append(giftMemberModel())
+        for seat in RoomManager.shared.speakerService.seatList {
+            if seat.status != .occupied {
+                continue
+            }
+            if seat.userID == RoomManager.shared.userService.localInfo?.userID {
+                continue
+            }
+            let model:giftMemberModel = giftMemberModel()
+            model.userID = seat.userID
+            model.headImageName = "touxiang1"
+            model.userName = RoomManager.shared.userService.userList.getObj(seat.userID ?? "")?.userName
+            array.append(model)
+        }
+        return array
+    }
+    
+    func configTargetUserListData() -> Array<String> {
+        let array:Array<String> = seatUserList?.filter({ Value in
+            return Value.isSelected == true && Value.userID?.count ?? 0 > 0
+        }).map({ Value in
+            Value.userID ?? ""
+        }) ?? []
+        return array
     }
     
     required init?(coder: NSCoder) {
@@ -186,8 +209,6 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     func reset() -> Void {
-        seatUserList = nil
-        targetUserList = nil
         messageTableView?.reloadData()
         setMessageLabelNomalTitle()
         sendButton?.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
@@ -200,6 +221,8 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker")
         }
     }
+    
+    
     
     @objc func tapClick() -> Void {
         self.isHidden = true
