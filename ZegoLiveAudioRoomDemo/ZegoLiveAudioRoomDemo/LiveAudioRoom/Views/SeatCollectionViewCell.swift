@@ -50,7 +50,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
             micImageView.isHidden = !seatModel.mic
             let imageName:String = ""
             headImageView.image = UIImage.init(named: imageName)
-            if seatModel.userID == RoomManager.shared.roomService.info?.hostID {
+            if seatModel.userID == RoomManager.shared.roomService.info.hostID {
                 hostLogo.isHidden = false
             }
             break

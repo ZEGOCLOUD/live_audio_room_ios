@@ -54,7 +54,7 @@ class SpeakerSeatService: NSObject {
     /// remove other user to leave his seat
     func removeUserFromSeat(_ index: Int, callback: RoomCallback?) {
         
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         
         let key = String(index)
         let seatModel = SpeakerSeatModel(index: index)
@@ -72,7 +72,7 @@ class SpeakerSeatService: NSObject {
     /// close all unused seat
     func closeAllSeats(_ isClosed: Bool, callback: @escaping RoomCallback) {
        
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         
         var attributes: [String : String] = [:]
         for model in seatList {
@@ -95,7 +95,7 @@ class SpeakerSeatService: NSObject {
     /// close the unused seat
     func closeSeat(_ isClosed: Bool, _ index: Int, callback: RoomCallback?) {
         
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         
         let key = String(index)
         let seatModel = getSeatModel(index)
@@ -123,7 +123,7 @@ class SpeakerSeatService: NSObject {
     /// just turn off/on the local microphone
     func muteMic(_ isMuted: Bool, callback: RoomCallback?) {
         
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         let seatModel = SpeakerSeatModel(index: localSpeakerSeat?.index ?? -1)
         seatModel.mic = !isMuted
         
@@ -154,7 +154,7 @@ class SpeakerSeatService: NSObject {
     
     /// local user take the speaker seat
     func takeSeat(_ index: Int, callback: RoomCallback?) {
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         let key = String(index)
         
         let seatModel = getSeatModel(index)
@@ -184,7 +184,7 @@ class SpeakerSeatService: NSObject {
     /// local user leave speaker seat
     func leaveSeat(callback: RoomCallback?) {
         
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         let seatModel = SpeakerSeatModel(index: localSpeakerSeat?.index ?? -1)
         seatModel.status = .untaken
         
@@ -215,7 +215,7 @@ class SpeakerSeatService: NSObject {
     
     /// local user switch the speaker seat
     func switchSeat(to index: Int, callback: RoomCallback?) {
-        let roomID = RoomManager.shared.roomService.info?.roomID
+        let roomID = RoomManager.shared.roomService.info.roomID
         
         let fromSeat = localSpeakerSeat
         let toSeat = getSeatModel(index)
@@ -277,7 +277,7 @@ extension SpeakerSeatService {
     
     func setRoomAttributes(_ attributes: [String : String], _ roomID: String?, _ config: ZIMRoomAttributesSetConfig, _ callback: RoomCallback?) {
         
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID cann't be nil")
             if callback != nil {
                 callback!(.failure(.failed))
