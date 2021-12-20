@@ -21,8 +21,8 @@
 		8662105B276AE3A3002170C9 /* LiveAudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */; };
 		8662105E276AE5CB002170C9 /* LiveAudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */; };
 		8662105F276AE5CB002170C9 /* LiveAudioMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */; };
-		86621062276AE8FE002170C9 /* LiveAudioMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621061276AE8FE002170C9 /* LiveAudioMessageModel.swift */; };
-		86621064276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621063276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift */; };
+		86621062276AE8FE002170C9 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621061276AE8FE002170C9 /* MessageModel.swift */; };
+		86621064276B11A9002170C9 /* MessageModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621063276B11A9002170C9 /* MessageModelBuilder.swift */; };
 		86621066276B3F1D002170C9 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621065276B3F1D002170C9 /* InputTextView.swift */; };
 		86621068276B3F33002170C9 /* InputTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621067276B3F33002170C9 /* InputTextView.xib */; };
 		8662106A276B599C002170C9 /* MaskPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621069276B599C002170C9 /* MaskPopView.swift */; };
@@ -77,6 +77,9 @@
 		8EF4943C276CA37700B8B461 /* Base64.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49434276CA37700B8B461 /* Base64.cc */; };
 		8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4943E276CA3C600B8B461 /* ZegoToken.mm */; };
 		8EF49442276CA56000B8B461 /* AppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49441276CA56000B8B461 /* AppToken.swift */; };
+		8EF49444277075CB00B8B461 /* AuthorizedCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */; };
+		8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4944527707FA700B8B461 /* ZegoTimer.swift */; };
+		8EF494492770A70900B8B461 /* GiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF494482770A70900B8B461 /* GiftManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,8 +99,8 @@
 		8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageView.swift; sourceTree = "<group>"; };
 		8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageCell.swift; sourceTree = "<group>"; };
 		8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveAudioMessageCell.xib; sourceTree = "<group>"; };
-		86621061276AE8FE002170C9 /* LiveAudioMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageModel.swift; sourceTree = "<group>"; };
-		86621063276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageModelBuilder.swift; sourceTree = "<group>"; };
+		86621061276AE8FE002170C9 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		86621063276B11A9002170C9 /* MessageModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModelBuilder.swift; sourceTree = "<group>"; };
 		86621065276B3F1D002170C9 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		86621067276B3F33002170C9 /* InputTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTextView.xib; sourceTree = "<group>"; };
 		86621069276B599C002170C9 /* MaskPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskPopView.swift; sourceTree = "<group>"; };
@@ -200,6 +203,9 @@
 		8EF4943D276CA3C600B8B461 /* ZegoToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoToken.h; sourceTree = "<group>"; };
 		8EF4943E276CA3C600B8B461 /* ZegoToken.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZegoToken.mm; sourceTree = "<group>"; };
 		8EF49441276CA56000B8B461 /* AppToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToken.swift; sourceTree = "<group>"; };
+		8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedCheck.swift; sourceTree = "<group>"; };
+		8EF4944527707FA700B8B461 /* ZegoTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoTimer.swift; sourceTree = "<group>"; };
+		8EF494482770A70900B8B461 /* GiftManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftManager.swift; sourceTree = "<group>"; };
 		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +255,8 @@
 				8EF49440276CA53000B8B461 /* Token */,
 				8624CCA82769D6BF0048871D /* StringTool.swift */,
 				8EF49441276CA56000B8B461 /* AppToken.swift */,
+				8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */,
+				8EF4944527707FA700B8B461 /* ZegoTimer.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 				86621057276ADF77002170C9 /* LiveAudioRoomViewController.swift */,
 				8676EA4B27707A3A00114B60 /* MemberViewController.swift */,
 				8676EA5127707EBE00114B60 /* Member.storyboard */,
+				8EF494482770A70900B8B461 /* GiftManager.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -312,8 +321,8 @@
 		86621060276AE89C002170C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				86621061276AE8FE002170C9 /* LiveAudioMessageModel.swift */,
-				86621063276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift */,
+				86621061276AE8FE002170C9 /* MessageModel.swift */,
+				86621063276B11A9002170C9 /* MessageModelBuilder.swift */,
 				8662107D276C8AB3002170C9 /* GiftModel.swift */,
 				8676EA47277062E900114B60 /* giftMemberModel.swift */,
 			);
@@ -772,7 +781,7 @@
 				8EDD0271276735BE00A6987F /* RoomService.swift in Sources */,
 				86621079276C6F8C002170C9 /* SeatCollectionViewCell.swift in Sources */,
 				8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */,
-				86621064276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift in Sources */,
+				86621064276B11A9002170C9 /* MessageModelBuilder.swift in Sources */,
 				8662107C276C7A1B002170C9 /* LiveAudioGiftView.swift in Sources */,
 				8624CC90276877100048871D /* AppDefine.swift in Sources */,
 				8676EA4D27707A3A00114B60 /* MemberViewController.swift in Sources */,
@@ -792,19 +801,22 @@
 				8662106E276C37E2002170C9 /* LiveAudioSettingView.swift in Sources */,
 				8EDD02902768723700A6987F /* TextMessage.swift in Sources */,
 				86621071276C4167002170C9 /* SettingTableViewCell.swift in Sources */,
+				8EF494492770A70900B8B461 /* GiftManager.swift in Sources */,
 				8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */,
+				8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */,
 				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
 				8624CCA92769D6BF0048871D /* StringTool.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				86621058276ADF77002170C9 /* LiveAudioRoomViewController.swift in Sources */,
 				8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */,
+				8EF49444277075CB00B8B461 /* AuthorizedCheck.swift in Sources */,
 				8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */,
 				8EDD02982768CFB100A6987F /* ZegoJsonTool.swift in Sources */,
 				8662105B276AE3A3002170C9 /* LiveAudioMessageView.swift in Sources */,
 				8EF49437276CA37700B8B461 /* ZegoServerAssistantImpl.cpp in Sources */,
 				8EDD0277276735EC00A6987F /* MessageService.swift in Sources */,
 				8EF493F0276C772E00B8B461 /* DictionaryArray.swift in Sources */,
-				86621062276AE8FE002170C9 /* LiveAudioMessageModel.swift in Sources */,
+				86621062276AE8FE002170C9 /* MessageModel.swift in Sources */,
 				86621074276C6847002170C9 /* SeatCollectionView.swift in Sources */,
 				8624CC9427687A600048871D /* SettingViewController.swift in Sources */,
 				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,

@@ -12,7 +12,7 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
     
 //    var _tableView:UITableView?
     var messageTableView:UITableView?
-    var dataSource:Array<LiveAudioMessageModel>?
+    var dataSource:Array<MessageModel>?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +21,7 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        LiveAudioMessageModelBuilder.messageViewWidth = self.frame.size.width
+        MessageModelBuilder.messageViewWidth = self.frame.size.width
     }
     
     var constraintLeft:NSLayoutConstraint!
@@ -61,7 +61,7 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
 
     //MARK: -Public
-    func reloadWithData(data:Array<LiveAudioMessageModel>) -> Void {
+    func reloadWithData(data:Array<MessageModel>) -> Void {
         dataSource = data
         messageTableView?.reloadData()
     }
@@ -91,7 +91,7 @@ class LiveAudioMessageView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model:LiveAudioMessageModel = dataSource![indexPath.row]
+        let model:MessageModel = dataSource![indexPath.row]
         return model.messageHeight! + 10*2 + 10
     }
 

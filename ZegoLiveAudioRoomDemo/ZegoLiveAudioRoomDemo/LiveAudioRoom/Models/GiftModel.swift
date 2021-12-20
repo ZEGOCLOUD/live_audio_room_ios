@@ -8,7 +8,7 @@
 import UIKit
 
 class GiftModel: NSObject {
-    var imageName:String?
-    var name:String?
-    var giftID:Int = 0
+    var imageName: String?
+    var name: String?
+    var giftID: String = "0"
 }
