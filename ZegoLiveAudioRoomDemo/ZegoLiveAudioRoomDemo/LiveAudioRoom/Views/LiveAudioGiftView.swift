@@ -8,10 +8,11 @@
 import UIKit
 
 protocol LiveAudioGiftViewDelegate:AnyObject {
-    func sendGift(giftModel:GiftModel);
+    func sendGift(giftModel: GiftModel,targetUserList: Array<giftMemberModel>);
 }
 
-class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
+class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    //MARK: -UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return seatUserList?.count ?? 0
     }
@@ -22,7 +23,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
             cell?.selectionStyle = .none
             cell?.contentView.backgroundColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 248/255.0, alpha: 1.0)
-            var lineView:UIView = UIView.init(frame: CGRect.init(x: 16, y: 41.5, width: messageTableView?.bounds.size.width ?? 0 - 32, height: 0.5))
+            let lineView:UIView = UIView.init(frame: CGRect.init(x: 16, y: 41.5, width: messageTableView?.bounds.size.width ?? 0 - 32, height: 0.5))
             lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
             cell?.contentView.addSubview(lineView)
         }
@@ -31,14 +32,40 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    //MARK: -UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return giftArray?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell:giftCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "giftCollectionViewCell", for: indexPath) as! giftCollectionViewCell
+        cell.model = giftArray?[indexPath.item] ?? GiftModel()
+        return cell
+    }
+    
+    //MARK: -UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: 74, height: 74)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.init(top: 0, left: 18, bottom: 0, right: 18)
+    }
+    
     weak var delegate: LiveAudioGiftViewDelegate?
     
     var titleLabel:UILabel?
     var sendButton:UIButton?
     var giftCollectionView:UICollectionView?
     
-    var giftArray:Array<GiftModel>?
-    var seatUserList:Array<SpeakerSeatModel>?
+    let nomalGiftModel:GiftModel = GiftModel()
+    var giftArray:Array<GiftModel>? {
+        get {
+            nomalGiftModel.imageName = "gift_logo"
+            return [nomalGiftModel]
+        }
+    }
+    var seatUserList:Array<giftMemberModel>?
     var targetUserList:Array<Any>?
     var sendGift:GiftModel?
     var messageLabel:UILabel?
@@ -48,6 +75,21 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         sendGift = giftArray?.first
+        configUI()
+    }
+    
+    func configData() -> Void {
+//        seatUserList = seatUserList()<giftMemberModel>
+//        seatUserList?.append(giftMemberModel())
+//        for seat in RoomManager.shared.speakerService.seatList {
+//            if seat.status != .occupied {
+//                continue
+//            }
+//            if seat.userID == RoomManager.shared.userService.localInfo?.userID {
+//                continue
+//            }
+//                
+//        }
     }
     
     required init?(coder: NSCoder) {
@@ -75,6 +117,15 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
         titleLabel?.textAlignment = .center
         whiteView.addSubview(titleLabel!)
         
+        sendButton = UIButton.init(frame: CGRect.init(x: width - 112, y: 349, width: 94, height: 40))
+        sendButton?.layer.masksToBounds = true
+        sendButton?.layer.cornerRadius = 12.0
+        sendButton?.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
+        sendButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        sendButton?.setTitle(ZGLocalizedString("room_page_send_gift"), for: .normal)
+        sendButton?.addTarget(self, action: #selector(pressSendButton), for: .touchUpInside)
+        whiteView.addSubview(sendButton!)
+        
         let messageView:UIView = UIView.init(frame: CGRect.init(x: 18, y: 349, width: whiteView.bounds.size.width - 18 - 11 - 112, height: 40))
         messageView.layer.masksToBounds = true
         messageView.layer.cornerRadius = 12.0
@@ -88,13 +139,21 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
         messageView.addSubview(arrowButton!)
         
         messageLabel = UILabel.init(frame: CGRect.init(x: 15, y: 11, width: messageView.bounds.size.width - 15 - 12 - 16 - 30, height: 15))
-        messageLabel?.isUserInteractionEnabled = true ?? false
+        messageLabel?.isUserInteractionEnabled = true
         messageLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         messageView.addSubview(messageLabel!)
         
         let messageLabelTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(messageLabelTapClick))
         messageLabel?.addGestureRecognizer(messageLabelTap)
         setMessageLabelNomalTitle()
+        
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        giftCollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: titleLabel?.frame.maxY ?? 0 + 10, width: width, height: 74), collectionViewLayout: layout)
+        giftCollectionView?.backgroundColor = UIColor.white
+        giftCollectionView?.register(UINib.init(nibName: "giftCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "giftCollectionViewCell")
+        giftCollectionView?.delegate = self as UICollectionViewDelegate
+        giftCollectionView?.dataSource = self as UICollectionViewDataSource
+        whiteView.addSubview(giftCollectionView!)
         
         messageTableView = UITableView.init(frame: CGRect.init(x: 18, y: giftCollectionView?.frame.maxY ?? 0 + 9, width: width - 18 - 123, height: 400 - (giftCollectionView?.frame.maxY ?? 0) - 9 - 61), style: .plain)
         messageTableView?.delegate = self as UITableViewDelegate
@@ -115,16 +174,23 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
         self.addSubview(whiteView)
     }
     
-    @objc func tapClick() -> Void {
-        
+    override var isHidden: Bool {
+        didSet {
+            if isHidden == false {
+                reset()
+            } else {
+                messageTableView?.isHidden = true
+                arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)
+            }
+        }
     }
     
-    @objc func arrowClick(_ sender: UIButton) -> Void {
-        
-    }
-    
-    @objc func messageLabelTapClick() -> Void {
-        
+    func reset() -> Void {
+        seatUserList = nil
+        targetUserList = nil
+        messageTableView?.reloadData()
+        setMessageLabelNomalTitle()
+        sendButton?.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
     }
     
     func setMessageLabelNomalTitle() -> Void {
@@ -132,6 +198,38 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource {
             messageLabel?.text = ZGLocalizedString("room_page_select_default")
         } else {
             messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker")
+        }
+    }
+    
+    @objc func tapClick() -> Void {
+        self.isHidden = true
+    }
+    
+    @objc func arrowClick(_ sender: UIButton) -> Void {
+        if RoomManager.shared.userService.localInfo?.role == .host && RoomManager.shared.speakerService.seatList.count == 1 {
+            messageLabel?.text = ZGLocalizedString("room_page_select_default");
+        } else {
+            messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker");
+        }
+    }
+    
+    @objc func messageLabelTapClick() -> Void {
+        if messageTableView?.isHidden == false {
+            messageTableView?.isHidden = true
+            arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)
+        } else {
+            messageTableView?.isHidden = false
+            arrowButton?.transform = CGAffineTransform.init(rotationAngle: Double.pi)
+        }
+    }
+    
+    @objc func pressSendButton() -> Void {
+        if targetUserList?.count ?? 0 > 0 {
+            messageTableView?.isHidden = true
+            arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)
+            if delegate != nil {
+                
+            }
         }
     }
     

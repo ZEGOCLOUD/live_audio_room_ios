@@ -36,6 +36,9 @@
 		8662107A276C6F8C002170C9 /* SeatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */; };
 		8662107C276C7A1B002170C9 /* LiveAudioGiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */; };
 		8662107E276C8AB3002170C9 /* GiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662107D276C8AB3002170C9 /* GiftModel.swift */; };
+		8676EA452770571800114B60 /* giftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA432770571800114B60 /* giftCollectionViewCell.swift */; };
+		8676EA462770571800114B60 /* giftCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA442770571800114B60 /* giftCollectionViewCell.xib */; };
+		8676EA48277062E900114B60 /* giftMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA47277062E900114B60 /* giftMemberModel.swift */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
 		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
@@ -104,6 +107,9 @@
 		86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeatCollectionViewCell.xib; sourceTree = "<group>"; };
 		8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioGiftView.swift; sourceTree = "<group>"; };
 		8662107D276C8AB3002170C9 /* GiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftModel.swift; sourceTree = "<group>"; };
+		8676EA432770571800114B60 /* giftCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftCollectionViewCell.swift; sourceTree = "<group>"; };
+		8676EA442770571800114B60 /* giftCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = giftCollectionViewCell.xib; sourceTree = "<group>"; };
+		8676EA47277062E900114B60 /* giftMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftMemberModel.swift; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -286,6 +292,8 @@
 				86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */,
 				86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */,
 				8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */,
+				8676EA432770571800114B60 /* giftCollectionViewCell.swift */,
+				8676EA442770571800114B60 /* giftCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 				86621061276AE8FE002170C9 /* LiveAudioMessageModel.swift */,
 				86621063276B11A9002170C9 /* LiveAudioMessageModelBuilder.swift */,
 				8662107D276C8AB3002170C9 /* GiftModel.swift */,
+				8676EA47277062E900114B60 /* giftMemberModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -674,6 +683,7 @@
 				86621068276B3F33002170C9 /* InputTextView.xib in Resources */,
 				8EDD028327674FF800A6987F /* AppCenter.json in Resources */,
 				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
+				8676EA462770571800114B60 /* giftCollectionViewCell.xib in Resources */,
 				8624CC9C2768A4000048871D /* Room.strings in Resources */,
 				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
 				86621072276C4167002170C9 /* SettingTableViewCell.xib in Resources */,
@@ -749,6 +759,8 @@
 				8662105E276AE5CB002170C9 /* LiveAudioMessageCell.swift in Sources */,
 				8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */,
 				8EF4943B276CA37700B8B461 /* aes.cpp in Sources */,
+				8676EA48277062E900114B60 /* giftMemberModel.swift in Sources */,
+				8676EA452770571800114B60 /* giftCollectionViewCell.swift in Sources */,
 				8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */,
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
 				8EF49435276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp in Sources */,

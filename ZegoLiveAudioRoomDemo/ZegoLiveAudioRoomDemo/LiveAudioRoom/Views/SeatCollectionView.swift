@@ -11,7 +11,8 @@ protocol SeatCollectionViewDelegate: AnyObject {
     func seatCollectionViewDidSelectedItem(itemIndex:Int);
 }
 
-class SeatCollectionView: UIView,UICollectionViewDelegate,UICollectionViewDataSource {
+class SeatCollectionView: UIView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    //MARK: -UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.count ?? 0
     }
@@ -22,6 +23,26 @@ class SeatCollectionView: UIView,UICollectionViewDelegate,UICollectionViewDataSo
         cell.setSpeakerSeat(seatModel: model, role: role)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if delegate != nil {
+            delegate?.seatCollectionViewDidSelectedItem(itemIndex: indexPath.item)
+        }
+    }
+    
+    //MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return itemSize ?? CGSize.init(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return lineSpace
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return itemSpace
+    }
+    
 
     public var dataSource: Array<SpeakerSeatModel>?
     public var lineSpace: CGFloat = 0.0
@@ -38,6 +59,7 @@ class SeatCollectionView: UIView,UICollectionViewDelegate,UICollectionViewDataSo
     
     public func updateDataSource(data: Array<SpeakerSeatModel>) -> Void {
         dataSource = data
+        collectiomView.reloadData()
     }
     
     public func reloadCollectionView() -> Void {
