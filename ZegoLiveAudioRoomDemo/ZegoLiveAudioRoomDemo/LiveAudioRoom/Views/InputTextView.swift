@@ -22,6 +22,10 @@ class InputTextView: UIView,UITextFieldDelegate {
         super.awakeFromNib()
     }
     
+    public func textViewBecomeFirstResponse() -> Void {
+        inputTextView.becomeFirstResponder()
+    }
+    
     @IBAction func textFieldDidChange(_ sender: UITextField) {
         var textStr : String = sender.text! as String
         let startIndex = textStr.index(textStr.startIndex, offsetBy: 0)

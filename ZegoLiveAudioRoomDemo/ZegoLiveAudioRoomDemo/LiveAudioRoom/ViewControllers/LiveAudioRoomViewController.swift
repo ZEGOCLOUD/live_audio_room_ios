@@ -39,6 +39,8 @@ class LiveAudioRoomViewController: UIViewController {
     }()
     
     var seatCollectionView: SeatCollectionView?
+    var settingsView: LiveAudioSettingView?
+    var giftView: LiveAudioGiftView?
     
     var messageList: [MessageModel] = []
     var isMuteAllMessage: Bool = false
@@ -100,6 +102,37 @@ class LiveAudioRoomViewController: UIViewController {
     func configUI() -> Void {
         roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
         roomIdLabel.text = RoomManager.shared.roomService.info.roomID
+        
+        settingsView = LiveAudioSettingView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        settingsView?.isHidden = true
+        self.view.addSubview(settingsView!)
+        
+        giftView = LiveAudioGiftView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        giftView?.isHidden = true
+        giftView?.delegate = self as! LiveAudioGiftViewDelegate
+        self.view.addSubview(giftView!)
+        
+        seatCollectionView = UINib.init(nibName: "SeatCollectionView", bundle: nil).instantiate(withOwner: self, options: nil).last as! SeatCollectionView
+        seatCollectionView?.itemSpace = 10
+        seatCollectionView?.lineSpace = 5
+        seatCollectionView?.delegate = self as! SeatCollectionViewDelegate
+        seatCollectionView?.setNumOfRows(numOfRows: 4, numOfLines: 2)
+        speakerSeatView.addSubview(seatCollectionView!)
+        
+        updateSpeakerSeatUI()
+        displayBottomButtonByIdentify()
+        
+        self.view.addSubview(inputTextView!)
+        
+        micButton.setImage(UIImage.init(named: "mic_open_icon"), for: .normal)
+        micButton.setImage(UIImage.init(named: "close_mic"), for: .selected)
+        
+        if RoomManager.shared.roomService.info.isTextMessageDisabled && !localUserIsHost() {
+            sendMessageButton .setImage(UIImage.init(named: "message_lock_icon"), for: .normal)
+        } else {
+            sendMessageButton .setImage(UIImage.init(named: "message_icon"), for: .normal)
+        }
+        
     }
     
     func reloadMessageData() -> Void {
