@@ -165,7 +165,7 @@ class CreateRoomViewController: UIViewController {
             case .success:
                 self.joinToChatRoom()
             case .failure(let error):
-                var message = ZGLocalizedString("toast_create_room_fail") + "\(error.code)"
+                var message = String(format: ZGLocalizedString("toast_create_room_fail"), error.code)
                 if case .roomExisted = error {
                     message =  ZGLocalizedString("toast_room_existed")
                 }
