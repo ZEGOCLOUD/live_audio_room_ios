@@ -145,7 +145,6 @@ class CreateRoomViewController: UIViewController {
     }
     
     func createRoomWithRoomID(roomID: String, roomName: String) -> Void {
-        
         var message:String = ""
         if roomID.count == 0 {
             message = ZGLocalizedString("toast_room_id_enter_error")
