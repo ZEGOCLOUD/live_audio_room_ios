@@ -12,11 +12,14 @@ import Foundation
 struct ZegoJsonTool {
     
     /// json to model
-    static func jsonToModel<T>(type: T.Type, json: Any) -> T? where T: Codable {
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: json, options: []) else {
-            return nil
-        }
-        guard let model = try? JSONDecoder.init().decode(type, from: jsonData) else {
+    static func jsonToModel<T>(type: T.Type, json: String) -> T? where T: Codable {
+
+        guard let jsonData = json.data(using: .utf8) else { return nil }
+        
+        var model: T
+        do {
+            try model = JSONDecoder.init().decode(type, from: jsonData)
+        } catch  {
             return nil
         }
         return model

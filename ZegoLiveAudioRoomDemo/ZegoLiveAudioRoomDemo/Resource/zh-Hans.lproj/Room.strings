@@ -16,6 +16,7 @@
 "create_page_create" = "创建";
 "toast_room_id_enter_error" = "请填写房间 ID";
 "toast_room_not_exist_fail" = "该房间不存在，请创建房间";
+"toast_room_existed" = "创建房间失败，房间已存在";
 "toast_room_name_error" = "请填写房间名称";
 "toast_create_room_success" = "房间已被创建，请加入房间";
 "toast_join_room_fail" = "加入房间失败，错误码：%d";

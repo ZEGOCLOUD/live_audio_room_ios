@@ -11,10 +11,13 @@ import Foundation
 class DictionaryArrary<KEY, VALUE> where KEY : Hashable, VALUE : NSObject {
     private var list: [VALUE] = []
     private var dict: [KEY : VALUE] = [ : ]
+    private let queue = DispatchQueue(label: "im.zego.dictionary.arrary.queue", attributes: .concurrent)
     
     var count: Int {
         get {
-            return list.count
+            queue.sync {
+                return list.count
+            }
         }
     }
     
@@ -23,26 +26,32 @@ class DictionaryArrary<KEY, VALUE> where KEY : Hashable, VALUE : NSObject {
     }
     
     func addObj(_ key: KEY, _ value: VALUE) {
-        if let old = dict[key] {
-            list = list.filter() { $0 != old }
+        queue.sync(flags: .barrier) {
+            if let old = dict[key] {
+                list = list.filter() { $0 != old }
+            }
+            dict[key] = value
+            list.append(value)
         }
-        dict[key] = value
-        list.append(value)
     }
-    
+
     func removeObj(_ key: KEY) {
-        let obj = dict[key]
-        guard let obj = obj else {
-            return
+        queue.sync(flags: .barrier) {
+            let obj = dict[key]
+            guard let obj = obj else {
+                return
+            }
+            dict.removeValue(forKey: key)
+            list = list.filter() { $0 != obj }
         }
-        dict.removeValue(forKey: key)
-        list = list.filter() { $0 != obj }
     }
     
     func getObj(_ key: KEY) -> VALUE? {
-        guard let obj = dict[key] else {
-            return nil
+        queue.sync {
+            guard let obj = dict[key] else {
+                return nil
+            }
+            return obj
         }
-        return obj
     }
 }

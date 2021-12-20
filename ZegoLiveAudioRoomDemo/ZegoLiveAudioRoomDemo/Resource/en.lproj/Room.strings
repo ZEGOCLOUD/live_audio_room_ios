@@ -16,6 +16,7 @@
 "create_page_create" = "Create";
 "toast_room_id_enter_error" = "Please enter the room ID.";
 "toast_room_not_exist_fail" = "This room does not exist. Please check the room ID or create a new one.";
+"toast_room_existed" = "Failed to create a room, room existed";
 "toast_room_name_error" = "Please enter the room name.";
 "toast_create_room_success" = "Room created successfully. Join the room now.";
 "toast_join_room_fail" = "Failed to join the room. Error code: %d.";

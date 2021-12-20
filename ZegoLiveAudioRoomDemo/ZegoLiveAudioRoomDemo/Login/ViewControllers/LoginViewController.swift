@@ -108,7 +108,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
                 
         let token: String = AppToken.getZIMToken(withUserID: userInfo.userID) ?? ""
+        HUDHelper.showNetworkLoading()
         RoomManager.shared.userService.login(userInfo, token) { result in
+            HUDHelper.hideNetworkLoading()
             switch result {
             case .success:
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
