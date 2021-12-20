@@ -67,17 +67,17 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     
     func RegisterServiceCallback() -> Void {
         RoomManager.shared.roomService.delegate = self
-        RoomManager.shared.userService.delegate = self
+        RoomManager.shared.userService.addUserServiceDelegate(self)
         RoomManager.shared.speakerService.delegate = self
     }
     
     //MARK: -SpeakerSeatServiceDelegate
-    func speakerSeatUpdate(_ model: SpeakerSeatModel) {
-
+    func speakerSeatUpdate(_ models: [SpeakerSeatModel]) {
+        
     }
     
     //MARK: -UserServiceDelegate
-    func userInfoUpdate(_ info: UserInfo?) {
+    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         
     }
 
@@ -89,12 +89,12 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
     }
     
-    //MARK: -RoomServiceDelegate
-    func receiveRoomInfoUpdate(_ info: RoomInfo?) {
+    func receiveTakeSeatInvitation() {
         
     }
     
-    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
+    //MARK: -RoomServiceDelegate
+    func receiveRoomInfoUpdate(_ info: RoomInfo?) {
         
     }
     
@@ -122,7 +122,7 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         RegisterServiceCallback()
         
         if localUserIsHost() {
-            RoomManager.shared.speakerService.takeSeat(0, callback:nil)
+            //RoomManager.shared.speakerService.takeSeat(0, callback:nil)
         }
         
         configUI()
@@ -176,12 +176,12 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
     }
     
     func localUserIsHost() -> Bool {
-        return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info?.hostID
+        return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
     }
     
     func configUI() -> Void {
-        roomTitleLabel.text = RoomManager.shared.roomService.info?.roomName
-        roomIdLabel.text = RoomManager.shared.roomService.info?.roomID
+        roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
+        roomIdLabel.text = RoomManager.shared.roomService.info.roomID
         
     }
     
@@ -190,14 +190,16 @@ class LiveAudioRoomViewController: UIViewController, RoomServiceDelegate, UserSe
         
     }
     
-    
     @IBAction func settingButtonClick(_ sender: UIButton) {
+        
     }
     
     @IBAction func memberButtonClick(_ sender: UIButton) {
+        
     }
     
     @IBAction func micButtonClick(_ sender: UIButton) {
+        
     }
     
     

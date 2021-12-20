@@ -13,8 +13,6 @@ class RoomManager: NSObject {
     static let shared = RoomManager()
     
     // MARK: - Private
-    private var appSign: String?
-    private var appID: UInt32 = 0
     private let rtcEventDelegates: NSHashTable<ZegoEventHandler> = NSHashTable(options: .weakMemory)
     private let zimEventDelegates: NSHashTable<ZIMEventHandler> = NSHashTable(options: .weakMemory)
     
@@ -35,31 +33,35 @@ class RoomManager: NSObject {
     var messageService: MessageService
     var giftService: GiftService
     
-    func initWithAppID(appID: UInt32, appSign: String, callback: RoomCallback) {
+    func initWithAppID(appID: UInt32, appSign: String, callback: RoomCallback?) {
         if appSign.count == 0 {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
         
-        self.appSign = appSign
-        self.appID = appID
-        
         ZIMManager.shared.createZIM(appID: appID)
+        ZegoExpressEngine.createEngine(withAppID: appID, appSign: appSign, isTestEnv: false, scenario: .general, eventHandler: self)
+        
+        var result: ZegoResult = .success(())
         if ZIMManager.shared.zim == nil {
-            callback(.failure(.other(1)))
+            result = .failure(.other(1))
         } else {
-            callback(.success(()))
             ZIMManager.shared.zim?.setEventHandler(self)
         }
+        guard let callback = callback else { return }
+        callback(result)
     }
     
     func uninit() {
+        logoutRtcRoom(true)
         ZIMManager.shared.destoryZIM()
-        resetRoomData(true)
+        ZegoExpressEngine.destroy(nil)
     }
     
-    func uploadLog(callback: @escaping RoomCallback) {
+    func uploadLog(callback: RoomCallback?) {
         ZIMManager.shared.zim?.uploadLog({ errorCode in
+            guard let callback = callback else { return }
             if errorCode.code == .ZIMErrorCodeSuccess {
                 callback(.success(()))
             } else {
@@ -70,16 +72,13 @@ class RoomManager: NSObject {
 }
 
 extension RoomManager {
-    // MARK: - Private
-    func setupRTCModule(with rtcToken: String) {
-        ZegoExpressEngine.createEngine(withAppID: self.appID, appSign: self.appSign!, isTestEnv: false, scenario: .general, eventHandler: self)
-        
+    func loginRtcRoom(with rtcToken: String) {
         guard let userID = RoomManager.shared.userService.localInfo?.userID else {
             assert(false, "user id can't be nil.")
             return
         }
         
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room id can't be nil.")
             return
         }
@@ -90,15 +89,14 @@ extension RoomManager {
         let config = ZegoRoomConfig()
         config.token = rtcToken
         config.maxMemberCount = 0
-        ZegoExpressEngine.shared() .loginRoom(roomID, user: user, config: config)
+        ZegoExpressEngine.shared().loginRoom(roomID, user: user, config: config)
         
         // monitor sound level
         ZegoExpressEngine.shared().startSoundLevelMonitor(1000)
     }
         
-    func resetRoomData(_ containsUserService: Bool = false) {
+    func logoutRtcRoom(_ containsUserService: Bool = false) {
         ZegoExpressEngine.shared().logoutRoom()
-        ZegoExpressEngine.destroy(nil)
         
         if containsUserService {
             userService = UserService()
@@ -205,10 +203,4 @@ extension RoomManager: ZIMEventHandler {
             delegate.zim?(zim, roomAttributesUpdated: updateInfo, roomID: roomID)
         }
     }
-    
-//    func zim(_ zim: ZIM, roomAttributesBatchUpdated updateInfo: [ZIMRoomAttributesUpdateInfo], roomID: String) {
-//        for delegate in zimEventDelegates.allObjects {
-//            delegate.zim?(zim, roomAttributesBatchUpdated: updateInfo, roomID: roomID)
-//        }
-//    }
 }

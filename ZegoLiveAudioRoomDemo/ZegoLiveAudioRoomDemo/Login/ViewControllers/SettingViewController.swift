@@ -16,7 +16,9 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var dataList : [[SettingCellModel]] {
         get {
-            return [[configModel(type: .express),configModel(type: .zim)],[configModel(type: .shareLog)],[configModel(type: .logOut)]];
+            return [[configModel(type: .express), configModel(type: .zim)],
+                    [configModel(type: .shareLog)],
+                    [configModel(type: .logOut)]];
         }
     }
 
@@ -24,7 +26,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         setupNavBar()
-        settingTableView .register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        settingTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         settingTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell1")
     }
     
@@ -130,7 +132,6 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         if (model.type == .logOut) {
             // logout
             RoomManager.shared.userService.logout()
-            RoomManager.shared.uninit()
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
             getKeyWindow().rootViewController = vc
 
@@ -144,7 +145,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_success"))
                     break
                 case .failure(let error):
-                    HUDHelper.showMessage(message: ZGLocalizedString("toast_upload_log_fail") + "\(error.code)")
+                    HUDHelper.showMessage(message: String(format: ZGLocalizedString("toast_upload_log_fail"), error.code))
                     break
                 }
             };

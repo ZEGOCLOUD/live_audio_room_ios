@@ -10,7 +10,6 @@ import ZIM
 
 protocol RoomServiceDelegate: AnyObject {
     func receiveRoomInfoUpdate(_ info: RoomInfo?)
-    func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent)
 }
 
 class RoomService: NSObject {
@@ -18,105 +17,107 @@ class RoomService: NSObject {
     // MARK: - Private
     override init() {
         super.init()
-        RoomManager.shared.addZIMEventHandler(self)
+        
+        // RoomManager didn't finish init at this time.
+        DispatchQueue.main.async {
+            RoomManager.shared.addZIMEventHandler(self)
+        }
     }
     
     // MARK: - Public
     
-    var info: RoomInfo?
+    var info: RoomInfo = RoomInfo()
     weak var delegate: RoomServiceDelegate?
     
     /// Create a chat room
     /// You need to enter a generated `rtc token`
-    func createRoom(_ roomID: String, _ roomName: String, _ token: String, callback: @escaping RoomCallback) {
+    func createRoom(_ roomID: String, _ roomName: String, _ token: String, callback: RoomCallback?) {
         guard roomID.count != 0 else {
+            guard let callback = callback else { return }
             callback(.failure(.paramInvalid))
             return
         }
         
         let parameters = getCreateRoomParameters(roomID, roomName)
         ZIMManager.shared.zim?.createRoom(parameters.0, config: parameters.1, callback: { fullRoomInfo, error in
+            
+            var result: ZegoResult = .success(())
             if error.code == .ZIMErrorCodeSuccess {
-                
                 RoomManager.shared.roomService.info = parameters.2
                 RoomManager.shared.userService.localInfo?.role = .host
                 RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes, .set)
-                RoomManager.shared.setupRTCModule(with: token)
-                
-                callback(.success(()))
+                RoomManager.shared.loginRtcRoom(with: token)
             }
-            
             else {
                 if error.code == .ZIMErrorCodeCreateExistRoom {
-                    callback(.failure(.roomExisted))
+                    result = .failure(.roomExisted)
                 } else {
-                    callback(.failure(.other(Int32(error.code.rawValue))))
+                    result = .failure(.other(Int32(error.code.rawValue)))
                 }
             }
+            
+            guard let callback = callback else { return }
+            callback(result)
         })
         
     }
     
     /// Join a chat room
     /// You need to enter a generated `rtc token`
-    func joinRoom(_ roomID: String, _ roomName: String, _ token: String, callback: @escaping RoomCallback) {
+    func joinRoom(_ roomID: String, _ token: String, callback: RoomCallback?) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
             if error.code != .ZIMErrorCodeSuccess {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                guard let callback = callback else { return }
+                if error.code == .ZIMErrorCodeRoomNotExist {
+                    callback(.failure(.roomNotFound))
+                } else {
+                    callback(.failure(.other(Int32(error.code.rawValue))))
+                }
                 return
             }
             
-            RoomManager.shared.roomService.info?.roomID = roomID
-            RoomManager.shared.roomService.info?.roomName = roomName
-            RoomManager.shared.setupRTCModule(with: token)
+            RoomManager.shared.roomService.info.roomID = fullRoomInfo.baseInfo.roomID
+            RoomManager.shared.roomService.info.roomName = fullRoomInfo.baseInfo.roomName
+            RoomManager.shared.loginRtcRoom(with: token)
+            
+            guard let callback = callback else { return }
             callback(.success(()))
         })
     }
     
     /// Leave the chat room
-    func leaveRoom(callback: @escaping RoomCallback) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
+    func leaveRoom(callback: RoomCallback?) {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID can't be nil")
+            guard let callback = callback else { return }
             callback(.failure(.failed))
             return
         }
         
         ZIMManager.shared.zim?.leaveRoom(roomID, callback: { error in
+            var result: ZegoResult = .success(())
             if error.code == .ZIMErrorCodeSuccess {
-                RoomManager.shared.resetRoomData()
-                callback(.success(()))
+                RoomManager.shared.logoutRtcRoom()
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
-    
-    /// Query the number of chat rooms available online
-    func queryOnlineRoomUsers(callback: @escaping OnlineRoomUsersCallback) {
-        guard let roomID = RoomManager.shared.roomService.info?.roomID else {
-            assert(false, "room ID can't be nil")
-            callback(.failure(.failed))
-            return
-        }
         
-        ZIMManager.shared.zim?.queryRoomOnlineMemberCount(roomID, callback: { count, error in
-            if error.code == .ZIMErrorCodeSuccess {
-                callback(.success(count))
-            } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
-            }
-        })
-    }
-    
     /// Disable text chat for all users
-    func disableTextMessage(_ isDisabled: Bool, callback: @escaping RoomCallback) {
+    func disableTextMessage(_ isDisabled: Bool, callback: RoomCallback?) {
         let parameters = getDisableTextMessageParameters(isDisabled)
         ZIMManager.shared.zim?.setRoomAttributes(parameters.0, roomID: parameters.1, config: parameters.2, callback: { error in
+            var result: ZegoResult
             if error.code == .ZIMErrorCodeSuccess {
-                callback(.success(()))
+                result = .success(())
             } else {
-                callback(.failure(.other(Int32(error.code.rawValue))))
+                result = .failure(.other(Int32(error.code.rawValue)))
             }
+            guard let callback = callback else { return }
+            callback(result)
         })
     }
 }
@@ -137,7 +138,7 @@ extension RoomService {
         roomInfo.seatNum = 8
         
         let config = ZIMRoomAdvancedConfig()
-        let roomInfoJson = ZegoModelTool.modelToJson(toString: roomInfo) ?? ""
+        let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
         config.roomAttributes = ["room_info" : roomInfoJson]
         
@@ -146,10 +147,10 @@ extension RoomService {
     
     private func getDisableTextMessageParameters(_ isDisabled: Bool) -> ([String:String], String, ZIMRoomAttributesSetConfig) {
         
-        let roomInfo = self.info?.copy() as? RoomInfo
+        let roomInfo = self.info.copy() as? RoomInfo
         roomInfo?.isTextMessageDisabled = isDisabled
         
-        let roomInfoJson = ZegoModelTool.modelToJson(toString: roomInfo) ?? ""
+        let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
         let attributes = ["room_info" : roomInfoJson]
         
@@ -165,5 +166,17 @@ extension RoomService {
 
 extension RoomService: ZIMEventHandler {
     
-    
+    func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
+        if updateInfo.roomAttributes.keys.contains("room_info") {
+            let roomJson = updateInfo.roomAttributes["room_info"] ?? ""
+            let roomInfo = ZegoJsonTool.jsonToModel(type: RoomInfo.self, json: roomJson)
+            
+            // if the room info is nil, we should not set self.info = nil
+            // because it can't get room info outside.
+            if let roomInfo = roomInfo {
+                self.info = roomInfo
+            }
+            delegate?.receiveRoomInfoUpdate(roomInfo)
+        }
+    }
 }

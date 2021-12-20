@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var userIDBackgroundView: UIView!
     @IBOutlet weak var userNameBackgroundView: UIView!
@@ -26,6 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let userId:String = "Apple\(a)"
         userIDTextField.text = userId
         myUserID = userId;
+        myUserName = userId
         configUI()
     }
     
@@ -105,15 +106,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             HUDHelper.showMessage(message:errMsg)
             return
         }
-        
-        let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
-        getKeyWindow().rootViewController = navVC
-        
-        let token : String = ""
-        RoomManager.shared.initWithAppID(appID: AppCenter.appID(), appSign: AppCenter.appSign()) { result in
-            
-        };
+                
+        let token: String = AppToken.getZIMToken(withUserID: userInfo.userID) ?? ""
+        HUDHelper.showNetworkLoading()
         RoomManager.shared.userService.login(userInfo, token) { result in
+            HUDHelper.hideNetworkLoading()
             switch result {
             case .success:
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
@@ -125,7 +122,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
-    
+}
+
+extension LoginViewController : UITextFieldDelegate {
     //MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         var backView = userIDBackgroundView

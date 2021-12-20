@@ -9,7 +9,7 @@ import Foundation
 
 struct AppCenter {
     
-    private static var json : [String:Any]?
+    private static var dict : [String:Any]?
         
     static func appID() -> UInt32 {
         if let dict = getJsonDictionary() {
@@ -37,24 +37,18 @@ struct AppCenter {
     
     // MARK: - Private
     private static func getJsonDictionary() -> [String:Any]? {
-        if json != nil {
-            return json
+        if dict != nil {
+            return dict
         }
         let jsonPath = Bundle.main.path(forResource: "AppCenter", ofType: "json")
-        if jsonPath == nil {
+        guard let jsonPath = jsonPath else {
             assert(false)
             return nil
         }
-        let jsonStr = try? String(contentsOfFile: jsonPath!)
+        let jsonStr = try? String(contentsOfFile: jsonPath)
         
-        if let data = jsonStr!.data(using: .utf8) {
-            do {
-                json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
-                return json
-            } catch {
-                
-            }
-        }
-        return nil
+        dict = ZegoJsonTool.jsonToDictionary(jsonStr)
+        
+        return dict
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 import ZIM
 
 
-class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomServiceDelegate {
+class CreateRoomViewController: UIViewController {
     
     @IBOutlet weak var roomIDBackgroundView: UIView!
     @IBOutlet weak var roomIDTextField: UITextField!
@@ -18,17 +18,19 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var settingButton: UIBarButtonItem!
     
-    var rtcToken : String = ""
     var myRoomID : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // register userservice delegate
+        RoomManager.shared.userService.addUserServiceDelegate(self)
+        
         configUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        RoomManager.shared.roomService.delegate = self
+        
     }
     
     func configUI() -> Void {
@@ -59,8 +61,36 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
         getKeyWindow().endEditing(true)
     }
     
+    // MARK: - Action
     @IBAction func chatRoomIDTextFieldChanged(_ sender: UITextField) {
         myRoomID = sender.text!
+    }
+    
+    @objc func joinRoomIdTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 20 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 20)
+            textField.text = String(text[startIndex...index])
+        }
+    }
+    
+    @objc func createRoomIdTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 20 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 20)
+            textField.text = String(text[startIndex...index])
+        }
+    }
+    
+    @objc func createRoomNameTextFieldDidChange(textField:UITextField) -> Void {
+        let text:String = textField.text! as String
+        if text.count > 32 {
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let index = text.index(text.startIndex, offsetBy: 32)
+            textField.text = String(text[startIndex...index])
+        }
     }
     
     @IBAction func createButtonClicked(_ sender: UIButton) {
@@ -89,9 +119,33 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
         self.present(alter, animated: true, completion: nil)
     }
     
-    func createRoomWithRoomID(roomID:String,roomName:String) -> Void {
-        joinToChatRoom()
-        return
+    @IBAction func joinRoomButtonClick(_ sender: UIButton) {
+        
+        if myRoomID.count == 0 {
+            HUDHelper.showMessage(message: ZGLocalizedString("toast_room_id_enter_error"))
+            return
+        }
+        
+        let rtcToken = AppToken.getRtcToken(withRoomID: myRoomID) ?? ""
+        
+        HUDHelper.showNetworkLoading()
+        RoomManager.shared.roomService.joinRoom(myRoomID, rtcToken) { result in
+            HUDHelper.hideNetworkLoading()
+            switch result {
+            case .success:
+                self.joinToChatRoom()
+            case .failure(let error):
+                var message = String(format: ZGLocalizedString("toast_join_room_fail"), error.code)
+                if case .roomNotFound = error {
+                    message = ZGLocalizedString("toast_room_not_exist_fail")
+                }
+                HUDHelper.showMessage(message: message)
+            }
+        }
+    }
+    
+    func createRoomWithRoomID(roomID: String, roomName: String) -> Void {
+        
         var message:String = ""
         if roomID.count == 0 {
             message = ZGLocalizedString("toast_room_id_enter_error")
@@ -103,58 +157,25 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
             return
         }
         
-        //TODO: - need add logic
-        rtcToken = ""
+        let rtcToken: String = AppToken.getRtcToken(withRoomID: roomID) ?? ""
         
         HUDHelper.showNetworkLoading()
-        RoomManager.shared.roomService .createRoom(roomID, roomName, rtcToken) { result in
+        RoomManager.shared.roomService.createRoom(roomID, roomName, rtcToken) { result in
+            HUDHelper.hideNetworkLoading()
             switch result {
             case .success:
                 self.joinToChatRoom()
             case .failure(let error):
-                HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_fail") + "\(error.code)")
-//                switch error {
-//                case .other
-//                }
-//                if code == 1001 {
-//                    HUDHelper.showMessage(message: ZGLocalizedString("toast_create_room_success"))
-//                } else {
-//
-//                }
-//                break
+                var message = ZGLocalizedString("toast_create_room_fail") + "\(error.code)"
+                if case .roomExisted = error {
+                    message =  ZGLocalizedString("toast_room_existed")
+                }
+                HUDHelper.showMessage(message: message)
             }
         }
         
     }
-    
-    //MARK: - action
-    @objc func joinRoomIdTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 20 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
-    @objc func createRoomIdTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 20 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
-    @objc func createRoomNameTextFieldDidChange(textField:UITextField) -> Void {
-        let text:String = textField.text! as String
-        if text.count > 32 {
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 32)
-            textField.text = String(text[startIndex...index])
-        }
-    }
-    
+        
     //MARK: - Jump
     func joinToChatRoom() -> Void {
         let vc = UIStoryboard(name: "LiveAudioRoom", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomViewController")
@@ -163,11 +184,12 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     
     func logout() -> Void {
         RoomManager.shared.userService.logout()
-        RoomManager.shared.uninit()
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
         getKeyWindow().rootViewController = vc
     }
-    
+}
+
+extension CreateRoomViewController : UITextFieldDelegate {
     //MARK: - UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         roomIDBackgroundView.layer.borderColor = UIColor.init(red: 0 / 255.0, green: 85 / 255.0, blue: 255 / 255.0, alpha: 1.0).cgColor
@@ -176,12 +198,10 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
     func textFieldDidEndEditing(_ textField: UITextField) {
         roomIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
     }
-    
-    //MARK: -RoomServiceDelegate
-    func receiveRoomInfoUpdate(_ info: RoomInfo?) {
-        
-    }
-    
+}
+
+extension CreateRoomViewController : UserServiceDelegate {
+    //MARK: - UserServiceDelegate
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
         if (state == .disconnected) {
             let message:String = event == .kickedOut ? ZGLocalizedString("toast_kickout_error") : ZGLocalizedString("toast_disconnect_tips")
@@ -189,5 +209,4 @@ class CreateRoomViewController: UIViewController,UITextFieldDelegate,RoomService
             logout()
         }
     }
-    
 }
