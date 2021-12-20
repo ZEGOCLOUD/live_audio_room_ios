@@ -23,6 +23,8 @@ class LiveAudioRoomViewController: UIViewController {
     @IBOutlet weak var roomTitleLabel: UILabel!
     @IBOutlet weak var roomIdLabel: UILabel!
     
+    @IBOutlet weak var giftTipView: GiftTipView!
+    
     @IBOutlet weak var messageView: LiveAudioMessageView!
     
     @IBOutlet weak var settingButtonWidth: NSLayoutConstraint!
@@ -31,22 +33,49 @@ class LiveAudioRoomViewController: UIViewController {
     @IBOutlet weak var memberButtonTrail: NSLayoutConstraint!
     @IBOutlet weak var messageHeightConstraint: NSLayoutConstraint!
     
-    lazy var inputTextView: InputTextView? = {
+    lazy var inputTextView: InputTextView = {
         let textView: InputTextView = UINib(nibName: "InputTextView", bundle: nil).instantiate(withOwner: self, options: nil).last as! InputTextView
         textView.frame = CGRect(x: 0, y: self.view.bounds.size.height, width: self.view.bounds.size.width, height: 55)
         textView.delegate = self
         return textView
     }()
     
-    var seatCollectionView: SeatCollectionView?
-    var settingsView: LiveAudioSettingView?
-    var giftView: LiveAudioGiftView?
+    lazy var seatCollectionView: SeatCollectionView = {
+        let seatCollectionView = UINib(nibName: "SeatCollectionView", bundle: nil).instantiate(withOwner: self, options: nil).last as! SeatCollectionView
+        
+        seatCollectionView.itemSpace = 10
+        seatCollectionView.lineSpace = 5
+        seatCollectionView.delegate = self
+        seatCollectionView.setNumOfRows(numOfRows: 4, numOfLines: 2)
+        return seatCollectionView
+    }()
+    
+    lazy var settingsView: LiveAudioSettingView = {
+       let settingsView = LiveAudioSettingView(frame: CGRect(x: 0,
+                                                             y: 0,
+                                                             width:
+                                                                self.view.bounds.size.width,
+                                                             height: self.view.bounds.size.height))
+        settingsView.isHidden = true
+        return settingsView
+    }()
+    lazy var giftView: LiveAudioGiftView = {
+        let giftView = LiveAudioGiftView(frame: CGRect(x: 0,
+                                                       y: 0,
+                                                       width:
+                                                        self.view.frame.size.width,
+                                                       height: self.view.frame.size.height))
+        giftView.isHidden = true
+        giftView.delegate = self
+        return giftView
+    }()
     
     var messageList: [MessageModel] = []
     var isMuteAllMessage: Bool = false
-    var localUserID: String? {
+    var localUserID: String {
         get {
-            RoomManager.shared.userService.localInfo?.userID
+            assert(RoomManager.shared.userService.localInfo?.userID != nil, "user ID shouldn't be nil.")
+            return RoomManager.shared.userService.localInfo?.userID ?? ""
         }
     }
     var currentUserInfo: UserInfo?
@@ -103,26 +132,14 @@ class LiveAudioRoomViewController: UIViewController {
         roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
         roomIdLabel.text = RoomManager.shared.roomService.info.roomID
         
-        settingsView = LiveAudioSettingView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-        settingsView?.isHidden = true
-        self.view.addSubview(settingsView!)
-        
-        giftView = LiveAudioGiftView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        giftView?.isHidden = true
-        giftView?.delegate = self as! LiveAudioGiftViewDelegate
-        self.view.addSubview(giftView!)
-        
-        seatCollectionView = UINib.init(nibName: "SeatCollectionView", bundle: nil).instantiate(withOwner: self, options: nil).last as! SeatCollectionView
-        seatCollectionView?.itemSpace = 10
-        seatCollectionView?.lineSpace = 5
-        seatCollectionView?.delegate = self as! SeatCollectionViewDelegate
-        seatCollectionView?.setNumOfRows(numOfRows: 4, numOfLines: 2)
-        speakerSeatView.addSubview(seatCollectionView!)
+        self.view.addSubview(settingsView)
+        self.view.addSubview(giftView)
+        speakerSeatView.addSubview(seatCollectionView)
         
         updateSpeakerSeatUI()
         displayBottomButtonByIdentify()
         
-        self.view.addSubview(inputTextView!)
+        self.view.addSubview(inputTextView)
         
         micButton.setImage(UIImage.init(named: "mic_open_icon"), for: .normal)
         micButton.setImage(UIImage.init(named: "close_mic"), for: .selected)
@@ -151,9 +168,9 @@ class LiveAudioRoomViewController: UIViewController {
     
     func updateSpeakerSeatUI() {
         if let role = currentUserInfo?.role {
-            seatCollectionView?.role = role
+            seatCollectionView.role = role
         }
-        seatCollectionView?.updateDataSource(data: RoomManager.shared.speakerService.seatList)
+        seatCollectionView.updateDataSource(data: RoomManager.shared.speakerService.seatList)
         displayBottomButtonByIdentify()
     }
     
@@ -252,7 +269,7 @@ extension LiveAudioRoomViewController {
         if model.mic == micButton.isSelected {
             model.mic = !micButton.isSelected
         }
-        seatCollectionView?.reloadCollectionView()
+        seatCollectionView.reloadCollectionView()
     }
     
     func logout() -> Void {
@@ -275,6 +292,34 @@ extension LiveAudioRoomViewController {
 extension LiveAudioRoomViewController : InputTextViewDelegate {
     //MARK: -InputTextViewDelegate
     func inputTextViewDidClickSend(_ message: String?) {
+        if RoomManager.shared.roomService.info.isTextMessageDisabled && !localUserIsHost() {
+            HUDHelper.showMessage(message: ZGLocalizedString("room_page_bands_send_message"))
+            return
+        }
+        guard let message = message else  { return }
+        if message.count == 0 { return }
+        RoomManager.shared.messageService.sendTextMessage(message) { result in
+            switch result {
+            case .success(()):
+                let model = MessageModelBuilder.buildModel(userID: self.localUserID, message: message)
+                self.messageList.append(model)
+                self.reloadMessageData()
+            case .failure(let error):
+                let message = String(format: ZGLocalizedString("toast_send_message_error"), error.code)
+                HUDHelper.showMessage(message: message)
+            }
+        }
+    }
+}
+
+extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
+    func sendGift(giftModel: GiftModel, targetUserList: Array<GiftMemberModel>) {
+        
+    }
+}
+
+extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
+    func seatCollectionViewDidSelectedItem(itemIndex: Int) {
         
     }
 }
@@ -366,6 +411,7 @@ extension LiveAudioRoomViewController : SpeakerSeatServiceDelegate {
         updateCurrentUserMicStatus()
         updateSpeakerSeatUI()
         //TODO: need reload memebr list
+        
     }
 }
 
@@ -381,5 +427,6 @@ extension LiveAudioRoomViewController : GiftServiceDelegate {
     func receiveGift(_ giftID: String, from userID: String, to userList: [String]) {
         let model = GiftManager.shared.getGiftModel(giftID)
         //TODO: need update gift tips view
+        
     }
 }

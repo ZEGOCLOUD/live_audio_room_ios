@@ -49,8 +49,8 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         
         
         settingTableView = UITableView.init(frame: CGRect.init(x: 0, y: headerView.frame.maxY + 10, width: whiteView.bounds.size.width, height: whiteView.bounds.size.height - 50), style: .plain)
-        settingTableView?.delegate = self as? UITableViewDelegate
-        settingTableView?.dataSource = self as? UITableViewDataSource
+        settingTableView?.delegate = self
+        settingTableView?.dataSource = self
         settingTableView?.separatorStyle = .none
         settingTableView?.register(UINib.init(nibName: "SettingTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingTableViewCell")
         
@@ -59,8 +59,8 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         
         whiteView.addSubview(headerView)
         whiteView.addSubview(settingTableView ?? UITableView())
-        whiteView.addSubview(maskView)
-        whiteView.addSubview(whiteView)
+        self.addSubview(maskView)
+        self.addSubview(whiteView)
     }
     
     //MARK: -UITableViewDelegate

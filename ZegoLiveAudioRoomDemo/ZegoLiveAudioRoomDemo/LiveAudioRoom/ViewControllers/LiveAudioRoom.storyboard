@@ -148,7 +148,7 @@
                                     <constraint firstAttribute="height" constant="394" id="K3G-dV-KT8"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-MI-ZPS" userLabel="Gift View" customClass="ZegoGiftTipView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-MI-ZPS" userLabel="Gift View" customClass="GiftTipView" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target">
                                 <rect key="frame" x="16" y="318" width="309" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-sf-Cql" userLabel="Gift Label">
@@ -197,6 +197,7 @@
                         <outlet property="bottomBar" destination="loD-fs-3Kv" id="iOu-52-4eD"/>
                         <outlet property="giftButton" destination="d3L-Yb-ckT" id="imE-jP-n8d"/>
                         <outlet property="giftButtonTrail" destination="ivI-Ej-7JV" id="pSJ-Pl-kS0"/>
+                        <outlet property="giftTipView" destination="f3h-MI-ZPS" id="YDX-1D-YO1"/>
                         <outlet property="memberButton" destination="wUO-qY-4sr" id="HRt-uu-mZd"/>
                         <outlet property="memberButtonTrail" destination="RyG-H6-bKP" id="bbl-5i-n2k"/>
                         <outlet property="memberButtonWidth" destination="JIT-36-LdN" id="Omx-Cw-tRM"/>
