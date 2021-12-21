@@ -66,6 +66,7 @@
 		8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02912768727D00A6987F /* CustomCommand.swift */; };
 		8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02942768AF6900A6987F /* Result+Zego.swift */; };
 		8EDD02982768CFB100A6987F /* ZegoJsonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02972768CFB100A6987F /* ZegoJsonTool.swift */; };
+		8EE13E882772022E0038AFCF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EE13E8A2772022E0038AFCF /* InfoPlist.strings */; };
 		8EF493F0276C772E00B8B461 /* DictionaryArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493EF276C772E00B8B461 /* DictionaryArray.swift */; };
 		8EF49435276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493F4276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp */; };
 		8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493F6276CA37700B8B461 /* ZegoRTCServerAssistant.cpp */; };
@@ -147,6 +148,8 @@
 		8EDD02912768727D00A6987F /* CustomCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommand.swift; sourceTree = "<group>"; };
 		8EDD02942768AF6900A6987F /* Result+Zego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Zego.swift"; sourceTree = "<group>"; };
 		8EDD02972768CFB100A6987F /* ZegoJsonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoJsonTool.swift; sourceTree = "<group>"; };
+		8EE13E892772022E0038AFCF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8EE13E8B2772022F0038AFCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		8EF493EF276C772E00B8B461 /* DictionaryArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryArray.swift; sourceTree = "<group>"; };
 		8EF493F4276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoRTCServerAssistantImpl.cpp; sourceTree = "<group>"; };
 		8EF493F5276CA37700B8B461 /* ZegoRTCServerAssistantImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoRTCServerAssistantImpl.h; sourceTree = "<group>"; };
@@ -378,6 +381,7 @@
 				8EAB49E02766FC7900A32320 /* Assets.xcassets */,
 				8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */,
 				8EAB49E52766FC7900A32320 /* Info.plist */,
+				8EE13E8A2772022E0038AFCF /* InfoPlist.strings */,
 			);
 			path = ZegoLiveAudioRoomDemo;
 			sourceTree = "<group>";
@@ -716,6 +720,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8676EA5227707EBE00114B60 /* Member.storyboard in Resources */,
+				8EE13E882772022E0038AFCF /* InfoPlist.strings in Resources */,
 				86621055276ADF11002170C9 /* LiveAudioRoom.storyboard in Resources */,
 				86621076276C685E002170C9 /* SeatCollectionView.xib in Resources */,
 				8662105F276AE5CB002170C9 /* LiveAudioMessageCell.xib in Resources */,
@@ -869,6 +874,15 @@
 				8EAB49E32766FC7900A32320 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8EE13E8A2772022E0038AFCF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EE13E892772022E0038AFCF /* en */,
+				8EE13E8B2772022F0038AFCF /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

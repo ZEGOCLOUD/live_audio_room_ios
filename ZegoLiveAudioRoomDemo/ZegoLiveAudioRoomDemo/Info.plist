@@ -25,5 +25,7 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need to use your mic to help you join the voice interaction.</string>
 </dict>
 </plist>

@@ -25,6 +25,7 @@ class SpeakerSeatService: NSObject {
         // RoomManager didn't finish init at this time.
         DispatchQueue.main.async {
             RoomManager.shared.addZIMEventHandler(self)
+            RoomManager.shared.addExpressEventHandler(self)
         }
     }
     
@@ -182,7 +183,15 @@ class SpeakerSeatService: NSObject {
         config.isDeleteAfterOwnerLeft = true
         config.isUpdateOwner = false
         
-        setRoomAttributes(attributes, roomID, config, callback)
+        setRoomAttributes(attributes, roomID, config) { result in
+            if result.isSuccess {
+                ZegoExpressEngine.shared().muteMicrophone(false)
+                let userID = RoomManager.shared.userService.localInfo?.userID
+                ZegoExpressEngine.shared().startPublishingStream(self.getPublishStreamID(userID))
+            }
+            guard let callback = callback else { return }
+            callback(result)
+        }
     }
     
     /// local user leave speaker seat
@@ -347,6 +356,19 @@ extension SpeakerSeatService {
             }
         }
     }
+    
+    func getPublishStreamID(_ userID: String?) -> String {
+        guard let roomID = RoomManager.shared.roomService.info.roomID else {
+            assert(false, "room ID can't be nil")
+            return ""
+        }
+        guard let userID = userID else {
+            assert(false, "local user ID can't be nil")
+            return ""
+        }
+        let streamID = roomID + "_" + userID + "_main"
+        return streamID
+    }
 }
 
 extension SpeakerSeatService : ZIMEventHandler {
@@ -362,5 +384,23 @@ extension SpeakerSeatService : ZIMEventHandler {
                 return
             }
         }
+    }
+}
+
+extension SpeakerSeatService : ZegoEventHandler {
+    func onCapturedSoundLevelUpdate(_ soundLevel: NSNumber) {
+        localSpeakerSeat?.soundLevel = soundLevel.uintValue
+        delegate?.speakerSeatUpdate(seatList)
+    }
+    
+    func onRemoteSoundLevelUpdate(_ soundLevels: [String : NSNumber]) {
+        for seat in seatList {
+            guard let userID = seat.userID else { continue }
+            let streamID = getPublishStreamID(userID)
+            if streamID.count == 0 { continue }
+            let soundLevel = soundLevels[streamID]?.uintValue ?? 0
+            seat.soundLevel = soundLevel
+        }
+        delegate?.speakerSeatUpdate(seatList)
     }
 }
