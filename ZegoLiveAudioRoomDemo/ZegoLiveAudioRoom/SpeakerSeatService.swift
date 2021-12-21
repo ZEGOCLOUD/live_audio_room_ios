@@ -129,14 +129,13 @@ class SpeakerSeatService: NSObject {
     func muteMic(_ isMuted: Bool, callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
-        let seatModel = SpeakerSeatModel(index: localSpeakerSeat?.index ?? -1)
-        seatModel.mic = !isMuted
-        
-        if seatModel.index == -1 {
+        let seatModel = localSpeakerSeat?.copy() as? SpeakerSeatModel
+        guard let seatModel = seatModel else {
             guard let callback = callback else { return }
             callback(.failure(.failed))
             return
         }
+        seatModel.mic = !isMuted
         
         let key = String(seatModel.index)
         let seatModelJson = ZegoJsonTool.modelToJson(toString: seatModel) ?? ""
@@ -395,6 +394,9 @@ extension SpeakerSeatService : ZegoEventHandler {
     
     func onRemoteSoundLevelUpdate(_ soundLevels: [String : NSNumber]) {
         for seat in seatList {
+            if seat != localSpeakerSeat {
+                seat.soundLevel = 0
+            }
             guard let userID = seat.userID else { continue }
             let streamID = getPublishStreamID(userID)
             if streamID.count == 0 { continue }
