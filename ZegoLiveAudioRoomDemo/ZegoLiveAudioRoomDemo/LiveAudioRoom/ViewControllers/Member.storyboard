@@ -11,7 +11,7 @@
         <!--Member View Controller-->
         <scene sceneID="q7p-Om-2Ps">
             <objects>
-                <viewController storyboardIdentifier="RoomMemberViewController" id="gYK-2K-9Ud" customClass="MemberViewController" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemberViewController" id="gYK-2K-9Ud" customClass="MemberViewController" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="82V-vZ-Tgo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

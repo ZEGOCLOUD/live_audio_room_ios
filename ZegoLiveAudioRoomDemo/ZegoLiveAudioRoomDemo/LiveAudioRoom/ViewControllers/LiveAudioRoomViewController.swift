@@ -70,6 +70,15 @@ class LiveAudioRoomViewController: UIViewController {
         return giftView
     }()
     
+    lazy var memberVC: MemberViewController = {
+        let vc = UIStoryboard(name: "Member", bundle: nil).instantiateViewController(withIdentifier: "MemberViewController") as! MemberViewController
+        vc.view.frame = self.view.bounds
+        vc.view.isHidden = true
+        self.addChild(vc)
+        self.view.addSubview(vc.view)
+        return vc
+    }()
+    
     var messageList: [MessageModel] = []
     var isMuteAllMessage: Bool = false
     var localUserID: String {
@@ -226,7 +235,7 @@ class LiveAudioRoomViewController: UIViewController {
     }
     
     @IBAction func memberButtonClick(_ sender: UIButton) {
-        
+        memberVC.view.isHidden = false
     }
     
     @IBAction func micButtonClick(_ sender: UIButton) {
