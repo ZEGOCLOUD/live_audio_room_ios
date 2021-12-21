@@ -57,16 +57,18 @@ class MemberTableViewCell: UITableViewCell {
             } else {
                 moreActionButton.isHidden = true
             }
-            
+
         case .speaker:
-            identifyTitle =  ZGLocalizedString("room_page_role_owner");
+            identifyTitle =  ZGLocalizedString("room_page_role_speaker");
             moreActionButton.isHidden = true
         case .none:
             break
         case .some(.host):
+            identifyTitle = ZGLocalizedString("room_page_role_owner");
+            moreActionButton.isHidden = true
             break
         }
-        
+
         identityLabel.text = identifyTitle
     }
     

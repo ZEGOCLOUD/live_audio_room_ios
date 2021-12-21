@@ -13,6 +13,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var roomMemberTableView: UITableView!
     @IBOutlet weak var inviteMaskView: UIView!
+    @IBOutlet weak var bottomMaskView: UIView!
     
     var inviteRoomUser:UserInfo?
     var memberCount:Int = 0
@@ -25,17 +26,23 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let bottomMaskTap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(bottomMaskTapClick))
+        bottomMaskView.addGestureRecognizer(bottomMaskTap)
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        inviteMaskView.addGestureRecognizer(tap)
+    }
+    
+    @objc func bottomMaskTapClick() -> Void {
+        self.view.isHidden = true
+    }
+    
+    @objc func tapClick() -> Void {
+        inviteMaskView.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         clipRoundCorners()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.view.removeFromSuperview()
-        self.removeFromParent()
     }
     
     func updateRoomName() -> Void {
@@ -74,7 +81,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:MemberTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MemberTableViewCell", for: indexPath) as! MemberTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RoomMemberTableViewCell") as! MemberTableViewCell
         cell.delegate = self as MemberTableViewCellDelegate
         let roomUser:UserInfo = RoomManager.shared.userService.userList.allObjects()[indexPath.row]
         let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
