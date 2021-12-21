@@ -28,10 +28,10 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
             cell?.contentView.addSubview(lineView)
         }
-        if model.userID?.count == 0 {
-            cell?.textLabel?.text = ZGLocalizedString("room_page_select_all_speakers");
-        } else {
+        if model.userID != nil {
             cell?.textLabel?.text = model.userName;
+        } else {
+            cell?.textLabel?.text = ZGLocalizedString("room_page_select_all_speakers");
         }
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         return cell ?? UITableViewCell()
@@ -43,7 +43,14 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model:GiftMemberModel = seatUserList?[indexPath.row] ?? GiftMemberModel()
-        
+        changeSelectedStatus(index: indexPath.row)
+        if model.userID == nil {
+            messageLabel?.text = ZGLocalizedString("room_page_select_all_speakers")
+        } else {
+            messageLabel?.text = model.userName
+        }
+        messageTableView?.isHidden = true
+        arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)
     }
     
     
@@ -224,12 +231,34 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     func setMessageLabelNomalTitle() -> Void {
         if RoomManager.shared.userService.localInfo?.role == .host && seatUserList?.count == 1 {
-            messageLabel?.text = ZGLocalizedString("room_page_select_default")
-        } else {
             messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker")
+        } else {
+            messageLabel?.text = ZGLocalizedString("room_page_select_default")
         }
     }
     
+    func changeSelectedStatus(index: Int) -> Void {
+        if index == 0 {
+            for i in 1...seatUserList!.count - 1  {
+                let model:GiftMemberModel = seatUserList![i]
+                model.isSelected = true
+            }
+        } else {
+            for i in 1...seatUserList!.count - 1 {
+                let model:GiftMemberModel = seatUserList![i]
+                if i == index {
+                    model.isSelected = true
+                } else {
+                    model.isSelected = false
+                }
+            }
+        }
+        if targetUserList.count > 0 {
+            sendButton?.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 1.0)
+        } else {
+            sendButton?.backgroundColor = UIColor.init(red:0/255.0, green:85/255.0, blue:255/255.0, alpha:0.3)
+        }
+    }
     
     
     @objc func tapClick() -> Void {
@@ -261,6 +290,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             guard let gift = sendGift else { return }
             delegate?.sendGift(giftModel: gift, targetUserList: targetUserList)
         }
+        self.isHidden = true
     }
     
 }

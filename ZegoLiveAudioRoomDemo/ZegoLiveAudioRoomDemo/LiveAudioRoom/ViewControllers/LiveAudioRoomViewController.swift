@@ -242,7 +242,9 @@ class LiveAudioRoomViewController: UIViewController {
         if RoomManager.shared.userService.localInfo?.role == .host {
             settingsView.isHidden = false
         } else if RoomManager.shared.userService.localInfo?.role == .speaker {
-            
+            if RoomManager.shared.speakerService.localSpeakerSeat != nil {
+                leaveSeat(index: RoomManager.shared.speakerService.localSpeakerSeat!.index)
+            }
         }
     }
     
