@@ -70,7 +70,7 @@ class SpeakerSeatService: NSObject {
     }
     
     /// close all unused seat
-    func closeAllSeats(_ isClosed: Bool, callback: @escaping RoomCallback) {
+    func closeAllSeats(_ isClosed: Bool, callback: RoomCallback?) {
        
         let roomID = RoomManager.shared.roomService.info.roomID
         
@@ -83,6 +83,10 @@ class SpeakerSeatService: NSObject {
             let jsonValue = ZegoJsonTool.modelToJson(toString: copyModel) ?? ""
             attributes[key] = jsonValue
         }
+        let roomInfo:RoomInfo = RoomManager.shared.roomService.info.copy() as! RoomInfo
+        roomInfo.isSeatClosed = isClosed
+        let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
+        attributes["room_info"] = roomInfoJson
         
         let config = ZIMRoomAttributesSetConfig()
         config.isForce = false
