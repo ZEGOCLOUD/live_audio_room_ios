@@ -88,7 +88,7 @@ class LiveAudioRoomViewController: UIViewController {
     }
     var currentUserInfo: UserInfo? {
         get {
-            return RoomManager.shared.userService.localInfo
+            RoomManager.shared.userService.localInfo
         }
     }
     var micAuthorizationTimer: ZegoTimer = ZegoTimer(500)

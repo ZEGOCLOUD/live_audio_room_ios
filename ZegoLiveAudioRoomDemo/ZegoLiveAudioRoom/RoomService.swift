@@ -45,7 +45,7 @@ class RoomService: NSObject {
             if error.code == .ZIMErrorCodeSuccess {
                 RoomManager.shared.roomService.info = parameters.2
                 RoomManager.shared.userService.localInfo?.role = .host
-                RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes, .set)
+                RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes)
                 RoomManager.shared.loginRtcRoom(with: token)
             }
             else {
