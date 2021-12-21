@@ -71,7 +71,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
     func isCurrentChinese() -> Bool {
         let languages:Array = NSLocale.preferredLanguages
         let currentLanguage:String = languages.first ?? ""
-        if currentLanguage == "" {
+        if currentLanguage == "zh-Hans-CN" {
             return true
         }
         return false
