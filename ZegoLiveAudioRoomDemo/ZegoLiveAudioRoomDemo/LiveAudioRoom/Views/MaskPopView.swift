@@ -59,6 +59,10 @@ class MaskPopView: UIView {
         }
         self.removeFromSuperview()
     }
-    
+}
 
+extension MaskPopView {
+    class func loadFromNib() -> MaskPopView {
+        return Bundle.main.loadNibNamed("MaskPopView", owner: nil, options: nil)?[0] as! MaskPopView
+    }
 }

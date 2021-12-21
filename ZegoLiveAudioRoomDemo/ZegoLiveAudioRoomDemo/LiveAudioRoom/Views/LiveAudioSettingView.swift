@@ -26,6 +26,10 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         super.init(coder: coder)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isHidden = true
+    }
+    
     func configUI() -> Void {
         self.backgroundColor = UIColor.clear
         
@@ -76,7 +80,7 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         if indexPath.row < dataSource?.count ?? 0 {
             let statusDic:NSDictionary = (dataSource?[indexPath.row] ?? [:]) as NSDictionary
             let title:String = statusDic["title"] as! String
-            let status:Bool = (statusArray[indexPath.row] ?? false) as Bool
+            let status:Bool = statusArray[indexPath.row] as Bool
             cell.updateCellWithTitle(title: title, status: status)
         }
         return cell
