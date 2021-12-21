@@ -85,9 +85,17 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             GiftManager.shared.giftModels
         }
     }
-    var seatUserList: Array<GiftMemberModel>? {
+    
+    private var _seatUserList: Array<GiftMemberModel>?
+    private var seatUserList: Array<GiftMemberModel>? {
         get {
-            return configSeatUserListData()
+            if _seatUserList == nil {
+                _seatUserList = configSeatUserListData()
+            }
+            return _seatUserList
+        }
+        set {
+            _seatUserList = newValue
         }
     }
     
@@ -224,6 +232,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     func reset() -> Void {
+        seatUserList = nil
         messageTableView?.reloadData()
         setMessageLabelNomalTitle()
         sendButton?.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
