@@ -29,14 +29,16 @@ class InputTextView: UIView,UITextFieldDelegate {
     @IBAction func textFieldDidChange(_ sender: UITextField) {
         var textStr : String = sender.text! as String
         let startIndex = textStr.index(textStr.startIndex, offsetBy: 0)
-        let index = textStr.index(textStr.startIndex, offsetBy: 100)
-        textStr = String(textStr[startIndex...index])
+        if textStr.count > 100 {
+            let index = textStr.index(textStr.startIndex, offsetBy: 100)
+            textStr = String(textStr[startIndex...index])
+        }
         sender.text = textStr
         
         if textStr.count > 0 {
-            sender.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 1.0)
+            sendButton.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 1.0)
         } else {
-            sender.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
+            sendButton.backgroundColor = UIColor.init(red: 0/255.0, green: 85/255.0, blue: 255/255.0, alpha: 0.3)
         }
         
     }
