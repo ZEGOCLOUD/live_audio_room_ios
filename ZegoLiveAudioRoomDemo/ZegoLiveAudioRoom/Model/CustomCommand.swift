@@ -39,7 +39,8 @@ class CustomCommand : NSObject {
             return
         }
         
-        self.actionType = dict["actionType"] as? CustomCommandType ?? .invitation
+        let actionType = dict["actionType"] as? UInt ?? 1
+        self.actionType = CustomCommandType(rawValue: actionType) ?? .invitation
         self.targetUserIDs = dict["target"] as? [String] ?? []
         self.content = dict["content"] as? [String : Any] ?? [:]
     }

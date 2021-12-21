@@ -52,17 +52,16 @@ class LiveAudioRoomViewController: UIViewController {
     lazy var settingsView: LiveAudioSettingView = {
        let settingsView = LiveAudioSettingView(frame: CGRect(x: 0,
                                                              y: 0,
-                                                             width:
-                                                                self.view.bounds.size.width,
+                                                             width: self.view.bounds.size.width,
                                                              height: self.view.bounds.size.height))
         settingsView.isHidden = true
         return settingsView
     }()
+    
     lazy var giftView: LiveAudioGiftView = {
         let giftView = LiveAudioGiftView(frame: CGRect(x: 0,
                                                        y: 0,
-                                                       width:
-                                                        self.view.frame.size.width,
+                                                       width: self.view.frame.size.width,
                                                        height: self.view.frame.size.height))
         giftView.isHidden = true
         giftView.delegate = self
@@ -326,8 +325,16 @@ extension LiveAudioRoomViewController : InputTextViewDelegate {
 }
 
 extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
-    func sendGift(giftModel: GiftModel, targetUserList: Array<GiftMemberModel>) {
-        
+    func sendGift(giftModel: GiftModel, targetUserList: [String]) {
+        RoomManager.shared.giftService.sendGift(giftModel.giftID, to: targetUserList) { result in
+            switch result {
+            case .success(()):
+                self.receiveGift(giftModel.giftID, from: self.localUserID, to: targetUserList)
+            case .failure(let error):
+                let message = String(format: ZGLocalizedString("toast_send_gift_error"), error.code)
+                HUDHelper.showMessage(message: message)
+            }
+        }
     }
 }
 
@@ -376,8 +383,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         }
         
         reloadMessageData()
-        //TODO: need reload memebr list
-        
+        memberVC.updateMemberListData()
     }
     
     func roomUserLeave(_ users: [UserInfo]) {
@@ -389,7 +395,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         }
         
         reloadMessageData()
-        //TODO: need reload memebr list
+        memberVC.updateMemberListData()
     }
     
     // reveive invitation for take a seat
@@ -423,8 +429,7 @@ extension LiveAudioRoomViewController : SpeakerSeatServiceDelegate {
     func speakerSeatUpdate(_ models: [SpeakerSeatModel]) {
         updateCurrentUserMicStatus()
         updateSpeakerSeatUI()
-        //TODO: need reload memebr list
-        
+        memberVC.updateMemberListData()
     }
 }
 
@@ -438,8 +443,17 @@ extension LiveAudioRoomViewController : MessageServiceDelegate {
 
 extension LiveAudioRoomViewController : GiftServiceDelegate {
     func receiveGift(_ giftID: String, from userID: String, to userList: [String]) {
-        let model = GiftManager.shared.getGiftModel(giftID)
-        //TODO: need update gift tips view
         
+        guard let gift = GiftManager.shared.getGiftModel(giftID) else { return }
+        
+        guard let fromUser = RoomManager.shared.userService.userList.getObj(userID) else {
+            return
+        }
+        
+        let toUsers: [UserInfo] = userList.compactMap { RoomManager.shared.userService.userList.getObj($0) }
+        
+        if toUsers.count == 0 { return }
+        
+        giftTipView.sendGift(gift, fromUser: fromUser, toUsers: toUsers)
     }
 }
