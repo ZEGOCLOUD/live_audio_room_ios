@@ -409,7 +409,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         let seatModel:SpeakerSeatModel = RoomManager.shared.speakerService.seatList[seatIndex]
         switch seatModel.status {
         case .untaken :
-            if RoomManager.shared.speakerService.localSpeakerSeat?.status == .occupied && RoomManager.shared.speakerService.localSpeakerSeat?.index == seatModel.index && !localUserIsHost() {
+            if RoomManager.shared.speakerService.localSpeakerSeat?.status == .occupied && RoomManager.shared.speakerService.localSpeakerSeat?.index != seatModel.index && !localUserIsHost() {
                 takeSeat(index: seatIndex, isSwitch: true)
             } else if localUserIsHost() && seatModel.status == .untaken {
                 lockSeat(index: seatIndex, isLock: true)
@@ -553,6 +553,12 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
         roomIdLabel.text = String(format: "ID: %@", info.roomID ?? "")
         
         settingsView.settingTableView?.reloadData()
+        
+        if RoomManager.shared.roomService.info.isTextMessageDisabled && !localUserIsHost() {
+            sendMessageButton .setImage(UIImage.init(named: "message_lock_icon"), for: .normal)
+        } else {
+            sendMessageButton .setImage(UIImage.init(named: "message_icon"), for: .normal)
+        }
     }
 }
 
