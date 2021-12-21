@@ -126,6 +126,9 @@
                                             <constraint firstAttribute="width" constant="34" id="Q97-VT-tje"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="leave_room"/>
+                                        <connections>
+                                            <action selector="leaveRoomButtonClick:" destination="Fq0-c6-sQn" eventType="touchUpInside" id="Z9d-Cz-2oz"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -172,7 +175,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YrE-Yw-Nrs"/>
-                        <color key="backgroundColor" red="0.95695167780000001" green="0.95683127639999999" blue="0.96511715649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="loD-fs-3Kv" firstAttribute="bottom" secondItem="YrE-Yw-Nrs" secondAttribute="bottom" id="0YM-wA-Xfr"/>
                             <constraint firstItem="YrE-Yw-Nrs" firstAttribute="trailing" secondItem="m5g-L7-xSQ" secondAttribute="trailing" id="19b-Qu-LyV"/>

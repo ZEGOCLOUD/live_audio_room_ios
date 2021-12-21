@@ -7,6 +7,7 @@
 
 import UIKit
 import ZIM
+import AVFoundation
 
 class LiveAudioRoomViewController: UIViewController {
     
@@ -120,6 +121,11 @@ class LiveAudioRoomViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        seatCollectionView.frame = speakerSeatView.bounds
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         getKeyWindow().endEditing(true)
@@ -225,11 +231,15 @@ class LiveAudioRoomViewController: UIViewController {
     
     //MARK: - Action
     @IBAction func giftButtonClick(_ sender: UIButton) {
-        
+        self.giftView.isHidden = false
     }
     
     @IBAction func settingButtonClick(_ sender: UIButton) {
-        
+        if RoomManager.shared.userService.localInfo?.role == .host {
+            settingsView.isHidden = false
+        } else if RoomManager.shared.userService.localInfo?.role == .speaker {
+            
+        }
     }
     
     @IBAction func memberButtonClick(_ sender: UIButton) {
@@ -237,7 +247,36 @@ class LiveAudioRoomViewController: UIViewController {
     }
     
     @IBAction func micButtonClick(_ sender: UIButton) {
+        if sender.isSelected && AuthorizedCheck.isMicrophoneAuthorizationDetermined() {
+            AuthorizedCheck.takeMicPhoneAuthorityStatus(completion: nil)
+        }
         
+        if sender.isSelected && AuthorizedCheck.isMicrophoneAuthorizationDetermined() && !AuthorizedCheck.isMicrophoneAuthorized() {
+            AuthorizedCheck.showMicrophoneUnauthorizedAlert(self)
+            return
+        }
+        
+        if AuthorizedCheck.isMicrophoneAuthorizationDetermined() {
+            if AuthorizedCheck.isMicrophoneAuthorized() {
+                RoomManager.shared.speakerService.muteMic(!sender.isSelected) { Result in
+                    switch Result {
+                    case .success:
+                        sender.isSelected = !sender.isSelected
+                    case .failure(_):
+                        break
+                    }
+                }
+            } else {
+                RoomManager.shared.speakerService.muteMic(true) { Result in
+                    switch Result {
+                    case .success:
+                        sender.isSelected = false
+                    case .failure(_):
+                        break
+                    }
+                }
+            }
+        }
     }
     
     
@@ -249,6 +288,22 @@ class LiveAudioRoomViewController: UIViewController {
         inputTextView.isHidden = false
         inputTextView.textViewBecomeFirstResponse()
     }
+    
+    @IBAction func leaveRoomButtonClick(_ sender: UIButton) {
+        if localUserIsHost() {
+            let alterVC:UIAlertController = UIAlertController.init(title: ZGLocalizedString("room_page_destroy_room"), message: ZGLocalizedString("dialog_sure_to_destroy_room"), preferredStyle: .alert)
+            let cancelAction:UIAlertAction = UIAlertAction.init(title: ZGLocalizedString("dialog_cancel"), style: .cancel, handler: nil)
+            let okAction:UIAlertAction = UIAlertAction.init(title: ZGLocalizedString("dialog_confirm"), style: .default) { action in
+                self.leaveChatRoom()
+            }
+            alterVC.addAction(cancelAction)
+            alterVC.addAction(okAction)
+            self.present(alterVC, animated: true, completion: nil)
+        } else {
+            leaveChatRoom()
+        }
+    }
+    
 }
 
 // MARK: - Private
@@ -340,7 +395,136 @@ extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
 
 extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
     func seatCollectionViewDidSelectedItem(itemIndex: Int) {
-        
+        inputTextView.endEditing(true)
+        speakerSeatButtonClickedAssistant(seatIndex: itemIndex)
+    }
+    
+    func speakerSeatButtonClickedAssistant(seatIndex: Int) -> Void {
+        let seatModel:SpeakerSeatModel = RoomManager.shared.speakerService.seatList[seatIndex]
+        switch seatModel.status {
+        case .untaken :
+            if RoomManager.shared.speakerService.localSpeakerSeat?.status == .occupied && RoomManager.shared.speakerService.localSpeakerSeat?.index == seatModel.index && !localUserIsHost() {
+                takeSeat(index: seatIndex, isSwitch: true)
+            } else if localUserIsHost() && seatModel.status == .untaken {
+                lockSeat(index: seatIndex, isLock: true)
+            } else if seatModel.status == .occupied && (RoomManager.shared.speakerService.localSpeakerSeat?.status == .untaken || RoomManager.shared.speakerService.localSpeakerSeat?.status == .closed) {
+                takeSeat(index: seatIndex, isSwitch: false)
+            }
+        case .occupied:
+            if seatModel.userID != RoomManager.shared.roomService.info.hostID && localUserIsHost() {
+                kickoutUser(seatModel: seatModel)
+            } else if !localUserIsHost() && seatModel.userID == localUserID {
+                leaveSeat(index: seatIndex)
+            }
+        case .closed:
+            if localUserIsHost() {
+                lockSeat(index: seatIndex, isLock: false)
+            } else {
+                HUDHelper.showMessage(message: ZGLocalizedString("the_wheat_position_has_been_locked"))
+            }
+        }
+    }
+    
+    func takeSeat(index: Int, isSwitch: Bool) -> Void {
+        let popView:MaskPopView = MaskPopView.loadFromNib()
+        popView.type = .take
+        popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        popView.block = {
+            if isSwitch {
+                RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
+            } else {
+                RoomManager.shared.speakerService.takeSeat(index) { Result in
+                    switch Result {
+                    case .success:
+                        break
+                    case .failure(let error):
+                        let message:String = String(format: ZGLocalizedString("toast_take_speaker_seat_fail"), "\(error.code)")
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
+            }
+        }
+        self.view.addSubview(popView)
+    }
+    
+    func lockSeat(index: Int, isLock: Bool) -> Void {
+        let popView:MaskPopView = MaskPopView.loadFromNib()
+        popView.type = isLock ? .lock:.unLock
+        popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        popView.block = {
+            RoomManager.shared.speakerService.closeSeat(isLock, index) { Result in
+                switch Result {
+                case .success:
+                    break
+                case .failure(let error):
+                    let message:String =  isLock ? String(format: ZGLocalizedString("toast_lock_seat_fail"), "\(error.code)") : String(format: ZGLocalizedString("toast_unlock_seat_fail"), "\(error.code)")
+                    HUDHelper.showMessage(message: message)
+                }
+            }
+        }
+        self.view.addSubview(popView)
+    }
+    
+    func leaveSeat(index: Int) -> Void {
+        let popView:MaskPopView = MaskPopView.loadFromNib()
+        popView.type = .leave
+        popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        popView.block = {
+            let seatModel:SpeakerSeatModel = RoomManager.shared.speakerService.seatList[index]
+            self.sureAlter(seatModel: seatModel, title: ZGLocalizedString("room_page_leave_speaker_seat"), message: ZGLocalizedString("dialog_sure_to_leave_seat"), isHost: false)
+        }
+        self.view.addSubview(popView)
+    }
+    
+    func kickoutUser(seatModel: SpeakerSeatModel) -> Void {
+        let popView:MaskPopView = MaskPopView.loadFromNib()
+        popView.type = .leave
+        popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        popView.block = {
+            let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
+            let message:String = String(format: ZGLocalizedString("dialog_warning_leave_seat_message"), userName)
+            self.sureAlter(seatModel: seatModel, title: ZGLocalizedString("room_page_leave_speaker_seat"), message: message, isHost: true)
+        }
+        self.view.addSubview(popView)
+    }
+    
+    func sureAlter(seatModel: SpeakerSeatModel, title: String, message: String, isHost: Bool) -> Void {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: ZGLocalizedString("dialog_cancel"), style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: ZGLocalizedString("dialog_confirm"), style: .default) { action in
+            if isHost {
+                if seatModel.status != .occupied || !self.localUserIsHost() || seatModel.userID == RoomManager.shared.userService.localInfo?.userID {
+                    return
+                }
+                
+                RoomManager.shared.speakerService.removeUserFromSeat(seatModel.index) { Result in
+                    switch Result {
+                    case .success:
+                        if !RoomManager.shared.roomService.info.isSeatClosed {
+                            RoomManager.shared.speakerService.closeSeat(true, seatModel.index, callback: nil)
+                        }
+                    case .failure(let error):
+                        let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
+                        let message:String = String(format: ZGLocalizedString("toast_kickout_leave_seat_error"), userName)
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
+                
+            } else {
+                RoomManager.shared.speakerService.leaveSeat { Result in
+                    switch Result {
+                    case .success:
+                        self.micButton.isSelected = false
+                    case .failure(let error):
+                        let message:String = String(format: ZGLocalizedString("toast_leave_seat_fail"), "\(error.code)")
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

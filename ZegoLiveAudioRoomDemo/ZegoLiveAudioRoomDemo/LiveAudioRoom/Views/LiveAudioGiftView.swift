@@ -19,6 +19,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let model:GiftMemberModel = self.seatUserList?[indexPath.row] ?? GiftMemberModel();
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
             cell?.selectionStyle = .none
@@ -27,8 +28,22 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
             cell?.contentView.addSubview(lineView)
         }
-        
+        if model.userID?.count == 0 {
+            cell?.textLabel?.text = ZGLocalizedString("room_page_select_all_speakers");
+        } else {
+            cell?.textLabel?.text = model.userName;
+        }
+        cell?.textLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 42.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model:GiftMemberModel = seatUserList?[indexPath.row] ?? GiftMemberModel()
+        
     }
     
     
@@ -123,7 +138,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         
         let width = self.frame.size.width
         
-        titleLabel = UILabel.init(frame: CGRect.init(x: 0, y: 10, width: whiteView.bounds.size.width, height: whiteView.bounds.size.height))
+        titleLabel = UILabel.init(frame: CGRect.init(x: 0, y: 10, width: whiteView.bounds.size.width, height: 36))
         titleLabel?.text = ZGLocalizedString("room_page_gift")
         titleLabel?.textColor = UIColor.init(red: 27/255.0, green: 27/255.0, blue: 27/255.0, alpha: 1.0)
         titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
@@ -177,6 +192,8 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         messageTableView?.layer.masksToBounds = true
         messageTableView?.layer.cornerRadius = 12.0
         messageTableView?.backgroundColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 248/255.0, alpha: 1.0)
+        whiteView.addSubview(messageTableView!)
+        messageTableView?.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         let maskView:UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height - 390))
         maskView.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.3)
