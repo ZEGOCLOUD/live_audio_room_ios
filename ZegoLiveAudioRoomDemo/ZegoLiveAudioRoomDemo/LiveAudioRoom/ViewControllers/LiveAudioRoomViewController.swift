@@ -325,8 +325,16 @@ extension LiveAudioRoomViewController : InputTextViewDelegate {
 }
 
 extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
-    func sendGift(giftModel: GiftModel, targetUserList: Array<GiftMemberModel>) {
-        
+    func sendGift(giftModel: GiftModel, targetUserList: [String]) {
+        RoomManager.shared.giftService.sendGift(giftModel.giftID, to: targetUserList) { result in
+            switch result {
+            case .success(()):
+                self.receiveGift(giftModel.giftID, from: self.localUserID, to: targetUserList)
+            case .failure(let error):
+                let message = String(format: ZGLocalizedString("toast_send_gift_error"), error.code)
+                HUDHelper.showMessage(message: message)
+            }
+        }
     }
 }
 
@@ -375,8 +383,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         }
         
         reloadMessageData()
-        //TODO: need reload memebr list
-        
+        memberVC.updateMemberListData()
     }
     
     func roomUserLeave(_ users: [UserInfo]) {
@@ -388,7 +395,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         }
         
         reloadMessageData()
-        //TODO: need reload memebr list
+        memberVC.updateMemberListData()
     }
     
     // reveive invitation for take a seat
@@ -422,8 +429,7 @@ extension LiveAudioRoomViewController : SpeakerSeatServiceDelegate {
     func speakerSeatUpdate(_ models: [SpeakerSeatModel]) {
         updateCurrentUserMicStatus()
         updateSpeakerSeatUI()
-        //TODO: need reload memebr list
-        
+        memberVC.updateMemberListData()
     }
 }
 
@@ -437,8 +443,17 @@ extension LiveAudioRoomViewController : MessageServiceDelegate {
 
 extension LiveAudioRoomViewController : GiftServiceDelegate {
     func receiveGift(_ giftID: String, from userID: String, to userList: [String]) {
-        let model = GiftManager.shared.getGiftModel(giftID)
-        //TODO: need update gift tips view
         
+        guard let gift = GiftManager.shared.getGiftModel(giftID) else { return }
+        
+        guard let fromUser = RoomManager.shared.userService.userList.getObj(userID) else {
+            return
+        }
+        
+        let toUsers: [UserInfo] = userList.compactMap { RoomManager.shared.userService.userList.getObj($0) }
+        
+        if toUsers.count == 0 { return }
+        
+        giftTipView.sendGift(gift, fromUser: fromUser, toUsers: toUsers)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LiveAudioGiftViewDelegate: AnyObject {
-    func sendGift(giftModel: GiftModel,targetUserList: Array<GiftMemberModel>);
+    func sendGift(giftModel: GiftModel, targetUserList: [String]);
 }
 
 class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -34,12 +34,12 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     //MARK: -UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return giftArray?.count ?? 0
+        return giftArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:GiftCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "giftCollectionViewCell", for: indexPath) as! GiftCollectionViewCell
-        cell.model = giftArray?[indexPath.item] ?? GiftModel()
+        cell.model = giftArray[indexPath.item]
         return cell
     }
     
@@ -58,11 +58,9 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     var sendButton: UIButton?
     var giftCollectionView: UICollectionView?
     
-    let nomalGiftModel: GiftModel = GiftModel()
-    var giftArray: Array<GiftModel>? {
+    var giftArray: Array<GiftModel> {
         get {
-            nomalGiftModel.imageName = "gift_logo"
-            return [nomalGiftModel]
+            GiftManager.shared.giftModels
         }
     }
     var seatUserList: Array<GiftMemberModel>? {
@@ -71,9 +69,10 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         }
     }
     
-    var targetUserList: Array<String>? {
+    var targetUserList: Array<String> {
         get {
-            return configTargetUserListData()
+            let list: [String] = seatUserList?.filter({ $0.isSelected }).compactMap({ $0.userID }) ?? []
+            return list
         }
     }
     var sendGift: GiftModel?
@@ -83,7 +82,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        sendGift = giftArray?.first
+        sendGift = giftArray.first
         configUI()
     }
     
@@ -105,16 +104,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         }
         return array
     }
-    
-    func configTargetUserListData() -> Array<String> {
-        let array:Array<String> = seatUserList?.filter({ Value in
-            return Value.isSelected == true && Value.userID?.count ?? 0 > 0
-        }).map({ Value in
-            Value.userID ?? ""
-        }) ?? []
-        return array
-    }
-    
+        
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -248,12 +238,11 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     @objc func pressSendButton() -> Void {
-        if targetUserList?.count ?? 0 > 0 {
+        if targetUserList.count > 0 {
             messageTableView?.isHidden = true
             arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)
-            if delegate != nil {
-                
-            }
+            guard let gift = sendGift else { return }
+            delegate?.sendGift(giftModel: gift, targetUserList: targetUserList)
         }
     }
     

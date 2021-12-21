@@ -38,6 +38,7 @@ class GiftTipView: UIView {
         backLayer.frame = bounds
     }
     
+    private var showCount: Int = 0
     // MARK: - Public
     func sendGift(_ gift: GiftModel, fromUser: UserInfo, toUsers: [UserInfo]) {
         
@@ -60,8 +61,12 @@ class GiftTipView: UIView {
         labelConstraintHeight.constant = size.height + 1.0
         
         isHidden = false
+        showCount += 1
         DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-            self.isHidden = true
+            self.showCount -= 1
+            if self.showCount <= 0 {
+                self.isHidden = true
+            }
         }
     }
     
