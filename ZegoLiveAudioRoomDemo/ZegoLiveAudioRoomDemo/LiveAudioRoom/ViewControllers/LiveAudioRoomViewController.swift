@@ -52,17 +52,16 @@ class LiveAudioRoomViewController: UIViewController {
     lazy var settingsView: LiveAudioSettingView = {
        let settingsView = LiveAudioSettingView(frame: CGRect(x: 0,
                                                              y: 0,
-                                                             width:
-                                                                self.view.bounds.size.width,
+                                                             width: self.view.bounds.size.width,
                                                              height: self.view.bounds.size.height))
         settingsView.isHidden = true
         return settingsView
     }()
+    
     lazy var giftView: LiveAudioGiftView = {
         let giftView = LiveAudioGiftView(frame: CGRect(x: 0,
                                                        y: 0,
-                                                       width:
-                                                        self.view.frame.size.width,
+                                                       width: self.view.frame.size.width,
                                                        height: self.view.frame.size.height))
         giftView.isHidden = true
         giftView.delegate = self
