@@ -42,7 +42,6 @@ class LiveAudioRoomViewController: UIViewController {
     
     lazy var seatCollectionView: SeatCollectionView = {
         let seatCollectionView = UINib(nibName: "SeatCollectionView", bundle: nil).instantiate(withOwner: self, options: nil).last as! SeatCollectionView
-        
         seatCollectionView.itemSpace = 10
         seatCollectionView.lineSpace = 5
         seatCollectionView.delegate = self
@@ -94,8 +93,8 @@ class LiveAudioRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardDidShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardDidHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardDidShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardDidHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         RegisterServiceCallback()
         
@@ -209,7 +208,7 @@ class LiveAudioRoomViewController: UIViewController {
         let duration: Double = durationValue.doubleValue
         
         UIView.animate(withDuration: duration) {
-            self.inputView?.frame = CGRect(x: 0,
+            self.inputTextView.frame = CGRect(x: 0,
                                            y: UIScreen.main.bounds.size.height - keyboardRect.size.height - 55,
                                            width: self.view.bounds.size.width,
                                            height: 55)
@@ -218,7 +217,7 @@ class LiveAudioRoomViewController: UIViewController {
     
     @objc func keyBoardDidHide(node : Notification){
         UIView.animate(withDuration: 0.25) {
-            self.inputView?.frame = CGRect(x: 0,
+            self.inputTextView.frame = CGRect(x: 0,
                                            y: UIScreen.main.bounds.size.height,
                                            width: self.view.bounds.size.width,
                                            height: 55)
@@ -244,7 +243,12 @@ class LiveAudioRoomViewController: UIViewController {
     
     
     @IBAction func messageButtonClick(_ sender: UIButton) {
-        
+        if RoomManager.shared.roomService.info.isTextMessageDisabled && !localUserIsHost() {
+            HUDHelper.showMessage(message: ZGLocalizedString("room_page_bands_send_message"))
+            return
+        }
+        inputTextView.isHidden = false
+        inputTextView.textViewBecomeFirstResponse()
     }
 }
 
