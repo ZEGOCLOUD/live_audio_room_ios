@@ -15,6 +15,8 @@ class ZegoTimer : NSObject {
     // the default interval is 1s
     private var interval: Int = 1000
     
+    private var isSuspend: Bool = true
+    
     init(_ interval: Int) {
         if interval > 0 {
             self.interval = interval
@@ -34,10 +36,24 @@ class ZegoTimer : NSObject {
     }
     
     func start() {
-        timer.resume()
+        if isSuspend {
+            timer.resume()
+        }
+        isSuspend = false
     }
     
     func stop() {
+        if isSuspend {
+            return
+        }
+        isSuspend = true
         timer.suspend()
+    }
+    
+    deinit {
+        if isSuspend {
+            timer.resume()
+        }
+        timer.cancel()
     }
 }

@@ -180,6 +180,9 @@ extension UserService : ZIMEventHandler {
             addUsers.append(user)
             guard let userID = user.userID else { continue }
             userList.addObj(userID, user)
+            if localInfo?.userID == userID {
+                localInfo = user
+            }
         }
         
         for obj in delegates.allObjects {

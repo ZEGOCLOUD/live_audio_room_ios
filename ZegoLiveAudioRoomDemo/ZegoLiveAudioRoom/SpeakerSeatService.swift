@@ -314,30 +314,34 @@ extension SpeakerSeatService {
         })
     }
     
-    func updateSpeakerSeats(_ seatDict: [String:Any]?, _ action: ZIMRoomAttributesUpdateAction) {
+    func updateSpeakerSeats(_ seatDict: [String:Any]?) {
         let localUser = RoomManager.shared.userService.localInfo
         for seatModel in seatList {
             let seatKey = String(seatModel.index)
             if seatDict?.keys.contains(seatKey) == false { continue }
             
+            var seatUserID = seatModel.userID
             var isUpdateLocalUser = seatModel.userID == localUser?.userID
-            if action == .set {
-                guard let seatValue = seatDict?[seatKey] as? String else { continue }
-                let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
-                seatModel.updateModel(with: newModel)
+            
+            guard let seatValue = seatDict?[seatKey] as? String else { continue }
+            let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
+            seatModel.updateModel(with: newModel)
+            
+            if seatModel.userID != nil {
+                seatUserID = seatModel.userID
                 isUpdateLocalUser = seatModel.userID == localUser?.userID
             }
             
-            else {
-                seatModel.reset()
+            // update user status
+            if let user: UserInfo = RoomManager.shared.userService.userList.getObj(seatUserID ?? "") {
+                if user.role != .host {
+                    user.role = seatModel.status == .occupied ? .speaker : .listener
+                }
             }
             
             if isUpdateLocalUser {
-                if localUser?.role != .host {
-                    localUser?.role = seatModel.status == .occupied ? .speaker : .listener
-                }
                 // local user leave the seat, and stop publish
-                if action == .delete {
+                if seatModel.status == .untaken {
                     ZegoExpressEngine.shared().stopPublishingStream()
                 }
             }
@@ -347,7 +351,7 @@ extension SpeakerSeatService {
 
 extension SpeakerSeatService : ZIMEventHandler {
     func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
-        updateSpeakerSeats(updateInfo.roomAttributes, updateInfo.action)
+        updateSpeakerSeats(updateInfo.roomAttributes)
         
         // the seat key is the index
         // if the roomAttributes's keys don't have seat key, then we don't need call back
