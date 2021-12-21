@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LiveAudioGiftViewDelegate: AnyObject {
-    func sendGift(giftModel: GiftModel,targetUserList: Array<giftMemberModel>);
+    func sendGift(giftModel: GiftModel,targetUserList: Array<GiftMemberModel>);
 }
 
 class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -65,7 +65,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             return [nomalGiftModel]
         }
     }
-    var seatUserList: Array<giftMemberModel>? {
+    var seatUserList: Array<GiftMemberModel>? {
         get {
             return configSeatUserListData()
         }
@@ -87,9 +87,9 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         configUI()
     }
     
-    func configSeatUserListData() -> Array<giftMemberModel> {
-        var array: Array<giftMemberModel> = []
-        array.append(giftMemberModel())
+    func configSeatUserListData() -> Array<GiftMemberModel> {
+        var array: Array<GiftMemberModel> = []
+        array.append(GiftMemberModel())
         for seat in RoomManager.shared.speakerService.seatList {
             if seat.status != .occupied {
                 continue
@@ -97,7 +97,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             if seat.userID == RoomManager.shared.userService.localInfo?.userID {
                 continue
             }
-            let model:giftMemberModel = giftMemberModel()
+            let model:GiftMemberModel = GiftMemberModel()
             model.userID = seat.userID
             model.headImageName = "touxiang1"
             model.userName = RoomManager.shared.userService.userList.getObj(seat.userID ?? "")?.userName
@@ -173,9 +173,10 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         giftCollectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: titleLabel?.frame.maxY ?? 0 + 10, width: width, height: 74), collectionViewLayout: layout)
         giftCollectionView?.backgroundColor = UIColor.white
-        giftCollectionView?.register(UINib.init(nibName: "giftCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "giftCollectionViewCell")
-        giftCollectionView?.delegate = self as UICollectionViewDelegate
-        giftCollectionView?.dataSource = self as UICollectionViewDataSource
+        let nib = UINib(nibName: "GiftCollectionViewCell", bundle: nil)
+        giftCollectionView?.register(nib, forCellWithReuseIdentifier: "giftCollectionViewCell")
+        giftCollectionView?.delegate = self
+        giftCollectionView?.dataSource = self
         whiteView.addSubview(giftCollectionView!)
         
         messageTableView = UITableView.init(frame: CGRect.init(x: 18, y: giftCollectionView?.frame.maxY ?? 0 + 9, width: width - 18 - 123, height: 400 - (giftCollectionView?.frame.maxY ?? 0) - 9 - 61), style: .plain)

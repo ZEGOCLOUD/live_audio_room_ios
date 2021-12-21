@@ -55,30 +55,35 @@ class SeatCollectionView: UIView,UICollectionViewDelegate,UICollectionViewDataSo
     private var lines: Int = 0
     private var itemSize:CGSize?
     
-    @IBOutlet weak var collectiomView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     public func updateDataSource(data: Array<SpeakerSeatModel>) -> Void {
         dataSource = data
-        collectiomView.reloadData()
+        collectionView.reloadData()
     }
     
     public func reloadCollectionView() -> Void {
-        collectiomView.reloadData()
+        collectionView.reloadData()
     }
     
     public func setNumOfRows(numOfRows: Int, numOfLines: Int) -> Void {
         rows = numOfRows
         lines = numOfLines
-        collectiomView.reloadData()
+        collectionView.reloadData()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        collectiomView.register(UINib.init(nibName: "SeatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SeatCollectionViewCell")
+        collectionView.register(UINib.init(nibName: "SeatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SeatCollectionViewCell")
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        collectionView.register(UINib.init(nibName: "SeatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SeatCollectionViewCell")
     }
     
     override func layoutSubviews() {

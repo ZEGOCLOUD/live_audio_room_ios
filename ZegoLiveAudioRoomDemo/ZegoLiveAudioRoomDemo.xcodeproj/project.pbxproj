@@ -38,7 +38,7 @@
 		8662107E276C8AB3002170C9 /* GiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662107D276C8AB3002170C9 /* GiftModel.swift */; };
 		8676EA452770571800114B60 /* GiftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA432770571800114B60 /* GiftCollectionViewCell.swift */; };
 		8676EA462770571800114B60 /* GiftCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA442770571800114B60 /* GiftCollectionViewCell.xib */; };
-		8676EA48277062E900114B60 /* giftMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA47277062E900114B60 /* giftMemberModel.swift */; };
+		8676EA48277062E900114B60 /* GiftMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA47277062E900114B60 /* GiftMemberModel.swift */; };
 		8676EA4D27707A3A00114B60 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4B27707A3A00114B60 /* MemberViewController.swift */; };
 		8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */; };
 		8676EA5227707EBE00114B60 /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA5127707EBE00114B60 /* Member.storyboard */; };
@@ -80,6 +80,7 @@
 		8EF49444277075CB00B8B461 /* AuthorizedCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */; };
 		8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4944527707FA700B8B461 /* ZegoTimer.swift */; };
 		8EF494492770A70900B8B461 /* GiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF494482770A70900B8B461 /* GiftManager.swift */; };
+		8EF4944C2770B00200B8B461 /* GiftTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4944B2770B00200B8B461 /* GiftTipView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,7 +117,7 @@
 		8662107D276C8AB3002170C9 /* GiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftModel.swift; sourceTree = "<group>"; };
 		8676EA432770571800114B60 /* GiftCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCollectionViewCell.swift; sourceTree = "<group>"; };
 		8676EA442770571800114B60 /* GiftCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftCollectionViewCell.xib; sourceTree = "<group>"; };
-		8676EA47277062E900114B60 /* giftMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giftMemberModel.swift; sourceTree = "<group>"; };
+		8676EA47277062E900114B60 /* GiftMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMemberModel.swift; sourceTree = "<group>"; };
 		8676EA4B27707A3A00114B60 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		8676EA5127707EBE00114B60 /* Member.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 		8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedCheck.swift; sourceTree = "<group>"; };
 		8EF4944527707FA700B8B461 /* ZegoTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoTimer.swift; sourceTree = "<group>"; };
 		8EF494482770A70900B8B461 /* GiftManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftManager.swift; sourceTree = "<group>"; };
+		8EF4944B2770B00200B8B461 /* GiftTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftTipView.swift; sourceTree = "<group>"; };
 		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -277,7 +279,6 @@
 				86621060276AE89C002170C9 /* Models */,
 				86621059276AE355002170C9 /* Views */,
 				86621056276ADF23002170C9 /* ViewControllers */,
-				86621054276ADF11002170C9 /* LiveAudioRoom.storyboard */,
 			);
 			path = LiveAudioRoom;
 			sourceTree = "<group>";
@@ -286,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				86621057276ADF77002170C9 /* LiveAudioRoomViewController.swift */,
+				86621054276ADF11002170C9 /* LiveAudioRoom.storyboard */,
 				8676EA4B27707A3A00114B60 /* MemberViewController.swift */,
 				8676EA5127707EBE00114B60 /* Member.storyboard */,
 				8EF494482770A70900B8B461 /* GiftManager.swift */,
@@ -296,24 +298,17 @@
 		86621059276AE355002170C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8EF4944A2770AFC300B8B461 /* Cell */,
 				8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */,
-				8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */,
-				8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */,
 				86621065276B3F1D002170C9 /* InputTextView.swift */,
 				86621067276B3F33002170C9 /* InputTextView.xib */,
 				86621069276B599C002170C9 /* MaskPopView.swift */,
 				8662106B276B59B2002170C9 /* MaskPopView.xib */,
 				8662106D276C37E2002170C9 /* LiveAudioSettingView.swift */,
-				8662106F276C4167002170C9 /* SettingTableViewCell.swift */,
-				86621070276C4167002170C9 /* SettingTableViewCell.xib */,
 				86621073276C6847002170C9 /* SeatCollectionView.swift */,
 				86621075276C685E002170C9 /* SeatCollectionView.xib */,
-				86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */,
-				86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */,
 				8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */,
-				8676EA432770571800114B60 /* GiftCollectionViewCell.swift */,
-				8676EA442770571800114B60 /* GiftCollectionViewCell.xib */,
-				8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */,
+				8EF4944B2770B00200B8B461 /* GiftTipView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,7 +319,7 @@
 				86621061276AE8FE002170C9 /* MessageModel.swift */,
 				86621063276B11A9002170C9 /* MessageModelBuilder.swift */,
 				8662107D276C8AB3002170C9 /* GiftModel.swift */,
-				8676EA47277062E900114B60 /* giftMemberModel.swift */,
+				8676EA47277062E900114B60 /* GiftMemberModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -625,6 +620,22 @@
 			path = Token;
 			sourceTree = "<group>";
 		};
+		8EF4944A2770AFC300B8B461 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */,
+				8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */,
+				8662106F276C4167002170C9 /* SettingTableViewCell.swift */,
+				86621070276C4167002170C9 /* SettingTableViewCell.xib */,
+				86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */,
+				86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */,
+				8676EA432770571800114B60 /* GiftCollectionViewCell.swift */,
+				8676EA442770571800114B60 /* GiftCollectionViewCell.xib */,
+				8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		AEBCC9E3D655A089D69D6D36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,6 +796,7 @@
 				8662107C276C7A1B002170C9 /* LiveAudioGiftView.swift in Sources */,
 				8624CC90276877100048871D /* AppDefine.swift in Sources */,
 				8676EA4D27707A3A00114B60 /* MemberViewController.swift in Sources */,
+				8EF4944C2770B00200B8B461 /* GiftTipView.swift in Sources */,
 				8624CCA42769C1710048871D /* MBProgressHUD.m in Sources */,
 				8EF4943A276CA37700B8B461 /* ZegoCrypto.cpp in Sources */,
 				8676EA552770828900114B60 /* String+Head.swift in Sources */,
@@ -792,7 +804,7 @@
 				8662105E276AE5CB002170C9 /* LiveAudioMessageCell.swift in Sources */,
 				8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */,
 				8EF4943B276CA37700B8B461 /* aes.cpp in Sources */,
-				8676EA48277062E900114B60 /* giftMemberModel.swift in Sources */,
+				8676EA48277062E900114B60 /* GiftMemberModel.swift in Sources */,
 				8676EA452770571800114B60 /* GiftCollectionViewCell.swift in Sources */,
 				8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */,
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
@@ -995,6 +1007,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1028,6 +1041,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

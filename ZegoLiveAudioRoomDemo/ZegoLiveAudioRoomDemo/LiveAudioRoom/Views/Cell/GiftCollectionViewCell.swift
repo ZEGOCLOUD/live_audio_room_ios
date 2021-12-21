@@ -11,9 +11,10 @@ class GiftCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var giftImage: UIImageView!
     
-    var model:GiftModel? {
+    var model: GiftModel? {
         didSet {
-            giftImage.image = UIImage.init(named: model?.imageName ?? "")
+            guard let imageName = model?.imageName else { return }
+            giftImage.image = UIImage(named: imageName)
         }
     }
     
