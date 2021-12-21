@@ -91,9 +91,27 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
         let index:NSIndexPath = NSIndexPath.init(row: 0, section: 0)
         let firstCell:UITableViewCell = settingTableView?.cellForRow(at: index as IndexPath) ?? UITableViewCell()
         if firstCell == cell {
-            
+            RoomManager.shared.speakerService.closeAllSeats(status) { Result in
+                switch Result {
+                case .success:
+                    break
+                case .failure(let error):
+                    let message:String = String(format: ZGLocalizedString("toast_lock_seat_error"), "\(error.code)")
+                    HUDHelper.showMessage(message: message)
+                    self.settingTableView?.reloadData()
+                }
+            }
         } else {
-            
+            RoomManager.shared.roomService.disableTextMessage(status) { Result in
+                switch Result {
+                case .success:
+                    break
+                case .failure(let error):
+                    let message:String = String(format: ZGLocalizedString("toast_mute_message_error"), "\(error.code)")
+                    HUDHelper.showMessage(message: message)
+                    self.settingTableView?.reloadData()
+                }
+            }
         }
     }
     

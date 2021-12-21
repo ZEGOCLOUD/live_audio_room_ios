@@ -86,7 +86,11 @@ class LiveAudioRoomViewController: UIViewController {
             return RoomManager.shared.userService.localInfo?.userID ?? ""
         }
     }
-    var currentUserInfo: UserInfo?
+    var currentUserInfo: UserInfo? {
+        get {
+            return RoomManager.shared.userService.localInfo
+        }
+    }
     var micAuthorizationTimer: ZegoTimer = ZegoTimer(500)
     
     // MARK: - life cycle
@@ -407,7 +411,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                 takeSeat(index: seatIndex, isSwitch: true)
             } else if localUserIsHost() && seatModel.status == .untaken {
                 lockSeat(index: seatIndex, isLock: true)
-            } else if seatModel.status == .occupied && (RoomManager.shared.speakerService.localSpeakerSeat?.status == .untaken || RoomManager.shared.speakerService.localSpeakerSeat?.status == .closed) {
+            } else if seatModel.status == .untaken {
                 takeSeat(index: seatIndex, isSwitch: false)
             }
         case .occupied:
@@ -545,6 +549,8 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
         }
         roomTitleLabel.text = info.roomName
         roomIdLabel.text = String(format: "ID: %@", info.roomID ?? "")
+        
+        settingsView.settingTableView?.reloadData()
     }
 }
 

@@ -37,10 +37,6 @@ class SettingTableViewCell: UITableViewCell {
     
     func updateCellWithTitle(title: String, status: Bool) -> Void {
         titleLabel.text = title
-        if title == ZGLocalizedString("room_page_set_take_seat") {
-            switchButton.isOn = !status
-        } else {
-            switchButton.isOn = status
-        }
+        switchButton.isOn = status
     }
 }
