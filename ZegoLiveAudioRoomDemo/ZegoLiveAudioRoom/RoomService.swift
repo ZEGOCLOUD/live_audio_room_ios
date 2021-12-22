@@ -140,7 +140,7 @@ extension RoomService {
         let config = ZIMRoomAdvancedConfig()
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
-        config.roomAttributes = ["room_info" : roomInfoJson]
+        config.roomAttributes = ["roomInfo" : roomInfoJson]
         
         return (zimRoomInfo, config, roomInfo)
     }
@@ -152,7 +152,7 @@ extension RoomService {
         
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
-        let attributes = ["room_info" : roomInfoJson]
+        let attributes = ["roomInfo" : roomInfoJson]
         
         let roomID = roomInfo?.roomID ?? ""
         
@@ -180,8 +180,8 @@ extension RoomService: ZIMEventHandler {
     }
     
     func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
-        if updateInfo.roomAttributes.keys.contains("room_info") {
-            let roomJson = updateInfo.roomAttributes["room_info"] ?? ""
+        if updateInfo.roomAttributes.keys.contains("roomInfo") {
+            let roomJson = updateInfo.roomAttributes["roomInfo"] ?? ""
             let roomInfo = ZegoJsonTool.jsonToModel(type: RoomInfo.self, json: roomJson)
             
             // if the room info is nil, we should not set self.info = nil

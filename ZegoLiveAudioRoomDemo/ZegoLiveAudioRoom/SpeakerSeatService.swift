@@ -87,7 +87,7 @@ class SpeakerSeatService: NSObject {
         let roomInfo:RoomInfo = RoomManager.shared.roomService.info.copy() as! RoomInfo
         roomInfo.isSeatClosed = isClosed
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
-        attributes["room_info"] = roomInfoJson
+        attributes["roomInfo"] = roomInfoJson
         
         let config = ZIMRoomAttributesSetConfig()
         config.isForce = false
