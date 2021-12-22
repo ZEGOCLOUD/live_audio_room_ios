@@ -17,6 +17,7 @@ enum NetworkQuality: Codable {
     case good
     case medium
     case bad
+    case unknow
 }
 
 class SpeakerSeatModel: NSObject, Codable {
