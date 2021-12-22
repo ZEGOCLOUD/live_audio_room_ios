@@ -328,7 +328,7 @@ extension LiveAudioRoomViewController {
             return
         }
         let on = AuthorizedCheck.isMicrophoneAuthorized()
-        micButton.select(!on)
+        micButton.isSelected = (!on)
         updateCurrentUserMicStatus()
         micAuthorizationTimer.stop()
     }
@@ -421,6 +421,8 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                 kickoutUser(seatModel: seatModel)
             } else if !localUserIsHost() && seatModel.userID == localUserID {
                 leaveSeat(index: seatIndex)
+            } else if !localUserIsHost() && seatModel.userID != localUserID {
+                HUDHelper.showMessage(message: ZGLocalizedString("the_wheat_position_has_been_locked"))
             }
         case .closed:
             if localUserIsHost() {
@@ -547,6 +549,7 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
                 self.micAuthorizationTimer.setEventHandler {
                     self.onMicAuthorizationTimerTriggered()
                 }
+                self.micAuthorizationTimer.start()
             }
         }
         roomTitleLabel.text = info.roomName
