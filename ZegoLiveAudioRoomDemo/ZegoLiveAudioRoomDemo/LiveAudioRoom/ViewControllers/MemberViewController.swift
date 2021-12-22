@@ -116,6 +116,12 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func inviteSpeak(_ sender: UIButton) {
+        
+        if RoomManager.shared.roomService.info.isSeatClosed {
+            inviteMaskView.isHidden = true
+            return
+        }
+        
         let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
         let isSpeakerSeat:Bool = isOnSeatWithUser(userID: inviteRoomUser?.userID ?? "")
         if inviteRoomUser?.role == .listener && isHost && !isSpeakerSeat {
