@@ -158,7 +158,7 @@ extension RoomService {
         
         let config = ZIMRoomAttributesSetConfig()
         config.isDeleteAfterOwnerLeft = true
-        config.isForce = false
+        config.isForce = true
         
         return (attributes, roomID, config)
     }
