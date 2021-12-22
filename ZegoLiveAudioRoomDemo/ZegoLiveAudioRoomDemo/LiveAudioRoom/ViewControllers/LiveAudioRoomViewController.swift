@@ -103,7 +103,12 @@ class LiveAudioRoomViewController: UIViewController {
         RegisterServiceCallback()
         
         if localUserIsHost() {
-            RoomManager.shared.speakerService.takeSeat(0, callback:nil)
+            RoomManager.shared.speakerService.takeSeat(0, callback:{ result in
+                self.micAuthorizationTimer.setEventHandler {
+                    self.onMicAuthorizationTimerTriggered()
+                }
+                self.micAuthorizationTimer.start()
+            })
         }
         
         configUI()
@@ -545,12 +550,7 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
             return
         }
         if localUserIsHost() {
-            RoomManager.shared.speakerService.takeSeat(0) { result in
-                self.micAuthorizationTimer.setEventHandler {
-                    self.onMicAuthorizationTimerTriggered()
-                }
-                self.micAuthorizationTimer.start()
-            }
+            RoomManager.shared.speakerService.takeSeat(0, callback: nil)
         }
         roomTitleLabel.text = info.roomName
         roomIdLabel.text = String(format: "ID: %@", info.roomID ?? "")

@@ -421,6 +421,8 @@ extension SpeakerSeatService : ZegoEventHandler {
             return .good
         } else if upstreamQuality == .medium {
             return .medium
+        } else if upstreamQuality == .unknown {
+            return .unknow
         } else {
             return .bad
         }

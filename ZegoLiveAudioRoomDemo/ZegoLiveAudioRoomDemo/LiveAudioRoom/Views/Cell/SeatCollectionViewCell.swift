@@ -53,7 +53,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
         case .occupied :
             nameLabel.isHidden = false
             micImageView.isHidden = seatModel.mic
-            networkStatusLog.isHidden = false
+            networkStatusLog.isHidden = seatModel.networkQuality == .unknow ? true : false
             let imageName:String = String.getHeadImageNameWithUserId(userID: seatModel.userID ?? "")
             headImageView.image = UIImage.init(named: imageName)
             if seatModel.userID == RoomManager.shared.roomService.info.hostID {
@@ -77,6 +77,8 @@ class SeatCollectionViewCell: UICollectionViewCell {
             networkStatusLog.image = UIImage.init(named: "network_status_middle")
         case .bad:
             networkStatusLog.image = UIImage.init(named: "network_status_low")
+        case .unknow:
+            break
         }
     }
     

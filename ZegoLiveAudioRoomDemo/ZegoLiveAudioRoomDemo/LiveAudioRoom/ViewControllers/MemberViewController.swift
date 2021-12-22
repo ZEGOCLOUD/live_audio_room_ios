@@ -137,9 +137,11 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         break
                     }
                 }
+            } else {
+                HUDHelper.showMessage(message: ZGLocalizedString("room_page_no_more_seat_available"))
             }
         } else {
-            HUDHelper.showMessage(message:ZGLocalizedString("room_page_no_more_seat_available"))
+            inviteMaskView.isHidden = true
         }
         
     }
