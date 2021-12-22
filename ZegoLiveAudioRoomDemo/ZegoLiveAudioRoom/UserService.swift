@@ -215,7 +215,8 @@ extension UserService : ZIMEventHandler {
             guard let message = message as? ZIMCustomMessage else { continue }
             guard let jsonStr = String(data: message.message, encoding: .utf8) else { continue }
             guard let dict = ZegoJsonTool.jsonToDictionary(jsonStr) else { continue }
-            guard let actionType = dict["actionType"] as? CustomCommandType else { continue }
+            let type: UInt = dict["actionType"] as? UInt ?? 0
+            guard let actionType = CustomCommandType(rawValue: type)  else { continue }
             if actionType != .invitation { continue }
             
             for delegate in delegates.allObjects {

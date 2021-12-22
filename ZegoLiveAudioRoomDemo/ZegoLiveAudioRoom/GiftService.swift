@@ -75,7 +75,7 @@ extension GiftService : ZIMEventHandler {
             let customCommand: CustomCommand = CustomCommand(with: jsonStr)
             if customCommand.actionType != .gift { continue }
             guard let giftID = customCommand.giftID else { continue }
-            delegate?.receiveGift(giftID, from: fromRoomID, to: customCommand.targetUserIDs)
+            delegate?.receiveGift(giftID, from: message.userID, to: customCommand.targetUserIDs)
         }
     }
 }
