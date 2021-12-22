@@ -57,6 +57,7 @@ extension MessageService : ZIMEventHandler {
         for message in messageList {
             guard let message = message as? ZIMTextMessage else { continue }
             let textMessage = TextMessage(message.message)
+            textMessage.userID = message.userID
             delegate?.receiveTextMessage(textMessage)
         }
     }
