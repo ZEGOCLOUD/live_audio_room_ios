@@ -117,7 +117,8 @@ class LoginViewController: UIViewController {
                 getKeyWindow().rootViewController = navVC
                 break
             case .failure(let error):
-                HUDHelper.showMessage(message: (ZGLocalizedString("toast_login_fail") + "\(error.code)"))
+                let message = String(format: ZGLocalizedString("toast_login_fail"), error.code)
+                HUDHelper.showMessage(message: message)
                 break
             }
         }

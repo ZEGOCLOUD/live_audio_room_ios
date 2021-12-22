@@ -16,7 +16,7 @@
 "create_page_create" = "Create";
 "toast_room_id_enter_error" = "Please enter the room ID.";
 "toast_room_not_exist_fail" = "This room does not exist. Please check the room ID or create a new one.";
-"toast_room_existed" = "Failed to create a room, room existed";
+"toast_room_existed" = "Failed to create a room. The room has been created.";
 "toast_room_name_error" = "Please enter the room name.";
 "toast_create_room_success" = "Room created successfully. Join the room now.";
 "toast_join_room_fail" = "Failed to join the room. Error code: %d.";
@@ -40,7 +40,6 @@
 "room_page_role_speaker" = "Speaker";
 "room_page_role_owner" = "Owner";
 "room_page_settings" = "Settings";
-"room_page_leave_seat" = "Leave the seat";
 "room_page_set_take_seat" = "Close all untaken speaker seats";
 "room_page_set_silence" = "Disable text chat for all";
 "room_page_has_left_the_room" = "%@ left the room";
@@ -83,3 +82,6 @@
 "toast_room_end_fail_tip" = "Failed to end the room. Error code: %d.";
 "toast_lock_seat_error" = "Failed to lock the seat. Error code: %d.";
 "toast_mute_message_error" = "Failed to mute message. Error code: %d.";
+"network_reconnect" = "Network error. Reconnecting...";
+"network_connect_failed_title" = "Network error.";
+"network_connect_failed" = "Network connection failed. Please log out and join again.";
