@@ -8,7 +8,11 @@
 import Foundation
 import ZIM
 
-class TextMessage: ZIMTextMessage {
+class TextMessage: NSObject {
+    
+    var userID: String = ""
+    var message: String = ""
+    
     init(_ message: String) {
         super.init()
         self.message = message
