@@ -144,6 +144,13 @@ extension RoomManager: ZegoEventHandler {
             }
         }
     }
+    
+    func onNetworkQuality(_ userID: String, upstreamQuality: ZegoStreamQualityLevel, downstreamQuality: ZegoStreamQualityLevel) {
+        for delegate in rtcEventDelegates.allObjects {
+            delegate.onNetworkQuality?(userID, upstreamQuality: upstreamQuality, downstreamQuality: downstreamQuality)
+        }
+    }
+
 }
 
 extension RoomManager: ZIMEventHandler {

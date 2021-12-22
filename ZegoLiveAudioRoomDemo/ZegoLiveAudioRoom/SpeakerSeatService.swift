@@ -405,4 +405,24 @@ extension SpeakerSeatService : ZegoEventHandler {
         }
         delegate?.speakerSeatUpdate(seatList)
     }
+    
+    func onNetworkQuality(_ userID: String, upstreamQuality: ZegoStreamQualityLevel, downstreamQuality: ZegoStreamQualityLevel) {
+        for seat in seatList {
+            guard let seatUserID = seat.userID else { continue }
+            if userID == seatUserID {
+                seat.networkQuality = setNetWorkQuality(upstreamQuality: upstreamQuality)
+            }
+        }
+        delegate?.speakerSeatUpdate(seatList)
+    }
+    
+    private func setNetWorkQuality(upstreamQuality: ZegoStreamQualityLevel) -> NetworkQuality {
+        if upstreamQuality == .excellent || upstreamQuality == .good {
+            return .good
+        } else if upstreamQuality == .medium {
+            return .medium
+        } else {
+            return .bad
+        }
+    }
 }

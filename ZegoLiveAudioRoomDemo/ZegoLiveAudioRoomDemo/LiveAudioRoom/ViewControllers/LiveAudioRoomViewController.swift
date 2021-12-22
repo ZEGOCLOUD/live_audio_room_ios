@@ -629,6 +629,7 @@ extension LiveAudioRoomViewController : SpeakerSeatServiceDelegate {
         updateSpeakerSeatUI()
         memberVC.updateMemberListData()
     }
+    
 }
 
 extension LiveAudioRoomViewController : MessageServiceDelegate {

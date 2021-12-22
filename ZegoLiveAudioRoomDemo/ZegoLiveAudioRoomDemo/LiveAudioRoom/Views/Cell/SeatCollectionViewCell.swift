@@ -14,6 +14,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var soundWaveImage: UIImageView!
     @IBOutlet weak var micImageView: UIImageView!
     @IBOutlet weak var hostLogo: UIImageView!
+    @IBOutlet weak var networkStatusLog: UIImageView!
     
     @IBOutlet weak var soundImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headImageHeightConstraint: NSLayoutConstraint!
@@ -30,10 +31,14 @@ class SeatCollectionViewCell: UICollectionViewCell {
     }
     
     public func setSpeakerSeat(seatModel: SpeakerSeatModel, role: UserRole) -> Void {
+        
         nameLabel.text = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName
         hostLogo.isHidden = true
         micImageView.isHidden = true
+        networkStatusLog.isHidden = true
         soundWaveImage.isHidden = seatModel.soundLevel <= 5
+        
+        setNetWorkStatusImage(netWorkQuality: seatModel.networkQuality)
         
         switch seatModel.status {
         case .untaken :
@@ -48,6 +53,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
         case .occupied :
             nameLabel.isHidden = false
             micImageView.isHidden = seatModel.mic
+            networkStatusLog.isHidden = false
             let imageName:String = String.getHeadImageNameWithUserId(userID: seatModel.userID ?? "")
             headImageView.image = UIImage.init(named: imageName)
             if seatModel.userID == RoomManager.shared.roomService.info.hostID {
@@ -61,6 +67,17 @@ class SeatCollectionViewCell: UICollectionViewCell {
             break
         }
         
+    }
+    
+    func setNetWorkStatusImage(netWorkQuality: NetworkQuality) -> Void {
+        switch netWorkQuality {
+        case .good:
+            networkStatusLog.image = UIImage.init(named: "network_status_high")
+        case .medium:
+            networkStatusLog.image = UIImage.init(named: "network_status_middle")
+        case .bad:
+            networkStatusLog.image = UIImage.init(named: "network_status_low")
+        }
     }
     
     override func layoutSubviews() {
