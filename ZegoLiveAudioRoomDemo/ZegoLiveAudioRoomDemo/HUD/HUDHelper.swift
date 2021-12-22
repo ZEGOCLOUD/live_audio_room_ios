@@ -27,7 +27,7 @@ class HUDHelper: NSObject {
             hud.mode = .text
             hud.detailsLabel.text = message
             hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
-            hud.hide(animated: true, afterDelay: 2.5)
+            hud.hide(animated: true, afterDelay: 2.0)
             hud.completionBlock = doneHandler
         }
     }
@@ -39,16 +39,24 @@ class HUDHelper: NSObject {
         }
     }
     
+    /// Display network loading with message
+    static func showNetworkLoading(_ message: String) {
+        DispatchQueue.main.async {
+            let hud = MBProgressHUD.showAdded(to: getKeyWindow(), animated: true)
+            hud.mode = .text
+            hud.detailsLabel.text = message
+            hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        }
+    }
+    
     /// Remove network loading HUD
     static func hideNetworkLoading() -> Void {
         DispatchQueue.main.async {
             for subview in getKeyWindow().subviews {
                 if subview is MBProgressHUD {
                     let hud:MBProgressHUD = subview as! MBProgressHUD
-                    if hud.mode == .indeterminate && hud.label.text == nil {
                         hud.removeFromSuperViewOnHide = true
                         hud.hide(animated: true)
-                    }
                 }
             }
         }

@@ -518,7 +518,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                         }
                     case .failure(let error):
                         let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
-                        let message:String = String(format: ZGLocalizedString("toast_kickout_leave_seat_error"), userName)
+                        let message:String = String(format: ZGLocalizedString("toast_kickout_leave_seat_error"), userName, error.code)
                         HUDHelper.showMessage(message: message)
                     }
                 }
@@ -568,10 +568,40 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
 extension LiveAudioRoomViewController : UserServiceDelegate {
     //MARK: -UserServiceDelegate
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
-        if (state == .disconnected) {
-            let message:String = event == .kickedOut ? ZGLocalizedString("toast_kickout_error") : ZGLocalizedString("toast_disconnect_tips")
-            HUDHelper.showMessage(message: message)
-            logout()
+        if state == .disconnected {
+            HUDHelper.hideNetworkLoading()
+            if event == .loginTimeout {
+                showNetworkAlert()
+            } else {
+                // disconnect of room end
+                var message = ZGLocalizedString("toast_disconnect_tips")
+                if event == .success {
+                    message = ZGLocalizedString("toast_room_has_destroyed")
+                    HUDHelper.showMessage(message: message)
+                    self.leaveChatRoom()
+                    return
+                }
+                else if event == .kickedOut {
+                    message = ZGLocalizedString("toast_kickout_error")
+                }
+                HUDHelper.showMessage(message: message)
+                logout()
+            }
+        } else if state == .reconnecting {
+            HUDHelper.showNetworkLoading(ZGLocalizedString("network_reconnect"))
+        } else if state == .connected {
+            HUDHelper.hideNetworkLoading()
+        }
+                
+        func showNetworkAlert() {
+            let title = ZGLocalizedString("network_connect_failed_title")
+            let message = ZGLocalizedString("network_connect_failed")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: ZGLocalizedString("dialog_confirm"), style: .default) { action in
+                self.logout()
+            }
+            alert.addAction(confirmAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
