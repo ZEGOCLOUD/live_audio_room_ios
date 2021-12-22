@@ -90,7 +90,7 @@ class SpeakerSeatService: NSObject {
         attributes["roomInfo"] = roomInfoJson
         
         let config = ZIMRoomAttributesSetConfig()
-        config.isForce = false
+        config.isForce = true
         config.isDeleteAfterOwnerLeft = true
         config.isUpdateOwner = true
         
@@ -118,8 +118,8 @@ class SpeakerSeatService: NSObject {
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
-        config.isForce = false
-        config.isDeleteAfterOwnerLeft = true
+        config.isForce = true
+        config.isDeleteAfterOwnerLeft = false
         config.isUpdateOwner = true
         
         setRoomAttributes(attributes, roomID, config, callback)
@@ -142,8 +142,8 @@ class SpeakerSeatService: NSObject {
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
-        config.isForce = false
-        config.isDeleteAfterOwnerLeft = true
+        config.isForce = true
+        config.isDeleteAfterOwnerLeft = false
         
         setRoomAttributes(attributes, roomID, config) { result in
             if result.isSuccess {
@@ -178,9 +178,9 @@ class SpeakerSeatService: NSObject {
         let attributes = [key : seatModelJson]
         
         let config = ZIMRoomAttributesSetConfig()
-        config.isForce = false
-        config.isDeleteAfterOwnerLeft = true
-        config.isUpdateOwner = false
+        config.isForce = true
+        config.isDeleteAfterOwnerLeft = false
+        config.isUpdateOwner = true
         
         setRoomAttributes(attributes, roomID, config) { result in
             if result.isSuccess {
@@ -269,8 +269,8 @@ class SpeakerSeatService: NSObject {
         attributes[key2] = json2
         
         let config = ZIMRoomAttributesSetConfig()
-        config.isForce = false
-        config.isDeleteAfterOwnerLeft = true
+        config.isForce = true
+        config.isDeleteAfterOwnerLeft = false
         config.isUpdateOwner = true
         
         setRoomAttributes(attributes, roomID, config, callback)
