@@ -40,7 +40,6 @@
 "room_page_role_speaker" = "连麦成员";
 "room_page_role_owner" = "房主";
 "room_page_settings" = "设置";
-"room_page_leave_seat" = "下麦";
 "room_page_set_take_seat" = "禁止房间用户上麦";
 "room_page_set_silence" = "禁止房间用户发送消息";
 "room_page_has_left_the_room" = "%@ 离开房间";
@@ -83,3 +82,6 @@
 "toast_room_end_fail_tip" = "解散房间失败，错误码：%d";
 "toast_lock_seat_error" = "锁定麦位失败，错误码：%d";
 "toast_mute_message_error" = "禁止发送消息失败，错误码：%d";
+"network_reconnect" = "网络发生了错误，正在重连中...";
+"network_connect_failed_title" = "网络错误";
+"network_connect_failed" = "网络连接失败，请尝试退出房间重新加入";

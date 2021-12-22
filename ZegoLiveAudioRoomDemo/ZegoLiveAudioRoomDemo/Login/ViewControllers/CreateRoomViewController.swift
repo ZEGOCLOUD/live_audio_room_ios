@@ -202,6 +202,9 @@ extension CreateRoomViewController : UITextFieldDelegate {
 extension CreateRoomViewController : UserServiceDelegate {
     //MARK: - UserServiceDelegate
     func connectionStateChanged(_ state: ZIMConnectionState, _ event: ZIMConnectionEvent) {
+        // logout and show toast when there is only one child controller(CreateRoom)
+        let count = self.navigationController?.children.count ?? 0
+        if count > 1 { return }
         if (state == .disconnected) {
             let message:String = event == .kickedOut ? ZGLocalizedString("toast_kickout_error") : ZGLocalizedString("toast_disconnect_tips")
             HUDHelper.showMessage(message: message)
