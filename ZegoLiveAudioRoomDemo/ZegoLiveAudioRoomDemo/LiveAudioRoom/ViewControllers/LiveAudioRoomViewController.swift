@@ -439,6 +439,12 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
     }
     
     func takeSeat(index: Int, isSwitch: Bool) -> Void {
+        
+        self.micAuthorizationTimer.setEventHandler {
+            self.onMicAuthorizationTimerTriggered()
+        }
+        self.micAuthorizationTimer.start()
+
         let popView:MaskPopView = MaskPopView.loadFromNib()
         popView.type = .take
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)

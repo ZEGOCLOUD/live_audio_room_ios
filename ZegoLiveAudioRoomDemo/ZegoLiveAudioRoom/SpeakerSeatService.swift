@@ -335,13 +335,13 @@ extension SpeakerSeatService {
             let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
             seatModel.updateModel(with: newModel)
             
-            if seatModel.userID != nil {
+            if seatModel.userID != ""  {
                 seatUserID = seatModel.userID
                 isUpdateLocalUser = seatModel.userID == localUser?.userID
             }
             
             // update user status
-            if let user: UserInfo = RoomManager.shared.userService.userList.getObj(seatUserID ?? "") {
+            if let user: UserInfo = RoomManager.shared.userService.userList.getObj(seatUserID) {
                 if user.role != .host {
                     user.role = seatModel.status == .occupied ? .speaker : .listener
                 }
