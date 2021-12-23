@@ -117,7 +117,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func inviteSpeak(_ sender: UIButton) {
         
-        if RoomManager.shared.roomService.info.isSeatClosed {
+        if RoomManager.shared.roomService.info.isSeatClosed && !isAnyFreeSeat(){
             inviteMaskView.isHidden = true
             return
         }
@@ -148,11 +148,20 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getCurrentSeatUserNum() -> Int {
         let array = RoomManager.shared.speakerService.seatList.filter { Value in
-            return Value.userID?.count ?? 0 > 0
+            return Value.userID.count > 0
         }
         return array.count
     }
     
-    
+    func isAnyFreeSeat() -> Bool {
+        var hasFreeSeat: Bool = false
+        for seat in RoomManager.shared.speakerService.seatList {
+            if seat.userID.count == 0 && seat.status == .untaken {
+                hasFreeSeat = true
+                break
+            }
+        }
+        return hasFreeSeat
+    }
     
 }

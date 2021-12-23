@@ -22,7 +22,7 @@ enum NetworkQuality: Codable {
 
 class SpeakerSeatModel: NSObject, Codable {
     /// user ID
-    var userID: String?
+    var userID: String = ""
     
     /// the index of speaker seat
     fileprivate(set) var index: Int

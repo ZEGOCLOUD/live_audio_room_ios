@@ -59,7 +59,7 @@ class SpeakerSeatService: NSObject {
         
         let key = String(index)
         let seatModel = SpeakerSeatModel(index: index)
-        seatModel.status = .untaken
+        seatModel.status = RoomManager.shared.roomService.info.isSeatClosed ? .closed : .untaken
         
         let seatModelJson = ZegoJsonTool.modelToJson(toString: seatModel) ?? ""
         let attributes = [key : seatModelJson]
@@ -171,7 +171,7 @@ class SpeakerSeatService: NSObject {
         
         let newModel = SpeakerSeatModel(index: seatModel?.index ?? -1)
         newModel.mic = true
-        newModel.userID = RoomManager.shared.userService.localInfo?.userID
+        newModel.userID = RoomManager.shared.userService.localInfo?.userID ?? ""
         newModel.status = .occupied
         
         let seatModelJson = ZegoJsonTool.modelToJson(toString: newModel) ?? ""
@@ -198,7 +198,7 @@ class SpeakerSeatService: NSObject {
         
         let roomID = RoomManager.shared.roomService.info.roomID
         let seatModel = SpeakerSeatModel(index: localSpeakerSeat?.index ?? -1)
-        seatModel.status = .untaken
+        seatModel.status = RoomManager.shared.roomService.info.isSeatClosed ? .closed : .untaken
         
         if seatModel.index == -1 {
             guard let callback = callback else { return }
@@ -253,7 +253,7 @@ class SpeakerSeatService: NSObject {
         }
         
         let toSeatNew = SpeakerSeatModel(index: index)
-        toSeatNew.userID = fromSeat?.userID
+        toSeatNew.userID = fromSeat?.userID ?? ""
         toSeatNew.status = .occupied
         toSeatNew.mic = fromSeat?.mic ?? false
         let fromSeatNew = SpeakerSeatModel(index: fromIndex)
@@ -397,8 +397,7 @@ extension SpeakerSeatService : ZegoEventHandler {
             if seat != localSpeakerSeat {
                 seat.soundLevel = 0
             }
-            guard let userID = seat.userID else { continue }
-            let streamID = getPublishStreamID(userID)
+            let streamID = getPublishStreamID(seat.userID)
             if streamID.count == 0 { continue }
             let soundLevel = soundLevels[streamID]?.uintValue ?? 0
             seat.soundLevel = soundLevel
@@ -408,8 +407,7 @@ extension SpeakerSeatService : ZegoEventHandler {
     
     func onNetworkQuality(_ userID: String, upstreamQuality: ZegoStreamQualityLevel, downstreamQuality: ZegoStreamQualityLevel) {
         for seat in seatList {
-            guard let seatUserID = seat.userID else { continue }
-            if userID == seatUserID {
+            if userID == seat.userID {
                 seat.networkQuality = setNetWorkQuality(upstreamQuality: upstreamQuality)
             }
         }
