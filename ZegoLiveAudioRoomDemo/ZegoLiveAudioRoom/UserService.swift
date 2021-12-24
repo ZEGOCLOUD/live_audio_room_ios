@@ -200,6 +200,17 @@ extension UserService : ZIMEventHandler {
             leftUsers.append(user)
             guard let userID = user.userID else { continue }
             userList.removeObj(userID)
+            
+            for leftUser in leftUsers {
+                for seatModel in RoomManager.shared.speakerService.seatList {
+                    if leftUser.userID != "" && leftUser.userID == seatModel.userID {
+                        seatModel.userID = ""
+                        seatModel.status = RoomManager.shared.roomService.info.isSeatClosed ? .closed : .untaken
+                        break
+                    }
+                }
+            }
+            
         }
         
         for obj in delegates.allObjects {

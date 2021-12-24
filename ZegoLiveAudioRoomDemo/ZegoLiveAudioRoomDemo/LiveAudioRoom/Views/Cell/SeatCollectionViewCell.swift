@@ -54,7 +54,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
             nameLabel.isHidden = false
             micImageView.isHidden = seatModel.mic
             networkStatusLog.isHidden = seatModel.networkQuality == .unknow ? true : false
-            let imageName:String = String.getHeadImageNameWithUserId(userID: seatModel.userID)
+            let imageName:String = String.getHeadImageName(userName: RoomManager.shared.userService.userList.getObj(seatModel.userID)?.userName ?? "")
             headImageView.image = UIImage.init(named: imageName)
             if seatModel.userID == RoomManager.shared.roomService.info.hostID {
                 hostLogo.isHidden = false

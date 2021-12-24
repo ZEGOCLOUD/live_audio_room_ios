@@ -50,6 +50,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
             switch Result {
             case .success(let count):
                 self.memberCount = Int(count)
+                self.roomMemberTableView.reloadData()
             case .failure:
                 break
             }
@@ -117,8 +118,9 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func inviteSpeak(_ sender: UIButton) {
         
-        if RoomManager.shared.roomService.info.isSeatClosed && !isAnyFreeSeat(){
+        if !isAnyFreeSeat(){
             inviteMaskView.isHidden = true
+            HUDHelper.showMessage(message: ZGLocalizedString("room_page_no_more_seat_available"))
             return
         }
         

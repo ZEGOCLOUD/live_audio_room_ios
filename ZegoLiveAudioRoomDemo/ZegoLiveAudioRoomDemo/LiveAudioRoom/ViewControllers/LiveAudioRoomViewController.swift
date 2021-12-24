@@ -334,6 +334,7 @@ extension LiveAudioRoomViewController {
         }
         let on = AuthorizedCheck.isMicrophoneAuthorized()
         micButton.isSelected = (!on)
+        RoomManager.shared.speakerService.muteMic(!on, callback: nil)
         updateCurrentUserMicStatus()
         micAuthorizationTimer.stop()
     }
@@ -348,6 +349,7 @@ extension LiveAudioRoomViewController {
             model.mic = !micButton.isSelected
         }
         seatCollectionView.reloadCollectionView()
+
     }
     
     func logout() -> Void {
@@ -476,7 +478,12 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                 case .success:
                     break
                 case .failure(let error):
-                    let message:String =  isLock ? String(format: ZGLocalizedString("toast_lock_seat_fail"), "\(error.code)") : String(format: ZGLocalizedString("toast_unlock_seat_fail"), "\(error.code)")
+                    var message: String
+                    if case .setSeatInfoFailed = error {
+                        message = String(format: ZGLocalizedString("toast_lock_seat_already_take_seat"), "\(error.code)")
+                    } else {
+                    message =  isLock ? String(format: ZGLocalizedString("toast_lock_seat_fail"), "\(error.code)") : String(format: ZGLocalizedString("toast_unlock_seat_fail"), "\(error.code)")
+                    }
                     HUDHelper.showMessage(message: message)
                 }
             }
@@ -621,6 +628,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         
         reloadMessageData()
         memberVC.updateMemberListData()
+        updateSpeakerSeatUI()
     }
     
     func roomUserLeave(_ users: [UserInfo]) {

@@ -85,3 +85,4 @@
 "network_reconnect" = "Network error. Reconnecting...";
 "network_connect_failed_title" = "Network error.";
 "network_connect_failed" = "Network connection failed. Please log out and join again.";
+"toast_lock_seat_already_take_seat" = "Failed to close the seat. A speaker has already take the seat.";

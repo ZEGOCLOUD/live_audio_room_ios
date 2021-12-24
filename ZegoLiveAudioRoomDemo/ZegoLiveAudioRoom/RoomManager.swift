@@ -100,6 +100,8 @@ extension RoomManager {
         
         if containsUserService {
             userService = UserService()
+        } else {
+            userService.userList = DictionaryArrary<String, UserInfo>()
         }
         roomService = RoomService()
         speakerService = SpeakerSeatService()

@@ -25,8 +25,7 @@ class LoginViewController: UIViewController {
         let a = arc4random_uniform(1000) + 1
         let userId:String = "Apple\(a)"
         userIDTextField.text = userId
-        myUserID = userId;
-        myUserName = userId
+        myUserID = userId
         configUI()
     }
     
