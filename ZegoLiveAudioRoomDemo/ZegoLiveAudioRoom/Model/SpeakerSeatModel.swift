@@ -7,9 +7,13 @@
 
 import Foundation
 
+/// Enumeration values of the speaker seat status
 enum SpeakerSeatStatus: UInt, Codable {
-    case untaken = 0
+    // The speaker seat is untaken.
+    case untaken = 0   
+    // The speaker seat is occupied.
     case occupied = 1
+    // The speaker seat is closed.
     case closed = 2
 }
 
@@ -20,23 +24,26 @@ enum NetworkQuality: Codable {
     case unknow
 }
 
+/// Class speaker seat status information
+///
+/// Description: This class contains the speaker seat status information.
 class SpeakerSeatModel: NSObject, Codable {
-    /// user ID
+    /// User ID, null indicates the current speaker seat is available/untaken.
     var userID: String = ""
     
-    /// the index of speaker seat
+    /// The seat index.
     fileprivate(set) var index: Int
     
-    /// the mic status of speaker seat
+    /// The speaker seat mic status.
     var mic: Bool = false
     
-    /// the status of speaker seat
+    /// The speaker seat status, it is unused by default.
     var status: SpeakerSeatStatus = .untaken
     
-    /// the sound level of mic `[0, 100]`
+    /// Volume value, a local record attribute, used for displaying the sound level.
     var soundLevel: UInt = 0
     
-    /// newwork quality of current seat
+    /// Network status, a local record attributes. It is calculated based on stream quality, can be used for displaying the network status.
     var networkQuality: NetworkQuality = .good
     
     init(index: Int) {

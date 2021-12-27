@@ -7,23 +7,26 @@
 
 import Foundation
 
+/// Class room information
+///
+/// Description: This class contain the room status related information.
 class RoomInfo: NSObject, Codable {
-    /// room ID
+    /// Room ID, refers to the the unique identifier of the room, can be used when joining the room.
     var roomID: String?
     
-    /// room name
+    /// Room name, refers to the room title, can be used for display.
     var roomName: String?
     
-    /// host user ID
+    /// Host ID, refers to the ID of the room creator.
     var hostID: String?
     
-    // speaker seat Number
+    /// The number of speaker seats.
     var seatNum: UInt = 0
     
-    /// whether to disable text mesage
+    /// Whether the text chat is disabled in the room.
     var isTextMessageDisabled: Bool = false
     
-    /// whether to close all seat
+    /// whether the speaker seat is closed.
     var isSeatClosed: Bool = false
     
     

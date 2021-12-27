@@ -8,7 +8,11 @@
 import Foundation
 import ZIM
 
+/// Class IM message
+///
+/// Description: This class contains the IM message related information.
 class TextMessage: NSObject {
+    //  Inherit from the ZIMTextMessage
     
     var userID: String = ""
     var message: String = ""

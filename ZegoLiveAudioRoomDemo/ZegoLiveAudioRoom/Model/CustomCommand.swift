@@ -13,9 +13,16 @@ enum CustomCommandType : UInt {
     case gift = 2
 }
 
+/// Class custom signaling
+///
+/// Description: This class contains the custom signaling related logics, such as send virtual gift, send seat-taking invitation, etc.
 class CustomCommand : NSObject {
+    // Inherit from  ZIMCustomMessage
+    /// Custom signaling type 1: Invite to take the speaker seat 2: Send virtual gifts
     var actionType: CustomCommandType = .invitation
+    /// Target users
     var targetUserIDs: [String] = []
+    /// Signaling content Invite to speak: {}, send gift: {"giftID": ""}
     var content: [String : Any] = [ : ]
     
     var giftID: String? {

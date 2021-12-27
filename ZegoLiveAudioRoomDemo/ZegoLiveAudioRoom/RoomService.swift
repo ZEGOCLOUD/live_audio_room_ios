@@ -8,10 +8,21 @@
 import Foundation
 import ZIM
 
+/// The delegate related to room status callbacks
+///
+/// Description: Callbacks that be triggered when room status changes.
 protocol RoomServiceDelegate: AnyObject {
+    /// Callback for the room status update
+    ///
+    /// Description: This callback will be triggered when the text chat is disabled or there is a speaker seat be closed in the room. And all uses in the room receive a notification through this callback.
+    ///
+    /// @param roomInfo refers to the updated room information.
     func receiveRoomInfoUpdate(_ info: RoomInfo?)
 }
 
+/// Class LiveAudioRoom information management
+///
+/// Description: This class contains the room information management logics, such as the logic of create a room, join a room, leave a room, disable the text chat in room, etc.
 class RoomService: NSObject {
     
     // MARK: - Private
@@ -25,12 +36,21 @@ class RoomService: NSObject {
     }
     
     // MARK: - Public
-    
+    /// Room information, it will be assigned after join the room successfully. And it will be updated synchronously when the room status updates.
     var info: RoomInfo = RoomInfo()
+    /// The delegate related to the room status
     weak var delegate: RoomServiceDelegate?
     
-    /// Create a chat room
-    /// You need to enter a generated `rtc token`
+    /// Create a room
+    ///
+    /// Description: This method can be used to create a room. The room creator will be the Host by default when the room is created successfully.
+    ///
+    /// Call this method at: After user logs in
+    ///
+    /// @param roomID refers to the room ID, the unique identifier of the room. This is required to join a room and cannot be null.
+    /// @param roomName refers to the room name. This is used for display in the room and cannot be null.
+    /// @param token refers to the authentication token. To get this, see the documentation: https://doc-en.zego.im/article/11648
+    /// @param callback refers to the callback for create a room.
     func createRoom(_ roomID: String, _ roomName: String, _ token: String, callback: RoomCallback?) {
         guard roomID.count != 0 else {
             guard let callback = callback else { return }
@@ -62,8 +82,15 @@ class RoomService: NSObject {
         
     }
     
-    /// Join a chat room
-    /// You need to enter a generated `rtc token`
+    /// Join a room
+    ///
+    /// Description: This method can be used to join a room, the room must be an existing room.
+    ///
+    /// Call this method at: After user logs in
+    ///
+    /// @param roomID refers to the ID of the room you want to join, and cannot be null.
+    /// @param token refers to the authentication token. To get this, see the documentation: https://doc-en.zego.im/article/11648
+    /// @param callback refers to the callback for join a room.
     func joinRoom(_ roomID: String, _ token: String, callback: RoomCallback?) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
             if error.code != .ZIMErrorCodeSuccess {
@@ -85,7 +112,13 @@ class RoomService: NSObject {
         })
     }
     
-    /// Leave the chat room
+    /// Leave the room
+    ///
+    /// Description: This method can be used to leave the room you joined. The room will be ended when the Host leaves, and all users in the room will be forced to leave the room.
+    ///
+    /// Call this method at: After joining a room
+    ///
+    /// @param callback refers to the callback for leave a room.
     func leaveRoom(callback: RoomCallback?) {
         guard let roomID = RoomManager.shared.roomService.info.roomID else {
             assert(false, "room ID can't be nil")
@@ -106,7 +139,14 @@ class RoomService: NSObject {
         })
     }
         
-    /// Disable text chat for all users
+    /// Disable text chat in the room
+    ///
+    /// Description: This method can be used to disable the text chat in the room.
+    ///
+    /// Call this method at: After joining a room
+    ///
+    /// @param disable refers to the parameter that whether to disable the text chat. To disable the text chat, set it to [true]; To allow the text chat, set it to [false].
+    /// @param callback refers to the callback for disable text chat.
     func disableTextMessage(_ isDisabled: Bool, callback: RoomCallback?) {
         let parameters = getDisableTextMessageParameters(isDisabled)
         ZIMManager.shared.zim?.setRoomAttributes(parameters.0, roomID: parameters.1, config: parameters.2, callback: { error in

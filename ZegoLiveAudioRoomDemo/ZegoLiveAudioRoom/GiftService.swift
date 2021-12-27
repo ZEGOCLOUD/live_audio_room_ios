@@ -8,12 +8,27 @@
 import Foundation
 import ZIM
 
+/// The delegate related to gift receiving callbacks
+///
+/// Description: Callbacks that triggered when receiving virtual gifts.
 protocol GiftServiceDelegate: AnyObject {
-    /// receive gift message
+    /// Callback for receive a virtual gift
+    ///
+    /// Description: This callback will be triggered when there is a virtual gifting event occurs, all room users will receive a notification. You can define your own logic here for UI display.
+    ///
+    /// Call this method at:  After joining the room and when there is a virtual gifting event occurs
+    ///
+    /// @param giftID refers to the gift type.
+    /// @param fromUserID refers to the gift sender.
+    /// @param toUserList refers to the gift recipient list.
     func receiveGift(_ giftID: String, from userID: String, to userList: [String])
 }
 
+/// Class gift management
+///
+/// Description: This class contains the logics of send and receive gifts.
 class GiftService: NSObject {
+    /// The delegate related to gift updates
     weak var delegate: GiftServiceDelegate?
     
     override init() {
@@ -25,7 +40,15 @@ class GiftService: NSObject {
         }
     }
     
-    /// send gift message to corresponding users
+    /// Send virtual gift
+    ///
+    /// Description: This method can be used to send a virtual gift, all room users will receive a notification. You can determine whether you are the gift recipient by the toUserList parameter.
+    ///
+    /// Call this method at:  After joining the room
+    ///
+    /// @param giftID refers to the gift type.
+    /// @param toUserList refers to the gift recipient.
+    /// @param callback refers to the callback for send a virtual gift.
     func sendGift(_ giftID: String, to userList: [String], callback: RoomCallback?) {
         
         guard let roomID = RoomManager.shared.roomService.info.roomID else {

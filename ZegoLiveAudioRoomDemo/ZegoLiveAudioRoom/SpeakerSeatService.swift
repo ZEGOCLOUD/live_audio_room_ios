@@ -9,11 +9,21 @@ import Foundation
 import ZIM
 import ZegoExpressEngine
 
+/// The delegate related to speaker seat status callbacks
+///
+/// Description: Callbacks that triggered when speaker seat status updates.
 protocol SpeakerSeatServiceDelegate: AnyObject {
-    /// speaker seat upate
+    /// Callback for the updates on the speaker seat status
+    ///
+    /// Description: The callback will be triggered when the speaker seat is be taken, or user ID, microphone status, volume, network status of a speaker seat changes.
+    ///
+    /// @param speakerSeatModel refers to the updated speaker seat info.
     func speakerSeatUpdate(_ models: [SpeakerSeatModel])
 }
 
+/// Class speaker seat management
+///
+/// Description: This class contains the logics related to speaker seat management, such as take/leave a speaker seat, close a speaker seat, remove user from seat, change speaker seats, etc.
 class SpeakerSeatService: NSObject {
     // MARK: - Private
     override init() {
@@ -30,13 +40,19 @@ class SpeakerSeatService: NSObject {
     }
     
     // MARK: - Public
-    /// seat service delegate
+    /// The delegate related to speaker seat status
     weak var delegate: SpeakerSeatServiceDelegate?
     
-    /// speaker seat list
+    /// The speaker seat list
     var seatList: [SpeakerSeatModel] = []
     
-    /// get locak user's speaker model
+    /// Get the speaker seat info of the current logged-in user.
+    ///
+    /// Description: It returns the seat info when the current logged-in user takes a speaker seat; If the currently logged-in user does not take any speaker seat, it returns null.
+    ///
+    /// Call this method at: After the listener takes a speaker seat
+    ///
+    /// @return refers to the speaker seat info of the current logged-in user.
     var localSpeakerSeat: SpeakerSeatModel? {
         get {
             guard let userID = RoomManager.shared.userService.localInfo?.userID else {
@@ -52,7 +68,14 @@ class SpeakerSeatService: NSObject {
         }
     }
     
-    /// remove other user to leave his seat
+    /// Remove a user from speaker seat
+    ///
+    /// Description: This method can be used to remove a specified user (except the host) from the speaker seat.
+    ///
+    /// Call this method at: After joining the room
+    ///
+    /// @param seatIndex refers to the seat index of the user you want to remove.
+    /// @param callback refers to the callback for remove a user from the speaker seat.
     func removeUserFromSeat(_ index: Int, callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
@@ -70,7 +93,14 @@ class SpeakerSeatService: NSObject {
         setRoomAttributes(attributes, roomID, config, callback)
     }
     
-    /// close all unused seat
+    /// Close all untaken speaker seat/Open all closed speaker seat
+    ///
+    /// Description: This method can be used to close all untaken seats or open all closed seats. And the status of the isSeatClosed will also be updated automatically.
+    ///
+    /// Call this method at: After joining the room
+    ///
+    /// @param isClosed can be used to close all untaken speaker seats.
+    /// @param callback refers to the callback for close all speaker seats.
     func closeAllSeats(_ isClosed: Bool, callback: RoomCallback?) {
        
         let roomID = RoomManager.shared.roomService.info.roomID
@@ -97,7 +127,15 @@ class SpeakerSeatService: NSObject {
         setRoomAttributes(attributes, roomID, config, callback)
     }
     
-    /// close the unused seat
+    /// lose specified untaken speaker seat/Open specified closed speaker seat
+    ///
+    /// Description: You can call this method to close untaken speaker seats, and the status of the specified speaker seat will change to closed or unused.
+    ///
+    /// Call this method at: After joining the room
+    ///
+    /// @param isClosed can be used to close specified untaken speaker seats.
+    /// @param seatIndex refers to the seat index of the seat that you want to close/open.
+    /// @param callback  refers to the callback for close/open specified speaker seats.
     func closeSeat(_ isClosed: Bool, _ index: Int, callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
@@ -125,7 +163,14 @@ class SpeakerSeatService: NSObject {
         setRoomAttributes(attributes, roomID, config, callback)
     }
     
-    /// just turn off/on the local microphone
+    /// Mute/Unmute your own microphone
+    ///
+    /// Description: This method can be used to mute/unmute your own microphone.
+    ///
+    /// Call this method at:  After the host enters the room/listener takes a speaker seat
+    ///
+    /// @param isMuted can be set to [true] to mute the microphone; or set it to [false] to unmute the microphone.
+    /// @param callback refers to the callback for mute/unmute the microphone.
     func muteMic(_ isMuted: Bool, callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
@@ -156,7 +201,14 @@ class SpeakerSeatService: NSObject {
         }
     }
     
-    /// local user take the speaker seat
+    /// Take the speaker seat
+    ///
+    /// Description: This method can be used to help a listener to take a speaker seat to speak. And at the same time, the microphone will be enabled, the audio streams will be published.
+    ///
+    /// Call this method at:  After joining the room
+    ///
+    /// @param seatIndex refers to the seat index of the seat that will be taken, only the open and untaken speaker seats can be taken.
+    /// @param callback refers to the callback for take a speaker seat.
     func takeSeat(_ index: Int, callback: RoomCallback?) {
         let roomID = RoomManager.shared.roomService.info.roomID
         let key = String(index)
@@ -193,7 +245,13 @@ class SpeakerSeatService: NSObject {
         }
     }
     
-    /// local user leave speaker seat
+    /// leave the speaker seat
+    ///
+    /// Description: This method can be used to help a speaker to leave the speaker seat to become a listener again. And at the same time, the microphone will be disabled, the audio stream publishing will be stopped.
+    ///
+    /// Call this method at:  After the listener takes a speaker seat
+    ///
+    /// @param callback refers to the callback for leave the speaker seat.
     func leaveSeat(callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
@@ -225,7 +283,14 @@ class SpeakerSeatService: NSObject {
         }
     }
     
-    /// local user switch the speaker seat
+    /// Change the speaker seats
+    ///
+    /// Description: This method can be used for users to change from the current speaker seat to another speaker seat, and make the current seat available.
+    ///
+    /// Call this method at: After the listener takes a speaker seat
+    ///
+    /// @param seatIndex refers to the seat index of the seat that you want to switch to, you can only change to the open and untaken speaker seats.
+    /// @param callback refers to the callback for change the speaker seats.
     func switchSeat(to index: Int, callback: RoomCallback?) {
         let roomID = RoomManager.shared.roomService.info.roomID
         
