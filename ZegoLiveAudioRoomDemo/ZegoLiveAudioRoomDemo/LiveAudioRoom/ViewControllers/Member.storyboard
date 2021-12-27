@@ -53,15 +53,15 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJh-8H-8Db">
-                                                            <rect key="frame" x="64" y="11.5" width="227" height="20.5"/>
+                                                            <rect key="frame" x="64" y="11.5" width="207" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-ae-P9g">
-                                                            <rect key="frame" x="311" y="13.5" width="60" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-ae-P9g">
+                                                            <rect key="frame" x="291" y="13.5" width="80" height="17"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="4Uf-1I-Ye3"/>
+                                                                <constraint firstAttribute="width" constant="80" id="4Uf-1I-Ye3"/>
                                                                 <constraint firstAttribute="height" constant="17" id="xGJ-br-dhw"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>

@@ -152,7 +152,7 @@ class LiveAudioRoomViewController: UIViewController {
     
     func configUI() -> Void {
         roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
-        roomIdLabel.text = RoomManager.shared.roomService.info.roomID
+        roomIdLabel.text = String(format: "ID: %@", RoomManager.shared.roomService.info.roomID ?? "")
         
         self.view.addSubview(settingsView)
         self.view.addSubview(giftView)
@@ -441,22 +441,22 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
     }
     
     func takeSeat(index: Int, isSwitch: Bool) -> Void {
-        
-        self.micAuthorizationTimer.setEventHandler {
-            self.onMicAuthorizationTimerTriggered()
-        }
-        self.micAuthorizationTimer.start()
 
         let popView:MaskPopView = MaskPopView.loadFromNib()
         popView.type = .take
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
+            
             if isSwitch {
                 RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
             } else {
                 RoomManager.shared.speakerService.takeSeat(index) { Result in
                     switch Result {
                     case .success:
+                        self.micAuthorizationTimer.setEventHandler {
+                            self.onMicAuthorizationTimerTriggered()
+                        }
+                        self.micAuthorizationTimer.start()
                         break
                     case .failure(let error):
                         let message:String = String(format: ZGLocalizedString("toast_take_speaker_seat_fail"), "\(error.code)")

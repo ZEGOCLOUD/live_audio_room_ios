@@ -92,6 +92,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let secView:UIView = UIView()
+        secView.backgroundColor = UIColor.white
         let titleLabel:UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 10, width: self.view.bounds.size.width, height: 36))
         titleLabel.textAlignment = .center
         titleLabel.text = String(format: ZGLocalizedString("room_page_user_list"), memberCount)

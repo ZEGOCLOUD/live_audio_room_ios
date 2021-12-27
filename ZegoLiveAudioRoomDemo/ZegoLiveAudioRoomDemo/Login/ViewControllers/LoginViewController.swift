@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
     }
     
     func configUI() -> Void {
+        
         loginButton.layer.cornerRadius = 12.0
         loginButton.clipsToBounds = true
         loginButton.setTitle(ZGLocalizedString("login_page_login"), for: UIControl.State.normal)
@@ -78,9 +79,9 @@ class LoginViewController: UIViewController {
 
     @IBAction func userNameTextFieldChanged(_ sender: UITextField) {
         var userName = sender.text! as String
-        if userName.count > 32 {
+        if userName.count > 16 {
             let startIndex = userName.index(userName.startIndex, offsetBy: 0)
-            let index = userName.index(userName.startIndex, offsetBy: 31)
+            let index = userName.index(userName.startIndex, offsetBy: 15)
             userName = String(userName[startIndex...index])
             sender.text = userName
         }
