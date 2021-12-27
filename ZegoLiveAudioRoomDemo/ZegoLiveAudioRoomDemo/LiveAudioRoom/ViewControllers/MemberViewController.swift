@@ -65,7 +65,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
         whiteView.layer.mask = maskLayer
     }
     
-    func isOnSeatWithUser(userID: String) -> Bool {
+    func isOnSeat(userID: String) -> Bool {
         var isOnSeat:Bool = false
         for seat in RoomManager.shared.speakerService.seatList {
             if seat.userID == userID {
@@ -86,7 +86,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.delegate = self as MemberTableViewCellDelegate
         let roomUser:UserInfo = RoomManager.shared.userService.userList.allObjects()[indexPath.row]
         let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
-        cell.setRoomUser(user: roomUser, isSpeakerSeat: isOnSeatWithUser(userID: roomUser.userID ?? ""), isHost: isHost)
+        cell.setRoomUser(user: roomUser, isSpeakerSeat: isOnSeat(userID: roomUser.userID ?? ""), isHost: isHost)
         return cell
     }
     
@@ -126,7 +126,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
-        let isSpeakerSeat:Bool = isOnSeatWithUser(userID: inviteRoomUser?.userID ?? "")
+        let isSpeakerSeat:Bool = isOnSeat(userID: inviteRoomUser?.userID ?? "")
         if inviteRoomUser?.role == .listener && isHost && !isSpeakerSeat {
             if getCurrentSeatUserNum() < 8 {
                 RoomManager.shared.userService.sendInvitation(inviteRoomUser?.userID ?? "") { result in

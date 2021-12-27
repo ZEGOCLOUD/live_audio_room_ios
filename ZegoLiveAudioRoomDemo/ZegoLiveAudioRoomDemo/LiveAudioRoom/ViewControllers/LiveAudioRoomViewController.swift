@@ -657,10 +657,12 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
                 return
             }
             
-            RoomManager.shared.speakerService.takeSeat(model.index) { result in
-                guard let error = result.failure else { return }
-                let message = String(format: ZGLocalizedString("toast_to_be_a_speaker_seat_fail"), error.code)
-                HUDHelper.showMessage(message: message)
+            if self.currentUserInfo?.role == .listener {
+                RoomManager.shared.speakerService.takeSeat(model.index) { result in
+                    guard let error = result.failure else { return }
+                    let message = String(format: ZGLocalizedString("toast_to_be_a_speaker_seat_fail"), error.code)
+                    HUDHelper.showMessage(message: message)
+                }
             }
         }
         alert.addAction(cancelAction)
