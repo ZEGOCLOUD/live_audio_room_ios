@@ -323,35 +323,33 @@ extension SpeakerSeatService {
     }
     
     func updateSpeakerSeats(_ seatDict: [String:Any]?) {
-        let localUser = RoomManager.shared.userService.localInfo
         for seatModel in seatList {
             let seatKey = String(seatModel.index)
             if seatDict?.keys.contains(seatKey) == false { continue }
             
-            var seatUserID = seatModel.userID
-            var isUpdateLocalUser = seatModel.userID == localUser?.userID
-            
             guard let seatValue = seatDict?[seatKey] as? String else { continue }
             let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
             seatModel.updateModel(with: newModel)
-            
-            if seatModel.userID != ""  {
-                seatUserID = seatModel.userID
-                isUpdateLocalUser = seatModel.userID == localUser?.userID
+        }
+        updateLocalUserInfo()
+    }
+    
+    private func updateLocalUserInfo() -> Void {
+        let localUser = RoomManager.shared.userService.localInfo
+        if let localUser = localUser {
+            if localUser.role != .host {
+                localUser.role = .listener
             }
-            
-            // update user status
-            if let user: UserInfo = RoomManager.shared.userService.userList.getObj(seatUserID) {
-                if user.role != .host {
-                    user.role = seatModel.status == .occupied ? .speaker : .listener
+            for seatModel in seatList {
+                // update user status
+                if seatModel.userID == localUser.userID && localUser.role != .host {
+                    localUser.role = seatModel.status == .occupied ? .speaker : .listener
+                    break
                 }
             }
-            
-            if isUpdateLocalUser {
+            if localSpeakerSeat == nil {
                 // local user leave the seat, and stop publish
-                if seatModel.status == .untaken {
-                    ZegoExpressEngine.shared().stopPublishingStream()
-                }
+                ZegoExpressEngine.shared().stopPublishingStream()
             }
         }
     }
