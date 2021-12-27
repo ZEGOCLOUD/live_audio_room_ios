@@ -132,6 +132,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 RoomManager.shared.userService.sendInvitation(inviteRoomUser?.userID ?? "") { result in
                     switch result {
                     case .success:
+                        self.inviteMaskView.isHidden = true
                         self.view.isHidden = true
                         HUDHelper.showMessage(message:ZGLocalizedString("room_page_invitation_has_sent"))
                         break
