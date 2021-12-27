@@ -275,11 +275,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     @objc func arrowClick(_ sender: UIButton) -> Void {
-        if RoomManager.shared.userService.localInfo?.role == .host && RoomManager.shared.speakerService.seatList.count == 1 {
-            messageLabel?.text = ZGLocalizedString("room_page_select_default");
-        } else {
-            messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker");
-        }
+        messageLabelTapClick()
     }
     
     @objc func messageLabelTapClick() -> Void {

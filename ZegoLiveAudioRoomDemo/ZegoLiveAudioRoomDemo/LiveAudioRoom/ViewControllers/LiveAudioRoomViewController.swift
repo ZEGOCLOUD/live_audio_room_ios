@@ -447,6 +447,8 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
             
+            if RoomManager.shared.roomService.info.isSeatClosed {return}
+            
             if isSwitch {
                 RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
             } else {
