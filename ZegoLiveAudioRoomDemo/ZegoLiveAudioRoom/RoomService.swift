@@ -208,15 +208,6 @@ extension RoomService: ZIMEventHandler {
     
     func zim(_ zim: ZIM, connectionStateChanged state: ZIMConnectionState, event: ZIMConnectionEvent, extendedData: [AnyHashable : Any]) {
         // if host reconneted
-        if state == .connected && event == .success {
-            guard let roomID = RoomManager.shared.roomService.info.roomID else { return }
-            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { dict, error in
-                if error.code != .ZIMErrorCodeSuccess { return }
-                if dict.count == 0 {
-                    self.delegate?.receiveRoomInfoUpdate(nil)
-                }
-            })
-        }
     }
     
     func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
@@ -232,4 +223,19 @@ extension RoomService: ZIMEventHandler {
             delegate?.receiveRoomInfoUpdate(roomInfo)
         }
     }
+    
+    func zim(_ zim: ZIM, roomStateChanged state: ZIMRoomState, event: ZIMRoomEvent, extendedData: [AnyHashable : Any], roomID: String) {
+        if state == .connected && event == .success {
+            guard let roomID = RoomManager.shared.roomService.info.roomID else { return }
+            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { dict, error in
+                if error.code != .ZIMErrorCodeSuccess { return }
+                if dict.count == 0 {
+                    self.delegate?.receiveRoomInfoUpdate(nil)
+                }
+            })
+        } else if state == .disconnected {
+            delegate?.receiveRoomInfoUpdate(nil)
+        }
+    }
+    
 }
