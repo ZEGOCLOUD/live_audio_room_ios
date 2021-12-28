@@ -233,7 +233,7 @@ extension RoomService: ZIMEventHandler {
                     self.delegate?.receiveRoomInfoUpdate(nil)
                 }
             })
-        } else if state == .disconnected {
+        } else if state == .disconnected && event == .enterFailed{
             delegate?.receiveRoomInfoUpdate(nil)
         }
     }
