@@ -31,6 +31,8 @@ class LoginViewController: UIViewController {
     
     func configUI() -> Void {
         
+        print(NSHomeDirectory());
+        
         loginButton.layer.cornerRadius = 12.0
         loginButton.clipsToBounds = true
         loginButton.setTitle(ZGLocalizedString("login_page_login"), for: UIControl.State.normal)

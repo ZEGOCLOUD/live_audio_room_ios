@@ -640,11 +640,16 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
 
     func roomUserJoin(_ users: [UserInfo]) {
         
+        var tempList: [MessageModel] = []
         for user in users {
-            if user.userID == localUserID { continue }
+            if user.userID == localUserID {
+                tempList.removeAll()
+                break
+            }
             let model: MessageModel = MessageModelBuilder.buildJoinMessageModel(user: user)
-            messageList.append(model)
+            tempList.append(model)
         }
+        messageList.append(contentsOf: tempList)
         
         reloadMessageData()
         memberVC.updateMemberListData()
