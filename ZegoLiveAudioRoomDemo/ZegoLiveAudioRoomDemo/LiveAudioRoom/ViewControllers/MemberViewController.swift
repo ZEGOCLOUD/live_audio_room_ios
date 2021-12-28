@@ -82,7 +82,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RoomMemberTableViewCell") as! MemberTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RoomMemberTableViewCell") as? MemberTableViewCell ?? MemberTableViewCell.init(style: .default, reuseIdentifier: "RoomMemberTableViewCell")
         cell.delegate = self as MemberTableViewCellDelegate
         let roomUser:UserInfo = RoomManager.shared.userService.userList.allObjects()[indexPath.row]
         let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
