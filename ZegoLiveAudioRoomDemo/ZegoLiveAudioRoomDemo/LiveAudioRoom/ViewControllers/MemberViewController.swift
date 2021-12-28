@@ -111,7 +111,7 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: -MemberTableViewCellDelegate
     func MemberTableViewCellDidSelectedMoreAction(cell: MemberTableViewCell) {
-        let index:NSIndexPath = roomMemberTableView.indexPath(for: cell)! as NSIndexPath
+        let index:NSIndexPath = roomMemberTableView.indexPath(for: cell) as NSIndexPath? ?? NSIndexPath()
         inviteRoomUser = RoomManager.shared.userService.userList.allObjects()[index.row]
         inviteMaskView.isHidden = false
     }
