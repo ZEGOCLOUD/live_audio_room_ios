@@ -70,7 +70,7 @@ class CreateRoomViewController: UIViewController {
         let text:String = textField.text! as String
         if text.count > 20 {
             let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
+            let index = text.index(text.startIndex, offsetBy: 19)
             textField.text = String(text[startIndex...index])
         }
     }
@@ -79,16 +79,16 @@ class CreateRoomViewController: UIViewController {
         let text:String = textField.text! as String
         if text.count > 20 {
             let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 20)
+            let index = text.index(text.startIndex, offsetBy: 19)
             textField.text = String(text[startIndex...index])
         }
     }
     
     @objc func createRoomNameTextFieldDidChange(textField:UITextField) -> Void {
         let text:String = textField.text! as String
-        if text.count > 32 {
+        if text.count > 16 {
             let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let index = text.index(text.startIndex, offsetBy: 32)
+            let index = text.index(text.startIndex, offsetBy: 15)
             textField.text = String(text[startIndex...index])
         }
     }

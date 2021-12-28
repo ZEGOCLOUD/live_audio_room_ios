@@ -93,6 +93,8 @@ class LiveAudioRoomViewController: UIViewController {
     }
     var micAuthorizationTimer: ZegoTimer = ZegoTimer(500)
     
+    var inviteAlter: UIAlertController?
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +132,13 @@ class LiveAudioRoomViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let inviteAlter = inviteAlter {
+            inviteAlter.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         seatCollectionView.frame = speakerSeatView.bounds
@@ -152,7 +161,7 @@ class LiveAudioRoomViewController: UIViewController {
     
     func configUI() -> Void {
         roomTitleLabel.text = RoomManager.shared.roomService.info.roomName
-        roomIdLabel.text = RoomManager.shared.roomService.info.roomID
+        roomIdLabel.text = String(format: "ID: %@", RoomManager.shared.roomService.info.roomID ?? "")
         
         self.view.addSubview(settingsView)
         self.view.addSubview(giftView)
@@ -334,6 +343,7 @@ extension LiveAudioRoomViewController {
         }
         let on = AuthorizedCheck.isMicrophoneAuthorized()
         micButton.isSelected = (!on)
+        RoomManager.shared.speakerService.muteMic(!on, callback: nil)
         updateCurrentUserMicStatus()
         micAuthorizationTimer.stop()
     }
@@ -348,6 +358,7 @@ extension LiveAudioRoomViewController {
             model.mic = !micButton.isSelected
         }
         seatCollectionView.reloadCollectionView()
+
     }
     
     func logout() -> Void {
@@ -439,16 +450,24 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
     }
     
     func takeSeat(index: Int, isSwitch: Bool) -> Void {
+
         let popView:MaskPopView = MaskPopView.loadFromNib()
         popView.type = .take
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
+            
+            if !self.hasFreeSeat() {return}
+            
             if isSwitch {
                 RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
             } else {
                 RoomManager.shared.speakerService.takeSeat(index) { Result in
                     switch Result {
                     case .success:
+                        self.micAuthorizationTimer.setEventHandler {
+                            self.onMicAuthorizationTimerTriggered()
+                        }
+                        self.micAuthorizationTimer.start()
                         break
                     case .failure(let error):
                         let message:String = String(format: ZGLocalizedString("toast_take_speaker_seat_fail"), "\(error.code)")
@@ -458,6 +477,17 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
             }
         }
         self.view.addSubview(popView)
+    }
+    
+    func hasFreeSeat() -> Bool {
+        var hasFreeSeat: Bool = false
+        for seatModel in RoomManager.shared.speakerService.seatList {
+            if seatModel.status == .untaken {
+                hasFreeSeat = true
+                break
+            }
+        }
+        return hasFreeSeat
     }
     
     func lockSeat(index: Int, isLock: Bool) -> Void {
@@ -470,7 +500,12 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                 case .success:
                     break
                 case .failure(let error):
-                    let message:String =  isLock ? String(format: ZGLocalizedString("toast_lock_seat_fail"), "\(error.code)") : String(format: ZGLocalizedString("toast_unlock_seat_fail"), "\(error.code)")
+                    var message: String
+                    if case .setSeatInfoFailed = error {
+                        message = String(format: ZGLocalizedString("toast_lock_seat_already_take_seat"), "\(error.code)")
+                    } else {
+                    message =  isLock ? String(format: ZGLocalizedString("toast_lock_seat_fail"), "\(error.code)") : String(format: ZGLocalizedString("toast_unlock_seat_fail"), "\(error.code)")
+                    }
                     HUDHelper.showMessage(message: message)
                 }
             }
@@ -615,6 +650,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
         
         reloadMessageData()
         memberVC.updateMemberListData()
+        updateSpeakerSeatUI()
     }
     
     func roomUserLeave(_ users: [UserInfo]) {
@@ -633,7 +669,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
     func receiveTakeSeatInvitation() {
         let title = ZGLocalizedString("dialog_invition_title")
         let message = ZGLocalizedString("dialog_invition_descrip")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        inviteAlter = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: ZGLocalizedString("dialog_refuse"), style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: ZGLocalizedString("dialog_accept"), style: .default) { action in
@@ -643,15 +679,27 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
                 return
             }
             
-            RoomManager.shared.speakerService.takeSeat(model.index) { result in
-                guard let error = result.failure else { return }
-                let message = String(format: ZGLocalizedString("toast_to_be_a_speaker_seat_fail"), error.code)
-                HUDHelper.showMessage(message: message)
+            if self.currentUserInfo?.role == .listener {
+                RoomManager.shared.speakerService.takeSeat(model.index) { result in
+                    switch result {
+                    case .success:
+                        self.micAuthorizationTimer.setEventHandler {
+                            self.onMicAuthorizationTimerTriggered()
+                        }
+                        self.micAuthorizationTimer.start()
+                    case .failure(let error):
+                        let message = String(format: ZGLocalizedString("toast_to_be_a_speaker_seat_fail"), error.code)
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
             }
         }
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        
+        if let inviteAlter = inviteAlter {
+            inviteAlter.addAction(cancelAction)
+            inviteAlter.addAction(okAction)
+            self.present(inviteAlter, animated: true, completion: nil)
+        }
     }
 }
 

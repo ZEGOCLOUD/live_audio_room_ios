@@ -7,20 +7,28 @@
 
 import Foundation
 
+/// Enumeration values of the user role
+/// User role definition enumeration value
 enum UserRole: Codable {
+    // Listener
     case listener
+    // Speaker
     case speaker
+    // Host
     case host
 }
 
+/// Class user information
+///
+/// Description: This class contains the user related information.
 class UserInfo: NSObject, Codable {
-    /// user ID
+    /// User ID, refers to the user unique ID, can only contains numbers and letters.
     var userID: String?
     
-    /// user name
+    /// User name, cannot be null.
     var userName: String?
     
-    /// user role
+    /// User role
     var role: UserRole = .listener
     
     init(_ userID: String, _ userName: String, _ role: UserRole) {

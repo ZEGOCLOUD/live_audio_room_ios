@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,12 +23,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxS-W5-L7d">
                                 <rect key="frame" x="0.0" y="496" width="414" height="400"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VAv-qL-p5A">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VAv-qL-p5A">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomMemberTableViewCell" id="X1j-8x-V7c" customClass="MemberTableViewCell" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X1j-8x-V7c" id="PYj-ff-Skc">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -55,14 +53,15 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJh-8H-8Db">
-                                                            <rect key="frame" x="64" y="11.5" width="41.5" height="21"/>
+                                                            <rect key="frame" x="64" y="11.5" width="207" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-ae-P9g">
-                                                            <rect key="frame" x="329.5" y="13.5" width="41.5" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-ae-P9g">
+                                                            <rect key="frame" x="291" y="13.5" width="80" height="17"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="4Uf-1I-Ye3"/>
                                                                 <constraint firstAttribute="height" constant="17" id="xGJ-br-dhw"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -75,6 +74,7 @@
                                                         <constraint firstItem="DJh-8H-8Db" firstAttribute="leading" secondItem="tqe-9b-j4m" secondAttribute="trailing" constant="12" id="8Uz-to-MVj"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="Ic4-ae-P9g" secondAttribute="trailing" constant="23" id="CgY-S2-ylc"/>
                                                         <constraint firstItem="tqe-9b-j4m" firstAttribute="leading" secondItem="PYj-ff-Skc" secondAttribute="leading" constant="18" id="HcK-kr-kmb"/>
+                                                        <constraint firstItem="Ic4-ae-P9g" firstAttribute="leading" secondItem="DJh-8H-8Db" secondAttribute="trailing" constant="20" id="IMY-q9-S9i"/>
                                                         <constraint firstItem="DJh-8H-8Db" firstAttribute="centerY" secondItem="PYj-ff-Skc" secondAttribute="centerY" id="KsE-67-gJO"/>
                                                         <constraint firstItem="Ic4-ae-P9g" firstAttribute="centerY" secondItem="PYj-ff-Skc" secondAttribute="centerY" id="dws-O7-eBt"/>
                                                         <constraint firstItem="tqe-9b-j4m" firstAttribute="centerY" secondItem="PYj-ff-Skc" secondAttribute="centerY" id="ikx-Sp-CjO"/>
@@ -165,8 +165,5 @@
     </scenes>
     <resources>
         <image name="more_action" width="30" height="30"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

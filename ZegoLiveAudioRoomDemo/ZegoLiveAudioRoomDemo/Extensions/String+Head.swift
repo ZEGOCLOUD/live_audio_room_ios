@@ -9,12 +9,12 @@ import Foundation
 
 extension String {
     
-    static func getHeadImageNameWithUserId(userID: String) -> String {
-        if userID.count == 0 {
+    static func getHeadImageName(userName: String) -> String {
+        if userName.count == 0 {
             return ""
         }
-        let data = userID.cString(using: String.Encoding.utf8)
-        let len = CC_LONG(userID.lengthOfBytes(using: String.Encoding.utf8))
+        let data = userName.cString(using: String.Encoding.utf8)
+        let len = CC_LONG(userName.lengthOfBytes(using: String.Encoding.utf8))
         let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 16)
         CC_MD5(data!,len, result)
         let hash = NSMutableString()

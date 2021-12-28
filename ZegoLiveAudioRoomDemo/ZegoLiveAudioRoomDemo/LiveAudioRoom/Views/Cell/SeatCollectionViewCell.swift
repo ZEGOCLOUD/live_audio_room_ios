@@ -32,11 +32,11 @@ class SeatCollectionViewCell: UICollectionViewCell {
     
     public func setSpeakerSeat(seatModel: SpeakerSeatModel, role: UserRole) -> Void {
         
-        nameLabel.text = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName
+        nameLabel.text = RoomManager.shared.userService.userList.getObj(seatModel.userID)?.userName
         hostLogo.isHidden = true
         micImageView.isHidden = true
         networkStatusLog.isHidden = true
-        soundWaveImage.isHidden = seatModel.soundLevel <= 5
+        soundWaveImage.isHidden = seatModel.soundLevel <= 5 || seatModel.status != .occupied
         
         setNetWorkStatusImage(netWorkQuality: seatModel.networkQuality)
         
@@ -54,7 +54,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
             nameLabel.isHidden = false
             micImageView.isHidden = seatModel.mic
             networkStatusLog.isHidden = seatModel.networkQuality == .unknow ? true : false
-            let imageName:String = String.getHeadImageNameWithUserId(userID: seatModel.userID ?? "")
+            let imageName:String = String.getHeadImageName(userName: RoomManager.shared.userService.userList.getObj(seatModel.userID)?.userName ?? "")
             headImageView.image = UIImage.init(named: imageName)
             if seatModel.userID == RoomManager.shared.roomService.info.hostID {
                 hostLogo.isHidden = false

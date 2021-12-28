@@ -25,12 +25,12 @@ class LoginViewController: UIViewController {
         let a = arc4random_uniform(1000) + 1
         let userId:String = "Apple\(a)"
         userIDTextField.text = userId
-        myUserID = userId;
-        myUserName = userId
+        myUserID = userId
         configUI()
     }
     
     func configUI() -> Void {
+        
         loginButton.layer.cornerRadius = 12.0
         loginButton.clipsToBounds = true
         loginButton.setTitle(ZGLocalizedString("login_page_login"), for: UIControl.State.normal)
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
         var userId : String = sender.text! as String
         if userId.count > 20 {
             let startIndex = userId.index(userId.startIndex, offsetBy: 0)
-            let index = userId.index(userId.startIndex, offsetBy: 20)
+            let index = userId.index(userId.startIndex, offsetBy: 19)
             userId = String(userId[startIndex...index])
             sender.text = userId;
         }
@@ -79,9 +79,9 @@ class LoginViewController: UIViewController {
 
     @IBAction func userNameTextFieldChanged(_ sender: UITextField) {
         var userName = sender.text! as String
-        if userName.count > 32 {
+        if userName.count > 16 {
             let startIndex = userName.index(userName.startIndex, offsetBy: 0)
-            let index = userName.index(userName.startIndex, offsetBy: 32)
+            let index = userName.index(userName.startIndex, offsetBy: 15)
             userName = String(userName[startIndex...index])
             sender.text = userName
         }
@@ -90,7 +90,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        let userInfo = UserInfo(myUserID, myUserID, .listener)
+        let userInfo = UserInfo(myUserID, myUserName, .listener)
         if userInfo.userName == nil || userInfo.userName?.count == 0 {
             userInfo.userName = userInfo.userID
         }

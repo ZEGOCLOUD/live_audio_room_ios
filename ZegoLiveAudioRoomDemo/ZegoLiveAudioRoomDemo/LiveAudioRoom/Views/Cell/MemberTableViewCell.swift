@@ -35,7 +35,7 @@ class MemberTableViewCell: UITableViewCell {
         _isSpeakerSeat = isSpeakerSeat
         _isHost = isHost
         userName.text = user.userName
-        let imageName:String = String.getHeadImageNameWithUserId(userID: user.userID ?? "")
+        let imageName:String = String.getHeadImageName(userName: user.userName ?? "")
         headImage.image = UIImage.init(named: imageName)
         updateRoleInfo()
     }

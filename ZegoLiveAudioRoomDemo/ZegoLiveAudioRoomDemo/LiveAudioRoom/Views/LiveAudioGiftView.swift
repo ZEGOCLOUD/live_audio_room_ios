@@ -129,7 +129,7 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             let model:GiftMemberModel = GiftMemberModel()
             model.userID = seat.userID
             model.headImageName = "touxiang1"
-            model.userName = RoomManager.shared.userService.userList.getObj(seat.userID ?? "")?.userName
+            model.userName = RoomManager.shared.userService.userList.getObj(seat.userID)?.userName
             array.append(model)
         }
         return array
@@ -275,14 +275,13 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
     }
     
     @objc func arrowClick(_ sender: UIButton) -> Void {
-        if RoomManager.shared.userService.localInfo?.role == .host && RoomManager.shared.speakerService.seatList.count == 1 {
-            messageLabel?.text = ZGLocalizedString("room_page_select_default");
-        } else {
-            messageLabel?.text = ZGLocalizedString("room_page_gift_no_speaker");
-        }
+        messageLabelTapClick()
     }
     
     @objc func messageLabelTapClick() -> Void {
+        if RoomManager.shared.userService.localInfo?.role == .host && seatUserList?.count == 1 {
+            return
+        }
         if messageTableView?.isHidden == false {
             messageTableView?.isHidden = true
             arrowButton?.transform = CGAffineTransform.init(rotationAngle: 0)

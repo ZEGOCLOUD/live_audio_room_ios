@@ -31,6 +31,7 @@ class LiveAudioMessageCell: UITableViewCell {
         
         ownerLabel.layer.cornerRadius = 2.0
         ownerLabel.clipsToBounds = true
+        ownerLabel.text = ZGLocalizedString("room_page_host")
     }
 
     
