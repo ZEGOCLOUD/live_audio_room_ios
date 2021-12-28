@@ -447,7 +447,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
             
-            if RoomManager.shared.roomService.info.isSeatClosed {return}
+            if !self.hasFreeSeat() {return}
             
             if isSwitch {
                 RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
@@ -468,6 +468,17 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
             }
         }
         self.view.addSubview(popView)
+    }
+    
+    func hasFreeSeat() -> Bool {
+        var hasFreeSeat: Bool = false
+        for seatModel in RoomManager.shared.speakerService.seatList {
+            if seatModel.status == .untaken {
+                hasFreeSeat = true
+                break
+            }
+        }
+        return hasFreeSeat
     }
     
     func lockSeat(index: Int, isLock: Bool) -> Void {
