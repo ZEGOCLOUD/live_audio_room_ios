@@ -93,6 +93,8 @@ class LiveAudioRoomViewController: UIViewController {
     }
     var micAuthorizationTimer: ZegoTimer = ZegoTimer(500)
     
+    var inviteAlter: UIAlertController?
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +130,13 @@ class LiveAudioRoomViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let inviteAlter = inviteAlter {
+            inviteAlter.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -660,7 +669,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
     func receiveTakeSeatInvitation() {
         let title = ZGLocalizedString("dialog_invition_title")
         let message = ZGLocalizedString("dialog_invition_descrip")
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        inviteAlter = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: ZGLocalizedString("dialog_refuse"), style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: ZGLocalizedString("dialog_accept"), style: .default) { action in
@@ -685,9 +694,12 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
                 }
             }
         }
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        
+        if let inviteAlter = inviteAlter {
+            inviteAlter.addAction(cancelAction)
+            inviteAlter.addAction(okAction)
+            self.present(inviteAlter, animated: true, completion: nil)
+        }
     }
 }
 
