@@ -33,7 +33,7 @@ class RoomInfo: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case roomID = "id"
         case roomName = "name"
-        case hostID = "hostID"
+        case hostID = "host_id"
         case seatNum = "num"
         case isTextMessageDisabled = "disable"
         case isSeatClosed = "close"
