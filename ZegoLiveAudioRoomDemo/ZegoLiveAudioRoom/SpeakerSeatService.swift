@@ -395,6 +395,14 @@ extension SpeakerSeatService {
             guard let seatValue = seatDict?[seatKey] as? String else { continue }
             let newModel = ZegoJsonTool.jsonToModel(type: SpeakerSeatModel.self, json: seatValue)
             seatModel.updateModel(with: newModel)
+            
+            if seatModel.userID == localSpeakerSeat?.userID && seatModel.status == .occupied && seatModel.mic {
+                ZegoExpressEngine.shared().muteMicrophone(false)
+                let userID = RoomManager.shared.userService.localInfo?.userID
+                ZegoExpressEngine.shared().startPublishingStream(self.getPublishStreamID(userID))
+            } else if seatModel.userID == localSpeakerSeat?.userID {
+                ZegoExpressEngine.shared().stopPublishingStream()
+            }
         }
         updateLocalUserInfo()
     }
