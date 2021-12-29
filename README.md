@@ -34,7 +34,7 @@ Before getting started with the Live Audio Room application, **contact us to act
 <img width="700px" src="images/bundleId.png"/>
 
 5. Click the **Signing & Capabilities** tab and select your own developer certificate in the **Team**.  
-<img width="700px" src="images/team.png"/>
+<img width="700px" src="images/Team.png"/>
 
 ### Run the sample code
 
