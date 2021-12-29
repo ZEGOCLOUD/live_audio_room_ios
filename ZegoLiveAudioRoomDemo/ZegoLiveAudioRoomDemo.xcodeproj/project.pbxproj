@@ -1,0 +1,1106 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7E2F4BD29093631E4EEEF6F0 /* Pods_ZegoLiveAudioRoomDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */; };
+		8624CC90276877100048871D /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC8F276877100048871D /* AppDefine.swift */; };
+		8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9127687A490048871D /* CreateRoomViewController.swift */; };
+		8624CC9427687A600048871D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9327687A600048871D /* SettingViewController.swift */; };
+		8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CC9627687D7B0048871D /* SettingCellModel.swift */; };
+		8624CC9C2768A4000048871D /* Room.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8624CC9E2768A4000048871D /* Room.strings */; };
+		8624CCA42769C1710048871D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA22769C1710048871D /* MBProgressHUD.m */; };
+		8624CCA62769C2380048871D /* HUDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA52769C2380048871D /* HUDHelper.swift */; };
+		8624CCA92769D6BF0048871D /* StringTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8624CCA82769D6BF0048871D /* StringTool.swift */; };
+		86621055276ADF11002170C9 /* LiveAudioRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86621054276ADF11002170C9 /* LiveAudioRoom.storyboard */; };
+		86621058276ADF77002170C9 /* LiveAudioRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621057276ADF77002170C9 /* LiveAudioRoomViewController.swift */; };
+		8662105B276AE3A3002170C9 /* LiveAudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */; };
+		8662105E276AE5CB002170C9 /* LiveAudioMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */; };
+		8662105F276AE5CB002170C9 /* LiveAudioMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */; };
+		86621062276AE8FE002170C9 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621061276AE8FE002170C9 /* MessageModel.swift */; };
+		86621064276B11A9002170C9 /* MessageModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621063276B11A9002170C9 /* MessageModelBuilder.swift */; };
+		86621066276B3F1D002170C9 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621065276B3F1D002170C9 /* InputTextView.swift */; };
+		86621068276B3F33002170C9 /* InputTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621067276B3F33002170C9 /* InputTextView.xib */; };
+		8662106A276B599C002170C9 /* MaskPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621069276B599C002170C9 /* MaskPopView.swift */; };
+		8662106C276B59B2002170C9 /* MaskPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8662106B276B59B2002170C9 /* MaskPopView.xib */; };
+		8662106E276C37E2002170C9 /* LiveAudioSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662106D276C37E2002170C9 /* LiveAudioSettingView.swift */; };
+		86621071276C4167002170C9 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662106F276C4167002170C9 /* SettingTableViewCell.swift */; };
+		86621072276C4167002170C9 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621070276C4167002170C9 /* SettingTableViewCell.xib */; };
+		86621074276C6847002170C9 /* SeatCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621073276C6847002170C9 /* SeatCollectionView.swift */; };
+		86621076276C685E002170C9 /* SeatCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621075276C685E002170C9 /* SeatCollectionView.xib */; };
+		86621079276C6F8C002170C9 /* SeatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */; };
+		8662107A276C6F8C002170C9 /* SeatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */; };
+		8662107C276C7A1B002170C9 /* LiveAudioGiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */; };
+		8662107E276C8AB3002170C9 /* GiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662107D276C8AB3002170C9 /* GiftModel.swift */; };
+		8676EA452770571800114B60 /* GiftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA432770571800114B60 /* GiftCollectionViewCell.swift */; };
+		8676EA462770571800114B60 /* GiftCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA442770571800114B60 /* GiftCollectionViewCell.xib */; };
+		8676EA48277062E900114B60 /* GiftMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA47277062E900114B60 /* GiftMemberModel.swift */; };
+		8676EA4D27707A3A00114B60 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4B27707A3A00114B60 /* MemberViewController.swift */; };
+		8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */; };
+		8676EA5227707EBE00114B60 /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA5127707EBE00114B60 /* Member.storyboard */; };
+		8676EA552770828900114B60 /* String+Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA542770828900114B60 /* String+Head.swift */; };
+		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
+		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
+		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
+		8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49DD2766FC7800A32320 /* Main.storyboard */; };
+		8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E02766FC7900A32320 /* Assets.xcassets */; };
+		8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */; };
+		8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49ED2766FD2500A32320 /* AppCenter.swift */; };
+		8EDD026F2767340C00A6987F /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD026E2767340C00A6987F /* RoomManager.swift */; };
+		8EDD0271276735BE00A6987F /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0270276735BE00A6987F /* RoomService.swift */; };
+		8EDD0273276735CD00A6987F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0272276735CD00A6987F /* UserService.swift */; };
+		8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */; };
+		8EDD0277276735EC00A6987F /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0276276735EC00A6987F /* MessageService.swift */; };
+		8EDD0279276735F900A6987F /* GiftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD0278276735F900A6987F /* GiftService.swift */; };
+		8EDD027B27673C8C00A6987F /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD027A27673C8C00A6987F /* Define.swift */; };
+		8EDD027D27673CED00A6987F /* ZIMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD027C27673CED00A6987F /* ZIMManager.swift */; };
+		8EDD028327674FF800A6987F /* AppCenter.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD028227674FF800A6987F /* AppCenter.json */; };
+		8EDD02892767727C00A6987F /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02882767727C00A6987F /* RoomInfo.swift */; };
+		8EDD028C2767771300A6987F /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028B2767771300A6987F /* UserInfo.swift */; };
+		8EDD028E27683A7B00A6987F /* SpeakerSeatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */; };
+		8EDD02902768723700A6987F /* TextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD028F2768723700A6987F /* TextMessage.swift */; };
+		8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02912768727D00A6987F /* CustomCommand.swift */; };
+		8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02942768AF6900A6987F /* Result+Zego.swift */; };
+		8EDD02982768CFB100A6987F /* ZegoJsonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD02972768CFB100A6987F /* ZegoJsonTool.swift */; };
+		8EE13E882772022E0038AFCF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EE13E8A2772022E0038AFCF /* InfoPlist.strings */; };
+		8EF493F0276C772E00B8B461 /* DictionaryArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493EF276C772E00B8B461 /* DictionaryArray.swift */; };
+		8EF49435276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493F4276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp */; };
+		8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493F6276CA37700B8B461 /* ZegoRTCServerAssistant.cpp */; };
+		8EF49437276CA37700B8B461 /* ZegoServerAssistantImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493FC276CA37700B8B461 /* ZegoServerAssistantImpl.cpp */; };
+		8EF49438276CA37700B8B461 /* ZegoServerAssistant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF493FD276CA37700B8B461 /* ZegoServerAssistant.cpp */; };
+		8EF49439276CA37700B8B461 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EF4942D276CA37700B8B461 /* CMakeLists.txt */; };
+		8EF4943A276CA37700B8B461 /* ZegoCrypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49430276CA37700B8B461 /* ZegoCrypto.cpp */; };
+		8EF4943B276CA37700B8B461 /* aes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49433276CA37700B8B461 /* aes.cpp */; };
+		8EF4943C276CA37700B8B461 /* Base64.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49434276CA37700B8B461 /* Base64.cc */; };
+		8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4943E276CA3C600B8B461 /* ZegoToken.mm */; };
+		8EF49442276CA56000B8B461 /* AppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49441276CA56000B8B461 /* AppToken.swift */; };
+		8EF49444277075CB00B8B461 /* AuthorizedCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */; };
+		8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4944527707FA700B8B461 /* ZegoTimer.swift */; };
+		8EF494492770A70900B8B461 /* GiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF494482770A70900B8B461 /* GiftManager.swift */; };
+		8EF4944C2770B00200B8B461 /* GiftTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4944B2770B00200B8B461 /* GiftTipView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8624CC8F276877100048871D /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
+		8624CC9127687A490048871D /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
+		8624CC9327687A600048871D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		8624CC9627687D7B0048871D /* SettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellModel.swift; sourceTree = "<group>"; };
+		8624CC9D2768A4000048871D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Room.strings; sourceTree = "<group>"; };
+		8624CC9F2768A41A0048871D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Room.strings"; sourceTree = "<group>"; };
+		8624CCA12769C1710048871D /* ZegoLiveAudioRoomDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZegoLiveAudioRoomDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		8624CCA22769C1710048871D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8624CCA32769C1710048871D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		8624CCA52769C2380048871D /* HUDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDHelper.swift; sourceTree = "<group>"; };
+		8624CCA82769D6BF0048871D /* StringTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTool.swift; sourceTree = "<group>"; };
+		86621054276ADF11002170C9 /* LiveAudioRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LiveAudioRoom.storyboard; sourceTree = "<group>"; };
+		86621057276ADF77002170C9 /* LiveAudioRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioRoomViewController.swift; sourceTree = "<group>"; };
+		8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageView.swift; sourceTree = "<group>"; };
+		8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMessageCell.swift; sourceTree = "<group>"; };
+		8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveAudioMessageCell.xib; sourceTree = "<group>"; };
+		86621061276AE8FE002170C9 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		86621063276B11A9002170C9 /* MessageModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModelBuilder.swift; sourceTree = "<group>"; };
+		86621065276B3F1D002170C9 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		86621067276B3F33002170C9 /* InputTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTextView.xib; sourceTree = "<group>"; };
+		86621069276B599C002170C9 /* MaskPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskPopView.swift; sourceTree = "<group>"; };
+		8662106B276B59B2002170C9 /* MaskPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MaskPopView.xib; sourceTree = "<group>"; };
+		8662106D276C37E2002170C9 /* LiveAudioSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioSettingView.swift; sourceTree = "<group>"; };
+		8662106F276C4167002170C9 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		86621070276C4167002170C9 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
+		86621073276C6847002170C9 /* SeatCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatCollectionView.swift; sourceTree = "<group>"; };
+		86621075276C685E002170C9 /* SeatCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeatCollectionView.xib; sourceTree = "<group>"; };
+		86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatCollectionViewCell.swift; sourceTree = "<group>"; };
+		86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeatCollectionViewCell.xib; sourceTree = "<group>"; };
+		8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioGiftView.swift; sourceTree = "<group>"; };
+		8662107D276C8AB3002170C9 /* GiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftModel.swift; sourceTree = "<group>"; };
+		8676EA432770571800114B60 /* GiftCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCollectionViewCell.swift; sourceTree = "<group>"; };
+		8676EA442770571800114B60 /* GiftCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftCollectionViewCell.xib; sourceTree = "<group>"; };
+		8676EA47277062E900114B60 /* GiftMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMemberModel.swift; sourceTree = "<group>"; };
+		8676EA4B27707A3A00114B60 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
+		8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		8676EA5127707EBE00114B60 /* Member.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
+		8676EA542770828900114B60 /* String+Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Head.swift"; sourceTree = "<group>"; };
+		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8EAB49DB2766FC7800A32320 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8EAB49DE2766FC7800A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8EAB49E02766FC7900A32320 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8EAB49E32766FC7900A32320 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8EAB49E52766FC7900A32320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EAB49ED2766FD2500A32320 /* AppCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenter.swift; sourceTree = "<group>"; };
+		8EDD026E2767340C00A6987F /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		8EDD0270276735BE00A6987F /* RoomService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
+		8EDD0272276735CD00A6987F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerSeatService.swift; sourceTree = "<group>"; };
+		8EDD0276276735EC00A6987F /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		8EDD0278276735F900A6987F /* GiftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftService.swift; sourceTree = "<group>"; };
+		8EDD027A27673C8C00A6987F /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		8EDD027C27673CED00A6987F /* ZIMManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIMManager.swift; sourceTree = "<group>"; };
+		8EDD028227674FF800A6987F /* AppCenter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppCenter.json; sourceTree = "<group>"; };
+		8EDD02882767727C00A6987F /* RoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
+		8EDD028B2767771300A6987F /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerSeatModel.swift; sourceTree = "<group>"; };
+		8EDD028F2768723700A6987F /* TextMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessage.swift; sourceTree = "<group>"; };
+		8EDD02912768727D00A6987F /* CustomCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCommand.swift; sourceTree = "<group>"; };
+		8EDD02942768AF6900A6987F /* Result+Zego.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Zego.swift"; sourceTree = "<group>"; };
+		8EDD02972768CFB100A6987F /* ZegoJsonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoJsonTool.swift; sourceTree = "<group>"; };
+		8EE13E892772022E0038AFCF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8EE13E8B2772022F0038AFCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		8EF493EF276C772E00B8B461 /* DictionaryArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryArray.swift; sourceTree = "<group>"; };
+		8EF493F4276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoRTCServerAssistantImpl.cpp; sourceTree = "<group>"; };
+		8EF493F5276CA37700B8B461 /* ZegoRTCServerAssistantImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoRTCServerAssistantImpl.h; sourceTree = "<group>"; };
+		8EF493F6276CA37700B8B461 /* ZegoRTCServerAssistant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoRTCServerAssistant.cpp; sourceTree = "<group>"; };
+		8EF493F8276CA37700B8B461 /* ZegoRTCServerAssistantDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoRTCServerAssistantDefines.h; sourceTree = "<group>"; };
+		8EF493F9276CA37700B8B461 /* ZegoRTCServerAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoRTCServerAssistant.h; sourceTree = "<group>"; };
+		8EF493FC276CA37700B8B461 /* ZegoServerAssistantImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoServerAssistantImpl.cpp; sourceTree = "<group>"; };
+		8EF493FD276CA37700B8B461 /* ZegoServerAssistant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoServerAssistant.cpp; sourceTree = "<group>"; };
+		8EF493FE276CA37700B8B461 /* ZegoServerAssistantImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoServerAssistantImpl.h; sourceTree = "<group>"; };
+		8EF49400276CA37700B8B461 /* ZegoServerAssistantDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoServerAssistantDefines.h; sourceTree = "<group>"; };
+		8EF49401276CA37700B8B461 /* ZegoServerAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoServerAssistant.h; sourceTree = "<group>"; };
+		8EF49404276CA37700B8B461 /* fwd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fwd.h; sourceTree = "<group>"; };
+		8EF49405276CA37700B8B461 /* memorystream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorystream.h; sourceTree = "<group>"; };
+		8EF49406276CA37700B8B461 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		8EF49407276CA37700B8B461 /* prettywriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prettywriter.h; sourceTree = "<group>"; };
+		8EF49408276CA37700B8B461 /* ostreamwrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ostreamwrapper.h; sourceTree = "<group>"; };
+		8EF49409276CA37700B8B461 /* encodedstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encodedstream.h; sourceTree = "<group>"; };
+		8EF4940A276CA37700B8B461 /* filereadstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filereadstream.h; sourceTree = "<group>"; };
+		8EF4940B276CA37700B8B461 /* istreamwrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = istreamwrapper.h; sourceTree = "<group>"; };
+		8EF4940C276CA37700B8B461 /* stringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringbuffer.h; sourceTree = "<group>"; };
+		8EF4940E276CA37700B8B461 /* ieee754.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ieee754.h; sourceTree = "<group>"; };
+		8EF4940F276CA37700B8B461 /* strtod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strtod.h; sourceTree = "<group>"; };
+		8EF49410276CA37700B8B461 /* swap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swap.h; sourceTree = "<group>"; };
+		8EF49411276CA37700B8B461 /* regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regex.h; sourceTree = "<group>"; };
+		8EF49412276CA37700B8B461 /* diyfp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diyfp.h; sourceTree = "<group>"; };
+		8EF49413276CA37700B8B461 /* biginteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = biginteger.h; sourceTree = "<group>"; };
+		8EF49414276CA37700B8B461 /* strfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strfunc.h; sourceTree = "<group>"; };
+		8EF49415276CA37700B8B461 /* itoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itoa.h; sourceTree = "<group>"; };
+		8EF49416276CA37700B8B461 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		8EF49417276CA37700B8B461 /* dtoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtoa.h; sourceTree = "<group>"; };
+		8EF49418276CA37700B8B461 /* meta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meta.h; sourceTree = "<group>"; };
+		8EF49419276CA37700B8B461 /* pow10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pow10.h; sourceTree = "<group>"; };
+		8EF4941A276CA37700B8B461 /* encodings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encodings.h; sourceTree = "<group>"; };
+		8EF4941B276CA37700B8B461 /* schema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schema.h; sourceTree = "<group>"; };
+		8EF4941C276CA37700B8B461 /* stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
+		8EF4941D276CA37700B8B461 /* filewritestream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filewritestream.h; sourceTree = "<group>"; };
+		8EF4941E276CA37700B8B461 /* rapidjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidjson.h; sourceTree = "<group>"; };
+		8EF4941F276CA37700B8B461 /* document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = document.h; sourceTree = "<group>"; };
+		8EF49420276CA37700B8B461 /* allocators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = allocators.h; sourceTree = "<group>"; };
+		8EF49421276CA37700B8B461 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		8EF49423276CA37700B8B461 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		8EF49424276CA37700B8B461 /* en.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = en.h; sourceTree = "<group>"; };
+		8EF49425276CA37700B8B461 /* memorybuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorybuffer.h; sourceTree = "<group>"; };
+		8EF49426276CA37700B8B461 /* pointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
+		8EF49428276CA37700B8B461 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		8EF49429276CA37700B8B461 /* stdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
+		8EF4942C276CA37700B8B461 /* json_tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json_tools.hpp; sourceTree = "<group>"; };
+		8EF4942D276CA37700B8B461 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		8EF4942E276CA37700B8B461 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		8EF4942F276CA37700B8B461 /* ZegoCrypto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ZegoCrypto.hpp; sourceTree = "<group>"; };
+		8EF49430276CA37700B8B461 /* ZegoCrypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ZegoCrypto.cpp; sourceTree = "<group>"; };
+		8EF49432276CA37700B8B461 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		8EF49433276CA37700B8B461 /* aes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aes.cpp; sourceTree = "<group>"; };
+		8EF49434276CA37700B8B461 /* Base64.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64.cc; sourceTree = "<group>"; };
+		8EF4943D276CA3C600B8B461 /* ZegoToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZegoToken.h; sourceTree = "<group>"; };
+		8EF4943E276CA3C600B8B461 /* ZegoToken.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZegoToken.mm; sourceTree = "<group>"; };
+		8EF49441276CA56000B8B461 /* AppToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppToken.swift; sourceTree = "<group>"; };
+		8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedCheck.swift; sourceTree = "<group>"; };
+		8EF4944527707FA700B8B461 /* ZegoTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZegoTimer.swift; sourceTree = "<group>"; };
+		8EF494482770A70900B8B461 /* GiftManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftManager.swift; sourceTree = "<group>"; };
+		8EF4944B2770B00200B8B461 /* GiftTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftTipView.swift; sourceTree = "<group>"; };
+		B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.release.xcconfig"; sourceTree = "<group>"; };
+		C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZegoLiveAudioRoomDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; path = "Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8EAB49D12766FC7800A32320 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2F4BD29093631E4EEEF6F0 /* Pods_ZegoLiveAudioRoomDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8624CC9527687D5C0048871D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8624CC9627687D7B0048871D /* SettingCellModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8624CC992768A3A50048871D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8624CC9E2768A4000048871D /* Room.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		8624CCA02769C1050048871D /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				8624CCA32769C1710048871D /* MBProgressHUD.h */,
+				8624CCA22769C1710048871D /* MBProgressHUD.m */,
+				8624CCA52769C2380048871D /* HUDHelper.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		8624CCA72769D6310048871D /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49440276CA53000B8B461 /* Token */,
+				8624CCA82769D6BF0048871D /* StringTool.swift */,
+				8EF49441276CA56000B8B461 /* AppToken.swift */,
+				8EF49443277075CB00B8B461 /* AuthorizedCheck.swift */,
+				8EF4944527707FA700B8B461 /* ZegoTimer.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		8624CCAA2769E6CC0048871D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8EAB49DB2766FC7800A32320 /* LoginViewController.swift */,
+				8624CC9127687A490048871D /* CreateRoomViewController.swift */,
+				8624CC9327687A600048871D /* SettingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86621053276ADEE8002170C9 /* LiveAudioRoom */ = {
+			isa = PBXGroup;
+			children = (
+				86621060276AE89C002170C9 /* Models */,
+				86621059276AE355002170C9 /* Views */,
+				86621056276ADF23002170C9 /* ViewControllers */,
+			);
+			path = LiveAudioRoom;
+			sourceTree = "<group>";
+		};
+		86621056276ADF23002170C9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				86621057276ADF77002170C9 /* LiveAudioRoomViewController.swift */,
+				86621054276ADF11002170C9 /* LiveAudioRoom.storyboard */,
+				8676EA4B27707A3A00114B60 /* MemberViewController.swift */,
+				8676EA5127707EBE00114B60 /* Member.storyboard */,
+				8EF494482770A70900B8B461 /* GiftManager.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86621059276AE355002170C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8EF4944A2770AFC300B8B461 /* Cell */,
+				8662105A276AE3A3002170C9 /* LiveAudioMessageView.swift */,
+				86621065276B3F1D002170C9 /* InputTextView.swift */,
+				86621067276B3F33002170C9 /* InputTextView.xib */,
+				86621069276B599C002170C9 /* MaskPopView.swift */,
+				8662106B276B59B2002170C9 /* MaskPopView.xib */,
+				8662106D276C37E2002170C9 /* LiveAudioSettingView.swift */,
+				86621073276C6847002170C9 /* SeatCollectionView.swift */,
+				86621075276C685E002170C9 /* SeatCollectionView.xib */,
+				8662107B276C7A1A002170C9 /* LiveAudioGiftView.swift */,
+				8EF4944B2770B00200B8B461 /* GiftTipView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		86621060276AE89C002170C9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				86621061276AE8FE002170C9 /* MessageModel.swift */,
+				86621063276B11A9002170C9 /* MessageModelBuilder.swift */,
+				8662107D276C8AB3002170C9 /* GiftModel.swift */,
+				8676EA47277062E900114B60 /* GiftMemberModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8676EA532770825700114B60 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8676EA542770828900114B60 /* String+Head.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		86F305FB27673FE7003BA278 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8624CCAA2769E6CC0048871D /* ViewControllers */,
+				8624CC9527687D5C0048871D /* Model */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8EAB49CB2766FC7800A32320 = {
+			isa = PBXGroup;
+			children = (
+				8EAB49EB2766FC9100A32320 /* ZegoLiveAudioRoom */,
+				8EAB49D62766FC7800A32320 /* ZegoLiveAudioRoomDemo */,
+				8EAB49D52766FC7800A32320 /* Products */,
+				AEBCC9E3D655A089D69D6D36 /* Pods */,
+				D6FA1652EFB614C45326A64C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8EAB49D52766FC7800A32320 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8EAB49D62766FC7800A32320 /* ZegoLiveAudioRoomDemo */ = {
+			isa = PBXGroup;
+			children = (
+				8676EA532770825700114B60 /* Extensions */,
+				86621053276ADEE8002170C9 /* LiveAudioRoom */,
+				8624CCA72769D6310048871D /* Tool */,
+				8624CCA02769C1050048871D /* HUD */,
+				86F305FB27673FE7003BA278 /* Login */,
+				8EAB49EC2766FD1400A32320 /* AppCenter */,
+				8624CC992768A3A50048871D /* Resource */,
+				8EAB49D72766FC7800A32320 /* AppDelegate.swift */,
+				8EAB49D92766FC7800A32320 /* SceneDelegate.swift */,
+				8624CC8F276877100048871D /* AppDefine.swift */,
+				8624CCA12769C1710048871D /* ZegoLiveAudioRoomDemo-Bridging-Header.h */,
+				8EAB49DD2766FC7800A32320 /* Main.storyboard */,
+				8EAB49E02766FC7900A32320 /* Assets.xcassets */,
+				8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */,
+				8EAB49E52766FC7900A32320 /* Info.plist */,
+				8EE13E8A2772022E0038AFCF /* InfoPlist.strings */,
+			);
+			path = ZegoLiveAudioRoomDemo;
+			sourceTree = "<group>";
+		};
+		8EAB49EB2766FC9100A32320 /* ZegoLiveAudioRoom */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02962768CF9E00A6987F /* Tool */,
+				8EDD02932768AF5400A6987F /* Extensions */,
+				8EDD02872767727100A6987F /* Model */,
+				8EDD027C27673CED00A6987F /* ZIMManager.swift */,
+				8EDD026E2767340C00A6987F /* RoomManager.swift */,
+				8EDD0270276735BE00A6987F /* RoomService.swift */,
+				8EDD0272276735CD00A6987F /* UserService.swift */,
+				8EDD0274276735DD00A6987F /* SpeakerSeatService.swift */,
+				8EDD0276276735EC00A6987F /* MessageService.swift */,
+				8EDD0278276735F900A6987F /* GiftService.swift */,
+				8EDD027A27673C8C00A6987F /* Define.swift */,
+			);
+			path = ZegoLiveAudioRoom;
+			sourceTree = "<group>";
+		};
+		8EAB49EC2766FD1400A32320 /* AppCenter */ = {
+			isa = PBXGroup;
+			children = (
+				8EAB49ED2766FD2500A32320 /* AppCenter.swift */,
+				8EDD028227674FF800A6987F /* AppCenter.json */,
+			);
+			path = AppCenter;
+			sourceTree = "<group>";
+		};
+		8EDD02872767727100A6987F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02882767727C00A6987F /* RoomInfo.swift */,
+				8EDD028B2767771300A6987F /* UserInfo.swift */,
+				8EDD028D27683A7B00A6987F /* SpeakerSeatModel.swift */,
+				8EDD028F2768723700A6987F /* TextMessage.swift */,
+				8EDD02912768727D00A6987F /* CustomCommand.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8EDD02932768AF5400A6987F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02942768AF6900A6987F /* Result+Zego.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8EDD02962768CF9E00A6987F /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				8EDD02972768CFB100A6987F /* ZegoJsonTool.swift */,
+				8EF493EF276C772E00B8B461 /* DictionaryArray.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		8EF493F1276CA37700B8B461 /* TokenGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493F2276CA37700B8B461 /* kernel03 */,
+				8EF493FA276CA37700B8B461 /* kernel04 */,
+				8EF49402276CA37700B8B461 /* common */,
+			);
+			path = TokenGenerator;
+			sourceTree = "<group>";
+		};
+		8EF493F2276CA37700B8B461 /* kernel03 */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493F3276CA37700B8B461 /* impl */,
+				8EF493F7276CA37700B8B461 /* include */,
+			);
+			path = kernel03;
+			sourceTree = "<group>";
+		};
+		8EF493F3276CA37700B8B461 /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493F4276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp */,
+				8EF493F5276CA37700B8B461 /* ZegoRTCServerAssistantImpl.h */,
+				8EF493F6276CA37700B8B461 /* ZegoRTCServerAssistant.cpp */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
+		8EF493F7276CA37700B8B461 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493F8276CA37700B8B461 /* ZegoRTCServerAssistantDefines.h */,
+				8EF493F9276CA37700B8B461 /* ZegoRTCServerAssistant.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8EF493FA276CA37700B8B461 /* kernel04 */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493FB276CA37700B8B461 /* impl */,
+				8EF493FF276CA37700B8B461 /* include */,
+			);
+			path = kernel04;
+			sourceTree = "<group>";
+		};
+		8EF493FB276CA37700B8B461 /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493FC276CA37700B8B461 /* ZegoServerAssistantImpl.cpp */,
+				8EF493FD276CA37700B8B461 /* ZegoServerAssistant.cpp */,
+				8EF493FE276CA37700B8B461 /* ZegoServerAssistantImpl.h */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
+		8EF493FF276CA37700B8B461 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49400276CA37700B8B461 /* ZegoServerAssistantDefines.h */,
+				8EF49401276CA37700B8B461 /* ZegoServerAssistant.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8EF49402276CA37700B8B461 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49403276CA37700B8B461 /* rapidjson */,
+				8EF4942A276CA37700B8B461 /* modules */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		8EF49403276CA37700B8B461 /* rapidjson */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49404276CA37700B8B461 /* fwd.h */,
+				8EF49405276CA37700B8B461 /* memorystream.h */,
+				8EF49406276CA37700B8B461 /* reader.h */,
+				8EF49407276CA37700B8B461 /* prettywriter.h */,
+				8EF49408276CA37700B8B461 /* ostreamwrapper.h */,
+				8EF49409276CA37700B8B461 /* encodedstream.h */,
+				8EF4940A276CA37700B8B461 /* filereadstream.h */,
+				8EF4940B276CA37700B8B461 /* istreamwrapper.h */,
+				8EF4940C276CA37700B8B461 /* stringbuffer.h */,
+				8EF4940D276CA37700B8B461 /* internal */,
+				8EF4941A276CA37700B8B461 /* encodings.h */,
+				8EF4941B276CA37700B8B461 /* schema.h */,
+				8EF4941C276CA37700B8B461 /* stream.h */,
+				8EF4941D276CA37700B8B461 /* filewritestream.h */,
+				8EF4941E276CA37700B8B461 /* rapidjson.h */,
+				8EF4941F276CA37700B8B461 /* document.h */,
+				8EF49420276CA37700B8B461 /* allocators.h */,
+				8EF49421276CA37700B8B461 /* writer.h */,
+				8EF49422276CA37700B8B461 /* error */,
+				8EF49425276CA37700B8B461 /* memorybuffer.h */,
+				8EF49426276CA37700B8B461 /* pointer.h */,
+				8EF49427276CA37700B8B461 /* msinttypes */,
+			);
+			path = rapidjson;
+			sourceTree = "<group>";
+		};
+		8EF4940D276CA37700B8B461 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				8EF4940E276CA37700B8B461 /* ieee754.h */,
+				8EF4940F276CA37700B8B461 /* strtod.h */,
+				8EF49410276CA37700B8B461 /* swap.h */,
+				8EF49411276CA37700B8B461 /* regex.h */,
+				8EF49412276CA37700B8B461 /* diyfp.h */,
+				8EF49413276CA37700B8B461 /* biginteger.h */,
+				8EF49414276CA37700B8B461 /* strfunc.h */,
+				8EF49415276CA37700B8B461 /* itoa.h */,
+				8EF49416276CA37700B8B461 /* stack.h */,
+				8EF49417276CA37700B8B461 /* dtoa.h */,
+				8EF49418276CA37700B8B461 /* meta.h */,
+				8EF49419276CA37700B8B461 /* pow10.h */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		8EF49422276CA37700B8B461 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49423276CA37700B8B461 /* error.h */,
+				8EF49424276CA37700B8B461 /* en.h */,
+			);
+			path = error;
+			sourceTree = "<group>";
+		};
+		8EF49427276CA37700B8B461 /* msinttypes */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49428276CA37700B8B461 /* inttypes.h */,
+				8EF49429276CA37700B8B461 /* stdint.h */,
+			);
+			path = msinttypes;
+			sourceTree = "<group>";
+		};
+		8EF4942A276CA37700B8B461 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				8EF4942B276CA37700B8B461 /* common */,
+			);
+			path = modules;
+			sourceTree = "<group>";
+		};
+		8EF4942B276CA37700B8B461 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				8EF4942C276CA37700B8B461 /* json_tools.hpp */,
+				8EF4942D276CA37700B8B461 /* CMakeLists.txt */,
+				8EF4942E276CA37700B8B461 /* Base64.h */,
+				8EF4942F276CA37700B8B461 /* ZegoCrypto.hpp */,
+				8EF49430276CA37700B8B461 /* ZegoCrypto.cpp */,
+				8EF49431276CA37700B8B461 /* crypto-algorithms */,
+				8EF49434276CA37700B8B461 /* Base64.cc */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		8EF49431276CA37700B8B461 /* crypto-algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				8EF49432276CA37700B8B461 /* aes.h */,
+				8EF49433276CA37700B8B461 /* aes.cpp */,
+			);
+			path = "crypto-algorithms";
+			sourceTree = "<group>";
+		};
+		8EF49440276CA53000B8B461 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				8EF493F1276CA37700B8B461 /* TokenGenerator */,
+				8EF4943D276CA3C600B8B461 /* ZegoToken.h */,
+				8EF4943E276CA3C600B8B461 /* ZegoToken.mm */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
+		8EF4944A2770AFC300B8B461 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8662105C276AE5CB002170C9 /* LiveAudioMessageCell.swift */,
+				8662105D276AE5CB002170C9 /* LiveAudioMessageCell.xib */,
+				8662106F276C4167002170C9 /* SettingTableViewCell.swift */,
+				86621070276C4167002170C9 /* SettingTableViewCell.xib */,
+				86621077276C6F8C002170C9 /* SeatCollectionViewCell.swift */,
+				86621078276C6F8C002170C9 /* SeatCollectionViewCell.xib */,
+				8676EA432770571800114B60 /* GiftCollectionViewCell.swift */,
+				8676EA442770571800114B60 /* GiftCollectionViewCell.xib */,
+				8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AEBCC9E3D655A089D69D6D36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */,
+				B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D6FA1652EFB614C45326A64C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C585BB18E4E71070F01FA46D /* Pods_ZegoLiveAudioRoomDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8EAB49D32766FC7800A32320 /* ZegoLiveAudioRoomDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EAB49E82766FC7900A32320 /* Build configuration list for PBXNativeTarget "ZegoLiveAudioRoomDemo" */;
+			buildPhases = (
+				4458EEA720C11575FD25210F /* [CP] Check Pods Manifest.lock */,
+				8EAB49D02766FC7800A32320 /* Sources */,
+				8EAB49D12766FC7800A32320 /* Frameworks */,
+				8EAB49D22766FC7800A32320 /* Resources */,
+				0D76416BC061264E2E9F68E4 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZegoLiveAudioRoomDemo;
+			productName = ZegoLiveAudioRoomDemo;
+			productReference = 8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8EAB49CC2766FC7800A32320 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					8EAB49D32766FC7800A32320 = {
+						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
+					};
+				};
+			};
+			buildConfigurationList = 8EAB49CF2766FC7800A32320 /* Build configuration list for PBXProject "ZegoLiveAudioRoomDemo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 8EAB49CB2766FC7800A32320;
+			productRefGroup = 8EAB49D52766FC7800A32320 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8EAB49D32766FC7800A32320 /* ZegoLiveAudioRoomDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8EAB49D22766FC7800A32320 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8676EA5227707EBE00114B60 /* Member.storyboard in Resources */,
+				8EE13E882772022E0038AFCF /* InfoPlist.strings in Resources */,
+				86621055276ADF11002170C9 /* LiveAudioRoom.storyboard in Resources */,
+				86621076276C685E002170C9 /* SeatCollectionView.xib in Resources */,
+				8662105F276AE5CB002170C9 /* LiveAudioMessageCell.xib in Resources */,
+				8662107A276C6F8C002170C9 /* SeatCollectionViewCell.xib in Resources */,
+				8662106C276B59B2002170C9 /* MaskPopView.xib in Resources */,
+				86621068276B3F33002170C9 /* InputTextView.xib in Resources */,
+				8EDD028327674FF800A6987F /* AppCenter.json in Resources */,
+				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
+				8676EA462770571800114B60 /* GiftCollectionViewCell.xib in Resources */,
+				8624CC9C2768A4000048871D /* Room.strings in Resources */,
+				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
+				86621072276C4167002170C9 /* SettingTableViewCell.xib in Resources */,
+				8EAB49DF2766FC7800A32320 /* Main.storyboard in Resources */,
+				8EF49439276CA37700B8B461 /* CMakeLists.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D76416BC061264E2E9F68E4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZegoLiveAudioRoomDemo/Pods-ZegoLiveAudioRoomDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4458EEA720C11575FD25210F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZegoLiveAudioRoomDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8EAB49D02766FC7800A32320 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EDD0279276735F900A6987F /* GiftService.swift in Sources */,
+				8EDD026F2767340C00A6987F /* RoomManager.swift in Sources */,
+				8662106A276B599C002170C9 /* MaskPopView.swift in Sources */,
+				8EF4943C276CA37700B8B461 /* Base64.cc in Sources */,
+				8EDD0273276735CD00A6987F /* UserService.swift in Sources */,
+				8EDD028E27683A7B00A6987F /* SpeakerSeatModel.swift in Sources */,
+				8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */,
+				8EDD0271276735BE00A6987F /* RoomService.swift in Sources */,
+				86621079276C6F8C002170C9 /* SeatCollectionViewCell.swift in Sources */,
+				8624CC9727687D7B0048871D /* SettingCellModel.swift in Sources */,
+				86621064276B11A9002170C9 /* MessageModelBuilder.swift in Sources */,
+				8662107C276C7A1B002170C9 /* LiveAudioGiftView.swift in Sources */,
+				8624CC90276877100048871D /* AppDefine.swift in Sources */,
+				8676EA4D27707A3A00114B60 /* MemberViewController.swift in Sources */,
+				8EF4944C2770B00200B8B461 /* GiftTipView.swift in Sources */,
+				8624CCA42769C1710048871D /* MBProgressHUD.m in Sources */,
+				8EF4943A276CA37700B8B461 /* ZegoCrypto.cpp in Sources */,
+				8676EA552770828900114B60 /* String+Head.swift in Sources */,
+				8EF49442276CA56000B8B461 /* AppToken.swift in Sources */,
+				8662105E276AE5CB002170C9 /* LiveAudioMessageCell.swift in Sources */,
+				8624CC9227687A490048871D /* CreateRoomViewController.swift in Sources */,
+				8EF4943B276CA37700B8B461 /* aes.cpp in Sources */,
+				8676EA48277062E900114B60 /* GiftMemberModel.swift in Sources */,
+				8676EA452770571800114B60 /* GiftCollectionViewCell.swift in Sources */,
+				8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */,
+				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
+				8EF49435276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp in Sources */,
+				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
+				8662106E276C37E2002170C9 /* LiveAudioSettingView.swift in Sources */,
+				8EDD02902768723700A6987F /* TextMessage.swift in Sources */,
+				86621071276C4167002170C9 /* SettingTableViewCell.swift in Sources */,
+				8EF494492770A70900B8B461 /* GiftManager.swift in Sources */,
+				8EDD0275276735DD00A6987F /* SpeakerSeatService.swift in Sources */,
+				8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */,
+				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
+				8624CCA92769D6BF0048871D /* StringTool.swift in Sources */,
+				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
+				86621058276ADF77002170C9 /* LiveAudioRoomViewController.swift in Sources */,
+				8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */,
+				8EF49444277075CB00B8B461 /* AuthorizedCheck.swift in Sources */,
+				8EDD02922768727E00A6987F /* CustomCommand.swift in Sources */,
+				8EDD02982768CFB100A6987F /* ZegoJsonTool.swift in Sources */,
+				8662105B276AE3A3002170C9 /* LiveAudioMessageView.swift in Sources */,
+				8EF49437276CA37700B8B461 /* ZegoServerAssistantImpl.cpp in Sources */,
+				8EDD0277276735EC00A6987F /* MessageService.swift in Sources */,
+				8EF493F0276C772E00B8B461 /* DictionaryArray.swift in Sources */,
+				86621062276AE8FE002170C9 /* MessageModel.swift in Sources */,
+				86621074276C6847002170C9 /* SeatCollectionView.swift in Sources */,
+				8624CC9427687A600048871D /* SettingViewController.swift in Sources */,
+				8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */,
+				8EDD027B27673C8C00A6987F /* Define.swift in Sources */,
+				8662107E276C8AB3002170C9 /* GiftModel.swift in Sources */,
+				8EDD02892767727C00A6987F /* RoomInfo.swift in Sources */,
+				8624CCA62769C2380048871D /* HUDHelper.swift in Sources */,
+				8EDD028C2767771300A6987F /* UserInfo.swift in Sources */,
+				8EF49438276CA37700B8B461 /* ZegoServerAssistant.cpp in Sources */,
+				86621066276B3F1D002170C9 /* InputTextView.swift in Sources */,
+				8EDD027D27673CED00A6987F /* ZIMManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8624CC9E2768A4000048871D /* Room.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8624CC9D2768A4000048871D /* en */,
+				8624CC9F2768A41A0048871D /* zh-Hans */,
+			);
+			name = Room.strings;
+			sourceTree = "<group>";
+		};
+		8EAB49DD2766FC7800A32320 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EAB49DE2766FC7800A32320 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EAB49E32766FC7900A32320 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8EE13E8A2772022E0038AFCF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EE13E892772022E0038AFCF /* en */,
+				8EE13E8B2772022F0038AFCF /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8EAB49E62766FC7900A32320 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8EAB49E72766FC7900A32320 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8EAB49E92766FC7900A32320 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E74307424E565E6C7BF64EDC /* Pods-ZegoLiveAudioRoomDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = B82BHJ5H89;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ZegoLiveAudioRoomDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ZegoLiveAudio;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need to use your mic to help you join the voice interaction.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8EAB49EA2766FC7900A32320 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B37C85AEA064180C9E3593C2 /* Pods-ZegoLiveAudioRoomDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = B82BHJ5H89;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ZegoLiveAudioRoomDemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ZegoLiveAudio;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need to use your mic to help you join the voice interaction.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8EAB49CF2766FC7800A32320 /* Build configuration list for PBXProject "ZegoLiveAudioRoomDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EAB49E62766FC7900A32320 /* Debug */,
+				8EAB49E72766FC7900A32320 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8EAB49E82766FC7900A32320 /* Build configuration list for PBXNativeTarget "ZegoLiveAudioRoomDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EAB49E92766FC7900A32320 /* Debug */,
+				8EAB49EA2766FC7900A32320 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8EAB49CC2766FC7800A32320 /* Project object */;
+}

@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  ZegoLiveAudioRoomDemo
+
+  Created by Kael Ding on 2021/12/21.
+  
+*/
+"NSMicrophoneUsageDescription" = "请允许我们使用你的麦克风，以便你能正常进行语音聊天。";

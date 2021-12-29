@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  ZegoLiveAudioRoomDemo
+
+  Created by Kael Ding on 2021/12/21.
+  
+*/
+
+
+"NSMicrophoneUsageDescription" = "We need to use your mic to help you join the voice interaction.";

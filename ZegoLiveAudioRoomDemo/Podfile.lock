@@ -1,0 +1,20 @@
+PODS:
+  - ZegoExpressEngine/Audio (2.13.1)
+  - ZIM (1.3.0)
+
+DEPENDENCIES:
+  - ZegoExpressEngine/Audio
+  - ZIM
+
+SPEC REPOS:
+  trunk:
+    - ZegoExpressEngine
+    - ZIM
+
+SPEC CHECKSUMS:
+  ZegoExpressEngine: 65e982c8a8d5bcc79a0824a0043020cdaeb832b4
+  ZIM: f8d32d71d0f20c48855f6e9b310b465c99c7d36c
+
+PODFILE CHECKSUM: 638bcf637f5a5b7f6588163099021db4af0854d4
+
+COCOAPODS: 1.11.2
