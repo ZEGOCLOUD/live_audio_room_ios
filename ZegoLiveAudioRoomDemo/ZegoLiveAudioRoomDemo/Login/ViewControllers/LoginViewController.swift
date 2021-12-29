@@ -87,7 +87,24 @@ class LoginViewController: UIViewController {
             userName = String(userName[startIndex...index])
             sender.text = userName
         }
-        myUserName = userName
+        myUserName = subStringOfBytes(userName: userName)
+    }
+    
+    func subStringOfBytes(userName: String) -> String {
+        var count:Int = 0
+        var newStr:String = ""
+        for i in 0..<userName.count {
+            let startIndex = userName.index(userName.startIndex, offsetBy: i)
+            let index = userName.index(userName.startIndex, offsetBy: i)
+            let aStr:String = String(userName[startIndex...index])
+            count += aStr.lengthOfBytes(using: .utf8)
+            if count <= 32 {
+                newStr.append(aStr)
+            } else {
+                break
+            }
+        }
+        return newStr
     }
     
     
