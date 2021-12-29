@@ -456,7 +456,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
             
-            if !self.hasFreeSeat() {return}
+            if !self.currentSeatIsFree(index: index) {return}
             
             if isSwitch {
                 RoomManager.shared.speakerService.switchSeat(to: index, callback: nil)
@@ -479,15 +479,13 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         self.view.addSubview(popView)
     }
     
-    func hasFreeSeat() -> Bool {
-        var hasFreeSeat: Bool = false
-        for seatModel in RoomManager.shared.speakerService.seatList {
-            if seatModel.status == .untaken {
-                hasFreeSeat = true
-                break
-            }
+    func currentSeatIsFree(index: Int) -> Bool {
+        var isFree: Bool = false
+        let seatModel:SpeakerSeatModel = RoomManager.shared.speakerService.seatList[index]
+        if seatModel.status == .untaken {
+            isFree = true
         }
-        return hasFreeSeat
+        return isFree
     }
     
     func lockSeat(index: Int, isLock: Bool) -> Void {
@@ -642,11 +640,16 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
 
     func roomUserJoin(_ users: [UserInfo]) {
         
+        var tempList: [MessageModel] = []
         for user in users {
-            if user.userID == localUserID { continue }
+            if user.userID == localUserID {
+                tempList.removeAll()
+                break
+            }
             let model: MessageModel = MessageModelBuilder.buildJoinMessageModel(user: user)
-            messageList.append(model)
+            tempList.append(model)
         }
+        messageList.append(contentsOf: tempList)
         
         reloadMessageData()
         memberVC.updateMemberListData()

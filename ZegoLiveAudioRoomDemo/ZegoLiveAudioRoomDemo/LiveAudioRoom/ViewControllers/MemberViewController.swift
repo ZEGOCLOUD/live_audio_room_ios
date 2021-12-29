@@ -82,11 +82,13 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RoomMemberTableViewCell") as! MemberTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RoomMemberTableViewCell") as? MemberTableViewCell ?? MemberTableViewCell.init(style: .default, reuseIdentifier: "RoomMemberTableViewCell")
         cell.delegate = self as MemberTableViewCellDelegate
-        let roomUser:UserInfo = RoomManager.shared.userService.userList.allObjects()[indexPath.row]
-        let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
-        cell.setRoomUser(user: roomUser, isSpeakerSeat: isOnSeat(userID: roomUser.userID ?? ""), isHost: isHost)
+        if indexPath.row < RoomManager.shared.userService.userList.count {
+            let roomUser:UserInfo = RoomManager.shared.userService.userList.allObjects()[indexPath.row]
+            let isHost:Bool = RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
+            cell.setRoomUser(user: roomUser, isSpeakerSeat: isOnSeat(userID: roomUser.userID ?? ""), isHost: isHost)
+        }
         return cell
     }
     
@@ -111,8 +113,10 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: -MemberTableViewCellDelegate
     func MemberTableViewCellDidSelectedMoreAction(cell: MemberTableViewCell) {
-        let index:NSIndexPath = roomMemberTableView.indexPath(for: cell)! as NSIndexPath
-        inviteRoomUser = RoomManager.shared.userService.userList.allObjects()[index.row]
+        let index:NSIndexPath = roomMemberTableView.indexPath(for: cell) as NSIndexPath? ?? NSIndexPath()
+        if index.row < RoomManager.shared.userService.userList.count {
+            inviteRoomUser = RoomManager.shared.userService.userList.allObjects()[index.row]
+        }
         inviteMaskView.isHidden = false
     }
     

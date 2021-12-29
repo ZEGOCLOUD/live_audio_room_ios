@@ -1,5 +1,5 @@
 {
     "appID": 123456789,
     "appSign": "xxxxxxxxxxxx",
-    "appSecret": "xxxxxxxxxxxx"
+    "serverSecret": "xxxxxxxxxxxx"
 }

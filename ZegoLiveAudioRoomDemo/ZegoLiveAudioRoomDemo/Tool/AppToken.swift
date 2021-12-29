@@ -14,7 +14,7 @@ struct AppToken {
         let token = ZegoToken.getRTCToken(withRoomID: roomID,
                                           userID: userID,
                                           appID: AppCenter.appID(),
-                                          appSecret: AppCenter.appSecret())
+                                          appSecret: AppCenter.serverSecret())
         return token
     }
     
@@ -23,7 +23,7 @@ struct AppToken {
 
         let token = ZegoToken.getZIMToken(withUserID: userID,
                                           appID: AppCenter.appID(),
-                                          appSecret: AppCenter.appSecret())
+                                          appSecret: AppCenter.serverSecret())
         
         return token
     }

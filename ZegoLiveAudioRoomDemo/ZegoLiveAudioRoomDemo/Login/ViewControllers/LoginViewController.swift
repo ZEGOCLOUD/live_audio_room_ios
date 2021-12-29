@@ -31,6 +31,8 @@ class LoginViewController: UIViewController {
     
     func configUI() -> Void {
         
+        print(NSHomeDirectory());
+        
         loginButton.layer.cornerRadius = 12.0
         loginButton.clipsToBounds = true
         loginButton.setTitle(ZGLocalizedString("login_page_login"), for: UIControl.State.normal)
@@ -85,7 +87,24 @@ class LoginViewController: UIViewController {
             userName = String(userName[startIndex...index])
             sender.text = userName
         }
-        myUserName = userName
+        myUserName = subStringOfBytes(userName: userName)
+    }
+    
+    func subStringOfBytes(userName: String) -> String {
+        var count:Int = 0
+        var newStr:String = ""
+        for i in 0..<userName.count {
+            let startIndex = userName.index(userName.startIndex, offsetBy: i)
+            let index = userName.index(userName.startIndex, offsetBy: i)
+            let aStr:String = String(userName[startIndex...index])
+            count += aStr.lengthOfBytes(using: .utf8)
+            if count <= 32 {
+                newStr.append(aStr)
+            } else {
+                break
+            }
+        }
+        return newStr
     }
     
     
@@ -139,5 +158,14 @@ extension LoginViewController : UITextFieldDelegate {
         userIDBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
         userNameBackgroundView.layer.borderColor = UIColor.init(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0).cgColor
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let proposeLength = (textField.text?.lengthOfBytes(using: .utf8))! - range.length + string.lengthOfBytes(using: .utf8)
+        if proposeLength > 32 {
+            return false
+        }
+        return true
+    }
+
 }
 

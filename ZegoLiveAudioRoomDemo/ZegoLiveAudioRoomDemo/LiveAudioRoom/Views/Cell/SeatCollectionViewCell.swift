@@ -36,7 +36,7 @@ class SeatCollectionViewCell: UICollectionViewCell {
         hostLogo.isHidden = true
         micImageView.isHidden = true
         networkStatusLog.isHidden = true
-        soundWaveImage.isHidden = seatModel.soundLevel <= 5 || seatModel.status != .occupied
+        soundWaveImage.isHidden = seatModel.soundLevel <= 10 || seatModel.status != .occupied
         
         setNetWorkStatusImage(netWorkQuality: seatModel.networkQuality)
         

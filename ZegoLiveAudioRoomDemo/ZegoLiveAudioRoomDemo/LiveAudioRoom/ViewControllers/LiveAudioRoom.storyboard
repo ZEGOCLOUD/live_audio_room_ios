@@ -102,7 +102,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A live audio room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6r-Hf-06T">
-                                        <rect key="frame" x="15" y="8" width="335" height="22.5"/>
+                                        <rect key="frame" x="15" y="8" width="293" height="22.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22.5" id="NOB-XO-7bY"/>
                                         </constraints>
@@ -137,7 +137,7 @@
                                     <constraint firstItem="l4A-aY-LqQ" firstAttribute="top" secondItem="y6r-Hf-06T" secondAttribute="bottom" constant="1.5" id="EvR-gd-E3L"/>
                                     <constraint firstAttribute="height" constant="54" id="Hsi-0C-8Cl"/>
                                     <constraint firstAttribute="trailing" secondItem="HtY-Jy-Eg6" secondAttribute="trailing" constant="10" id="SUm-UV-aja"/>
-                                    <constraint firstItem="HtY-Jy-Eg6" firstAttribute="leading" secondItem="y6r-Hf-06T" secondAttribute="trailing" constant="20" id="TSl-if-KhQ"/>
+                                    <constraint firstItem="HtY-Jy-Eg6" firstAttribute="leading" secondItem="y6r-Hf-06T" secondAttribute="trailing" constant="62" id="TSl-if-KhQ"/>
                                     <constraint firstItem="HtY-Jy-Eg6" firstAttribute="centerY" secondItem="m5g-L7-xSQ" secondAttribute="centerY" id="dUu-Du-dhs"/>
                                     <constraint firstItem="l4A-aY-LqQ" firstAttribute="leading" secondItem="m5g-L7-xSQ" secondAttribute="leading" constant="15" id="hrM-9d-Rrz"/>
                                     <constraint firstItem="y6r-Hf-06T" firstAttribute="leading" secondItem="m5g-L7-xSQ" secondAttribute="leading" constant="15" id="nzA-0P-YVr"/>

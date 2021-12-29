@@ -180,7 +180,7 @@ extension RoomService {
         let config = ZIMRoomAdvancedConfig()
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
-        config.roomAttributes = ["roomInfo" : roomInfoJson]
+        config.roomAttributes = ["room_info" : roomInfoJson]
         
         return (zimRoomInfo, config, roomInfo)
     }
@@ -192,7 +192,7 @@ extension RoomService {
         
         let roomInfoJson = ZegoJsonTool.modelToJson(toString: roomInfo) ?? ""
         
-        let attributes = ["roomInfo" : roomInfoJson]
+        let attributes = ["room_info" : roomInfoJson]
         
         let roomID = roomInfo?.roomID ?? ""
         
@@ -208,20 +208,11 @@ extension RoomService: ZIMEventHandler {
     
     func zim(_ zim: ZIM, connectionStateChanged state: ZIMConnectionState, event: ZIMConnectionEvent, extendedData: [AnyHashable : Any]) {
         // if host reconneted
-        if state == .connected && event == .success {
-            guard let roomID = RoomManager.shared.roomService.info.roomID else { return }
-            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { dict, error in
-                if error.code != .ZIMErrorCodeSuccess { return }
-                if dict.count == 0 {
-                    self.delegate?.receiveRoomInfoUpdate(nil)
-                }
-            })
-        }
     }
     
     func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
-        if updateInfo.roomAttributes.keys.contains("roomInfo") {
-            let roomJson = updateInfo.roomAttributes["roomInfo"] ?? ""
+        if updateInfo.roomAttributes.keys.contains("room_info") {
+            let roomJson = updateInfo.roomAttributes["room_info"] ?? ""
             let roomInfo = ZegoJsonTool.jsonToModel(type: RoomInfo.self, json: roomJson)
             
             // if the room info is nil, we should not set self.info = nil
@@ -232,4 +223,19 @@ extension RoomService: ZIMEventHandler {
             delegate?.receiveRoomInfoUpdate(roomInfo)
         }
     }
+    
+    func zim(_ zim: ZIM, roomStateChanged state: ZIMRoomState, event: ZIMRoomEvent, extendedData: [AnyHashable : Any], roomID: String) {
+        if state == .connected && event == .success {
+            guard let roomID = RoomManager.shared.roomService.info.roomID else { return }
+            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { dict, error in
+                if error.code != .ZIMErrorCodeSuccess { return }
+                if dict.count == 0 {
+                    self.delegate?.receiveRoomInfoUpdate(nil)
+                }
+            })
+        } else if state == .disconnected && event == .enterFailed{
+            delegate?.receiveRoomInfoUpdate(nil)
+        }
+    }
+    
 }
