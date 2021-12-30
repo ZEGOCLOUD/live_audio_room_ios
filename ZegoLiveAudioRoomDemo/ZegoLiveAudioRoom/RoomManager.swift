@@ -64,7 +64,11 @@ class RoomManager: NSObject {
         }
         
         ZIMManager.shared.createZIM(appID: appID)
-        ZegoExpressEngine.createEngine(withAppID: appID, appSign: appSign, isTestEnv: false, scenario: .general, eventHandler: self)
+        let profile:ZegoEngineProfile = ZegoEngineProfile()
+        profile.appID = appID
+        profile.appSign = appSign
+        profile.scenario = .general
+        ZegoExpressEngine.createEngine(with: profile, eventHandler: self)
         
         var result: ZegoResult = .success(())
         if ZIMManager.shared.zim == nil {
