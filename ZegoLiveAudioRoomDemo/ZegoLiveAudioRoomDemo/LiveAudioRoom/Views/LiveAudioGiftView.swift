@@ -22,11 +22,6 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
         let model:GiftMemberModel = self.seatUserList?[indexPath.row] ?? GiftMemberModel();
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
-            cell?.selectionStyle = .none
-            cell?.contentView.backgroundColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 248/255.0, alpha: 1.0)
-            let lineView:UIView = UIView.init(frame: CGRect.init(x: 16, y: 41.5, width: messageTableView?.bounds.size.width ?? 0 - 32, height: 0.5))
-            lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
-            cell?.contentView.addSubview(lineView)
         }
         if model.userID != nil {
             cell?.textLabel?.text = model.userName;
@@ -34,6 +29,15 @@ class LiveAudioGiftView: UIView, UITableViewDelegate, UITableViewDataSource, UIC
             cell?.textLabel?.text = ZGLocalizedString("room_page_select_all_speakers");
         }
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        cell?.selectionStyle = .none
+        cell?.contentView.backgroundColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 248/255.0, alpha: 1.0)
+        var lineWidth: CGFloat = 0;
+        if let messageTableView = messageTableView {
+            lineWidth = messageTableView.bounds.size.width - 32
+        }
+        let lineView:UIView = UIView.init(frame: CGRect.init(x: 16, y: 41.5, width: lineWidth, height: 0.5))
+        lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        cell?.contentView.addSubview(lineView)
         return cell ?? UITableViewCell()
     }
     
