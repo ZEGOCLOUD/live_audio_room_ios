@@ -1033,7 +1033,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";
@@ -1070,7 +1070,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";
