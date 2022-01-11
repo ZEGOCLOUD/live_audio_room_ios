@@ -16,7 +16,8 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     var dataList : [[SettingCellModel]] {
         get {
-            return [[configModel(type: .express), configModel(type: .zim)],
+            return [[configModel(type: .express), configModel(type: .zim), configModel(type: .app)],
+                    [configModel(type: .terms), configModel(type: .privacy)],
                     [configModel(type: .shareLog)],
                     [configModel(type: .logOut)]];
         }
@@ -40,28 +41,28 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.navigationController?.popViewController(animated: true)
     }
     
-    func configModel(type:SettingCellType) -> SettingCellModel {
-        let model : SettingCellModel = SettingCellModel.init()
+    func configModel(type: SettingCellType) -> SettingCellModel {
+        let model : SettingCellModel = SettingCellModel()
+        model.type = type
         switch type {
         case .express:
             let version : String = ZegoExpressEngine.getVersion().components(separatedBy: "_")[0]
             model.title = ZGLocalizedString("setting_page_sdk_version")
             model.subTitle = "v\(version)"
-            model.type = type
-            break
         case .zim:
             model.title = ZGLocalizedString("setting_page_zim_sdk_version")
             model.subTitle = "v\(ZIM.getVersion())"
-            model.type = type
-            break
         case .shareLog:
             model.title = ZGLocalizedString("setting_page_upload_log")
-            model.type = type
-            break
         case .logOut:
             model.title = ZGLocalizedString("setting_page_logout")
-            model.type = type
-            break
+        case .app:
+            model.title = ZGLocalizedString("setting_page_version")
+            model.subTitle = getAppVersion()
+        case .terms:
+            model.title = ZGLocalizedString("setting_page_terms_of_service")
+        case .privacy:
+            model.title = ZGLocalizedString("setting_page_privacy_policy")
         }
         return model
     }
@@ -119,9 +120,9 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 16
-        } else if section == 1 {
+        } else if section == 1 || section == 2 {
             return 10
-        } else if section == 2 {
+        } else if section == 3 {
             return 60
         }
         return 0
@@ -149,6 +150,26 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
                     break
                 }
             };
+        } else if model.type == .terms {
+            junmpToWeb("https://www.zegocloud.com/policy?index=1")
+        } else if model.type == .privacy {
+            junmpToWeb("https://www.zegocloud.com/policy?index=0")
         }
+    }
+}
+
+extension SettingViewController {
+    private func getAppVersion() -> String {
+        let bundle = Bundle.main
+        let localVersion = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        let build = bundle.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+        let version = (localVersion ?? "") + "." + (build ?? "")
+        return version
+    }
+    
+    private func junmpToWeb(_ urlStr: String) {
+        let vc = WebVC()
+        vc.urlStr = urlStr
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -91,3 +91,6 @@
 "toast_allow_text_chat_success" = "Allow text chat successfully.";
 "toast_disable_text_chat_tips" = "The host has disabled text chat for everyone.";
 "toast_allow_text_chat_tips" = "The host has allowed text chat for everyone.";
+"setting_page_version" = "APP Version";
+"setting_page_terms_of_service" = "Terms of service";
+"setting_page_privacy_policy" = "Privacy Policy";
