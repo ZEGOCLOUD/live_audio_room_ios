@@ -332,6 +332,17 @@ extension LiveAudioRoomViewController {
         return RoomManager.shared.userService.localInfo?.userID == RoomManager.shared.roomService.info.hostID
     }
     
+    func receiveRoomEnded() {
+        let alert = UIAlertController(title: ZGLocalizedString("dialog_tips_title"),
+                                      message: ZGLocalizedString("toast_room_has_destroyed"),
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: ZGLocalizedString("dialog_confirm"), style: .default) { action in
+            self.leaveChatRoom()
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func leaveChatRoom() {
         RoomManager.shared.roomService.leaveRoom(callback: nil)
         self.navigationController?.popToRootViewController(animated: true)
@@ -527,7 +538,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         popView.type = .leave
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
-            let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
+            let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID)?.userName ?? ""
             let message:String = String(format: ZGLocalizedString("dialog_warning_leave_seat_message"), userName)
             self.sureAlter(seatModel: seatModel, title: ZGLocalizedString("room_page_leave_speaker_seat"), message: message, isHost: true)
         }
@@ -550,7 +561,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                             RoomManager.shared.speakerService.convertClosedOpenSeat(true, seatModel.index, callback: nil)
                         }
                     case .failure(let error):
-                        let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
+                        let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID)?.userName ?? ""
                         let message:String = String(format: ZGLocalizedString("toast_kickout_leave_seat_error"), userName, error.code)
                         HUDHelper.showMessage(message: message)
                     }
@@ -578,8 +589,7 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
     //MARK: -RoomServiceDelegate
     func receiveRoomInfoUpdate(_ info: RoomInfo?) {
         guard let info = info else {
-            HUDHelper.showMessage(message: ZGLocalizedString("toast_room_has_destroyed"))
-            self.leaveChatRoom()
+            self.receiveRoomEnded()
             return
         }
         if localUserIsHost() {
@@ -590,10 +600,16 @@ extension LiveAudioRoomViewController : RoomServiceDelegate {
         
         settingsView.settingTableView?.reloadData()
         
-        if RoomManager.shared.roomService.info.isTextMessageDisabled && !localUserIsHost() {
-            sendMessageButton .setImage(UIImage.init(named: "message_lock_icon"), for: .normal)
+        if localUserIsHost() { return }
+        if sendMessageButton.isSelected == RoomManager.shared.roomService.info.isTextMessageDisabled {
+            return
+        }
+        if RoomManager.shared.roomService.info.isTextMessageDisabled {
+            sendMessageButton.isSelected = true
+            HUDHelper.showMessage(message: ZGLocalizedString("toast_disable_text_chat_tips"))
         } else {
-            sendMessageButton .setImage(UIImage.init(named: "message_icon"), for: .normal)
+            sendMessageButton.isSelected = false
+            HUDHelper.showMessage(message: ZGLocalizedString("toast_allow_text_chat_tips"))
         }
     }
 }
@@ -609,9 +625,7 @@ extension LiveAudioRoomViewController : UserServiceDelegate {
                 // disconnect of room end
                 var message = ZGLocalizedString("toast_disconnect_tips")
                 if event == .success {
-                    message = ZGLocalizedString("toast_room_has_destroyed")
-                    HUDHelper.showMessage(message: message)
-                    self.leaveChatRoom()
+                    self.receiveRoomEnded()
                     return
                 }
                 else if event == .kickedOut {

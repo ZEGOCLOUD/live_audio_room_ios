@@ -166,7 +166,7 @@ class UserService: NSObject {
     /// @param callback refers to the callback for get the total number of in-room users.
     func queryOnlineRoomUsersCount(callback: OnlineRoomUsersNumCallback?) {
         guard let roomID = RoomManager.shared.roomService.info.roomID else {
-            assert(false, "room ID can't be nil")
+//            assert(false, "room ID can't be nil")
             guard let callback = callback else { return }
             callback(.failure(.failed))
             return
