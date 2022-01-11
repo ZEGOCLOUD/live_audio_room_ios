@@ -493,7 +493,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         popView.type = isLock ? .lock:.unLock
         popView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         popView.block = {
-            RoomManager.shared.speakerService.closeSeat(isLock, index) { Result in
+            RoomManager.shared.speakerService.convertClosedOpenSeat(isLock, index) { Result in
                 switch Result {
                 case .success:
                     break
@@ -547,7 +547,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
                     switch Result {
                     case .success:
                         if !RoomManager.shared.roomService.info.isSeatClosed {
-                            RoomManager.shared.speakerService.closeSeat(true, seatModel.index, callback: nil)
+                            RoomManager.shared.speakerService.convertClosedOpenSeat(true, seatModel.index, callback: nil)
                         }
                     case .failure(let error):
                         let userName:String = RoomManager.shared.userService.userList.getObj(seatModel.userID ?? "")?.userName ?? ""
