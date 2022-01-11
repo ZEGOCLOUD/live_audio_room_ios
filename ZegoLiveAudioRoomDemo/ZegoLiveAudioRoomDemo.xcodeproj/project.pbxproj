@@ -43,6 +43,7 @@
 		8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */; };
 		8676EA5227707EBE00114B60 /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA5127707EBE00114B60 /* Member.storyboard */; };
 		8676EA552770828900114B60 /* String+Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA542770828900114B60 /* String+Head.swift */; };
+		8E224443278D5E8A00B86C52 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E224442278D5E8A00B86C52 /* WebVC.swift */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
 		8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49DB2766FC7800A32320 /* LoginViewController.swift */; };
@@ -123,6 +124,7 @@
 		8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		8676EA5127707EBE00114B60 /* Member.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
 		8676EA542770828900114B60 /* String+Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Head.swift"; sourceTree = "<group>"; };
+		8E224442278D5E8A00B86C52 /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EAB49D92766FC7800A32320 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				8EAB49DB2766FC7800A32320 /* LoginViewController.swift */,
 				8624CC9127687A490048871D /* CreateRoomViewController.swift */,
 				8624CC9327687A600048871D /* SettingViewController.swift */,
+				8E224442278D5E8A00B86C52 /* WebVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				8676EA452770571800114B60 /* GiftCollectionViewCell.swift in Sources */,
 				8EF49436276CA37700B8B461 /* ZegoRTCServerAssistant.cpp in Sources */,
 				8EAB49EE2766FD2500A32320 /* AppCenter.swift in Sources */,
+				8E224443278D5E8A00B86C52 /* WebVC.swift in Sources */,
 				8EF49435276CA37700B8B461 /* ZegoRTCServerAssistantImpl.cpp in Sources */,
 				8EAB49DC2766FC7800A32320 /* LoginViewController.swift in Sources */,
 				8662106E276C37E2002170C9 /* LiveAudioSettingView.swift in Sources */,
@@ -1032,8 +1036,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";
@@ -1069,8 +1073,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoomDemo;
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.zego.liveAudioRoom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZegoLiveAudioRoomDemo/ZegoLiveAudioRoomDemo-Bridging-Header.h";

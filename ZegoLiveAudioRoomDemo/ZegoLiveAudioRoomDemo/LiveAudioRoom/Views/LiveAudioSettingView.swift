@@ -105,6 +105,8 @@ class LiveAudioSettingView: UIView, UITableViewDelegate, UITableViewDataSource,S
             RoomManager.shared.roomService.disableTextMessage(status) { Result in
                 switch Result {
                 case .success:
+                    let message = status ? ZGLocalizedString("toast_disable_text_chat_success") : ZGLocalizedString("toast_allow_text_chat_success")
+                    HUDHelper.showMessage(message: message)
                     break
                 case .failure(let error):
                     let message:String = String(format: ZGLocalizedString("toast_mute_message_error"), "\(error.code)")
