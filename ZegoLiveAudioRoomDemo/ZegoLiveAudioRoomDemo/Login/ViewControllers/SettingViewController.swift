@@ -96,7 +96,7 @@ class SettingViewController: UIViewController,UITableViewDelegate,UITableViewDat
             cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         }
         let lineView = UIView(frame: CGRect.init(x: 0, y: 48.5, width: self.view.bounds.size.width, height: 0.5))
-        lineView.backgroundColor = UIColor.init(red: 216/255.0, green: 216/255.0, blue: 216/255.0, alpha: 1.0)
+        lineView.backgroundColor = UIColor.init(red: 244/255.0, green: 245/255.0, blue: 246/255.0, alpha: 1.0)
         if model.type == .express || model.type == .zim || model.type == .terms {
             lineView.isHidden = false
         } else {
