@@ -7,7 +7,7 @@
 
 import UIKit
 
-let hostWidth:CGFloat = 42.0
+let hostWidth:CGFloat = 33.5
 
 class MessageModelBuilder: NSObject {
     
