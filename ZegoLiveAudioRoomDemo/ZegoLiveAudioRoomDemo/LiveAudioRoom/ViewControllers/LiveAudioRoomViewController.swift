@@ -333,11 +333,12 @@ extension LiveAudioRoomViewController {
     }
     
     func receiveRoomEnded() {
+        RoomManager.shared.roomService.leaveRoom(callback: nil)
         let alert = UIAlertController(title: ZGLocalizedString("dialog_tips_title"),
                                       message: ZGLocalizedString("toast_room_has_destroyed"),
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: ZGLocalizedString("dialog_confirm"), style: .default) { action in
-            self.leaveChatRoom()
+            self.navigationController?.popToRootViewController(animated: true)
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
