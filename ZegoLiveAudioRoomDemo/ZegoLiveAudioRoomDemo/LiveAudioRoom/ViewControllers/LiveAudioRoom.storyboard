@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,6 +71,7 @@
                                             <constraint firstAttribute="width" constant="34" id="IAn-gf-kdG"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="message_icon"/>
+                                        <state key="selected" image="message_lock_icon"/>
                                         <connections>
                                             <action selector="messageButtonClick:" destination="Fq0-c6-sQn" eventType="touchUpInside" id="igb-XF-gMb"/>
                                         </connections>
@@ -152,9 +153,9 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-MI-ZPS" userLabel="Gift View" customClass="GiftTipView" customModule="ZegoLiveAudioRoomDemo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="318" width="309" height="40"/>
+                                <rect key="frame" x="16" y="364" width="309" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-sf-Cql" userLabel="Gift Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-sf-Cql" userLabel="Gift Label">
                                         <rect key="frame" x="10" y="12" width="289" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" identifier="giftLabelConstraintHeight" id="1Da-ki-IrX"/>
@@ -186,7 +187,8 @@
                             <constraint firstItem="loD-fs-3Kv" firstAttribute="top" secondItem="OLg-IQ-NwX" secondAttribute="bottom" id="HGy-4M-bNp"/>
                             <constraint firstItem="loD-fs-3Kv" firstAttribute="leading" secondItem="YrE-Yw-Nrs" secondAttribute="leading" id="JSl-0u-l9q"/>
                             <constraint firstItem="m5g-L7-xSQ" firstAttribute="leading" secondItem="YrE-Yw-Nrs" secondAttribute="leading" id="Kyk-e9-rWJ"/>
-                            <constraint firstItem="OLg-IQ-NwX" firstAttribute="top" secondItem="f3h-MI-ZPS" secondAttribute="bottom" constant="6" id="R45-L8-Pwi"/>
+                            <constraint firstItem="OLg-IQ-NwX" firstAttribute="top" secondItem="f3h-MI-ZPS" secondAttribute="bottom" priority="750" constant="6" id="R45-L8-Pwi"/>
+                            <constraint firstItem="f3h-MI-ZPS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VHJ-6v-Chu" secondAttribute="bottom" constant="55" id="RN2-MG-b68"/>
                             <constraint firstItem="f3h-MI-ZPS" firstAttribute="leading" secondItem="YrE-Yw-Nrs" secondAttribute="leading" constant="16" id="SEL-p5-6EO"/>
                             <constraint firstItem="m5g-L7-xSQ" firstAttribute="top" secondItem="YrE-Yw-Nrs" secondAttribute="top" id="dK7-pU-URD"/>
                             <constraint firstItem="VHJ-6v-Chu" firstAttribute="leading" secondItem="YrE-Yw-Nrs" secondAttribute="leading" constant="19" id="fTR-tW-1fm"/>
@@ -225,6 +227,7 @@
         <image name="leave_room" width="34" height="34"/>
         <image name="member_icon" width="34" height="34"/>
         <image name="message_icon" width="34" height="34"/>
+        <image name="message_lock_icon" width="34" height="34"/>
         <image name="setting_icon" width="34" height="34"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

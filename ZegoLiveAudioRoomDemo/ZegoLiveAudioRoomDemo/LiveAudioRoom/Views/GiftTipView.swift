@@ -46,15 +46,15 @@ class GiftTipView: UIView {
         label.attributedText = str
         
         let width = UIScreen.main.bounds.size.width - 89.0 - 16.0 - 10.0 * 2
-        var size = str.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
+        let size = str.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)),
                                     options: .usesLineFragmentOrigin,
                                     context: nil).size
         
         // if lines > 2
-        if size.height > 30 {
-            size.height = 30.0
-            size.width = width
-        }
+//        if size.height > 30 {
+//            size.height = 30.0
+//            size.width = width
+//        }
         
         // update label constraint
         labelConstraintWidth.constant = size.width + 1.0

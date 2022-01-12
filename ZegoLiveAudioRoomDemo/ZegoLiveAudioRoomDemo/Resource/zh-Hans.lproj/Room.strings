@@ -86,3 +86,11 @@
 "network_connect_failed_title" = "网络错误";
 "network_connect_failed" = "网络连接失败，请尝试退出房间重新加入";
 "toast_lock_seat_already_take_seat" = "锁定麦位失败，麦上已有用户";
+"dialog_tips_title" = "提示";
+"toast_disable_text_chat_success" = "已开启全员禁言";
+"toast_allow_text_chat_success" = "已取消全员禁言";
+"toast_disable_text_chat_tips" = "主持人已开启全员禁言";
+"toast_allow_text_chat_tips" = "主持人已取消全员禁言";
+"setting_page_version" = "App 版本号";
+"setting_page_terms_of_service" = "服务条款";
+"setting_page_privacy_policy" = "隐私政策";

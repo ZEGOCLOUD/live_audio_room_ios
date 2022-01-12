@@ -136,7 +136,7 @@ class SpeakerSeatService: NSObject {
     /// @param isClosed can be used to close specified untaken speaker seats.
     /// @param seatIndex refers to the seat index of the seat that you want to close/open.
     /// @param callback  refers to the callback for close/open specified speaker seats.
-    func closeSeat(_ isClosed: Bool, _ index: Int, callback: RoomCallback?) {
+    func convertClosedOpenSeat(_ isClosed: Bool, _ index: Int, callback: RoomCallback?) {
         
         let roomID = RoomManager.shared.roomService.info.roomID
         
