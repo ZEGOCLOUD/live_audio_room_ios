@@ -38,11 +38,6 @@ protocol UserServiceDelegate : AnyObject  {
     func receiveTakeSeatInvitation()
 }
 
-extension UserServiceDelegate {
-    func roomUserJoin(_ users: [UserInfo]) { }
-    func roomUserLeave(_ users: [UserInfo]) { }
-    func receiveTakeSeatInvitation() { }
-}
 
 /// Class user information management
 ///

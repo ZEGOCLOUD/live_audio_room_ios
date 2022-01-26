@@ -17,10 +17,7 @@ extension String {
         let len = CC_LONG(userName.lengthOfBytes(using: String.Encoding.utf8))
         let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 16)
         CC_MD5(data!,len, result)
-        let hash = NSMutableString()
-        for i in 0..<1 {
-            hash.appendFormat("%02x", result[i])
-        }
+        let hash = result[0]
         
         let headImageArray:Array = [
             "seat_1_icon",
