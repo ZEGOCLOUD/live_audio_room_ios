@@ -121,6 +121,8 @@ class MemberViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    // only host can invite user to be a speaker.
+    // if user receive this invitation and agree, this user will take seat.
     @IBAction func inviteSpeak(_ sender: UIButton) {
         
         if !isAnyFreeSeat(){

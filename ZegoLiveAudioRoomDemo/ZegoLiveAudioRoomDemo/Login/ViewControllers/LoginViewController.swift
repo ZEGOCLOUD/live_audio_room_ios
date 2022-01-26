@@ -107,7 +107,8 @@ class LoginViewController: UIViewController {
         return newStr
     }
     
-    
+    // create a user and generate zim token when login button click.
+    // the user default user role is listener.
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         let userInfo = UserInfo(myUserID, myUserName, .listener)
         if userInfo.userName == nil || userInfo.userName?.count == 0 {
