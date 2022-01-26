@@ -119,6 +119,9 @@ class CreateRoomViewController: UIViewController {
         self.present(alter, animated: true, completion: nil)
     }
     
+    // when join a exist room, we need enter the room ID
+    // and use the room ID to generate the rtcToken
+    // after join room success, just jump to LiveAudioRoomViewController
     @IBAction func joinRoomButtonClick(_ sender: UIButton) {
         
         if myRoomID.count == 0 {
@@ -144,6 +147,9 @@ class CreateRoomViewController: UIViewController {
         }
     }
     
+    // when create a room, we need enter the room ID and room name
+    // and use the room ID to generate the rtcToken
+    // after create room success, just jump to LiveAudioRoomViewController
     func createRoomWithRoomID(roomID: String, roomName: String) -> Void {
         var message:String = ""
         if roomID.count == 0 {
@@ -210,5 +216,17 @@ extension CreateRoomViewController : UserServiceDelegate {
             HUDHelper.showMessage(message: message)
             logout()
         }
+    }
+    
+    func roomUserJoin(_ users: [UserInfo]) {
+        
+    }
+    
+    func roomUserLeave(_ users: [UserInfo]) {
+        
+    }
+    
+    func receiveTakeSeatInvitation() {
+        
     }
 }

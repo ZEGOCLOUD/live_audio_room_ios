@@ -104,6 +104,7 @@ class LiveAudioRoomViewController: UIViewController {
         
         RegisterServiceCallback()
         
+        /// if myself is host, we need call the `takeSeat` method
         if localUserIsHost() {
             RoomManager.shared.speakerService.takeSeat(0, callback:{ result in
                 self.micAuthorizationTimer.setEventHandler {
@@ -114,7 +115,8 @@ class LiveAudioRoomViewController: UIViewController {
         }
         
         configUI()
-
+        
+        // when join in the room, just generate a local join message and refresh UI.
         if let myself = RoomManager.shared.userService.localInfo {
             let model: MessageModel = MessageModelBuilder.buildJoinMessageModel(user: myself)
             messageList.append(model)
@@ -266,6 +268,7 @@ class LiveAudioRoomViewController: UIViewController {
         memberVC.view.isHidden = false
     }
     
+    // before open mic, we need check the mic authority
     @IBAction func micButtonClick(_ sender: UIButton) {
         if sender.isSelected && AuthorizedCheck.isMicrophoneAuthorizationDetermined() {
             AuthorizedCheck.takeMicPhoneAuthorityStatus(completion: nil)
@@ -309,6 +312,8 @@ class LiveAudioRoomViewController: UIViewController {
         inputTextView.textViewBecomeFirstResponse()
     }
     
+    // if my self is host, will show a alert when leave button click
+    // if not, just leave room.
     @IBAction func leaveRoomButtonClick(_ sender: UIButton) {
         if localUserIsHost() {
             let alterVC:UIAlertController = UIAlertController.init(title: ZGLocalizedString("room_page_destroy_room"), message: ZGLocalizedString("dialog_sure_to_destroy_room"), preferredStyle: .alert)
@@ -373,6 +378,7 @@ extension LiveAudioRoomViewController {
 
     }
     
+    // logout and back to login vc.
     func logout() -> Void {
         RoomManager.shared.userService.logout()
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
@@ -414,6 +420,8 @@ extension LiveAudioRoomViewController : InputTextViewDelegate {
 }
 
 extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
+    /// when receive the send gift action, just call `sendGift`,
+    /// if success, just show the gift tip
     func sendGift(giftModel: GiftModel, targetUserList: [String]) {
         RoomManager.shared.giftService.sendGift(giftModel.giftID, to: targetUserList) { result in
             switch result {
@@ -428,6 +436,10 @@ extension LiveAudioRoomViewController : LiveAudioGiftViewDelegate {
 }
 
 extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
+    /// when user click the seat icon, will trigger this delegate
+    /// if the seat status is untaken: host will lock the seat; listener will take the seat; speaker will switch the seat.
+    /// if the seat status is occupied: host will kickout user; listener will leave the seat (the operator is the listener itself)
+    /// if the seat status is closed: only host can operate it, host will open this seat.
     func seatCollectionViewDidSelectedItem(itemIndex: Int) {
         inputTextView.endEditing(true)
         speakerSeatButtonClickedAssistant(seatIndex: itemIndex)
@@ -461,6 +473,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         }
     }
     
+    // take seat or switch seat
     func takeSeat(index: Int, isSwitch: Bool) -> Void {
 
         let popView:MaskPopView = MaskPopView.loadFromNib()
@@ -500,6 +513,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         return isFree
     }
     
+    // host lock or open the seat.
     func lockSeat(index: Int, isLock: Bool) -> Void {
         let popView:MaskPopView = MaskPopView.loadFromNib()
         popView.type = isLock ? .lock:.unLock
@@ -534,6 +548,7 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
         self.view.addSubview(popView)
     }
     
+    // only host can kickout the user from a seat.
     func kickoutUser(seatModel: SpeakerSeatModel) -> Void {
         let popView:MaskPopView = MaskPopView.loadFromNib()
         popView.type = .leave

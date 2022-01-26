@@ -15,7 +15,7 @@ Before getting started with the Live Audio Room application, **contact us to act
 * [Xcode 7.0 or later\|_blank](https://developer.apple.com/xcode/download)
 * [CocoaPods\|_blank](https://guides.cocoapods.org/using/getting-started.html#installation)
 * An iOS device or Simulator that is running on iOS 9.0 or later and supports audio and video. We recommend you use a real device.
-* Create a project in [ZEGO Admin Console\|_blank](https://console.zego.im/). For details, see [ZEGO Admin Console - Project management\|_blank](#1271).
+* Create a project in [ZEGO Admin Console\|_blank](https://console.zego.im/). For details, see [ZEGO Admin Console - Project management\|_blank](https://docs.zegocloud.com/article/1271).
 
 ### Install Pods
 
