@@ -11,14 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZegoToken : NSObject
 
-+ (NSString *)getRTCTokenWithRoomID:(NSString *)roomID
-                             userID:(NSString *)userID
++ (NSString *)getTokenWithUserID:(NSString *)userID
                               appID:(uint32_t)appID
-                          appSecret:(NSString *)appSercret;
-
-+ (NSString *)getZIMTokenWithUserID:(NSString *)userID
-                              appID:(uint32_t)appID
-                          appSecret:(NSString *)appSecret;
+                       appSecret:(NSString *)appSecret;
 
 @end
 

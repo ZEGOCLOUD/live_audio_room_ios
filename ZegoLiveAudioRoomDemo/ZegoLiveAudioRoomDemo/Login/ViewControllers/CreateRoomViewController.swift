@@ -129,7 +129,11 @@ class CreateRoomViewController: UIViewController {
             return
         }
         
-        let rtcToken = AppToken.getRtcToken(withRoomID: myRoomID) ?? ""
+        guard let userID = RoomManager.shared.userService.localInfo?.userID else {
+            return
+        }
+        
+        let rtcToken =  AppToken.getToken(withUserID: userID) ?? ""
         
         HUDHelper.showNetworkLoading()
         RoomManager.shared.roomService.joinRoom(myRoomID, rtcToken) { result in
@@ -162,7 +166,8 @@ class CreateRoomViewController: UIViewController {
             return
         }
         
-        let rtcToken: String = AppToken.getRtcToken(withRoomID: roomID) ?? ""
+        guard let userID = RoomManager.shared.userService.localInfo?.userID else { return }
+        let rtcToken: String = AppToken.getToken(withUserID: userID) ?? ""
         
         HUDHelper.showNetworkLoading()
         RoomManager.shared.roomService.createRoom(roomID, roomName, rtcToken) { result in
