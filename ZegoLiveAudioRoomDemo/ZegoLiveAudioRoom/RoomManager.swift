@@ -55,18 +55,11 @@ class RoomManager: NSObject {
     /// Call this method at: Before you log in. We recommend you call this method when the application starts.
     ///
     /// @param appID refers to the project ID. To get this, go to ZEGOCLOUD Admin Console: https://console.zego.im/dashboard?lang=en
-    /// @param appSign refers to the secret key for authentication. To get this, go to ZEGOCLOUD Admin Console: https://console.zego.im/dashboard?lang=en
-    func initWithAppID(appID: UInt32, appSign: String, callback: RoomCallback?) {
-        if appSign.count == 0 {
-            guard let callback = callback else { return }
-            callback(.failure(.paramInvalid))
-            return
-        }
+    func initWithAppID(appID: UInt32, callback: RoomCallback?) {
         
         ZIMManager.shared.createZIM(appID: appID)
         let profile: ZegoEngineProfile = ZegoEngineProfile()
         profile.appID = appID
-        profile.appSign = appSign
         profile.scenario = .general
         ZegoExpressEngine.createEngine(with: profile, eventHandler: self)
         
@@ -113,7 +106,7 @@ class RoomManager: NSObject {
 }
 
 extension RoomManager {
-    func loginRtcRoom(with rtcToken: String) {
+    func loginRtcRoom(with token: String) {
         guard let userID = RoomManager.shared.userService.localInfo?.userID else {
             assert(false, "user id can't be nil.")
             return
@@ -128,7 +121,7 @@ extension RoomManager {
         let user = ZegoUser(userID: userID)
         
         let config = ZegoRoomConfig()
-        config.token = rtcToken
+        config.token = token
         config.maxMemberCount = 0
         ZegoExpressEngine.shared().loginRoom(roomID, user: user, config: config)
         
