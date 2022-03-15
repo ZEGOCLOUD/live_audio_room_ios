@@ -106,7 +106,7 @@ class RoomManager: NSObject {
 }
 
 extension RoomManager {
-    func loginRtcRoom(with rtcToken: String) {
+    func loginRtcRoom(with token: String) {
         guard let userID = RoomManager.shared.userService.localInfo?.userID else {
             assert(false, "user id can't be nil.")
             return
@@ -121,7 +121,7 @@ extension RoomManager {
         let user = ZegoUser(userID: userID)
         
         let config = ZegoRoomConfig()
-        config.token = rtcToken
+        config.token = token
         config.maxMemberCount = 0
         ZegoExpressEngine.shared().loginRoom(roomID, user: user, config: config)
         
