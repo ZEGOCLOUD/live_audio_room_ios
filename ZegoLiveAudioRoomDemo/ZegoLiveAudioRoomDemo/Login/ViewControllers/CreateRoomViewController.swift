@@ -133,20 +133,30 @@ class CreateRoomViewController: UIViewController {
             return
         }
         
-        let rtcToken =  AppToken.getToken(withUserID: userID) ?? ""
-        
         HUDHelper.showNetworkLoading()
-        RoomManager.shared.roomService.joinRoom(myRoomID, rtcToken) { result in
-            HUDHelper.hideNetworkLoading()
-            switch result {
-            case .success:
-                self.joinToChatRoom()
-            case .failure(let error):
-                var message = String(format: ZGLocalizedString("toast_join_room_fail"), error.code)
-                if case .roomNotFound = error {
-                    message = ZGLocalizedString("toast_room_not_exist_fail")
+        TokenManager.shared.getToken(userID) { result in
+            if result.isSuccess {
+                let rtcToken: String? = result.success
+                guard let rtcToken = rtcToken else {
+                    print("token is nil")
+                    HUDHelper.hideNetworkLoading()
+                    return
                 }
-                HUDHelper.showMessage(message: message)
+                RoomManager.shared.roomService.joinRoom(self.myRoomID, rtcToken) { result in
+                    HUDHelper.hideNetworkLoading()
+                    switch result {
+                    case .success:
+                        self.joinToChatRoom()
+                    case .failure(let error):
+                        var message = String(format: ZGLocalizedString("toast_join_room_fail"), error.code)
+                        if case .roomNotFound = error {
+                            message = ZGLocalizedString("toast_room_not_exist_fail")
+                        }
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
+            } else {
+                HUDHelper.showMessage(message: "get token fail")
             }
         }
     }
@@ -167,23 +177,32 @@ class CreateRoomViewController: UIViewController {
         }
         
         guard let userID = RoomManager.shared.userService.localInfo?.userID else { return }
-        let rtcToken: String = AppToken.getToken(withUserID: userID) ?? ""
-        
         HUDHelper.showNetworkLoading()
-        RoomManager.shared.roomService.createRoom(roomID, roomName, rtcToken) { result in
-            HUDHelper.hideNetworkLoading()
-            switch result {
-            case .success:
-                self.joinToChatRoom()
-            case .failure(let error):
-                var message = String(format: ZGLocalizedString("toast_create_room_fail"), error.code)
-                if case .roomExisted = error {
-                    message =  ZGLocalizedString("toast_room_existed")
+        TokenManager.shared.getToken(userID) { result in
+            if result.isSuccess {
+                let rtcToken: String? = result.success
+                guard let rtcToken = rtcToken else {
+                    print("token is nil")
+                    HUDHelper.hideNetworkLoading()
+                    return
                 }
-                HUDHelper.showMessage(message: message)
+                RoomManager.shared.roomService.createRoom(roomID, roomName, rtcToken) { result in
+                    HUDHelper.hideNetworkLoading()
+                    switch result {
+                    case .success:
+                        self.joinToChatRoom()
+                    case .failure(let error):
+                        var message = String(format: ZGLocalizedString("toast_create_room_fail"), error.code)
+                        if case .roomExisted = error {
+                            message =  ZGLocalizedString("toast_room_existed")
+                        }
+                        HUDHelper.showMessage(message: message)
+                    }
+                }
+            } else {
+                HUDHelper.showMessage(message: "get token fail")
             }
         }
-        
     }
         
     //MARK: - Jump

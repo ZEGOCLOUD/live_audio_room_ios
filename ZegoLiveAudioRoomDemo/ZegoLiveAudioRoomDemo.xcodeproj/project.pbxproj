@@ -43,6 +43,7 @@
 		8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */; };
 		8676EA5227707EBE00114B60 /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA5127707EBE00114B60 /* Member.storyboard */; };
 		8676EA552770828900114B60 /* String+Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA542770828900114B60 /* String+Head.swift */; };
+		86D4184828012301002B0C8D /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D4184728012301002B0C8D /* TokenManager.swift */; };
 		86ECE31727E1868B00279711 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86ECE31627E1868B00279711 /* GoogleService-Info.plist */; };
 		8E224443278D5E8A00B86C52 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E224442278D5E8A00B86C52 /* WebVC.swift */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
@@ -125,6 +126,7 @@
 		8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		8676EA5127707EBE00114B60 /* Member.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
 		8676EA542770828900114B60 /* String+Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Head.swift"; sourceTree = "<group>"; };
+		86D4184728012301002B0C8D /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		86ECE31627E1868B00279711 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E224442278D5E8A00B86C52 /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -626,6 +628,7 @@
 				8EF493F1276CA37700B8B461 /* TokenGenerator */,
 				8EF4943D276CA3C600B8B461 /* ZegoToken.h */,
 				8EF4943E276CA3C600B8B461 /* ZegoToken.mm */,
+				86D4184728012301002B0C8D /* TokenManager.swift */,
 			);
 			path = Token;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */,
 				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
 				8624CCA92769D6BF0048871D /* StringTool.swift in Sources */,
+				86D4184828012301002B0C8D /* TokenManager.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				86621058276ADF77002170C9 /* LiveAudioRoomViewController.swift in Sources */,
 				8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */,

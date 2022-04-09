@@ -7,6 +7,7 @@
 
 import Foundation
 import ZIM
+import ZegoExpressEngine
 
 /// The delegate related to room status callbacks
 ///
@@ -18,6 +19,9 @@ protocol RoomServiceDelegate: AnyObject {
     ///
     /// @param roomInfo refers to the updated room information.
     func receiveRoomInfoUpdate(_ info: RoomInfo?)
+    
+    
+    func onRoomTokenWillExpire(_ remainTimeInSecond: Int32, roomID: String?)
 }
 
 /// Class LiveAudioRoom information management
@@ -32,6 +36,7 @@ class RoomService: NSObject {
         // RoomManager didn't finish init at this time.
         DispatchQueue.main.async {
             RoomManager.shared.addZIMEventHandler(self)
+            RoomManager.shared.addExpressEventHandler(self)
         }
     }
     
@@ -160,6 +165,15 @@ class RoomService: NSObject {
             callback(result)
         })
     }
+    
+    func renewToken(_ token: String, roomID: String?) {
+        if let roomID = roomID {
+            ZegoExpressEngine.shared().renewToken(token, roomID: roomID)
+        }
+        ZIMManager.shared.zim?.renewToken(token, callback: { message, error in
+            
+        })
+    }
 }
 
 // MARK: - Private
@@ -238,4 +252,14 @@ extension RoomService: ZIMEventHandler {
         }
     }
     
+    func zim(_ zim: ZIM, tokenWillExpire second: UInt32) {
+        delegate?.onRoomTokenWillExpire(Int32(second), roomID: nil)
+    }
+    
+}
+
+extension RoomService: ZegoEventHandler {
+    func onRoomTokenWillExpire(_ remainTimeInSecond: Int32, roomID: String) {
+        delegate?.onRoomTokenWillExpire(remainTimeInSecond, roomID: roomID)
+    }
 }

@@ -127,15 +127,29 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let token: String = AppToken.getToken(withUserID: userInfo.userID) ?? ""
+        //let token: String = AppToken.getToken(withUserID: userInfo.userID) ?? ""
         HUDHelper.showNetworkLoading()
+        TokenManager.shared.getToken(myUserID, isForceUpdate: true) { result in
+            if result.isSuccess {
+                let token: String? = result.success
+                guard let token = token else {
+                    print("token is nil")
+                    return
+                }
+                self.startLogin(userInfo, token)
+            } else {
+                HUDHelper.showMessage(message: "get token fail")
+            }
+        }
+    }
+    
+    func startLogin(_ userInfo: UserInfo, _ token: String) {
         RoomManager.shared.userService.login(userInfo, token) { result in
             HUDHelper.hideNetworkLoading()
             switch result {
             case .success:
                 let navVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LiveAudioRoomNavigationController")
                 getKeyWindow().rootViewController = navVC
-                break
             case .failure(let error):
                 let message = String(format: ZGLocalizedString("toast_login_fail"), error.code)
                 HUDHelper.showMessage(message: message)
