@@ -8,5 +8,7 @@ target 'ZegoLiveAudioRoomDemo' do
   # Pods for ZegoLiveAudioRoomDemo
   pod 'ZIM'
   pod 'ZegoExpressEngine/Audio'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
 
 end
