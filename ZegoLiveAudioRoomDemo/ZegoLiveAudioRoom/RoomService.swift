@@ -20,7 +20,12 @@ protocol RoomServiceDelegate: AnyObject {
     /// @param roomInfo refers to the updated room information.
     func receiveRoomInfoUpdate(_ info: RoomInfo?)
     
-    
+    /// Callback notification that Token authentication is about to expire.
+    ///
+    /// Description:The callback notification that the Token authentication is about to expire, please use [renewToken] to update the Token authentication.
+    ///
+    /// @param remainTimeInSecond The remaining time before the token expires.
+    /// @param roomID Room ID where the user is logged in, a string of up to 128 bytes in length.
     func onRoomTokenWillExpire(_ remainTimeInSecond: Int32, roomID: String?)
 }
 
@@ -166,6 +171,12 @@ class RoomService: NSObject {
         })
     }
     
+    /// Renew token.
+    ///
+    /// Description: After the developer receives [onRoomTokenWillExpire], they can use this API to update the token to ensure that the subsequent RTC&ZIM functions are normal.
+    ///
+    /// @param token The token that needs to be renew.
+    /// @param roomID Room ID.
     func renewToken(_ token: String, roomID: String?) {
         if let roomID = roomID {
             ZegoExpressEngine.shared().renewToken(token, roomID: roomID)

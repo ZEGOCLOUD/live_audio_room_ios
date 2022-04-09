@@ -127,12 +127,12 @@ class LoginViewController: UIViewController {
             return
         }
         
-        //let token: String = AppToken.getToken(withUserID: userInfo.userID) ?? ""
         HUDHelper.showNetworkLoading()
         TokenManager.shared.getToken(myUserID, isForceUpdate: true) { result in
             if result.isSuccess {
                 let token: String? = result.success
                 guard let token = token else {
+                    HUDHelper.hideNetworkLoading()
                     print("token is nil")
                     return
                 }
