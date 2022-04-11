@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getTokenWithUserID:(NSString *)userID
                               appID:(uint32_t)appID
-                       appSecret:(NSString *)appSecret;
+                          appSecret:(NSString *)appSecret
+          effectiveTimeInSeconds:(int64_t)effectiveTimeInSeconds;
 
 @end
 

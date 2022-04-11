@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>759986651228-t4rrc6n9f3kor356aee2kgi1n1m71bid.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.759986651228-t4rrc6n9f3kor356aee2kgi1n1m71bid</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAD6yzYM-xrUHudYAlT72CuMmKFcmK8hoY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>759986651228</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>im.zego.liveAudioRoom</string>
+	<key>PROJECT_ID</key>
+	<string>zegoliveaudio</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zegoliveaudio.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:759986651228:ios:e5e58c8650b6302d436699</string>
+</dict>
+</plist>

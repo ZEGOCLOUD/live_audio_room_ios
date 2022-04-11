@@ -602,6 +602,18 @@ extension LiveAudioRoomViewController : SeatCollectionViewDelegate {
 }
 
 extension LiveAudioRoomViewController : RoomServiceDelegate {
+    func onRoomTokenWillExpire(_ remainTimeInSecond: Int32, roomID: String?) {
+        TokenManager.shared.getToken(localUserID, isForceUpdate: true) { result in
+            if result.isSuccess {
+                let token: String? = result.success
+                guard let token = token else { return }
+                RoomManager.shared.roomService.renewToken(token, roomID: roomID)
+            } else {
+                HUDHelper.showMessage(message: "renew token fail")
+            }
+        }
+    }
+    
     //MARK: -RoomServiceDelegate
     func receiveRoomInfoUpdate(_ info: RoomInfo?) {
         guard let info = info else {
