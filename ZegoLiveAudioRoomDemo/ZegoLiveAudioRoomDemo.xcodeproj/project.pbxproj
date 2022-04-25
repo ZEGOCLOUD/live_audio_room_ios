@@ -43,6 +43,8 @@
 		8676EA5027707DC700114B60 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */; };
 		8676EA5227707EBE00114B60 /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8676EA5127707EBE00114B60 /* Member.storyboard */; };
 		8676EA552770828900114B60 /* String+Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8676EA542770828900114B60 /* String+Head.swift */; };
+		86D4184828012301002B0C8D /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D4184728012301002B0C8D /* TokenManager.swift */; };
+		86ECE31727E1868B00279711 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86ECE31627E1868B00279711 /* GoogleService-Info.plist */; };
 		8E224443278D5E8A00B86C52 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E224442278D5E8A00B86C52 /* WebVC.swift */; };
 		8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D72766FC7800A32320 /* AppDelegate.swift */; };
 		8EAB49DA2766FC7800A32320 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB49D92766FC7800A32320 /* SceneDelegate.swift */; };
@@ -124,6 +126,8 @@
 		8676EA4F27707DC700114B60 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		8676EA5127707EBE00114B60 /* Member.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
 		8676EA542770828900114B60 /* String+Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Head.swift"; sourceTree = "<group>"; };
+		86D4184728012301002B0C8D /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		86ECE31627E1868B00279711 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E224442278D5E8A00B86C52 /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		8EAB49D42766FC7800A32320 /* ZegoLiveAudioRoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZegoLiveAudioRoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB49D72766FC7800A32320 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 				8EAB49DD2766FC7800A32320 /* Main.storyboard */,
 				8EAB49E02766FC7900A32320 /* Assets.xcassets */,
 				8EAB49E22766FC7900A32320 /* LaunchScreen.storyboard */,
+				86ECE31627E1868B00279711 /* GoogleService-Info.plist */,
 				8EAB49E52766FC7900A32320 /* Info.plist */,
 				8EE13E8A2772022E0038AFCF /* InfoPlist.strings */,
 			);
@@ -623,6 +628,7 @@
 				8EF493F1276CA37700B8B461 /* TokenGenerator */,
 				8EF4943D276CA3C600B8B461 /* ZegoToken.h */,
 				8EF4943E276CA3C600B8B461 /* ZegoToken.mm */,
+				86D4184728012301002B0C8D /* TokenManager.swift */,
 			);
 			path = Token;
 			sourceTree = "<group>";
@@ -672,6 +678,7 @@
 				8EAB49D12766FC7800A32320 /* Frameworks */,
 				8EAB49D22766FC7800A32320 /* Resources */,
 				0D76416BC061264E2E9F68E4 /* [CP] Embed Pods Frameworks */,
+				8637810127E18C8C000A0C22 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -733,6 +740,7 @@
 				8EDD028327674FF800A6987F /* AppCenter.json in Resources */,
 				8EAB49E42766FC7900A32320 /* LaunchScreen.storyboard in Resources */,
 				8676EA462770571800114B60 /* GiftCollectionViewCell.xib in Resources */,
+				86ECE31727E1868B00279711 /* GoogleService-Info.plist in Resources */,
 				8624CC9C2768A4000048871D /* Room.strings in Resources */,
 				8EAB49E12766FC7900A32320 /* Assets.xcassets in Resources */,
 				86621072276C4167002170C9 /* SettingTableViewCell.xib in Resources */,
@@ -783,6 +791,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8637810127E18C8C000A0C22 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -827,6 +854,7 @@
 				8EF4944627707FA700B8B461 /* ZegoTimer.swift in Sources */,
 				8EDD02952768AF6900A6987F /* Result+Zego.swift in Sources */,
 				8624CCA92769D6BF0048871D /* StringTool.swift in Sources */,
+				86D4184828012301002B0C8D /* TokenManager.swift in Sources */,
 				8EAB49D82766FC7800A32320 /* AppDelegate.swift in Sources */,
 				86621058276ADF77002170C9 /* LiveAudioRoomViewController.swift in Sources */,
 				8EF4943F276CA3C600B8B461 /* ZegoToken.mm in Sources */,
@@ -1019,6 +1047,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B82BHJ5H89;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZegoLiveAudioRoomDemo/Info.plist;
