@@ -104,7 +104,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - ZegoExpressEngine/Audio
-  - ZIM (= 2.0.0)
+  - ZIM (>= 2.0.0)
 
 SPEC REPOS:
   trunk:
@@ -137,6 +137,6 @@ SPEC CHECKSUMS:
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
   ZIM: c9c7606675f713a42e5a319519c7d0127b208907
 
-PODFILE CHECKSUM: e6d542405334cafd774ddc1e4924b834c158a6b1
+PODFILE CHECKSUM: dba6c57ad4044669852c3bcaf5a165c402f487b2
 
 COCOAPODS: 1.11.2
