@@ -98,13 +98,13 @@ PODS:
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
   - ZegoExpressEngine/Audio (2.17.1.1)
-  - ZIM (1.3.7)
+  - ZIM (2.0.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - ZegoExpressEngine/Audio
-  - ZIM
+  - ZIM (= 2.0.0)
 
 SPEC REPOS:
   trunk:
@@ -135,8 +135,8 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ZegoExpressEngine: 718bfb624f56b10ac06705f18f8aba4ab12a4ade
-  ZIM: c4cdde572d8846650d9be8ebfbe0beedc4644884
+  ZIM: c9c7606675f713a42e5a319519c7d0127b208907
 
-PODFILE CHECKSUM: fc4a4b970a2d32d673705c982ef67c539e64e3de
+PODFILE CHECKSUM: e6d542405334cafd774ddc1e4924b834c158a6b1
 
 COCOAPODS: 1.11.2

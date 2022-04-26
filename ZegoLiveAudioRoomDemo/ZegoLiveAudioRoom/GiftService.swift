@@ -74,11 +74,12 @@ class GiftService: NSObject {
             return
         }
         
-        let customMessage: ZIMCustomMessage = ZIMCustomMessage(message: messageData)
-        
-        ZIMManager.shared.zim?.sendRoomMessage(customMessage, toRoomID: roomID, callback: { _, error in
+        let customMessage: ZIMCommandMessage = ZIMCommandMessage(message: messageData)
+        let config = ZIMMessageSendConfig()
+        config.priority = .low
+        ZIMManager.shared.zim?.sendRoomMessage(customMessage, toRoomID: roomID, config: config, callback: { _, error in
             var result: ZegoResult
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 result = .success(())
             } else {
                 result = .failure(.other(Int32(error.code.rawValue)))
@@ -93,12 +94,12 @@ class GiftService: NSObject {
 extension GiftService : ZIMEventHandler {
     func zim(_ zim: ZIM, receiveRoomMessage messageList: [ZIMMessage], fromRoomID: String) {
         for message in messageList {
-            guard let message = message as? ZIMCustomMessage else { continue }
+            guard let message = message as? ZIMCommandMessage else { continue }
             guard let jsonStr = String(data: message.message, encoding: .utf8) else { continue }
             let customCommand: CustomCommand = CustomCommand(with: jsonStr)
             if customCommand.actionType != .gift { continue }
             guard let giftID = customCommand.giftID else { continue }
-            delegate?.receiveGift(giftID, from: message.userID, to: customCommand.targetUserIDs)
+            delegate?.receiveGift(giftID, from: message.senderUserID, to: customCommand.targetUserIDs)
         }
     }
 }

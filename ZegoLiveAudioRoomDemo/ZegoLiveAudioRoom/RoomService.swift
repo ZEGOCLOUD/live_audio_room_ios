@@ -72,14 +72,14 @@ class RoomService: NSObject {
         ZIMManager.shared.zim?.createRoom(parameters.0, config: parameters.1, callback: { fullRoomInfo, error in
             
             var result: ZegoResult = .success(())
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 RoomManager.shared.roomService.info = parameters.2
                 RoomManager.shared.userService.localInfo?.role = .host
                 RoomManager.shared.speakerService.updateSpeakerSeats(parameters.1.roomAttributes)
                 RoomManager.shared.loginRtcRoom(with: token)
             }
             else {
-                if error.code == .ZIMErrorCodeCreateExistRoom {
+                if error.code == .roomModuleTheRoomAlreadyExists {
                     result = .failure(.roomExisted)
                 } else {
                     result = .failure(.other(Int32(error.code.rawValue)))
@@ -103,9 +103,9 @@ class RoomService: NSObject {
     /// @param callback refers to the callback for join a room.
     func joinRoom(_ roomID: String, _ token: String, callback: RoomCallback?) {
         ZIMManager.shared.zim?.joinRoom(roomID, callback: { fullRoomInfo, error in
-            if error.code != .ZIMErrorCodeSuccess {
+            if error.code != .success {
                 guard let callback = callback else { return }
-                if error.code == .ZIMErrorCodeRoomNotExist {
+                if error.code == .roomModuleTheRoomDoseNotExist {
                     callback(.failure(.roomNotFound))
                 } else {
                     callback(.failure(.other(Int32(error.code.rawValue))))
@@ -137,9 +137,9 @@ class RoomService: NSObject {
             return
         }
         
-        ZIMManager.shared.zim?.leaveRoom(roomID, callback: { error in
+        ZIMManager.shared.zim?.leaveRoom(roomID, callback: { _, error in
             var result: ZegoResult = .success(())
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 RoomManager.shared.logoutRtcRoom()
             } else {
                 result = .failure(.other(Int32(error.code.rawValue)))
@@ -159,9 +159,9 @@ class RoomService: NSObject {
     /// @param callback refers to the callback for disable text chat.
     func disableTextMessage(_ isDisabled: Bool, callback: RoomCallback?) {
         let parameters = getDisableTextMessageParameters(isDisabled)
-        ZIMManager.shared.zim?.setRoomAttributes(parameters.0, roomID: parameters.1, config: parameters.2, callback: { error in
+        ZIMManager.shared.zim?.setRoomAttributes(parameters.0, roomID: parameters.1, config: parameters.2, callback: { _, _, error in
             var result: ZegoResult
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 result = .success(())
             } else {
                 result = .failure(.other(Int32(error.code.rawValue)))
@@ -252,8 +252,8 @@ extension RoomService: ZIMEventHandler {
     func zim(_ zim: ZIM, roomStateChanged state: ZIMRoomState, event: ZIMRoomEvent, extendedData: [AnyHashable : Any], roomID: String) {
         if state == .connected && event == .success {
             guard let roomID = RoomManager.shared.roomService.info.roomID else { return }
-            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { dict, error in
-                if error.code != .ZIMErrorCodeSuccess { return }
+            ZIMManager.shared.zim?.queryRoomAllAttributes(byRoomID: roomID, callback: { _, dict, error in
+                if error.code != .success { return }
                 if dict.count == 0 {
                     self.delegate?.receiveRoomInfoUpdate(nil)
                 }

@@ -96,7 +96,7 @@ class RoomManager: NSObject {
     func uploadLog(callback: RoomCallback?) {
         ZIMManager.shared.zim?.uploadLog({ errorCode in
             guard let callback = callback else { return }
-            if errorCode.code == .ZIMErrorCodeSuccess {
+            if errorCode.code == .success {
                 callback(.success(()))
             } else {
                 callback(.failure(.other(Int32(errorCode.code.rawValue))))
