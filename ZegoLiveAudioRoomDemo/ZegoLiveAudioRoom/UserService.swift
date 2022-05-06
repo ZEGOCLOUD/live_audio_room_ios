@@ -281,6 +281,22 @@ extension UserService : ZIMEventHandler {
         }
     }
     
+    func zim(_ zim: ZIM, roomAttributesUpdated updateInfo: ZIMRoomAttributesUpdateInfo, roomID: String) {
+        if updateInfo.roomAttributes.keys.contains("room_info") {
+            let roomJson = updateInfo.roomAttributes["room_info"] ?? ""
+            let roomInfo = ZegoJsonTool.jsonToModel(type: RoomInfo.self, json: roomJson)
+            
+            if let roomInfo = roomInfo {
+                RoomManager.shared.roomService.info = roomInfo
+            }
+            
+            guard let hostID = roomInfo?.hostID,
+                  let user = userList.getObj(hostID)
+            else { return }
+            user.role = .host
+        }
+    }
+    
     // recevie a invitation via this method
     func zim(_ zim: ZIM, receivePeerMessage messageList: [ZIMMessage], fromUserID: String) {
         for message in messageList {
