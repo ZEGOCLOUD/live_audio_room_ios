@@ -137,6 +137,10 @@ class RoomService: NSObject {
             return
         }
         
+        if RoomManager.shared.userService.localInfo?.role == .speaker {
+            RoomManager.shared.speakerService.leaveSeat(callback: nil)
+        }
+        
         ZIMManager.shared.zim?.leaveRoom(roomID, callback: { _, error in
             var result: ZegoResult = .success(())
             if error.code == .success {
