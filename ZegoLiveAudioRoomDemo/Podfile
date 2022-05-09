@@ -6,7 +6,7 @@ target 'ZegoLiveAudioRoomDemo' do
   use_frameworks!
 
   # Pods for ZegoLiveAudioRoomDemo
-  pod 'ZIM','>=2.0.0'
+  pod 'ZIM','>=2.1.1'
   pod 'ZegoExpressEngine/Audio'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
