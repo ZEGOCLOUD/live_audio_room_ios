@@ -375,11 +375,11 @@ extension SpeakerSeatService {
             return
         }
         
-        ZIMManager.shared.zim?.setRoomAttributes(attributes, roomID: roomID, config: config, callback: { error in
+        ZIMManager.shared.zim?.setRoomAttributes(attributes, roomID: roomID, config: config, callback: { _, _, error in
             guard let callback = callback else {
                 return
             }
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 callback(.success(()))
             } else {
                 callback(.failure(.other(Int32(error.code.rawValue))))
