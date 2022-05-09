@@ -34,7 +34,7 @@ class ZIMManager {
     ///
     /// @param appID refers to the ID of your project. To get this, go to ZEGOCLOUD Admin Console: https://console.zego.im/dashboard?lang=en
     func createZIM(appID: UInt32) {
-        zim = ZIM.create(appID)
+        zim = ZIM.create(withAppID: appID)
     }
     
     /// Destroy the ZIM SDK instance

@@ -57,9 +57,11 @@ class MessageService: NSObject {
         }
         
         let textMessage = ZIMTextMessage(message: message)
-        ZIMManager.shared.zim?.sendRoomMessage(textMessage, toRoomID: roomID, callback: { _, error in
+        let config = ZIMMessageSendConfig()
+        config.priority = .low
+        ZIMManager.shared.zim?.sendRoomMessage(textMessage, toRoomID: roomID, config: config, callback: { _, error in
             var result: ZegoResult
-            if error.code == .ZIMErrorCodeSuccess {
+            if error.code == .success {
                 result = .success(())
             } else {
                 result = .failure(.other(Int32(error.code.rawValue)))
@@ -76,7 +78,7 @@ extension MessageService : ZIMEventHandler {
         for message in messageList {
             guard let message = message as? ZIMTextMessage else { continue }
             let textMessage = TextMessage(message.message)
-            textMessage.userID = message.userID
+            textMessage.userID = message.senderUserID
             delegate?.receiveTextMessage(textMessage)
         }
     }
