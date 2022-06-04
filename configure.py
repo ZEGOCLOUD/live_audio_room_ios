@@ -46,6 +46,9 @@ class KeyCenterHelper:
         self._add_key_center_file_to_git_ignore()
         print('Write config to {} succeed!'.format(self._file_name), real_config_obj)
 
+    def ignore_file_change(self) : 
+        command = "git update-index --skip-worktree " + os.path.join(self._get_current_path(), self._file_name)
+        os.system(command)
 
 if __name__ == "__main__":
     config_obj = {}
@@ -58,6 +61,7 @@ if __name__ == "__main__":
             key_center_helper = KeyCenterHelper(key_center_config_obj.get('key_center_file', ''),
                                                 key_center_config_obj.get('key_center_template_file', ''))
             key_center_helper.prepare_key_center_file()
+            key_center_helper.ignore_file_change()
         else:
             print("Ignore key center file update.")
     print("Configuration is complete!")

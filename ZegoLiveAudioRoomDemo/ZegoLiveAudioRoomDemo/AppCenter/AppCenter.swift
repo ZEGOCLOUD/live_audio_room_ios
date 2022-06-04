@@ -41,6 +41,10 @@ struct AppCenter {
         let jsonStr = try? String(contentsOfFile: jsonPath)
         
         dict = ZegoJsonTool.jsonToDictionary(jsonStr)
+        if (dict == nil) {
+            /// Please run the script './configure.sh' first on the root directory!
+            assert(false, "\n*** Please run the script './configure.sh' first！***")
+        }
         
         return dict
     }
